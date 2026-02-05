@@ -65,6 +65,8 @@ Append discovered tasks to TODO.md using this format:
 
 After each document:
 
+make sure you have appropriate .gitignore
+
 
 
 Commit and push
@@ -88,6 +90,8 @@ Review TODO.md
 
 
 Break large tasks into small, actionable steps
+
+Make sure it runs on my local machine first, connect to local mongodb etc
 
 acceptance criteria are:
 - all functions should work correctly

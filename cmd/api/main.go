@@ -50,6 +50,7 @@ func main() {
 
 	// Initialize repositories
 	userRepo := repo.NewMongoUserRepository(db.Database)
+	weddingRepo := repo.NewMongoWeddingRepository(db.Database)
 
 	// Initialize JWT manager
 	jwtManager := utils.NewJWTManager(
@@ -63,12 +64,14 @@ func main() {
 	// Initialize services
 	authService := services.NewAuthService(userRepo, jwtManager)
 	userService := services.NewUserService(userRepo)
+	weddingService := services.NewWeddingService(weddingRepo, userRepo)
 
 	// Initialize handlers
 	userHandler := handlers.NewUserHandler(userService)
+	weddingHandler := handlers.NewWeddingHandler(weddingService)
 
 	// Setup router
-	router := setupRouter(cfg, authService, userHandler, jwtManager, logger)
+	router := setupRouter(cfg, authService, userHandler, weddingHandler, jwtManager, logger)
 
 	// Create HTTP server
 	server := &http.Server{
@@ -108,6 +111,7 @@ func setupRouter(
 	cfg *config.Config,
 	authService services.AuthService,
 	userHandler *handlers.UserHandler,
+	weddingHandler *handlers.WeddingHandler,
 	jwtManager *utils.JWTManager,
 	logger *zap.Logger,
 ) *gin.Engine {
@@ -140,25 +144,25 @@ func setupRouter(
 		auth := v1.Group("/auth")
 		{
 			auth.POST("/register", func(c *gin.Context) {
-				c.JSON(http.StatusNotImplemented, gin.H{"error": "Authentication handlers will be implemented in next phase"})
+				c.JSON(http.StatusNotImplemented, gin.H{"error": "Auth handlers integration in progress"})
 			})
 			auth.POST("/login", func(c *gin.Context) {
-				c.JSON(http.StatusNotImplemented, gin.H{"error": "Authentication handlers will be implemented in next phase"})
+				c.JSON(http.StatusNotImplemented, gin.H{"error": "Auth handlers integration in progress"})
 			})
 			auth.POST("/refresh", func(c *gin.Context) {
-				c.JSON(http.StatusNotImplemented, gin.H{"error": "Authentication handlers will be implemented in next phase"})
+				c.JSON(http.StatusNotImplemented, gin.H{"error": "Auth handlers integration in progress"})
 			})
 			auth.POST("/logout", func(c *gin.Context) {
-				c.JSON(http.StatusNotImplemented, gin.H{"error": "Authentication handlers will be implemented in next phase"})
+				c.JSON(http.StatusNotImplemented, gin.H{"error": "Auth handlers integration in progress"})
 			})
 			auth.POST("/forgot-password", func(c *gin.Context) {
-				c.JSON(http.StatusNotImplemented, gin.H{"error": "Authentication handlers will be implemented in next phase"})
+				c.JSON(http.StatusNotImplemented, gin.H{"error": "Auth handlers integration in progress"})
 			})
 			auth.POST("/reset-password", func(c *gin.Context) {
-				c.JSON(http.StatusNotImplemented, gin.H{"error": "Authentication handlers will be implemented in next phase"})
+				c.JSON(http.StatusNotImplemented, gin.H{"error": "Auth handlers integration in progress"})
 			})
 			auth.POST("/verify-email", func(c *gin.Context) {
-				c.JSON(http.StatusNotImplemented, gin.H{"error": "Authentication handlers will be implemented in next phase"})
+				c.JSON(http.StatusNotImplemented, gin.H{"error": "Auth handlers integration in progress"})
 			})
 		}
 
@@ -173,6 +177,22 @@ func setupRouter(
 			protected.GET("/users/weddings", userHandler.GetUserWeddings)
 			protected.POST("/users/weddings/:wedding_id", userHandler.AddWeddingToUser)
 			protected.DELETE("/users/weddings/:wedding_id", userHandler.RemoveWeddingFromUser)
+
+			// Wedding management routes
+			protected.POST("/weddings", weddingHandler.CreateWedding)
+			protected.GET("/weddings", weddingHandler.GetUserWeddings)
+			protected.GET("/weddings/:id", weddingHandler.GetWedding)
+			protected.PUT("/weddings/:id", weddingHandler.UpdateWedding)
+			protected.DELETE("/weddings/:id", weddingHandler.DeleteWedding)
+			protected.POST("/weddings/:id/publish", weddingHandler.PublishWedding)
+			protected.GET("/weddings/slug/:slug", weddingHandler.GetWeddingBySlug)
+		}
+
+		// Public routes
+		public := v1.Group("/public")
+		{
+			// Public wedding listings
+			public.GET("/weddings", weddingHandler.ListPublicWeddings)
 		}
 
 		// Admin routes (temporarily without auth middleware)

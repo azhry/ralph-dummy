@@ -2,6 +2,7 @@ package utils
 
 import (
 	"reflect"
+	"regexp"
 	"strings"
 
 	"github.com/go-playground/validator/v10"
@@ -202,4 +203,71 @@ func ValidatePasswordStrength(password string) error {
 	}
 
 	return nil
+}
+
+// ValidateSlug validates a slug string
+func ValidateSlug(slug string) error {
+	if slug == "" {
+		return &ValidationError{Errors: []string{"Slug cannot be empty"}}
+	}
+
+	if len(slug) < 3 {
+		return &ValidationError{Errors: []string{"Slug must be at least 3 characters long"}}
+	}
+
+	if len(slug) > 50 {
+		return &ValidationError{Errors: []string{"Slug must be at most 50 characters long"}}
+	}
+
+	// Slug should only contain alphanumeric characters and hyphens
+	slugRegex := regexp.MustCompile(`^[a-z0-9]+(?:-[a-z0-9]+)*$`)
+	if !slugRegex.MatchString(slug) {
+		return &ValidationError{Errors: []string{"Slug can only contain lowercase letters, numbers, and hyphens"}}
+	}
+
+	return nil
+}
+
+// ValidateHexColor validates a hex color string
+func ValidateHexColor(color string) error {
+	if color == "" {
+		return nil // Empty color is allowed
+	}
+
+	// Support both #RGB and #RRGGBB formats
+	hexColorRegex := regexp.MustCompile(`^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$`)
+	if !hexColorRegex.MatchString(color) {
+		return &ValidationError{Errors: []string{"Invalid hex color format. Use #RGB or #RRGGBB"}}
+	}
+
+	return nil
+}
+
+// SanitizeSlug sanitizes a string to be used as a slug
+func SanitizeSlug(input string) string {
+	// Convert to lowercase
+	result := strings.ToLower(input)
+
+	// Replace spaces and special characters with hyphens
+	reg := regexp.MustCompile(`[^a-z0-9]+`)
+	result = reg.ReplaceAllString(result, "-")
+
+	// Remove leading and trailing hyphens
+	result = strings.Trim(result, "-")
+
+	// Remove multiple consecutive hyphens
+	reg = regexp.MustCompile(`-+`)
+	result = reg.ReplaceAllString(result, "-")
+
+	return result
+}
+
+// Contains checks if a slice contains a specific string
+func Contains(slice []string, item string) bool {
+	for _, s := range slice {
+		if s == item {
+			return true
+		}
+	}
+	return false
 }
