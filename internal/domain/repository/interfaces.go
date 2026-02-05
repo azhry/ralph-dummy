@@ -12,6 +12,8 @@ type UserRepository interface {
 	Create(ctx context.Context, user *models.User) error
 	GetByID(ctx context.Context, id primitive.ObjectID) (*models.User, error)
 	GetByEmail(ctx context.Context, email string) (*models.User, error)
+	GetByVerificationToken(ctx context.Context, token string) (*models.User, error)
+	GetByResetToken(ctx context.Context, token string) (*models.User, error)
 	Update(ctx context.Context, user *models.User) error
 	Delete(ctx context.Context, id primitive.ObjectID) error
 	List(ctx context.Context, page, pageSize int, filters UserFilters) ([]*models.User, int64, error)

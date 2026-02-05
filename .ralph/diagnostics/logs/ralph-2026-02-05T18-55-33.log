@@ -2,3 +2,9 @@
 2026-02-05T11:55:33.160875Z  INFO ralph_core::event_loop: Looking for memories at: "/Users/azharyarliansyah/Works/ralphs/dummy/.ralph/agent/memories.md" (exists: false)
 2026-02-05T11:55:33.160885Z  INFO ralph_core::event_loop: Successfully loaded 0 memories from store
 2026-02-05T11:55:33.160891Z  INFO ralph_core::event_loop: Memory store is empty - no memories to inject
+2026-02-05T12:26:25.601247Z  INFO ralph_core::event_loop: Memory injection check: enabled=true, inject=Auto, workspace_root="/Users/azharyarliansyah/Works/ralphs/dummy"
+2026-02-05T12:26:25.601906Z  INFO ralph_core::event_loop: Looking for memories at: "/Users/azharyarliansyah/Works/ralphs/dummy/.ralph/agent/memories.md" (exists: false)
+2026-02-05T12:26:25.601915Z  INFO ralph_core::event_loop: Successfully loaded 0 memories from store
+2026-02-05T12:26:25.601919Z  INFO ralph_core::event_loop: Memory store is empty - no memories to inject
+2026-02-05T12:26:25.602087Z  INFO ralph_core::event_loop: Injecting scratchpad (3556 chars) into prompt
+2026-02-05T12:26:25.602275Z  INFO ralph_core::event_loop: Injecting ready tasks (1 ready, 6 open, 4 closed) into prompt
