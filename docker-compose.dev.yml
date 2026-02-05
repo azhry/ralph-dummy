@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  # MongoDB Service (Development)
+  mongodb:
+    image: mongo:7.0
+    container_name: wedding-mongodb-dev
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+      MONGO_INITDB_DATABASE: wedding_invitations
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_dev_data:/data/db
+    networks:
+      - wedding-dev-network
+
+  # Redis Service (Development)
+  redis:
+    image: redis:7.2-alpine
+    container_name: wedding-redis-dev
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_dev_data:/data
+    networks:
+      - wedding-dev-network
+    command: redis-server --appendonly yes
+
+volumes:
+  mongodb_dev_data:
+  redis_dev_data:
+
+networks:
+  wedding-dev-network:
+    driver: bridge

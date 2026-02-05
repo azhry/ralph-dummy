@@ -1,0 +1,34 @@
+# Docker
+Dockerfile
+.dockerignore
+
+# Docker Compose
+docker-compose.yml
+docker-compose.dev.yml
+
+# Docker volumes
+data/
+uploads/
+logs/
+
+# Environment files
+.env
+.env.local
+.env.production
+.env.staging
+
+# SSL certificates
+nginx/ssl/
+
+# Temporary files
+*.tmp
+*.log
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
