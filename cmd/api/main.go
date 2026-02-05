@@ -13,6 +13,7 @@ import (
 	"go.uber.org/zap"
 
 	"wedding-invitation-backend/internal/config"
+	"wedding-invitation-backend/internal/handlers"
 	repo "wedding-invitation-backend/internal/repository/mongodb"
 	"wedding-invitation-backend/internal/services"
 	"wedding-invitation-backend/internal/utils"
@@ -61,9 +62,13 @@ func main() {
 
 	// Initialize services
 	authService := services.NewAuthService(userRepo, jwtManager)
+	userService := services.NewUserService(userRepo)
+
+	// Initialize handlers
+	userHandler := handlers.NewUserHandler(userService)
 
 	// Setup router
-	router := setupRouter(cfg, authService, jwtManager, logger)
+	router := setupRouter(cfg, authService, userHandler, jwtManager, logger)
 
 	// Create HTTP server
 	server := &http.Server{
@@ -102,6 +107,7 @@ func main() {
 func setupRouter(
 	cfg *config.Config,
 	authService services.AuthService,
+	userHandler *handlers.UserHandler,
 	jwtManager *utils.JWTManager,
 	logger *zap.Logger,
 ) *gin.Engine {
@@ -133,95 +139,53 @@ func setupRouter(
 		// Authentication routes (public)
 		auth := v1.Group("/auth")
 		{
-			auth.POST("/register", handleRegister(authService))
-			auth.POST("/login", handleLogin(authService))
-			auth.POST("/refresh", handleRefreshToken(authService, jwtManager))
-			auth.POST("/logout", handleLogout())
-			auth.POST("/forgot-password", handleForgotPassword(authService))
-			auth.POST("/reset-password", handleResetPassword(authService))
-			auth.POST("/verify-email", handleVerifyEmail(authService))
+			auth.POST("/register", func(c *gin.Context) {
+				c.JSON(http.StatusNotImplemented, gin.H{"error": "Authentication handlers will be implemented in next phase"})
+			})
+			auth.POST("/login", func(c *gin.Context) {
+				c.JSON(http.StatusNotImplemented, gin.H{"error": "Authentication handlers will be implemented in next phase"})
+			})
+			auth.POST("/refresh", func(c *gin.Context) {
+				c.JSON(http.StatusNotImplemented, gin.H{"error": "Authentication handlers will be implemented in next phase"})
+			})
+			auth.POST("/logout", func(c *gin.Context) {
+				c.JSON(http.StatusNotImplemented, gin.H{"error": "Authentication handlers will be implemented in next phase"})
+			})
+			auth.POST("/forgot-password", func(c *gin.Context) {
+				c.JSON(http.StatusNotImplemented, gin.H{"error": "Authentication handlers will be implemented in next phase"})
+			})
+			auth.POST("/reset-password", func(c *gin.Context) {
+				c.JSON(http.StatusNotImplemented, gin.H{"error": "Authentication handlers will be implemented in next phase"})
+			})
+			auth.POST("/verify-email", func(c *gin.Context) {
+				c.JSON(http.StatusNotImplemented, gin.H{"error": "Authentication handlers will be implemented in next phase"})
+			})
 		}
 
 		// Protected routes (temporarily without auth middleware)
 		protected := v1.Group("/")
 		{
-			// User profile route
-			protected.GET("/users/profile", handleGetProfile(authService))
-			protected.PUT("/users/profile", handleUpdateProfile(authService))
-			protected.PUT("/users/password", handleChangePassword(authService))
+			// User profile routes
+			protected.GET("/users/profile", userHandler.GetProfile)
+			protected.PUT("/users/profile", userHandler.UpdateProfile)
+
+			// User wedding routes
+			protected.GET("/users/weddings", userHandler.GetUserWeddings)
+			protected.POST("/users/weddings/:wedding_id", userHandler.AddWeddingToUser)
+			protected.DELETE("/users/weddings/:wedding_id", userHandler.RemoveWeddingFromUser)
+		}
+
+		// Admin routes (temporarily without auth middleware)
+		admin := v1.Group("/admin")
+		{
+			// User management routes
+			admin.GET("/users", userHandler.GetUsersList)
+			admin.GET("/users/search", userHandler.SearchUsers)
+			admin.PUT("/users/:id/status", userHandler.UpdateUserStatus)
+			admin.DELETE("/users/:id", userHandler.DeleteUser)
+			admin.GET("/users/stats", userHandler.GetUserStats)
 		}
 	}
 
 	return router
-}
-
-// Temporary handlers until proper handlers are implemented
-func handleRegister(authService services.AuthService) gin.HandlerFunc {
-	return func(c *gin.Context) {
-		// TODO: Implement registration handler
-		c.JSON(http.StatusNotImplemented, gin.H{"error": "Not implemented yet"})
-	}
-}
-
-func handleLogin(authService services.AuthService) gin.HandlerFunc {
-	return func(c *gin.Context) {
-		// TODO: Implement login handler
-		c.JSON(http.StatusNotImplemented, gin.H{"error": "Not implemented yet"})
-	}
-}
-
-func handleRefreshToken(authService services.AuthService, jwtManager *utils.JWTManager) gin.HandlerFunc {
-	return func(c *gin.Context) {
-		// TODO: Implement refresh token handler
-		c.JSON(http.StatusNotImplemented, gin.H{"error": "Not implemented yet"})
-	}
-}
-
-func handleLogout() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		// TODO: Implement logout handler
-		c.JSON(http.StatusNotImplemented, gin.H{"error": "Not implemented yet"})
-	}
-}
-
-func handleForgotPassword(authService services.AuthService) gin.HandlerFunc {
-	return func(c *gin.Context) {
-		// TODO: Implement forgot password handler
-		c.JSON(http.StatusNotImplemented, gin.H{"error": "Not implemented yet"})
-	}
-}
-
-func handleResetPassword(authService services.AuthService) gin.HandlerFunc {
-	return func(c *gin.Context) {
-		// TODO: Implement reset password handler
-		c.JSON(http.StatusNotImplemented, gin.H{"error": "Not implemented yet"})
-	}
-}
-
-func handleVerifyEmail(authService services.AuthService) gin.HandlerFunc {
-	return func(c *gin.Context) {
-		// TODO: Implement verify email handler
-		c.JSON(http.StatusNotImplemented, gin.H{"error": "Not implemented yet"})
-	}
-}
-
-func handleGetProfile(authService services.AuthService) gin.HandlerFunc {
-	return func(c *gin.Context) {
-		// TODO: Implement get profile handler
-		c.JSON(http.StatusNotImplemented, gin.H{"error": "Not implemented yet"})
-	}
-}
-
-func handleUpdateProfile(authService services.AuthService) gin.HandlerFunc {
-	return func(c *gin.Context) {
-		// TODO: Implement update profile handler
-		c.JSON(http.StatusNotImplemented, gin.H{"error": "Not implemented yet"})
-	}
-}
-
-func handleChangePassword(authService services.AuthService) gin.HandlerFunc {
-	return func(c *gin.Context) {
-		// TODO: Implement change password handler
-		c.JSON(http.StatusNotImplemented, gin.H{"error": "Not implemented yet"})
-	}
 }
