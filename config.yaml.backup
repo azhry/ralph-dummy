@@ -1,0 +1,33 @@
+server:
+  port: "8080"
+  environment: "development"
+  allowed_origins:
+    - "http://localhost:3000"
+    - "http://localhost:8080"
+  read_timeout: "30s"
+  write_timeout: "30s"
+
+database:
+  uri: "mongodb://localhost:27017"
+  database: "wedding_invitations"
+  timeout_seconds: 10
+
+auth:
+  jwt_secret: "dev-secret-key-change-in-production"
+  jwt_refresh_secret: "dev-refresh-secret-change-in-production"
+  access_token_ttl: "15m"
+  refresh_token_ttl: "168h"
+  bcrypt_cost: 12
+
+storage:
+  provider: "local"
+  region: "us-east-1"
+  bucket_name: "wedding-app-local"
+  access_key: ""
+  secret_key: ""
+  cdn_url: ""
+
+email:
+  provider: "sendgrid"
+  api_key: ""
+  from: "noreply@localhost"
