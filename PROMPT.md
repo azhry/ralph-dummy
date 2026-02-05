@@ -87,11 +87,9 @@ Step 3 — Task Breakdown
 
 Review TODO.md
 
-
-
 Break large tasks into small, actionable steps
 
-Make sure it runs on my local machine first, connect to local mongodb etc
+Make sure it runs on my local machine first with working .env values, connect to localhost mongodb etc
 
 acceptance criteria are:
 - all functions should work correctly

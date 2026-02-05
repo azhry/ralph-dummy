@@ -1,0 +1,26 @@
+2026-02-05T16:43:22.526543Z DEBUG ralph_core::config: Loading configuration from file path=ralph.yml
+2026-02-05T16:43:22.526821Z DEBUG ralph_core::config: Configuration loaded backend=opencode has_v1_fields=false custom_hats=0
+2026-02-05T16:43:22.526845Z  INFO ralph: Found existing scratchpad at '.ralph/agent/scratchpad.md', continuing from previous state
+2026-02-05T16:43:22.532418Z DEBUG ralph_core::loop_lock: Acquired loop lock at /Users/azharyarliansyah/Works/ralphs/dummy/.ralph/loop.lock
+2026-02-05T16:43:22.532433Z DEBUG ralph: Acquired loop lock, running as primary loop
+2026-02-05T16:43:22.532469Z DEBUG ralph::process_management: Skipping setpgid: keeping foreground process group 47857
+2026-02-05T16:43:22.532476Z DEBUG ralph::loop_runner: Resolving prompt content inline_prompt=None prompt_file=PROMPT.md
+2026-02-05T16:43:22.532482Z DEBUG ralph::loop_runner: Checking prompt file path=PROMPT.md exists=true
+2026-02-05T16:43:22.532501Z DEBUG ralph::loop_runner: Read prompt from file path=PROMPT.md len=1519
+2026-02-05T16:43:22.533040Z DEBUG ralph::loop_runner: Wrote loop ID marker file loop_id=primary-20260205-164322 marker="/Users/azharyarliansyah/Works/ralphs/dummy/.ralph/current-loop-id"
+2026-02-05T16:43:22.533058Z DEBUG ralph_core::event_loop: Solo mode: Ralph is the only coordinator
+2026-02-05T16:43:22.533248Z DEBUG ralph_core::event_loop: Published task.resume event topic="task.resume"
+2026-02-05T16:43:22.535324Z DEBUG ralph_core::event_logger: Event logged topic=task.resume iteration=0
+2026-02-05T16:43:22.637568Z DEBUG ralph::loop_runner: Execution mode configured execution_mode=autonomous
+2026-02-05T16:43:22.638709Z DEBUG ralph::loop_runner: Iteration 1/100 - ralph active
+2026-02-05T16:43:22.638818Z  INFO ralph_core::event_loop: Memory injection check: enabled=true, inject=Auto, workspace_root="/Users/azharyarliansyah/Works/ralphs/dummy"
+2026-02-05T16:43:22.638836Z  INFO ralph_core::event_loop: Looking for memories at: "/Users/azharyarliansyah/Works/ralphs/dummy/.ralph/agent/memories.md" (exists: false)
+2026-02-05T16:43:22.638844Z  INFO ralph_core::event_loop: Successfully loaded 0 memories from store
+2026-02-05T16:43:22.638850Z  INFO ralph_core::event_loop: Memory store is empty - no memories to inject
+2026-02-05T16:43:22.638862Z DEBUG ralph_core::event_loop: Injected ralph-tools skill from registry
+2026-02-05T16:43:22.639344Z  INFO ralph_core::event_loop: Injecting scratchpad (10398 chars) into prompt
+2026-02-05T16:43:22.639832Z  INFO ralph_core::event_loop: Injecting ready tasks (6 ready, 8 open, 12 closed) into prompt
+2026-02-05T16:43:22.639844Z DEBUG ralph_core::event_loop: build_prompt: routing to HatlessRalph (solo mode)
+2026-02-05T16:43:22.640833Z DEBUG ralph::loop_runner: Using global backend for 'ralph': opencode
+2026-02-05T16:43:22.642175Z DEBUG ralph_adapters::cli_backend: Built CLI command command=opencode args_count=2 prompt_len=27843 interactive=false uses_stdin=false uses_temp_file=false
+2026-02-05T16:43:22.643211Z DEBUG ralph_adapters::pty_executor: Spawning PTY output reader thread (streaming mode)
