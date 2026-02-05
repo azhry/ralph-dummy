@@ -15,7 +15,18 @@ event_loop:
 # Additional Configuration (uncomment to customize)
 # ─────────────────────────────────────────────────────────────────────────────
 
-# core:
+core:
+  guardrails:
+    - "Always run tests before declaring done"
+    - "Never modify production database"
+    - "Follow existing code patterns"
+
+  memories:
+    enabled: true
+
+  tasks:
+    enabled: true
+
 #   scratchpad: ".ralph/agent/scratchpad.md"
 #   specs_dir: ".ralph/specs/"
 

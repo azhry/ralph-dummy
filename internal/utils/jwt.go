@@ -80,9 +80,10 @@ func (j *JWTManager) GenerateTokenPair(userID primitive.ObjectID, email string, 
 
 	// Generate refresh token
 	refreshClaims := &Claims{
-		UserID:    userID.Hex(),
-		Email:     email,
-		TokenType: RefreshToken,
+		UserID:      userID.Hex(),
+		Email:       email,
+		TokenType:   RefreshToken,
+		Permissions: permissions,
 		RegisteredClaims: jwt.RegisteredClaims{
 			ID:        primitive.NewObjectID().Hex(),
 			Issuer:    j.issuer,
@@ -107,6 +108,23 @@ func (j *JWTManager) GenerateTokenPair(userID primitive.ObjectID, email string, 
 }
 
 func (j *JWTManager) ValidateToken(tokenString string, tokenType TokenType) (*Claims, error) {
+	// First, parse the token without signature verification to check the token type
+	unsafeToken, _, err := jwt.NewParser().ParseUnverified(tokenString, &Claims{})
+	if err != nil {
+		return nil, ErrInvalidToken
+	}
+
+	unsafeClaims, ok := unsafeToken.Claims.(*Claims)
+	if !ok {
+		return nil, ErrInvalidToken
+	}
+
+	// Check if the token type matches before verifying the signature
+	if unsafeClaims.TokenType != tokenType {
+		return nil, ErrInvalidTokenType
+	}
+
+	// Now validate with the correct key
 	var secretKey []byte
 	switch tokenType {
 	case AccessToken:
@@ -136,6 +154,7 @@ func (j *JWTManager) ValidateToken(tokenString string, tokenType TokenType) (*Cl
 		return nil, ErrInvalidToken
 	}
 
+	// Double check token type (should match from above)
 	if claims.TokenType != tokenType {
 		return nil, ErrInvalidTokenType
 	}
