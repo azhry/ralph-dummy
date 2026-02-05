@@ -43,3 +43,8 @@ core:
 #     publishes: ["review.approved", "review.changes_requested"]
 
 # Create PROMPT.md with your task, then run: ralph run
+RObot:
+  enabled: true
+  timeout_seconds: 300
+  telegram:
+    bot_token: "8410904127:AAGHGiRxueiInKrxDEL3dckab7kl3LxPUjY"

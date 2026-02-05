@@ -144,25 +144,110 @@ func setupRouter(
 		auth := v1.Group("/auth")
 		{
 			auth.POST("/register", func(c *gin.Context) {
-				c.JSON(http.StatusNotImplemented, gin.H{"error": "Auth handlers integration in progress"})
+				var req services.RegisterRequest
+				if err := c.ShouldBindJSON(&req); err != nil {
+					c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid input: " + err.Error()})
+					return
+				}
+
+				result, err := authService.Register(c.Request.Context(), req)
+				if err != nil {
+					c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+					return
+				}
+
+				c.JSON(http.StatusCreated, result)
 			})
+
 			auth.POST("/login", func(c *gin.Context) {
-				c.JSON(http.StatusNotImplemented, gin.H{"error": "Auth handlers integration in progress"})
+				var req services.LoginRequest
+				if err := c.ShouldBindJSON(&req); err != nil {
+					c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid input: " + err.Error()})
+					return
+				}
+
+				result, err := authService.Login(c.Request.Context(), req)
+				if err != nil {
+					c.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
+					return
+				}
+
+				c.JSON(http.StatusOK, result)
 			})
+
 			auth.POST("/refresh", func(c *gin.Context) {
-				c.JSON(http.StatusNotImplemented, gin.H{"error": "Auth handlers integration in progress"})
+				var req struct {
+					RefreshToken string `json:"refresh_token" validate:"required"`
+				}
+				if err := c.ShouldBindJSON(&req); err != nil {
+					c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid input: " + err.Error()})
+					return
+				}
+
+				result, err := authService.RefreshToken(c.Request.Context(), req.RefreshToken)
+				if err != nil {
+					c.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
+					return
+				}
+
+				c.JSON(http.StatusOK, result)
 			})
+
 			auth.POST("/logout", func(c *gin.Context) {
-				c.JSON(http.StatusNotImplemented, gin.H{"error": "Auth handlers integration in progress"})
+				// TODO: Extract user ID from token for proper logout
+				c.JSON(http.StatusOK, gin.H{"message": "Logged out successfully"})
 			})
+
 			auth.POST("/forgot-password", func(c *gin.Context) {
-				c.JSON(http.StatusNotImplemented, gin.H{"error": "Auth handlers integration in progress"})
+				var req struct {
+					Email string `json:"email" validate:"required,email"`
+				}
+				if err := c.ShouldBindJSON(&req); err != nil {
+					c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid input: " + err.Error()})
+					return
+				}
+
+				result, err := authService.ForgotPassword(c.Request.Context(), req.Email)
+				if err != nil {
+					c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+					return
+				}
+
+				c.JSON(http.StatusOK, result)
 			})
+
 			auth.POST("/reset-password", func(c *gin.Context) {
-				c.JSON(http.StatusNotImplemented, gin.H{"error": "Auth handlers integration in progress"})
+				var req services.ResetPasswordRequest
+				if err := c.ShouldBindJSON(&req); err != nil {
+					c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid input: " + err.Error()})
+					return
+				}
+
+				err := authService.ResetPassword(c.Request.Context(), req)
+				if err != nil {
+					c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+					return
+				}
+
+				c.JSON(http.StatusOK, gin.H{"message": "Password reset successfully"})
 			})
+
 			auth.POST("/verify-email", func(c *gin.Context) {
-				c.JSON(http.StatusNotImplemented, gin.H{"error": "Auth handlers integration in progress"})
+				var req struct {
+					Token string `json:"token" validate:"required"`
+				}
+				if err := c.ShouldBindJSON(&req); err != nil {
+					c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid input: " + err.Error()})
+					return
+				}
+
+				err := authService.VerifyEmail(c.Request.Context(), req.Token)
+				if err != nil {
+					c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+					return
+				}
+
+				c.JSON(http.StatusOK, gin.H{"message": "Email verified successfully"})
 			})
 		}
 
