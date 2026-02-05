@@ -51,6 +51,7 @@ func main() {
 	// Initialize repositories
 	userRepo := repo.NewMongoUserRepository(db.Database)
 	weddingRepo := repo.NewMongoWeddingRepository(db.Database)
+	rsvpRepo := repo.NewMongoRSVPRepository(db.Database)
 
 	// Initialize JWT manager
 	jwtManager := utils.NewJWTManager(
@@ -65,13 +66,15 @@ func main() {
 	authService := services.NewAuthService(userRepo, jwtManager)
 	userService := services.NewUserService(userRepo)
 	weddingService := services.NewWeddingService(weddingRepo, userRepo)
+	rsvpService := services.NewRSVPService(rsvpRepo, weddingRepo)
 
 	// Initialize handlers
 	userHandler := handlers.NewUserHandler(userService)
 	weddingHandler := handlers.NewWeddingHandler(weddingService)
+	rsvpHandler := handlers.NewRSVPHandler(rsvpService)
 
 	// Setup router
-	router := setupRouter(cfg, authService, userHandler, weddingHandler, jwtManager, logger)
+	router := setupRouter(cfg, authService, userHandler, weddingHandler, rsvpHandler, jwtManager, logger)
 
 	// Create HTTP server
 	server := &http.Server{
@@ -112,6 +115,7 @@ func setupRouter(
 	authService services.AuthService,
 	userHandler *handlers.UserHandler,
 	weddingHandler *handlers.WeddingHandler,
+	rsvpHandler *handlers.RSVPHandler,
 	jwtManager *utils.JWTManager,
 	logger *zap.Logger,
 ) *gin.Engine {
@@ -271,13 +275,25 @@ func setupRouter(
 			protected.DELETE("/weddings/:id", weddingHandler.DeleteWedding)
 			protected.POST("/weddings/:id/publish", weddingHandler.PublishWedding)
 			protected.GET("/weddings/slug/:slug", weddingHandler.GetWeddingBySlug)
+
+			// RSVP management routes
+			protected.GET("/weddings/:id/rsvps", rsvpHandler.GetRSVPs)
+			protected.GET("/weddings/:id/rsvps/statistics", rsvpHandler.GetRSVPStatistics)
+			protected.GET("/weddings/:id/rsvps/export", rsvpHandler.ExportRSVPs)
 		}
+
+		// Individual RSVP routes
+		v1.PUT("/rsvps/:id", rsvpHandler.UpdateRSVP)
+		v1.DELETE("/rsvps/:id", rsvpHandler.DeleteRSVP)
 
 		// Public routes
 		public := v1.Group("/public")
 		{
 			// Public wedding listings
 			public.GET("/weddings", weddingHandler.ListPublicWeddings)
+			
+			// Public RSVP submission
+			public.POST("/weddings/:id/rsvp", rsvpHandler.SubmitRSVP)
 		}
 
 		// Admin routes (temporarily without auth middleware)
