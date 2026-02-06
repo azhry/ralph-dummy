@@ -76,12 +76,16 @@ func main() {
 	mediaConfig := services.DefaultMediaServiceConfig()
 	mediaService := services.NewMediaService(mediaRepo, storageService, fileValidator, imageProcessor, logger, mediaConfig)
 
+	// Initialize repositories
+	analyticsRepo := repo.NewAnalyticsRepository(db.Database)
+
 	// Initialize services
 	authService := services.NewAuthService(userRepo, jwtManager)
 	userService := services.NewUserService(userRepo)
 	weddingService := services.NewWeddingService(weddingRepo, userRepo)
 	rsvpService := services.NewRSVPService(rsvpRepo, weddingRepo)
 	guestService := services.NewGuestService(guestRepo, weddingRepo)
+	analyticsService := services.NewAnalyticsService(analyticsRepo, weddingRepo, logger)
 
 	// Initialize handlers
 	userHandler := handlers.NewUserHandler(userService)
@@ -90,9 +94,10 @@ func main() {
 	publicHandler := handlers.NewPublicHandler(weddingService, rsvpService)
 	guestHandler := handlers.NewGuestHandler(guestService)
 	uploadHandler := handlers.NewUploadHandler(mediaService, logger)
+	analyticsHandler := handlers.NewAnalyticsHandler(analyticsService, weddingService)
 
 	// Setup router
-	router := setupRouter(cfg, authService, userHandler, weddingHandler, rsvpHandler, publicHandler, guestHandler, uploadHandler, jwtManager, logger)
+	router := setupRouter(cfg, authService, userHandler, weddingHandler, rsvpHandler, publicHandler, guestHandler, uploadHandler, analyticsHandler, jwtManager, logger)
 
 	// Create HTTP server
 	server := &http.Server{
@@ -137,6 +142,7 @@ func setupRouter(
 	publicHandler *handlers.PublicHandler,
 	guestHandler *handlers.GuestHandler,
 	uploadHandler *handlers.UploadHandler,
+	analyticsHandler *handlers.AnalyticsHandler,
 	jwtManager *utils.JWTManager,
 	logger *zap.Logger,
 ) *gin.Engine {
@@ -340,6 +346,22 @@ func setupRouter(
 			public.POST("/weddings/:slug/rsvp", publicHandler.SubmitRSVP)
 		}
 
+		// Analytics tracking routes (public)
+		analytics := v1.Group("/analytics")
+		{
+			analytics.POST("/track/page-view", analyticsHandler.TrackPageView)
+			analytics.POST("/track/rsvp-submission", analyticsHandler.TrackRSVPSubmission)
+			analytics.POST("/track/rsvp-abandonment", analyticsHandler.TrackRSVPAbandonment)
+			analytics.POST("/track/conversion", analyticsHandler.TrackConversion)
+		}
+
+		// Wedding analytics routes (protected)
+		protected.GET("/weddings/:id/analytics", analyticsHandler.GetWeddingAnalytics)
+		protected.GET("/weddings/:id/analytics/summary", analyticsHandler.GetAnalyticsSummary)
+		protected.GET("/weddings/:id/analytics/page-views", analyticsHandler.GetPageViews)
+		protected.GET("/weddings/:id/analytics/popular-pages", analyticsHandler.GetPopularPages)
+		protected.POST("/weddings/:id/analytics/refresh", analyticsHandler.RefreshAnalytics)
+
 		// Admin routes (temporarily without auth middleware)
 		admin := v1.Group("/admin")
 		{
@@ -349,6 +371,10 @@ func setupRouter(
 			admin.PUT("/users/:id/status", userHandler.UpdateUserStatus)
 			admin.DELETE("/users/:id", userHandler.DeleteUser)
 			admin.GET("/users/stats", userHandler.GetUserStats)
+			
+			// System analytics routes
+			admin.GET("/analytics/system", analyticsHandler.GetSystemAnalytics)
+			admin.POST("/analytics/refresh", analyticsHandler.RefreshSystemAnalytics)
 		}
 	}
 

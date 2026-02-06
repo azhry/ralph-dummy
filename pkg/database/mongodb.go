@@ -71,5 +71,132 @@ func (m *MongoDB) EnsureIndexes(ctx context.Context) error {
 		return fmt.Errorf("failed to create weddings user_id index: %w", err)
 	}
 
+	// RSVP indexes
+	rsvps := m.Collection("rsvps")
+	if _, err := rsvps.Indexes().CreateOne(ctx, mongo.IndexModel{
+		Keys: map[string]interface{}{"wedding_id": 1, "submitted_at": -1},
+	}); err != nil {
+		return fmt.Errorf("failed to create rsvps wedding_id index: %w", err)
+	}
+
+	if _, err := rsvps.Indexes().CreateOne(ctx, mongo.IndexModel{
+		Keys: map[string]interface{}{"wedding_id": 1, "email": 1},
+	}); err != nil {
+		return fmt.Errorf("failed to create rsvps email index: %w", err)
+	}
+
+	// Guest indexes
+	guests := m.Collection("guests")
+	if _, err := guests.Indexes().CreateOne(ctx, mongo.IndexModel{
+		Keys: map[string]interface{}{"wedding_id": 1, "created_at": -1},
+	}); err != nil {
+		return fmt.Errorf("failed to create guests wedding_id index: %w", err)
+	}
+
+	if _, err := guests.Indexes().CreateOne(ctx, mongo.IndexModel{
+		Keys: map[string]interface{}{"wedding_id": 1, "email": 1},
+	}); err != nil {
+		return fmt.Errorf("failed to create guests email index: %w", err)
+	}
+
+	// Analytics indexes
+	pageViews := m.Collection("page_views")
+	if _, err := pageViews.Indexes().CreateOne(ctx, mongo.IndexModel{
+		Keys: map[string]interface{}{"wedding_id": 1, "timestamp": -1},
+	}); err != nil {
+		return fmt.Errorf("failed to create page_views wedding_id index: %w", err)
+	}
+
+	if _, err := pageViews.Indexes().CreateOne(ctx, mongo.IndexModel{
+		Keys: map[string]interface{}{"session_id": 1},
+	}); err != nil {
+		return fmt.Errorf("failed to create page_views session_id index: %w", err)
+	}
+
+	if _, err := pageViews.Indexes().CreateOne(ctx, mongo.IndexModel{
+		Keys: map[string]interface{}{"wedding_id": 1, "page": 1},
+	}); err != nil {
+		return fmt.Errorf("failed to create page_views page index: %w", err)
+	}
+
+	if _, err := pageViews.Indexes().CreateOne(ctx, mongo.IndexModel{
+		Keys: map[string]interface{}{"timestamp": 1},
+		Options: options.Index().SetExpireAfterSeconds(7776000), // 90 days TTL
+	}); err != nil {
+		return fmt.Errorf("failed to create page_views TTL index: %w", err)
+	}
+
+	// RSVP analytics indexes
+	rsvpAnalytics := m.Collection("rsvp_analytics")
+	if _, err := rsvpAnalytics.Indexes().CreateOne(ctx, mongo.IndexModel{
+		Keys: map[string]interface{}{"wedding_id": 1, "timestamp": -1},
+	}); err != nil {
+		return fmt.Errorf("failed to create rsvp_analytics wedding_id index: %w", err)
+	}
+
+	if _, err := rsvpAnalytics.Indexes().CreateOne(ctx, mongo.IndexModel{
+		Keys: map[string]interface{}{"session_id": 1},
+	}); err != nil {
+		return fmt.Errorf("failed to create rsvp_analytics session_id index: %w", err)
+	}
+
+	if _, err := rsvpAnalytics.Indexes().CreateOne(ctx, mongo.IndexModel{
+		Keys: map[string]interface{}{"timestamp": 1},
+		Options: options.Index().SetExpireAfterSeconds(7776000), // 90 days TTL
+	}); err != nil {
+		return fmt.Errorf("failed to create rsvp_analytics TTL index: %w", err)
+	}
+
+	// Conversion events indexes
+	conversions := m.Collection("conversion_events")
+	if _, err := conversions.Indexes().CreateOne(ctx, mongo.IndexModel{
+		Keys: map[string]interface{}{"wedding_id": 1, "timestamp": -1},
+	}); err != nil {
+		return fmt.Errorf("failed to create conversion_events wedding_id index: %w", err)
+	}
+
+	if _, err := conversions.Indexes().CreateOne(ctx, mongo.IndexModel{
+		Keys: map[string]interface{}{"session_id": 1},
+	}); err != nil {
+		return fmt.Errorf("failed to create conversion_events session_id index: %w", err)
+	}
+
+	if _, err := conversions.Indexes().CreateOne(ctx, mongo.IndexModel{
+		Keys: map[string]interface{}{"event": 1},
+	}); err != nil {
+		return fmt.Errorf("failed to create conversion_events event index: %w", err)
+	}
+
+	if _, err := conversions.Indexes().CreateOne(ctx, mongo.IndexModel{
+		Keys: map[string]interface{}{"timestamp": 1},
+		Options: options.Index().SetExpireAfterSeconds(7776000), // 90 days TTL
+	}); err != nil {
+		return fmt.Errorf("failed to create conversion_events TTL index: %w", err)
+	}
+
+	// Wedding analytics indexes
+	weddingAnalytics := m.Collection("wedding_analytics")
+	if _, err := weddingAnalytics.Indexes().CreateOne(ctx, mongo.IndexModel{
+		Keys: map[string]interface{}{"_id": 1},
+		Options: options.Index().SetUnique(true),
+	}); err != nil {
+		return fmt.Errorf("failed to create wedding_analytics _id index: %w", err)
+	}
+
+	if _, err := weddingAnalytics.Indexes().CreateOne(ctx, mongo.IndexModel{
+		Keys: map[string]interface{}{"last_updated": -1},
+	}); err != nil {
+		return fmt.Errorf("failed to create wedding_analytics last_updated index: %w", err)
+	}
+
+	// System analytics indexes
+	systemAnalytics := m.Collection("system_analytics")
+	if _, err := systemAnalytics.Indexes().CreateOne(ctx, mongo.IndexModel{
+		Keys: map[string]interface{}{"_id": 1},
+		Options: options.Index().SetUnique(true),
+	}); err != nil {
+		return fmt.Errorf("failed to create system_analytics _id index: %w", err)
+	}
+
 	return nil
 }
