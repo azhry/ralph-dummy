@@ -53,6 +53,7 @@ func main() {
 	weddingRepo := repo.NewMongoWeddingRepository(db.Database)
 	rsvpRepo := repo.NewMongoRSVPRepository(db.Database)
 	guestRepo := repo.NewGuestRepository(db.Database)
+	mediaRepo := repo.NewMediaRepository(db.Database)
 
 	// Initialize JWT manager
 	jwtManager := utils.NewJWTManager(
@@ -62,6 +63,18 @@ func main() {
 		cfg.Auth.RefreshTokenTTL,
 		"wedding-invitation-api",
 	)
+
+	// Initialize storage and file processing services
+	storageService := services.NewLocalStorageService("./uploads", "http://localhost:8080/uploads")
+	fileValidator := services.NewFileValidator([]string{"image/jpeg", "image/png", "image/webp"}, 5*1024*1024)
+	imageProcessor := services.NewImageProcessor([]services.ThumbnailSize{
+		{Name: "small", Width: 150, Height: 150},
+		{Name: "medium", Width: 400, Height: 400},
+		{Name: "large", Width: 800, Height: 800},
+	}, true)
+	
+	mediaConfig := services.DefaultMediaServiceConfig()
+	mediaService := services.NewMediaService(mediaRepo, storageService, fileValidator, imageProcessor, logger, mediaConfig)
 
 	// Initialize services
 	authService := services.NewAuthService(userRepo, jwtManager)
@@ -76,9 +89,10 @@ func main() {
 	rsvpHandler := handlers.NewRSVPHandler(rsvpService)
 	publicHandler := handlers.NewPublicHandler(weddingService, rsvpService)
 	guestHandler := handlers.NewGuestHandler(guestService)
+	uploadHandler := handlers.NewUploadHandler(mediaService, logger)
 
 	// Setup router
-	router := setupRouter(cfg, authService, userHandler, weddingHandler, rsvpHandler, publicHandler, guestHandler, jwtManager, logger)
+	router := setupRouter(cfg, authService, userHandler, weddingHandler, rsvpHandler, publicHandler, guestHandler, uploadHandler, jwtManager, logger)
 
 	// Create HTTP server
 	server := &http.Server{
@@ -122,6 +136,7 @@ func setupRouter(
 	rsvpHandler *handlers.RSVPHandler,
 	publicHandler *handlers.PublicHandler,
 	guestHandler *handlers.GuestHandler,
+	uploadHandler *handlers.UploadHandler,
 	jwtManager *utils.JWTManager,
 	logger *zap.Logger,
 ) *gin.Engine {
@@ -292,6 +307,15 @@ func setupRouter(
 			protected.POST("/weddings/:wedding_id/guests/bulk", guestHandler.BulkCreateGuests)
 			protected.POST("/weddings/:wedding_id/guests/import", guestHandler.ImportGuestsCSV)
 			protected.GET("/weddings/:wedding_id/guests", guestHandler.ListGuests)
+
+			// File upload routes
+			protected.POST("/upload", uploadHandler.HandleUpload)
+			protected.POST("/upload/single", uploadHandler.HandleSingleUpload)
+			protected.POST("/upload/presign", uploadHandler.HandlePresignURL)
+			protected.POST("/upload/confirm", uploadHandler.HandleConfirmUpload)
+			protected.GET("/media/:id", uploadHandler.HandleGetMedia)
+			protected.GET("/media", uploadHandler.HandleListMedia)
+			protected.DELETE("/media/:id", uploadHandler.HandleDeleteMedia)
 		}
 
 		// Individual RSVP routes

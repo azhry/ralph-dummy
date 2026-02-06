@@ -11,6 +11,7 @@ type Config struct {
 	Auth     AuthConfig     `mapstructure:",squash"`
 	Storage  StorageConfig  `mapstructure:",squash"`
 	Email    EmailConfig    `mapstructure:",squash"`
+	Upload   UploadConfig   `mapstructure:",squash"`
 }
 
 type ServerConfig struct {
@@ -50,6 +51,18 @@ type EmailConfig struct {
 	From     string `mapstructure:"EMAIL_FROM"`
 }
 
+type UploadConfig struct {
+	MaxFileSize    int64    `mapstructure:"UPLOAD_MAX_FILE_SIZE"`
+	MaxTotalSize   int64    `mapstructure:"UPLOAD_MAX_TOTAL_SIZE"`
+	MaxFiles       int      `mapstructure:"UPLOAD_MAX_FILES"`
+	AllowedTypes   []string `mapstructure:"UPLOAD_ALLOWED_TYPES"`
+	EnableWebP     bool     `mapstructure:"UPLOAD_ENABLE_WEBP"`
+	ThumbnailSizes  string   `mapstructure:"UPLOAD_THUMBNAIL_SIZES"`
+	PresignExpiry  string   `mapstructure:"UPLOAD_PRESIGN_EXPIRY"`
+	LocalPath      string   `mapstructure:"UPLOAD_LOCAL_PATH"`
+	BaseURL        string   `mapstructure:"UPLOAD_BASE_URL"`
+}
+
 func Load() (*Config, error) {
 	viper.SetDefault("PORT", "8080")
 	viper.SetDefault("APP_ENV", "development")
@@ -62,6 +75,16 @@ func Load() (*Config, error) {
 	viper.SetDefault("JWT_REFRESH_TTL", "168h")
 	viper.SetDefault("BCRYPT_COST", 12)
 	viper.SetDefault("ALLOWED_ORIGINS", []string{"*"})
+	
+	// Upload defaults
+	viper.SetDefault("UPLOAD_MAX_FILE_SIZE", 5*1024*1024) // 5MB
+	viper.SetDefault("UPLOAD_MAX_TOTAL_SIZE", 20*1024*1024) // 20MB
+	viper.SetDefault("UPLOAD_MAX_FILES", 10)
+	viper.SetDefault("UPLOAD_ALLOWED_TYPES", []string{"image/jpeg", "image/png", "image/webp"})
+	viper.SetDefault("UPLOAD_ENABLE_WEBP", true)
+	viper.SetDefault("UPLOAD_PRESIGN_EXPIRY", "15m")
+	viper.SetDefault("UPLOAD_LOCAL_PATH", "./uploads")
+	viper.SetDefault("UPLOAD_BASE_URL", "http://localhost:8080/uploads")
 
 	viper.SetConfigName("config")
 	viper.SetConfigType("yaml")

@@ -2,6 +2,7 @@ package repository
 
 import (
 	"context"
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"time"
 	"wedding-invitation-backend/internal/domain/models"
@@ -62,6 +63,19 @@ type GuestRepository interface {
 	GetByImportBatch(ctx context.Context, weddingID primitive.ObjectID, batchID string) ([]*models.Guest, error)
 }
 
+// MediaRepository defines database operations for media files (for Phase 2)
+type MediaRepository interface {
+	Create(ctx context.Context, media *models.Media) error
+	GetByID(ctx context.Context, id primitive.ObjectID) (*models.Media, error)
+	GetByStorageKey(ctx context.Context, key string) (*models.Media, error)
+	List(ctx context.Context, filter MediaFilter, opts ListOptions) ([]*models.Media, int64, error)
+	Update(ctx context.Context, media *models.Media) error
+	Delete(ctx context.Context, id primitive.ObjectID) error
+	SoftDelete(ctx context.Context, id primitive.ObjectID) error
+	GetOrphaned(ctx context.Context, before time.Time) ([]*models.Media, error)
+	GetByCreatedBy(ctx context.Context, userID primitive.ObjectID, opts ListOptions) ([]*models.Media, int64, error)
+}
+
 // AnalyticsRepository defines database operations for analytics (for Phase 4)
 type AnalyticsRepository interface {
 	TrackPageView(ctx context.Context, event *models.PageViewEvent) error
@@ -120,6 +134,20 @@ type GuestStatistics struct {
 	RSVPPending       int64 `json:"rsvp_pending"`
 	PlusOnesAllowed   int64 `json:"plus_ones_allowed"`
 	VIPGuests         int64 `json:"vip_guests"`
+}
+
+type MediaFilter struct {
+	MimeType     string             `json:"mimeType"`
+	CreatedBy    *primitive.ObjectID `json:"createdBy"`
+	CreatedAfter *time.Time         `json:"createdAfter"`
+	CreatedBefore *time.Time        `json:"createdBefore"`
+	HasThumbnails bool              `json:"hasThumbnails"`
+}
+
+type ListOptions struct {
+	Limit  int64 `json:"limit"`
+	Offset int64 `json:"offset"`
+	Sort   bson.D `json:"sort"`
 }
 
 type DateRange struct {
