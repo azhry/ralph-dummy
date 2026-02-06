@@ -504,3 +504,27 @@ func (s *WeddingService) handleStatusChange(ctx context.Context, newWedding *mod
 
 	return nil
 }
+
+// GetWeddingBySlugForPublic retrieves a wedding by slug for public access
+func (s *WeddingService) GetWeddingBySlugForPublic(ctx context.Context, slug string) (*models.Wedding, error) {
+	wedding, err := s.weddingRepo.GetBySlug(ctx, slug)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get wedding: %w", err)
+	}
+
+	if wedding == nil {
+		return nil, errors.New("wedding not found")
+	}
+
+	// Check if wedding is published
+	if wedding.Status != string(models.WeddingStatusPublished) {
+		return nil, errors.New("wedding not published")
+	}
+
+	// Increment view count for public access
+	if err := s.weddingRepo.IncrementViewCount(ctx, wedding.ID); err != nil {
+		// Log error but don't fail the request
+	}
+
+	return wedding, nil
+}

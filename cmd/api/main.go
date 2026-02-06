@@ -72,9 +72,10 @@ func main() {
 	userHandler := handlers.NewUserHandler(userService)
 	weddingHandler := handlers.NewWeddingHandler(weddingService)
 	rsvpHandler := handlers.NewRSVPHandler(rsvpService)
+	publicHandler := handlers.NewPublicHandler(weddingService, rsvpService)
 
 	// Setup router
-	router := setupRouter(cfg, authService, userHandler, weddingHandler, rsvpHandler, jwtManager, logger)
+	router := setupRouter(cfg, authService, userHandler, weddingHandler, rsvpHandler, publicHandler, jwtManager, logger)
 
 	// Create HTTP server
 	server := &http.Server{
@@ -116,6 +117,7 @@ func setupRouter(
 	userHandler *handlers.UserHandler,
 	weddingHandler *handlers.WeddingHandler,
 	rsvpHandler *handlers.RSVPHandler,
+	publicHandler *handlers.PublicHandler,
 	jwtManager *utils.JWTManager,
 	logger *zap.Logger,
 ) *gin.Engine {
@@ -292,8 +294,11 @@ func setupRouter(
 			// Public wedding listings
 			public.GET("/weddings", weddingHandler.ListPublicWeddings)
 			
-			// Public RSVP submission
-			public.POST("/weddings/:id/rsvp", rsvpHandler.SubmitRSVP)
+			// Public wedding viewing by slug
+			public.GET("/weddings/:slug", publicHandler.GetWeddingBySlug)
+			
+			// Public RSVP submission by slug
+			public.POST("/weddings/:slug/rsvp", publicHandler.SubmitRSVP)
 		}
 
 		// Admin routes (temporarily without auth middleware)
