@@ -4,9 +4,6 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"net"
-	"net/http"
-	"strings"
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -15,16 +12,16 @@ import (
 )
 
 var (
-	ErrRSVPNotFound        = errors.New("rsvp not found")
-	ErrRSVPClosed          = errors.New("rsvp is closed for this wedding")
-	ErrInvalidRSVPStatus   = errors.New("invalid rsvp status")
-	ErrDuplicateRSVP       = errors.New("rsvp already submitted for this email")
-	ErrWeddingNotFound     = errors.New("wedding not found")
-	ErrUnauthorized        = errors.New("unauthorized")
-	ErrTooManyPlusOnes     = errors.New("too many plus ones")
-	ErrRSVPCannotModify    = errors.New("rsvp cannot be modified after 24 hours")
-	ErrGuestNotFound       = errors.New("guest not found")
-	ErrDuplicateGuest      = errors.New("guest with this email already exists")
+	ErrRSVPNotFound      = errors.New("rsvp not found")
+	ErrRSVPClosed        = errors.New("rsvp is closed for this wedding")
+	ErrInvalidRSVPStatus = errors.New("invalid rsvp status")
+	ErrDuplicateRSVP     = errors.New("rsvp already submitted for this email")
+	ErrWeddingNotFound   = errors.New("wedding not found")
+	ErrUnauthorized      = errors.New("unauthorized")
+	ErrTooManyPlusOnes   = errors.New("too many plus ones")
+	ErrRSVPCannotModify  = errors.New("rsvp cannot be modified after 24 hours")
+	ErrGuestNotFound     = errors.New("guest not found")
+	ErrDuplicateGuest    = errors.New("guest with this email already exists")
 )
 
 // RSVPService provides business logic for RSVP management
@@ -43,30 +40,30 @@ func NewRSVPService(rsvpRepo repository.RSVPRepository, weddingRepo repository.W
 
 // SubmitRSVPRequest represents a new RSVP submission
 type SubmitRSVPRequest struct {
-	FirstName           string                    `json:"first_name" validate:"required,max=50"`
-	LastName            string                    `json:"last_name" validate:"required,max=50"`
-	Email               string                    `json:"email,omitempty" validate:"omitempty,email,max=100"`
-	Phone               string                    `json:"phone,omitempty"`
-	Status              string                    `json:"status" validate:"required,oneof=attending not-attending maybe"`
-	AttendanceCount     int                       `json:"attendance_count" validate:"required,min=1"`
-	PlusOnes            []models.PlusOneInfo      `json:"plus_ones,omitempty"`
-	DietaryRestrictions string                    `json:"dietary_restrictions,omitempty"`
-	DietarySelected     []string                  `json:"dietary_selected,omitempty"`
-	AdditionalNotes     string                    `json:"additional_notes,omitempty" validate:"omitempty,max=500"`
-	CustomAnswers       []models.CustomAnswer     `json:"custom_answers,omitempty"`
-	Source              string                    `json:"source" validate:"oneof=web direct_link qr_code manual"`
-	IPAddress           string                    `json:"ip_address,omitempty"`
-	UserAgent           string                    `json:"user_agent,omitempty"`
+	FirstName           string                `json:"first_name" validate:"required,max=50"`
+	LastName            string                `json:"last_name" validate:"required,max=50"`
+	Email               string                `json:"email,omitempty" validate:"omitempty,email,max=100"`
+	Phone               string                `json:"phone,omitempty"`
+	Status              string                `json:"status" validate:"required,oneof=attending not-attending maybe"`
+	AttendanceCount     int                   `json:"attendance_count" validate:"required,min=1"`
+	PlusOnes            []models.PlusOneInfo  `json:"plus_ones,omitempty"`
+	DietaryRestrictions string                `json:"dietary_restrictions,omitempty"`
+	DietarySelected     []string              `json:"dietary_selected,omitempty"`
+	AdditionalNotes     string                `json:"additional_notes,omitempty" validate:"omitempty,max=500"`
+	CustomAnswers       []models.CustomAnswer `json:"custom_answers,omitempty"`
+	Source              string                `json:"source" validate:"oneof=web direct_link qr_code manual"`
+	IPAddress           string                `json:"ip_address,omitempty"`
+	UserAgent           string                `json:"user_agent,omitempty"`
 }
 
 // UpdateRSVPRequest represents an RSVP update
 type UpdateRSVPRequest struct {
-	Status              *string               `json:"status,omitempty" validate:"omitempty,oneof=attending not-attending maybe"`
-	AttendanceCount     *int                  `json:"attendance_count,omitempty" validate:"omitempty,min=1"`
-	PlusOnes            *[]models.PlusOneInfo `json:"plus_ones,omitempty"`
-	DietaryRestrictions *string               `json:"dietary_restrictions,omitempty"`
-	DietarySelected     *[]string             `json:"dietary_selected,omitempty"`
-	AdditionalNotes     *string               `json:"additional_notes,omitempty" validate:"omitempty,max=500"`
+	Status              *string                `json:"status,omitempty" validate:"omitempty,oneof=attending not-attending maybe"`
+	AttendanceCount     *int                   `json:"attendance_count,omitempty" validate:"omitempty,min=1"`
+	PlusOnes            *[]models.PlusOneInfo  `json:"plus_ones,omitempty"`
+	DietaryRestrictions *string                `json:"dietary_restrictions,omitempty"`
+	DietarySelected     *[]string              `json:"dietary_selected,omitempty"`
+	AdditionalNotes     *string                `json:"additional_notes,omitempty" validate:"omitempty,max=500"`
 	CustomAnswers       *[]models.CustomAnswer `json:"custom_answers,omitempty"`
 }
 
@@ -314,23 +311,17 @@ func (s *RSVPService) isRSVPOpen(wedding *models.Wedding) bool {
 		return false
 	}
 
-	// If RSVP settings exist, check them
-	if wedding.RSVP != nil {
-		now := time.Now()
-		
-		// Check if RSVP period is set and valid
-		if wedding.RSVP.OpenDate != nil && now.Before(*wedding.RSVP.OpenDate) {
-			return false
-		}
-		
-		if wedding.RSVP.CloseDate != nil && now.After(*wedding.RSVP.CloseDate) {
-			return false
-		}
-		
-		// Check if RSVP is explicitly disabled
-		if wedding.RSVP.Enabled != nil && !*wedding.RSVP.Enabled {
-			return false
-		}
+	// Check RSVP settings
+	now := time.Now()
+
+	// Check if RSVP is explicitly disabled
+	if !wedding.RSVP.Enabled {
+		return false
+	}
+
+	// Check if RSVP deadline has passed
+	if wedding.RSVP.Deadline != nil && now.After(*wedding.RSVP.Deadline) {
+		return false
 	}
 
 	return true
@@ -344,7 +335,7 @@ func (s *RSVPService) validateSubmitRequest(req SubmitRSVPRequest, wedding *mode
 	}
 
 	// Validate plus ones
-	if wedding.RSVP != nil && len(req.PlusOnes) > wedding.RSVP.MaxPlusOnes {
+	if len(req.PlusOnes) > wedding.RSVP.MaxPlusOnes {
 		return ErrTooManyPlusOnes
 	}
 
@@ -367,7 +358,7 @@ func (s *RSVPService) validateRSVP(rsvp *models.RSVP, wedding *models.Wedding) e
 	}
 
 	// Validate plus ones
-	if wedding.RSVP != nil && rsvp.PlusOneCount > wedding.RSVP.MaxPlusOnes {
+	if rsvp.PlusOneCount > wedding.RSVP.MaxPlusOnes {
 		return ErrTooManyPlusOnes
 	}
 

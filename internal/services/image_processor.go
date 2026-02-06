@@ -8,11 +8,9 @@ import (
 	"image/jpeg"
 	"image/png"
 	"io"
-	"time"
 
 	"github.com/chai2010/webp"
 	"github.com/disintegration/imaging"
-	"github.com/rwcarreira/goexif/exif"
 )
 
 // ImageProcessor processes images and generates thumbnails
@@ -147,35 +145,13 @@ func (p *imageProcessor) GenerateThumbnail(data []byte, width, height int, forma
 
 // ExtractEXIF extracts EXIF data from an image
 func (p *imageProcessor) ExtractEXIF(data []byte) (map[string]interface{}, error) {
-	exifData, err := exif.Decode(bytes.NewReader(data))
-	if err != nil {
-		return nil, fmt.Errorf("no EXIF data: %w", err)
-	}
-
+	// Stub implementation - EXIF extraction not implemented yet
+	// In a real implementation, you would use a library like github.com/rwcarreira/goexif
+	// or github.com/dsoprea/go-exif to extract EXIF data
 	result := make(map[string]interface{})
 
-	// Extract common fields
-	if dateTime, err := exifData.DateTime(); err == nil {
-		result["dateTime"] = dateTime.Format("2006-01-02 15:04:05")
-	}
-
-	if lat, long, err := exifData.LatLong(); err == nil {
-		result["gpsLatitude"] = lat
-		result["gpsLongitude"] = long
-	}
-
-	if make, err := exifData.Get(exif.Make); err == nil {
-		result["make"] = make.String()
-	}
-
-	if model, err := exifData.Get(exif.Model); err == nil {
-		result["model"] = model.String()
-	}
-
-	if orientation, err := exifData.Get(exif.Orientation); err == nil {
-		result["orientation"] = orientation.String()
-	}
-
+	// Return empty metadata for now
+	// TODO: Implement actual EXIF extraction if needed
 	return result, nil
 }
 

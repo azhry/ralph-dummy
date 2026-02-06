@@ -14,11 +14,6 @@ import (
 	"wedding-invitation-backend/internal/utils"
 )
 
-// ErrorResponse represents an error response
-type ErrorResponse struct {
-	Error string `json:"error"`
-}
-
 // PublicHandler handles public wedding operations
 type PublicHandler struct {
 	weddingService *services.WeddingService
@@ -35,44 +30,44 @@ func NewPublicHandler(weddingService *services.WeddingService, rsvpService *serv
 
 // PublicWeddingResponse represents the public wedding view response
 type PublicWeddingResponse struct {
-	Slug              string                     `json:"slug"`
-	Theme             string                     `json:"theme"`
-	GroomName         string                     `json:"groom_name"`
-	BrideName         string                     `json:"bride_name"`
-	GroomRole         string                     `json:"groom_role"`
-	BrideRole         string                     `json:"bride_role"`
-	GroomBio          string                     `json:"groom_bio"`
-	BrideBio          string                     `json:"bride_bio"`
-	GroomPhotoURL     string                     `json:"groom_photo_url"`
-	BridePhotoURL     string                     `json:"bride_photo_url"`
-	LoveStory         string                     `json:"love_story"`
-	WeddingDate       time.Time                  `json:"wedding_date"`
-	VenueName         string                     `json:"venue_name"`
-	VenueAddress      string                     `json:"venue_address"`
-	VenueMapURL       string                     `json:"venue_map_url"`
-	ContactEmail      string                     `json:"contact_email"`
-	SiteTitle         string                     `json:"site_title"`
-	MetaDescription   string                     `json:"meta_description"`
-	Events            []models.Event            `json:"events"`
-	GalleryImages     []string                   `json:"gallery_images"`
-	AllowPlusOne      bool                       `json:"allow_plus_one"`
-	CollectDietary    bool                       `json:"collect_dietary"`
-	CustomQuestions   []models.CustomQuestion    `json:"custom_questions"`
-	RSVPDeadline      time.Time                  `json:"rsvp_deadline"`
-	RSVPStatus        string                     `json:"rsvp_status"`
+	Slug            string                  `json:"slug"`
+	Theme           string                  `json:"theme"`
+	GroomName       string                  `json:"groom_name"`
+	BrideName       string                  `json:"bride_name"`
+	GroomRole       string                  `json:"groom_role"`
+	BrideRole       string                  `json:"bride_role"`
+	GroomBio        string                  `json:"groom_bio"`
+	BrideBio        string                  `json:"bride_bio"`
+	GroomPhotoURL   string                  `json:"groom_photo_url"`
+	BridePhotoURL   string                  `json:"bride_photo_url"`
+	LoveStory       string                  `json:"love_story"`
+	WeddingDate     time.Time               `json:"wedding_date"`
+	VenueName       string                  `json:"venue_name"`
+	VenueAddress    string                  `json:"venue_address"`
+	VenueMapURL     string                  `json:"venue_map_url"`
+	ContactEmail    string                  `json:"contact_email"`
+	SiteTitle       string                  `json:"site_title"`
+	MetaDescription string                  `json:"meta_description"`
+	Events          []models.Event          `json:"events"`
+	GalleryImages   []string                `json:"gallery_images"`
+	AllowPlusOne    bool                    `json:"allow_plus_one"`
+	CollectDietary  bool                    `json:"collect_dietary"`
+	CustomQuestions []models.CustomQuestion `json:"custom_questions"`
+	RSVPDeadline    time.Time               `json:"rsvp_deadline"`
+	RSVPStatus      string                  `json:"rsvp_status"`
 }
 
 // PublicRSVPRequest represents the public RSVP submission request
 type PublicRSVPRequest struct {
-	Name               string            `json:"name" binding:"required,min=1,max=100"`
-	Email              string            `json:"email" binding:"email"`
-	Phone              string            `json:"phone"`
-	Attending          bool              `json:"attending" binding:"required"`
-	NumberOfGuests     int               `json:"number_of_guests" binding:"required,min=1,max=10"`
-	PlusOneName        string            `json:"plus_one_name"`
-	DietaryRestrictions string           `json:"dietary_restrictions" binding:"max=500"`
-	Message            string            `json:"message" binding:"max=1000"`
-	CustomAnswers      map[string]string `json:"custom_answers"`
+	Name                string            `json:"name" binding:"required,min=1,max=100"`
+	Email               string            `json:"email" binding:"email"`
+	Phone               string            `json:"phone"`
+	Attending           bool              `json:"attending" binding:"required"`
+	NumberOfGuests      int               `json:"number_of_guests" binding:"required,min=1,max=10"`
+	PlusOneName         string            `json:"plus_one_name"`
+	DietaryRestrictions string            `json:"dietary_restrictions" binding:"max=500"`
+	Message             string            `json:"message" binding:"max=1000"`
+	CustomAnswers       map[string]string `json:"custom_answers"`
 }
 
 // PublicRSVPResponse represents the public RSVP submission response
@@ -123,7 +118,7 @@ func (h *PublicHandler) GetWeddingBySlug(c *gin.Context) {
 
 	// Convert to public response
 	response := h.convertToPublicResponse(wedding)
-	
+
 	c.JSON(http.StatusOK, response)
 }
 
@@ -176,20 +171,20 @@ func (h *PublicHandler) SubmitRSVP(c *gin.Context) {
 
 	// Create RSVP model
 	rsvp := &models.RSVP{
-		WeddingID:         wedding.ID,
-		Name:              req.Name,
-		Email:             req.Email,
-		Phone:             req.Phone,
-		Attending:         req.Attending,
-		NumberOfGuests:    req.NumberOfGuests,
-		PlusOneName:       req.PlusOneName,
+		WeddingID:           wedding.ID,
+		Name:                req.Name,
+		Email:               req.Email,
+		Phone:               req.Phone,
+		Attending:           req.Attending,
+		NumberOfGuests:      req.NumberOfGuests,
+		PlusOneName:         req.PlusOneName,
 		DietaryRestrictions: req.DietaryRestrictions,
-		Message:           req.Message,
-		CustomAnswers:     req.CustomAnswers,
-		Source:            models.RSVPSourceWeb,
-		IPAddress:         c.ClientIP(),
-		UserAgent:         c.GetHeader("User-Agent"),
-		SubmittedAt:       time.Now(),
+		Message:             req.Message,
+		CustomAnswers:       req.CustomAnswers,
+		Source:              models.RSVPSourceWeb,
+		IPAddress:           c.ClientIP(),
+		UserAgent:           c.GetHeader("User-Agent"),
+		SubmittedAt:         time.Now(),
 	}
 
 	// Submit RSVP
@@ -225,53 +220,53 @@ func (h *PublicHandler) SubmitRSVP(c *gin.Context) {
 // convertToPublicResponse converts a wedding model to public response
 func (h *PublicHandler) convertToPublicResponse(wedding *models.Wedding) *PublicWeddingResponse {
 	return &PublicWeddingResponse{
-		Slug:              wedding.Slug,
-		Theme:             wedding.Theme.ThemeID,
-		GroomName:         wedding.Couple.GroomName,
-		BrideName:         wedding.Couple.BrideName,
-		GroomRole:         wedding.Couple.GroomRole,
-		BrideRole:         wedding.Couple.BrideRole,
-		GroomBio:          wedding.Couple.GroomBio,
-		BrideBio:          wedding.Couple.BrideBio,
-		GroomPhotoURL:     wedding.Couple.GroomPhotoURL,
-		BridePhotoURL:     wedding.Couple.BridePhotoURL,
-		LoveStory:         wedding.Couple.LoveStory,
-		WeddingDate:       wedding.EventDetails.WeddingDate,
-		VenueName:         wedding.EventDetails.VenueName,
-		VenueAddress:      wedding.EventDetails.VenueAddress,
-		VenueMapURL:       wedding.EventDetails.VenueMapURL,
-		ContactEmail:      wedding.EventDetails.ContactEmail,
-		SiteTitle:         wedding.SEO.SiteTitle,
-		MetaDescription:   wedding.SEO.MetaDescription,
-		Events:            wedding.EventDetails.Events,
-		GalleryImages:     wedding.Gallery.Images,
-		AllowPlusOne:      wedding.RSVP.AllowPlusOne,
-		CollectDietary:    wedding.RSVP.CollectDietary,
-		CustomQuestions:   wedding.RSVP.CustomQuestions,
-		RSVPDeadline:      wedding.RSVP.Deadline,
-		RSVPStatus:        h.getRSVPStatus(wedding),
+		Slug:            wedding.Slug,
+		Theme:           wedding.Theme.ThemeID,
+		GroomName:       wedding.Couple.GroomName,
+		BrideName:       wedding.Couple.BrideName,
+		GroomRole:       wedding.Couple.GroomRole,
+		BrideRole:       wedding.Couple.BrideRole,
+		GroomBio:        wedding.Couple.GroomBio,
+		BrideBio:        wedding.Couple.BrideBio,
+		GroomPhotoURL:   wedding.Couple.GroomPhotoURL,
+		BridePhotoURL:   wedding.Couple.BridePhotoURL,
+		LoveStory:       wedding.Couple.LoveStory,
+		WeddingDate:     wedding.EventDetails.WeddingDate,
+		VenueName:       wedding.EventDetails.VenueName,
+		VenueAddress:    wedding.EventDetails.VenueAddress,
+		VenueMapURL:     wedding.EventDetails.VenueMapURL,
+		ContactEmail:    wedding.EventDetails.ContactEmail,
+		SiteTitle:       wedding.SEO.SiteTitle,
+		MetaDescription: wedding.SEO.MetaDescription,
+		Events:          wedding.EventDetails.Events,
+		GalleryImages:   wedding.Gallery.Images,
+		AllowPlusOne:    wedding.RSVP.AllowPlusOne,
+		CollectDietary:  wedding.RSVP.CollectDietary,
+		CustomQuestions: wedding.RSVP.CustomQuestions,
+		RSVPDeadline:    wedding.RSVP.Deadline,
+		RSVPStatus:      h.getRSVPStatus(wedding),
 	}
 }
 
 // getRSVPStatus determines the current RSVP status
 func (h *PublicHandler) getRSVPStatus(wedding *models.Wedding) string {
 	now := time.Now()
-	
+
 	// Check if wedding is published
 	if wedding.Status != string(models.WeddingStatusPublished) {
 		return "closed"
 	}
-	
+
 	// Check if RSVP period is open
 	if wedding.RSVP.OpenDate.After(now) {
 		return "upcoming"
 	}
-	
+
 	// Check if RSVP deadline has passed
 	if wedding.RSVP.Deadline.Before(now) {
 		return "closed"
 	}
-	
+
 	return "open"
 }
 

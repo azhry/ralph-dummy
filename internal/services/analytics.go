@@ -13,7 +13,7 @@ import (
 	"go.uber.org/zap"
 
 	"wedding-invitation-backend/internal/domain/models"
-	"wedding-invitation-backend/internal/repository/mongodb"
+	"wedding-invitation-backend/internal/domain/repository"
 )
 
 // AnalyticsService represents the analytics service interface
@@ -21,40 +21,44 @@ type AnalyticsService interface {
 	// Page View Tracking
 	TrackPageView(ctx context.Context, weddingID primitive.ObjectID, sessionID, page string, req *http.Request) error
 	GetPageViews(ctx context.Context, weddingID primitive.ObjectID, filter *models.AnalyticsFilter) ([]*models.PageView, int64, error)
-	
+
 	// RSVP Analytics
 	TrackRSVPSubmission(ctx context.Context, weddingID, rsvpID primitive.ObjectID, sessionID, source string, timeToComplete int64, req *http.Request) error
 	TrackRSVPAbandonment(ctx context.Context, weddingID primitive.ObjectID, sessionID, abandonedStep string, formErrors []string, req *http.Request) error
 	GetRSVPAnalytics(ctx context.Context, weddingID primitive.ObjectID, filter *models.AnalyticsFilter) ([]*models.RSVPAnalytics, int64, error)
-	
+
 	// Conversion Tracking
 	TrackConversion(ctx context.Context, weddingID primitive.ObjectID, sessionID, event string, value float64, properties map[string]interface{}) error
 	GetConversions(ctx context.Context, weddingID primitive.ObjectID, filter *models.AnalyticsFilter) ([]*models.ConversionEvent, int64, error)
-	
+
 	// Analytics Data
 	GetWeddingAnalytics(ctx context.Context, weddingID primitive.ObjectID) (*models.WeddingAnalytics, error)
 	GetSystemAnalytics(ctx context.Context) (*models.SystemAnalytics, error)
 	GetAnalyticsSummary(ctx context.Context, weddingID primitive.ObjectID, period string) (*models.AnalyticsSummary, error)
-	
+
 	// Reports
 	GetPopularPages(ctx context.Context, weddingID primitive.ObjectID, limit int) ([]models.PageStats, error)
 	GetTrafficSources(ctx context.Context, weddingID primitive.ObjectID, limit int) ([]models.TrafficSourceStats, error)
 	GetDailyMetrics(ctx context.Context, weddingID primitive.ObjectID, startDate, endDate time.Time) ([]models.DailyMetrics, error)
-	
+
 	// Management
 	RefreshWeddingAnalytics(ctx context.Context, weddingID primitive.ObjectID) error
 	RefreshSystemAnalytics(ctx context.Context) error
 	CleanupOldAnalytics(ctx context.Context, olderThan time.Time) error
+
+	// Validation
+	IsValidPage(page string) bool
+	IsValidEvent(event string) bool
 }
 
 type analyticsService struct {
-	analyticsRepo mongodb.AnalyticsRepository
-	weddingRepo   mongodb.WeddingRepository
+	analyticsRepo repository.AnalyticsRepository
+	weddingRepo   repository.WeddingRepository
 	logger        *zap.Logger
 }
 
 // NewAnalyticsService creates a new analytics service
-func NewAnalyticsService(analyticsRepo mongodb.AnalyticsRepository, weddingRepo mongodb.WeddingRepository, logger *zap.Logger) AnalyticsService {
+func NewAnalyticsService(analyticsRepo repository.AnalyticsRepository, weddingRepo repository.WeddingRepository, logger *zap.Logger) AnalyticsService {
 	return &analyticsService{
 		analyticsRepo: analyticsRepo,
 		weddingRepo:   weddingRepo,
@@ -69,25 +73,25 @@ func (s *analyticsService) TrackPageView(ctx context.Context, weddingID primitiv
 	if err != nil {
 		return fmt.Errorf("wedding not found: %w", err)
 	}
-	
+
 	if wedding.Status != string(models.WeddingStatusPublished) {
 		return fmt.Errorf("cannot track analytics for unpublished wedding")
 	}
-	
+
 	// Extract user agent and IP address
 	userAgent := ""
 	if req != nil {
 		userAgent = req.Header.Get("User-Agent")
 	}
-	
+
 	ipAddress := ""
 	if req != nil {
 		ipAddress = s.getClientIP(req)
 	}
-	
+
 	// Parse device, browser, and OS from user agent
 	device, browser, os := s.parseUserAgent(userAgent)
-	
+
 	// Get referrer
 	referrer := ""
 	if req != nil {
@@ -96,13 +100,13 @@ func (s *analyticsService) TrackPageView(ctx context.Context, weddingID primitiv
 			referrer = req.URL.Query().Get("ref")
 		}
 	}
-	
+
 	// Geolocation (placeholder - would integrate with IP geolocation service in production)
 	country, city := "", ""
 	if ipAddress != "" {
 		country, city = s.getGeoLocation(ipAddress)
 	}
-	
+
 	pageView := &models.PageView{
 		WeddingID: weddingID,
 		SessionID: sessionID,
@@ -118,21 +122,21 @@ func (s *analyticsService) TrackPageView(ctx context.Context, weddingID primitiv
 		City:      city,
 		Metadata:  make(map[string]interface{}),
 	}
-	
+
 	err = s.analyticsRepo.TrackPageView(ctx, pageView)
 	if err != nil {
-		s.logger.Error("Failed to track page view", 
+		s.logger.Error("Failed to track page view",
 			zap.Error(err),
 			zap.String("wedding_id", weddingID.Hex()),
 			zap.String("page", page))
 		return fmt.Errorf("failed to track page view: %w", err)
 	}
-	
+
 	s.logger.Debug("Tracked page view",
 		zap.String("wedding_id", weddingID.Hex()),
 		zap.String("session_id", sessionID),
 		zap.String("page", page))
-	
+
 	return nil
 }
 
@@ -148,7 +152,7 @@ func (s *analyticsService) TrackRSVPSubmission(ctx context.Context, weddingID, r
 	if err != nil {
 		return fmt.Errorf("wedding not found: %w", err)
 	}
-	
+
 	// Extract user agent and device info
 	userAgent := ""
 	device := "unknown"
@@ -157,7 +161,7 @@ func (s *analyticsService) TrackRSVPSubmission(ctx context.Context, weddingID, r
 		userAgent = req.Header.Get("User-Agent")
 		device, browser, _ = s.parseUserAgent(userAgent)
 	}
-	
+
 	// Get referrer
 	referrer := ""
 	if req != nil {
@@ -166,7 +170,7 @@ func (s *analyticsService) TrackRSVPSubmission(ctx context.Context, weddingID, r
 			referrer = req.URL.Query().Get("ref")
 		}
 	}
-	
+
 	event := &models.RSVPAnalytics{
 		WeddingID:      weddingID,
 		RSVPID:         rsvpID,
@@ -178,7 +182,7 @@ func (s *analyticsService) TrackRSVPSubmission(ctx context.Context, weddingID, r
 		Referrer:       referrer,
 		Timestamp:      time.Now(),
 	}
-	
+
 	err = s.analyticsRepo.TrackRSVPEvent(ctx, event)
 	if err != nil {
 		s.logger.Error("Failed to track RSVP submission",
@@ -187,21 +191,21 @@ func (s *analyticsService) TrackRSVPSubmission(ctx context.Context, weddingID, r
 			zap.String("rsvp_id", rsvpID.Hex()))
 		return fmt.Errorf("failed to track RSVP submission: %w", err)
 	}
-	
+
 	// Track conversion
 	err = s.TrackConversion(ctx, weddingID, sessionID, "rsvp_completed", 1, map[string]interface{}{
-		"source":          source,
+		"source":           source,
 		"time_to_complete": timeToComplete,
 	})
 	if err != nil {
 		s.logger.Warn("Failed to track RSVP conversion", zap.Error(err))
 	}
-	
+
 	s.logger.Debug("Tracked RSVP submission",
 		zap.String("wedding_id", weddingID.Hex()),
 		zap.String("rsvp_id", rsvpID.Hex()),
 		zap.String("source", source))
-	
+
 	return nil
 }
 
@@ -212,7 +216,7 @@ func (s *analyticsService) TrackRSVPAbandonment(ctx context.Context, weddingID p
 	if err != nil {
 		return fmt.Errorf("wedding not found: %w", err)
 	}
-	
+
 	// Extract device info
 	device := "unknown"
 	browser := "unknown"
@@ -220,24 +224,24 @@ func (s *analyticsService) TrackRSVPAbandonment(ctx context.Context, weddingID p
 		userAgent := req.Header.Get("User-Agent")
 		device, browser, _ = s.parseUserAgent(userAgent)
 	}
-	
+
 	// Get referrer
 	referrer := ""
 	if req != nil {
 		referrer = req.Header.Get("Referer")
 	}
-	
+
 	event := &models.RSVPAnalytics{
-		WeddingID:    weddingID,
-		SessionID:    sessionID,
-		Device:       device,
-		Browser:      browser,
-		Referrer:     referrer,
-		Timestamp:    time.Now(),
+		WeddingID:     weddingID,
+		SessionID:     sessionID,
+		Device:        device,
+		Browser:       browser,
+		Referrer:      referrer,
+		Timestamp:     time.Now(),
 		AbandonedStep: abandonedStep,
-		FormErrors:   formErrors,
+		FormErrors:    formErrors,
 	}
-	
+
 	err = s.analyticsRepo.TrackRSVPEvent(ctx, event)
 	if err != nil {
 		s.logger.Error("Failed to track RSVP abandonment",
@@ -246,7 +250,7 @@ func (s *analyticsService) TrackRSVPAbandonment(ctx context.Context, weddingID p
 			zap.String("abandoned_step", abandonedStep))
 		return fmt.Errorf("failed to track RSVP abandonment: %w", err)
 	}
-	
+
 	// Track conversion funnel
 	err = s.TrackConversion(ctx, weddingID, sessionID, "rsvp_abandoned", 0, map[string]interface{}{
 		"step":        abandonedStep,
@@ -255,11 +259,11 @@ func (s *analyticsService) TrackRSVPAbandonment(ctx context.Context, weddingID p
 	if err != nil {
 		s.logger.Warn("Failed to track RSVP abandonment conversion", zap.Error(err))
 	}
-	
+
 	s.logger.Debug("Tracked RSVP abandonment",
 		zap.String("wedding_id", weddingID.Hex()),
 		zap.String("abandoned_step", abandonedStep))
-	
+
 	return nil
 }
 
@@ -275,7 +279,7 @@ func (s *analyticsService) TrackConversion(ctx context.Context, weddingID primit
 	if err != nil {
 		return fmt.Errorf("wedding not found: %w", err)
 	}
-	
+
 	conversionEvent := &models.ConversionEvent{
 		WeddingID:  weddingID,
 		SessionID:  sessionID,
@@ -284,7 +288,7 @@ func (s *analyticsService) TrackConversion(ctx context.Context, weddingID primit
 		Timestamp:  time.Now(),
 		Properties: properties,
 	}
-	
+
 	err = s.analyticsRepo.TrackConversion(ctx, conversionEvent)
 	if err != nil {
 		s.logger.Error("Failed to track conversion",
@@ -293,7 +297,7 @@ func (s *analyticsService) TrackConversion(ctx context.Context, weddingID primit
 			zap.String("event", event))
 		return fmt.Errorf("failed to track conversion: %w", err)
 	}
-	
+
 	return nil
 }
 
@@ -343,10 +347,10 @@ func (s *analyticsService) RefreshWeddingAnalytics(ctx context.Context, weddingI
 			zap.String("wedding_id", weddingID.Hex()))
 		return fmt.Errorf("failed to refresh wedding analytics: %w", err)
 	}
-	
+
 	s.logger.Info("Wedding analytics refreshed",
 		zap.String("wedding_id", weddingID.Hex()))
-	
+
 	return nil
 }
 
@@ -357,7 +361,7 @@ func (s *analyticsService) RefreshSystemAnalytics(ctx context.Context) error {
 		s.logger.Error("Failed to refresh system analytics", zap.Error(err))
 		return fmt.Errorf("failed to refresh system analytics: %w", err)
 	}
-	
+
 	s.logger.Info("System analytics refreshed")
 	return nil
 }
@@ -369,10 +373,10 @@ func (s *analyticsService) CleanupOldAnalytics(ctx context.Context, olderThan ti
 		s.logger.Error("Failed to cleanup old analytics", zap.Error(err))
 		return fmt.Errorf("failed to cleanup old analytics: %w", err)
 	}
-	
+
 	s.logger.Info("Old analytics data cleaned up",
 		zap.Time("older_than", olderThan))
-	
+
 	return nil
 }
 
@@ -392,7 +396,7 @@ func (s *analyticsService) getClientIP(req *http.Request) string {
 			}
 		}
 	}
-	
+
 	// Check X-Real-IP header
 	xRealIP := req.Header.Get("X-Real-IP")
 	if xRealIP != "" {
@@ -400,13 +404,13 @@ func (s *analyticsService) getClientIP(req *http.Request) string {
 			return xRealIP
 		}
 	}
-	
+
 	// Fall back to RemoteAddr
 	ip, _, err := net.SplitHostPort(req.RemoteAddr)
 	if err != nil {
 		return req.RemoteAddr
 	}
-	
+
 	return ip
 }
 
@@ -415,9 +419,9 @@ func (s *analyticsService) parseUserAgent(userAgent string) (device, browser, os
 	if userAgent == "" {
 		return "unknown", "unknown", "unknown"
 	}
-	
+
 	userAgent = strings.ToLower(userAgent)
-	
+
 	// Detect device type
 	if strings.Contains(userAgent, "mobile") || strings.Contains(userAgent, "android") || strings.Contains(userAgent, "iphone") {
 		device = "mobile"
@@ -426,7 +430,7 @@ func (s *analyticsService) parseUserAgent(userAgent string) (device, browser, os
 	} else {
 		device = "desktop"
 	}
-	
+
 	// Detect browser
 	if strings.Contains(userAgent, "chrome") && !strings.Contains(userAgent, "edg") {
 		browser = "chrome"
@@ -441,7 +445,7 @@ func (s *analyticsService) parseUserAgent(userAgent string) (device, browser, os
 	} else {
 		browser = "other"
 	}
-	
+
 	// Detect OS
 	if strings.Contains(userAgent, "windows") {
 		os = "windows"
@@ -456,7 +460,7 @@ func (s *analyticsService) parseUserAgent(userAgent string) (device, browser, os
 	} else {
 		os = "other"
 	}
-	
+
 	return device, browser, os
 }
 
@@ -468,11 +472,11 @@ func (s *analyticsService) getGeoLocation(ipAddress string) (country, city strin
 	// - IPinfo
 	// - IP-API
 	// - Abstract API
-	
+
 	if ipAddress == "" || ipAddress == "127.0.0.1" || ipAddress == "::1" {
 		return "", ""
 	}
-	
+
 	// For demonstration, return empty values
 	// In production, you would make an API call to get real geolocation data
 	return "", ""
@@ -495,13 +499,13 @@ func (s *analyticsService) IsValidPage(page string) bool {
 		"contact",
 		"home",
 	}
-	
+
 	for _, validPage := range validPages {
 		if page == validPage {
 			return true
 		}
 	}
-	
+
 	return false
 }
 
@@ -517,13 +521,13 @@ func (s *analyticsService) IsValidEvent(event string) bool {
 		"contact_clicked",
 		"page_viewed",
 	}
-	
+
 	for _, validEvent := range validEvents {
 		if event == validEvent {
 			return true
 		}
 	}
-	
+
 	return false
 }
 
@@ -532,7 +536,7 @@ func (s *analyticsService) SanitizeReferrer(referrer string) string {
 	if referrer == "" {
 		return ""
 	}
-	
+
 	// Remove query parameters and fragments
 	if idx := strings.Index(referrer, "?"); idx != -1 {
 		referrer = referrer[:idx]
@@ -540,12 +544,12 @@ func (s *analyticsService) SanitizeReferrer(referrer string) string {
 	if idx := strings.Index(referrer, "#"); idx != -1 {
 		referrer = referrer[:idx]
 	}
-	
+
 	// Limit length
 	if len(referrer) > 500 {
 		referrer = referrer[:500]
 	}
-	
+
 	return referrer
 }
 
@@ -554,7 +558,7 @@ func (s *analyticsService) ExtractSourceFromReferrer(referrer string) string {
 	if referrer == "" {
 		return "direct"
 	}
-	
+
 	// Check for common sources
 	if strings.Contains(referrer, "google.com") {
 		return "google"
@@ -578,30 +582,30 @@ func (s *analyticsService) ExtractSourceFromReferrer(referrer string) string {
 // ValidatePeriod validates analytics period
 func (s *analyticsService) ValidatePeriod(period string) bool {
 	validPeriods := []string{"daily", "weekly", "monthly", "yearly"}
-	
+
 	for _, validPeriod := range validPeriods {
 		if period == validPeriod {
 			return true
 		}
 	}
-	
+
 	return false
 }
 
 // SanitizeCustomData sanitizes custom data for analytics
 func (s *analyticsService) SanitizeCustomData(data map[string]interface{}) map[string]interface{} {
 	sanitized := make(map[string]interface{})
-	
+
 	for key, value := range data {
 		// Limit key length
 		if len(key) > 50 {
 			key = key[:50]
 		}
-		
+
 		// Sanitize key (only alphanumeric and underscore)
 		reg := regexp.MustCompile(`[^a-zA-Z0-9_]`)
 		key = reg.ReplaceAllString(key, "_")
-		
+
 		// Limit value size
 		strValue := fmt.Sprintf("%v", value)
 		if len(strValue) > 200 {
@@ -610,6 +614,6 @@ func (s *analyticsService) SanitizeCustomData(data map[string]interface{}) map[s
 			sanitized[key] = value
 		}
 	}
-	
+
 	return sanitized
 }

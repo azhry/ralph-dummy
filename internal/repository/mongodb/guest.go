@@ -46,9 +46,25 @@ func (r *GuestRepository) GetByID(ctx context.Context, id primitive.ObjectID) (*
 	err := r.collection.FindOne(ctx, bson.M{"_id": id}).Decode(&guest)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
-			return nil, errors.New("guest not found")
+			return nil, repository.ErrNotFound
 		}
 		return nil, fmt.Errorf("failed to get guest: %w", err)
+	}
+	return &guest, nil
+}
+
+// GetByEmail retrieves a guest by email within a wedding
+func (r *GuestRepository) GetByEmail(ctx context.Context, weddingID primitive.ObjectID, email string) (*models.Guest, error) {
+	var guest models.Guest
+	err := r.collection.FindOne(ctx, bson.M{
+		"wedding_id": weddingID,
+		"email":      email,
+	}).Decode(&guest)
+	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			return nil, repository.ErrNotFound
+		}
+		return nil, fmt.Errorf("failed to get guest by email: %w", err)
 	}
 	return &guest, nil
 }
@@ -180,7 +196,7 @@ func (r *GuestRepository) ImportBatch(ctx context.Context, guests []*models.Gues
 // GetByImportBatch retrieves guests by wedding ID and batch ID
 func (r *GuestRepository) GetByImportBatch(ctx context.Context, weddingID primitive.ObjectID, batchID string) ([]*models.Guest, error) {
 	filter := bson.M{
-		"wedding_id":     weddingID,
+		"wedding_id":      weddingID,
 		"import_batch_id": batchID,
 	}
 
@@ -201,8 +217,6 @@ func (r *GuestRepository) GetByImportBatch(ctx context.Context, weddingID primit
 
 	return guests, nil
 }
-
-
 
 // buildFilters constructs the MongoDB filter based on the provided filters
 func (r *GuestRepository) buildFilters(baseFilter bson.M, filters repository.GuestFilters) bson.M {
@@ -239,27 +253,27 @@ func (r *GuestRepository) buildFilters(baseFilter bson.M, filters repository.Gue
 func (r *GuestRepository) EnsureIndexes(ctx context.Context) error {
 	indexModels := []mongo.IndexModel{
 		{
-			Keys: bson.M{"wedding_id": 1},
+			Keys:    bson.M{"wedding_id": 1},
 			Options: options.Index().SetName("wedding_id_index"),
 		},
 		{
-			Keys: bson.M{"wedding_id": 1, "email": 1},
+			Keys:    bson.M{"wedding_id": 1, "email": 1},
 			Options: options.Index().SetName("wedding_email_index").SetUnique(true),
 		},
 		{
-			Keys: bson.M{"wedding_id": 1, "side": 1},
+			Keys:    bson.M{"wedding_id": 1, "side": 1},
 			Options: options.Index().SetName("wedding_side_index"),
 		},
 		{
-			Keys: bson.M{"wedding_id": 1, "rsvp_status": 1},
+			Keys:    bson.M{"wedding_id": 1, "rsvp_status": 1},
 			Options: options.Index().SetName("wedding_rsvp_status_index"),
 		},
 		{
-			Keys: bson.M{"wedding_id": 1, "invitation_status": 1},
+			Keys:    bson.M{"wedding_id": 1, "invitation_status": 1},
 			Options: options.Index().SetName("wedding_invitation_status_index"),
 		},
 		{
-			Keys: bson.M{"import_batch_id": 1},
+			Keys:    bson.M{"import_batch_id": 1},
 			Options: options.Index().SetName("import_batch_id_index"),
 		},
 	}

@@ -18,38 +18,38 @@ type AnalyticsRepository interface {
 	// Page Views
 	TrackPageView(ctx context.Context, pageView *models.PageView) error
 	GetPageViews(ctx context.Context, weddingID primitive.ObjectID, filter *models.AnalyticsFilter) ([]*models.PageView, int64, error)
-	
+
 	// RSVP Analytics
 	TrackRSVPEvent(ctx context.Context, event *models.RSVPAnalytics) error
 	GetRSVPAnalytics(ctx context.Context, weddingID primitive.ObjectID, filter *models.AnalyticsFilter) ([]*models.RSVPAnalytics, int64, error)
-	
+
 	// Conversion Events
 	TrackConversion(ctx context.Context, event *models.ConversionEvent) error
 	GetConversions(ctx context.Context, weddingID primitive.ObjectID, filter *models.AnalyticsFilter) ([]*models.ConversionEvent, int64, error)
-	
+
 	// Aggregated Analytics
 	GetWeddingAnalytics(ctx context.Context, weddingID primitive.ObjectID) (*models.WeddingAnalytics, error)
 	UpdateWeddingAnalytics(ctx context.Context, weddingID primitive.ObjectID) error
-	
+
 	// System Analytics
 	GetSystemAnalytics(ctx context.Context) (*models.SystemAnalytics, error)
 	UpdateSystemAnalytics(ctx context.Context) error
-	
+
 	// Reports
 	GetAnalyticsSummary(ctx context.Context, weddingID primitive.ObjectID, period string) (*models.AnalyticsSummary, error)
 	GetPopularPages(ctx context.Context, weddingID primitive.ObjectID, limit int) ([]models.PageStats, error)
 	GetTrafficSources(ctx context.Context, weddingID primitive.ObjectID, limit int) ([]models.TrafficSourceStats, error)
 	GetDailyMetrics(ctx context.Context, weddingID primitive.ObjectID, startDate, endDate time.Time) ([]models.DailyMetrics, error)
-	
+
 	// Cleanup
 	CleanupOldAnalytics(ctx context.Context, olderThan time.Time) error
 }
 
 type analyticsRepository struct {
-	db         *mongo.Database
-	pageViews  *mongo.Collection
-	rsvpEvents *mongo.Collection
-	conversions *mongo.Collection
+	db               *mongo.Database
+	pageViews        *mongo.Collection
+	rsvpEvents       *mongo.Collection
+	conversions      *mongo.Collection
 	weddingAnalytics *mongo.Collection
 	systemAnalytics  *mongo.Collection
 }
@@ -74,24 +74,24 @@ func (r *analyticsRepository) TrackPageView(ctx context.Context, pageView *model
 	if pageView.Timestamp.IsZero() {
 		pageView.Timestamp = time.Now()
 	}
-	
+
 	_, err := r.pageViews.InsertOne(ctx, pageView)
 	if err != nil {
 		return fmt.Errorf("failed to track page view: %w", err)
 	}
-	
+
 	// Update wedding analytics asynchronously
 	go func() {
 		r.UpdateWeddingAnalytics(context.Background(), pageView.WeddingID)
 	}()
-	
+
 	return nil
 }
 
 // GetPageViews retrieves page views with filtering
 func (r *analyticsRepository) GetPageViews(ctx context.Context, weddingID primitive.ObjectID, filter *models.AnalyticsFilter) ([]*models.PageView, int64, error) {
 	query := bson.M{"wedding_id": weddingID}
-	
+
 	// Apply filters
 	if filter != nil {
 		if filter.StartDate != nil {
@@ -110,13 +110,13 @@ func (r *analyticsRepository) GetPageViews(ctx context.Context, weddingID primit
 			query["page"] = filter.Page
 		}
 	}
-	
+
 	// Get total count
 	total, err := r.pageViews.CountDocuments(ctx, query)
 	if err != nil {
 		return nil, 0, fmt.Errorf("failed to count page views: %w", err)
 	}
-	
+
 	// Apply pagination
 	opts := options.Find()
 	if filter != nil {
@@ -128,18 +128,18 @@ func (r *analyticsRepository) GetPageViews(ctx context.Context, weddingID primit
 		}
 	}
 	opts.SetSort(bson.M{"timestamp": -1})
-	
+
 	cursor, err := r.pageViews.Find(ctx, query, opts)
 	if err != nil {
 		return nil, 0, fmt.Errorf("failed to find page views: %w", err)
 	}
 	defer cursor.Close(ctx)
-	
+
 	var pageViews []*models.PageView
 	if err = cursor.All(ctx, &pageViews); err != nil {
 		return nil, 0, fmt.Errorf("failed to decode page views: %w", err)
 	}
-	
+
 	return pageViews, total, nil
 }
 
@@ -151,24 +151,24 @@ func (r *analyticsRepository) TrackRSVPEvent(ctx context.Context, event *models.
 	if event.Timestamp.IsZero() {
 		event.Timestamp = time.Now()
 	}
-	
+
 	_, err := r.rsvpEvents.InsertOne(ctx, event)
 	if err != nil {
 		return fmt.Errorf("failed to track RSVP event: %w", err)
 	}
-	
+
 	// Update wedding analytics asynchronously
 	go func() {
 		r.UpdateWeddingAnalytics(context.Background(), event.WeddingID)
 	}()
-	
+
 	return nil
 }
 
 // GetRSVPAnalytics retrieves RSVP analytics with filtering
 func (r *analyticsRepository) GetRSVPAnalytics(ctx context.Context, weddingID primitive.ObjectID, filter *models.AnalyticsFilter) ([]*models.RSVPAnalytics, int64, error) {
 	query := bson.M{"wedding_id": weddingID}
-	
+
 	// Apply filters
 	if filter != nil {
 		if filter.StartDate != nil {
@@ -187,13 +187,13 @@ func (r *analyticsRepository) GetRSVPAnalytics(ctx context.Context, weddingID pr
 			query["source"] = filter.Source
 		}
 	}
-	
+
 	// Get total count
 	total, err := r.rsvpEvents.CountDocuments(ctx, query)
 	if err != nil {
 		return nil, 0, fmt.Errorf("failed to count RSVP analytics: %w", err)
 	}
-	
+
 	// Apply pagination
 	opts := options.Find()
 	if filter != nil {
@@ -205,18 +205,18 @@ func (r *analyticsRepository) GetRSVPAnalytics(ctx context.Context, weddingID pr
 		}
 	}
 	opts.SetSort(bson.M{"timestamp": -1})
-	
+
 	cursor, err := r.rsvpEvents.Find(ctx, query, opts)
 	if err != nil {
 		return nil, 0, fmt.Errorf("failed to find RSVP analytics: %w", err)
 	}
 	defer cursor.Close(ctx)
-	
+
 	var events []*models.RSVPAnalytics
 	if err = cursor.All(ctx, &events); err != nil {
 		return nil, 0, fmt.Errorf("failed to decode RSVP analytics: %w", err)
 	}
-	
+
 	return events, total, nil
 }
 
@@ -228,24 +228,24 @@ func (r *analyticsRepository) TrackConversion(ctx context.Context, event *models
 	if event.Timestamp.IsZero() {
 		event.Timestamp = time.Now()
 	}
-	
+
 	_, err := r.conversions.InsertOne(ctx, event)
 	if err != nil {
 		return fmt.Errorf("failed to track conversion: %w", err)
 	}
-	
+
 	// Update wedding analytics asynchronously
 	go func() {
 		r.UpdateWeddingAnalytics(context.Background(), event.WeddingID)
 	}()
-	
+
 	return nil
 }
 
 // GetConversions retrieves conversion events with filtering
 func (r *analyticsRepository) GetConversions(ctx context.Context, weddingID primitive.ObjectID, filter *models.AnalyticsFilter) ([]*models.ConversionEvent, int64, error) {
 	query := bson.M{"wedding_id": weddingID}
-	
+
 	// Apply filters
 	if filter != nil {
 		if filter.StartDate != nil {
@@ -261,13 +261,13 @@ func (r *analyticsRepository) GetConversions(ctx context.Context, weddingID prim
 			query["event"] = filter.Event
 		}
 	}
-	
+
 	// Get total count
 	total, err := r.conversions.CountDocuments(ctx, query)
 	if err != nil {
 		return nil, 0, fmt.Errorf("failed to count conversions: %w", err)
 	}
-	
+
 	// Apply pagination
 	opts := options.Find()
 	if filter != nil {
@@ -279,18 +279,18 @@ func (r *analyticsRepository) GetConversions(ctx context.Context, weddingID prim
 		}
 	}
 	opts.SetSort(bson.M{"timestamp": -1})
-	
+
 	cursor, err := r.conversions.Find(ctx, query, opts)
 	if err != nil {
 		return nil, 0, fmt.Errorf("failed to find conversions: %w", err)
 	}
 	defer cursor.Close(ctx)
-	
+
 	var conversions []*models.ConversionEvent
 	if err = cursor.All(ctx, &conversions); err != nil {
 		return nil, 0, fmt.Errorf("failed to decode conversions: %w", err)
 	}
-	
+
 	return conversions, total, nil
 }
 
@@ -318,7 +318,7 @@ func (r *analyticsRepository) GetWeddingAnalytics(ctx context.Context, weddingID
 		}
 		return nil, fmt.Errorf("failed to get wedding analytics: %w", err)
 	}
-	
+
 	return &analytics, nil
 }
 
@@ -329,7 +329,7 @@ func (r *analyticsRepository) UpdateWeddingAnalytics(ctx context.Context, weddin
 	if err != nil {
 		return fmt.Errorf("failed to count page views: %w", err)
 	}
-	
+
 	// Get unique sessions
 	pipeline := []bson.M{
 		{"$match": bson.M{"wedding_id": weddingID}},
@@ -341,7 +341,7 @@ func (r *analyticsRepository) UpdateWeddingAnalytics(ctx context.Context, weddin
 		return fmt.Errorf("failed to aggregate sessions: %w", err)
 	}
 	defer cursor.Close(ctx)
-	
+
 	var uniqueSessions int64 = 0
 	if cursor.Next(ctx) {
 		var result struct {
@@ -351,13 +351,13 @@ func (r *analyticsRepository) UpdateWeddingAnalytics(ctx context.Context, weddin
 			uniqueSessions = result.UniqueSessions
 		}
 	}
-	
+
 	// Get RSVP count
 	rsvpCount, err := r.rsvpEvents.CountDocuments(ctx, bson.M{"wedding_id": weddingID})
 	if err != nil {
 		return fmt.Errorf("failed to count RSVP analytics: %w", err)
 	}
-	
+
 	// Calculate popular pages
 	popularPagesPipeline := []bson.M{
 		{"$match": bson.M{"wedding_id": weddingID}},
@@ -370,7 +370,7 @@ func (r *analyticsRepository) UpdateWeddingAnalytics(ctx context.Context, weddin
 		return fmt.Errorf("failed to aggregate popular pages: %w", err)
 	}
 	defer popularPagesCursor.Close(ctx)
-	
+
 	popularPages := make(map[string]int64)
 	for popularPagesCursor.Next(ctx) {
 		var result struct {
@@ -381,7 +381,7 @@ func (r *analyticsRepository) UpdateWeddingAnalytics(ctx context.Context, weddin
 			popularPages[result.Page] = result.Count
 		}
 	}
-	
+
 	// Calculate device breakdown
 	devicePipeline := []bson.M{
 		{"$match": bson.M{"wedding_id": weddingID, "device": bson.M{"$ne": ""}}},
@@ -392,7 +392,7 @@ func (r *analyticsRepository) UpdateWeddingAnalytics(ctx context.Context, weddin
 		return fmt.Errorf("failed to aggregate device breakdown: %w", err)
 	}
 	defer deviceCursor.Close(ctx)
-	
+
 	deviceBreakdown := make(map[string]int64)
 	for deviceCursor.Next(ctx) {
 		var result struct {
@@ -403,13 +403,13 @@ func (r *analyticsRepository) UpdateWeddingAnalytics(ctx context.Context, weddin
 			deviceBreakdown[result.Device] = result.Count
 		}
 	}
-	
+
 	// Calculate conversion rate
 	var conversionRate float64 = 0
 	if pageViews > 0 {
 		conversionRate = float64(rsvpCount) / float64(pageViews) * 100
 	}
-	
+
 	// Create update
 	analytics := &models.WeddingAnalytics{
 		WeddingID:         weddingID,
@@ -427,17 +427,17 @@ func (r *analyticsRepository) UpdateWeddingAnalytics(ctx context.Context, weddin
 		BounceRate:        0,                      // TODO: implement bounce rate calculation
 		LastUpdated:       time.Now(),
 	}
-	
+
 	// Upsert analytics
 	filter := bson.M{"_id": weddingID}
 	update := bson.M{"$set": analytics}
 	options := options.Update().SetUpsert(true)
-	
+
 	_, err = r.weddingAnalytics.UpdateOne(ctx, filter, update, options)
 	if err != nil {
 		return fmt.Errorf("failed to update wedding analytics: %w", err)
 	}
-	
+
 	return nil
 }
 
@@ -465,7 +465,7 @@ func (r *analyticsRepository) GetSystemAnalytics(ctx context.Context) (*models.S
 		}
 		return nil, fmt.Errorf("failed to get system analytics: %w", err)
 	}
-	
+
 	return &analytics, nil
 }
 
@@ -476,30 +476,30 @@ func (r *analyticsRepository) UpdateSystemAnalytics(ctx context.Context) error {
 	if err != nil {
 		return fmt.Errorf("failed to count users: %w", err)
 	}
-	
+
 	// Get total weddings
 	totalWeddings, err := r.db.Collection("weddings").CountDocuments(ctx, bson.M{})
 	if err != nil {
 		return fmt.Errorf("failed to count weddings: %w", err)
 	}
-	
+
 	// Get published weddings
 	publishedWeddings, err := r.db.Collection("weddings").CountDocuments(ctx, bson.M{"status": "published"})
 	if err != nil {
 		return fmt.Errorf("failed to count published weddings: %w", err)
 	}
-	
+
 	// Get total RSVPs
 	totalRSVPs, err := r.db.Collection("rsvps").CountDocuments(ctx, bson.M{})
 	if err != nil {
 		return fmt.Errorf("failed to count RSVPs: %w", err)
 	}
-	
+
 	// Get today's date
 	today := time.Now().UTC()
 	startOfDay := time.Date(today.Year(), today.Month(), today.Day(), 0, 0, 0, 0, time.UTC)
 	endOfDay := startOfDay.Add(24 * time.Hour)
-	
+
 	// Get new users today
 	newUsersToday, err := r.db.Collection("users").CountDocuments(ctx, bson.M{
 		"created_at": bson.M{"$gte": startOfDay, "$lt": endOfDay},
@@ -507,7 +507,7 @@ func (r *analyticsRepository) UpdateSystemAnalytics(ctx context.Context) error {
 	if err != nil {
 		return fmt.Errorf("failed to count new users today: %w", err)
 	}
-	
+
 	// Get new weddings today
 	newWeddingsToday, err := r.db.Collection("weddings").CountDocuments(ctx, bson.M{
 		"created_at": bson.M{"$gte": startOfDay, "$lt": endOfDay},
@@ -515,7 +515,7 @@ func (r *analyticsRepository) UpdateSystemAnalytics(ctx context.Context) error {
 	if err != nil {
 		return fmt.Errorf("failed to count new weddings today: %w", err)
 	}
-	
+
 	// Get new RSVPs today
 	newRSVPsToday, err := r.db.Collection("rsvps").CountDocuments(ctx, bson.M{
 		"submitted_at": bson.M{"$gte": startOfDay, "$lt": endOfDay},
@@ -523,7 +523,7 @@ func (r *analyticsRepository) UpdateSystemAnalytics(ctx context.Context) error {
 	if err != nil {
 		return fmt.Errorf("failed to count new RSVPs today: %w", err)
 	}
-	
+
 	// Calculate active weddings (weddings with RSVPs in last 30 days)
 	thirtyDaysAgo := time.Now().AddDate(0, 0, -30)
 	activeWeddings, err := r.db.Collection("rsvps").Distinct(ctx, "wedding_id", bson.M{
@@ -532,13 +532,13 @@ func (r *analyticsRepository) UpdateSystemAnalytics(ctx context.Context) error {
 	if err != nil {
 		return fmt.Errorf("failed to get active weddings: %w", err)
 	}
-	
+
 	// Get total page views
 	totalPageViews, err := r.pageViews.CountDocuments(ctx, bson.M{})
 	if err != nil {
 		return fmt.Errorf("failed to count page views: %w", err)
 	}
-	
+
 	analytics := &models.SystemAnalytics{
 		TotalUsers:        totalUsers,
 		TotalWeddings:     totalWeddings,
@@ -553,17 +553,17 @@ func (r *analyticsRepository) UpdateSystemAnalytics(ctx context.Context) error {
 		LastUpdated:       time.Now(),
 		MetricsByDate:     make(map[string]interface{}), // TODO: implement date-based tracking
 	}
-	
+
 	// Upsert analytics
 	filter := bson.M{}
 	update := bson.M{"$set": analytics}
 	options := options.Update().SetUpsert(true)
-	
+
 	_, err = r.systemAnalytics.UpdateOne(ctx, filter, update, options)
 	if err != nil {
 		return fmt.Errorf("failed to update system analytics: %w", err)
 	}
-	
+
 	return nil
 }
 
@@ -572,7 +572,7 @@ func (r *analyticsRepository) GetAnalyticsSummary(ctx context.Context, weddingID
 	// Calculate date range based on period
 	var startDate time.Time
 	now := time.Now()
-	
+
 	switch period {
 	case "daily":
 		startDate = now.AddDate(0, 0, -7) // Last 7 days
@@ -583,65 +583,65 @@ func (r *analyticsRepository) GetAnalyticsSummary(ctx context.Context, weddingID
 	default:
 		startDate = now.AddDate(0, 0, -30) // Default to last 30 days
 	}
-	
+
 	filter := &models.AnalyticsFilter{
 		WeddingID: &weddingID,
 		StartDate: &startDate,
 		EndDate:   &now,
 	}
-	
+
 	// Get page views and RSVPs
 	pageViews, _, err := r.GetPageViews(ctx, weddingID, filter)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get page views: %w", err)
 	}
-	
+
 	rsvpAnalytics, _, err := r.GetRSVPAnalytics(ctx, weddingID, filter)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get RSVP analytics: %w", err)
 	}
-	
+
 	// Calculate totals
 	totalPageViews := int64(len(pageViews))
 	totalRSVPs := int64(len(rsvpAnalytics))
-	
+
 	// Get unique sessions (approximate)
 	sessions := make(map[string]bool)
 	for _, pv := range pageViews {
 		sessions[pv.SessionID] = true
 	}
 	totalSessions := int64(len(sessions))
-	
+
 	// Calculate conversion rate
 	var conversionRate float64 = 0
 	if totalPageViews > 0 {
 		conversionRate = float64(totalRSVPs) / float64(totalPageViews) * 100
 	}
-	
+
 	// Get popular pages
 	popularPages, err := r.GetPopularPages(ctx, weddingID, 10)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get popular pages: %w", err)
 	}
-	
+
 	// Get traffic sources
 	trafficSources, err := r.GetTrafficSources(ctx, weddingID, 10)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get traffic sources: %w", err)
 	}
-	
+
 	// Get device breakdown
 	analytics, err := r.GetWeddingAnalytics(ctx, weddingID)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get wedding analytics: %w", err)
 	}
-	
+
 	// Get daily metrics
 	dailyMetrics, err := r.GetDailyMetrics(ctx, weddingID, startDate, now)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get daily metrics: %w", err)
 	}
-	
+
 	return &models.AnalyticsSummary{
 		Period:          period,
 		TotalPageViews:  totalPageViews,
@@ -660,8 +660,8 @@ func (r *analyticsRepository) GetPopularPages(ctx context.Context, weddingID pri
 	pipeline := []bson.M{
 		{"$match": bson.M{"wedding_id": weddingID}},
 		{"$group": bson.M{
-			"_id":         "$page",
-			"views":       bson.M{"$sum": 1},
+			"_id":          "$page",
+			"views":        bson.M{"$sum": 1},
 			"unique_views": bson.M{"$addToSet": "$session_id"},
 		}},
 		{"$project": bson.M{
@@ -673,13 +673,13 @@ func (r *analyticsRepository) GetPopularPages(ctx context.Context, weddingID pri
 		{"$sort": bson.M{"views": -1}},
 		{"$limit": int64(limit)},
 	}
-	
+
 	cursor, err := r.pageViews.Aggregate(ctx, pipeline)
 	if err != nil {
 		return nil, fmt.Errorf("failed to aggregate popular pages: %w", err)
 	}
 	defer cursor.Close(ctx)
-	
+
 	var pages []models.PageStats
 	for cursor.Next(ctx) {
 		var result struct {
@@ -691,7 +691,7 @@ func (r *analyticsRepository) GetPopularPages(ctx context.Context, weddingID pri
 		if err := cursor.Decode(&result); err != nil {
 			continue
 		}
-		
+
 		pages = append(pages, models.PageStats{
 			Page:        result.Page,
 			Views:       result.Views,
@@ -699,7 +699,7 @@ func (r *analyticsRepository) GetPopularPages(ctx context.Context, weddingID pri
 			AvgTime:     result.AvgTime,
 		})
 	}
-	
+
 	return pages, nil
 }
 
@@ -708,12 +708,12 @@ func (r *analyticsRepository) GetTrafficSources(ctx context.Context, weddingID p
 	pipeline := []bson.M{
 		{"$match": bson.M{
 			"wedding_id": weddingID,
-			"referrer":    bson.M{"$ne": ""},
+			"referrer":   bson.M{"$ne": ""},
 		}},
 		{"$group": bson.M{
-			"_id":       "$referrer",
-			"visitors":  bson.M{"$addToSet": "$session_id"},
-			"views":     bson.M{"$sum": 1},
+			"_id":      "$referrer",
+			"visitors": bson.M{"$addToSet": "$session_id"},
+			"views":    bson.M{"$sum": 1},
 		}},
 		{"$project": bson.M{
 			"source":   "$_id",
@@ -723,13 +723,13 @@ func (r *analyticsRepository) GetTrafficSources(ctx context.Context, weddingID p
 		{"$sort": bson.M{"visitors": -1}},
 		{"$limit": int64(limit)},
 	}
-	
+
 	cursor, err := r.pageViews.Aggregate(ctx, pipeline)
 	if err != nil {
 		return nil, fmt.Errorf("failed to aggregate traffic sources: %w", err)
 	}
 	defer cursor.Close(ctx)
-	
+
 	var sources []models.TrafficSourceStats
 	for cursor.Next(ctx) {
 		var result struct {
@@ -740,14 +740,14 @@ func (r *analyticsRepository) GetTrafficSources(ctx context.Context, weddingID p
 		if err := cursor.Decode(&result); err != nil {
 			continue
 		}
-		
+
 		sources = append(sources, models.TrafficSourceStats{
 			Source:   result.Source,
 			Visitors: result.Visitors,
 			Views:    result.Views,
 		})
 	}
-	
+
 	return sources, nil
 }
 
@@ -769,38 +769,38 @@ func (r *analyticsRepository) GetDailyMetrics(ctx context.Context, weddingID pri
 			"sessions":   bson.M{"$addToSet": "$session_id"},
 		}},
 		{"$project": bson.M{
-			"date":        bson.M{"$dateToString": bson.M{"format": "%Y-%m-%d", "date": "$_id"}},
-			"page_views":  1,
-			"sessions":    bson.M{"$size": "$sessions"},
+			"date":       bson.M{"$dateToString": bson.M{"format": "%Y-%m-%d", "date": "$_id"}},
+			"page_views": 1,
+			"sessions":   bson.M{"$size": "$sessions"},
 		}},
 		{"$sort": bson.M{"date": 1}},
 	}
-	
+
 	pageViewsCursor, err := r.pageViews.Aggregate(ctx, pageViewsPipeline)
 	if err != nil {
 		return nil, fmt.Errorf("failed to aggregate daily page views: %w", err)
 	}
 	defer pageViewsCursor.Close(ctx)
-	
+
 	// Create map for page views by date
-	pageViewsByDate := make(map[string]DailyMetrics)
+	pageViewsByDate := make(map[string]models.DailyMetrics)
 	for pageViewsCursor.Next(ctx) {
 		var result struct {
-			Date       string `bson:"date"`
-			PageViews  int64  `bson:"page_views"`
-			Sessions   int64  `bson:"sessions"`
+			Date      string `bson:"date"`
+			PageViews int64  `bson:"page_views"`
+			Sessions  int64  `bson:"sessions"`
 		}
 		if err := pageViewsCursor.Decode(&result); err != nil {
 			continue
 		}
-		
-		pageViewsByDate[result.Date] = DailyMetrics{
+
+		pageViewsByDate[result.Date] = models.DailyMetrics{
 			Date:      result.Date,
 			PageViews: result.PageViews,
 			Sessions:  result.Sessions,
 		}
 	}
-	
+
 	// Get daily RSVPs
 	rsvpPipeline := []bson.M{
 		{"$match": bson.M{
@@ -816,17 +816,17 @@ func (r *analyticsRepository) GetDailyMetrics(ctx context.Context, weddingID pri
 			"rsvps": bson.M{"$sum": 1},
 		}},
 		{"$project": bson.M{
-			"date":   bson.M{"$dateToString": bson.M{"format": "%Y-%m-%d", "date": "$_id"}},
-			"rsvps":  1,
+			"date":  bson.M{"$dateToString": bson.M{"format": "%Y-%m-%d", "date": "$_id"}},
+			"rsvps": 1,
 		}},
 	}
-	
+
 	rsvpCursor, err := r.rsvpEvents.Aggregate(ctx, rsvpPipeline)
 	if err != nil {
 		return nil, fmt.Errorf("failed to aggregate daily RSVPs: %w", err)
 	}
 	defer rsvpCursor.Close(ctx)
-	
+
 	// Combine data and calculate conversion rates
 	var metrics []models.DailyMetrics
 	for rsvpCursor.Next(ctx) {
@@ -837,24 +837,24 @@ func (r *analyticsRepository) GetDailyMetrics(ctx context.Context, weddingID pri
 		if err := rsvpCursor.Decode(&result); err != nil {
 			continue
 		}
-		
+
 		dailyMetric := pageViewsByDate[result.Date]
 		dailyMetric.Date = result.Date
 		dailyMetric.RSVPs = result.RSVPS
-		
+
 		if dailyMetric.PageViews > 0 {
 			dailyMetric.Conversions = float64(result.RSVPS) / float64(dailyMetric.PageViews) * 100
 		}
-		
+
 		metrics = append(metrics, dailyMetric)
 		delete(pageViewsByDate, result.Date)
 	}
-	
+
 	// Add remaining dates without RSVPs
 	for _, dailyMetric := range pageViewsByDate {
 		metrics = append(metrics, dailyMetric)
 	}
-	
+
 	// Sort by date
 	for i := 0; i < len(metrics)-1; i++ {
 		for j := i + 1; j < len(metrics); j++ {
@@ -863,7 +863,7 @@ func (r *analyticsRepository) GetDailyMetrics(ctx context.Context, weddingID pri
 			}
 		}
 	}
-	
+
 	return metrics, nil
 }
 
@@ -874,18 +874,18 @@ func (r *analyticsRepository) CleanupOldAnalytics(ctx context.Context, olderThan
 	if err != nil {
 		return fmt.Errorf("failed to cleanup old page views: %w", err)
 	}
-	
+
 	// Cleanup old RSVP analytics
 	_, err = r.rsvpEvents.DeleteMany(ctx, bson.M{"timestamp": bson.M{"$lt": olderThan}})
 	if err != nil {
 		return fmt.Errorf("failed to cleanup old RSVP analytics: %w", err)
 	}
-	
+
 	// Cleanup old conversion events
 	_, err = r.conversions.DeleteMany(ctx, bson.M{"timestamp": bson.M{"$lt": olderThan}})
 	if err != nil {
 		return fmt.Errorf("failed to cleanup old conversions: %w", err)
 	}
-	
+
 	return nil
 }

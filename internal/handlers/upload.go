@@ -42,24 +42,24 @@ type FileMetadata struct {
 
 // UploadResponse represents the response for a successful upload
 type UploadResponse struct {
-	ID          string                      `json:"id"`
-	Filename    string                      `json:"filename"`
-	OriginalURL string                      `json:"originalUrl"`
-	Thumbnails  map[string]string           `json:"thumbnails,omitempty"`
-	Size        int64                       `json:"size"`
-	MimeType    string                      `json:"mimeType"`
-	Width       int                         `json:"width,omitempty"`
-	Height      int                         `json:"height,omitempty"`
-	Format      string                      `json:"format,omitempty"`
-	EXIF        map[string]interface{}       `json:"exif,omitempty"`
-	CreatedAt   string                      `json:"createdAt"`
+	ID          string                 `json:"id"`
+	Filename    string                 `json:"filename"`
+	OriginalURL string                 `json:"originalUrl"`
+	Thumbnails  map[string]string      `json:"thumbnails,omitempty"`
+	Size        int64                  `json:"size"`
+	MimeType    string                 `json:"mimeType"`
+	Width       int                    `json:"width,omitempty"`
+	Height      int                    `json:"height,omitempty"`
+	Format      string                 `json:"format,omitempty"`
+	EXIF        map[string]interface{} `json:"exif,omitempty"`
+	CreatedAt   string                 `json:"createdAt"`
 }
 
 // PresignedURLRequest represents a request for pre-signed upload URL
 type PresignedURLRequest struct {
-	Filename   string `json:"filename" binding:"required"`
+	Filename    string `json:"filename" binding:"required"`
 	ContentType string `json:"contentType" binding:"required"`
-	Size       int64  `json:"size" binding:"required"`
+	Size        int64  `json:"size" binding:"required"`
 }
 
 // PresignedUploadResponse represents a pre-signed upload URL response
@@ -460,17 +460,6 @@ func (h *UploadHandler) HandleDeleteMedia(c *gin.Context) {
 type ConfirmUploadRequest struct {
 	MediaID string `json:"mediaId" binding:"required"`
 	Key     string `json:"key" binding:"required"`
-}
-
-// SuccessResponse represents a success response
-type SuccessResponse struct {
-	Message string `json:"message"`
-}
-
-// ErrorResponse represents an error response
-type ErrorResponse struct {
-	Error   string `json:"error"`
-	Message string `json:"message,omitempty"`
 }
 
 // getUserIDFromContext extracts user ID from JWT token context

@@ -14,6 +14,7 @@ import (
 
 	"wedding-invitation-backend/internal/config"
 	"wedding-invitation-backend/internal/handlers"
+	"wedding-invitation-backend/internal/middleware"
 	repo "wedding-invitation-backend/internal/repository/mongodb"
 	"wedding-invitation-backend/internal/services"
 	"wedding-invitation-backend/internal/utils"
@@ -158,6 +159,24 @@ func setupRouter(
 	// Add basic middleware
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
+
+	// Setup security middleware
+	environment := "development"
+	if cfg.IsProduction() {
+		environment = "production"
+	}
+	
+	// Configure CORS origins based on environment
+	var allowedOrigins []string
+	if environment == "production" {
+		// In production, you should set specific allowed origins
+		allowedOrigins = []string{"https://yourdomain.com"}
+	} else {
+		allowedOrigins = []string{"http://localhost:3000", "http://localhost:8080"}
+	}
+	
+	// Apply comprehensive security middleware
+	middleware.ApplySecurityDefaults(router, logger, environment, allowedOrigins)
 
 	// Health check endpoint
 	router.GET("/health", func(c *gin.Context) {

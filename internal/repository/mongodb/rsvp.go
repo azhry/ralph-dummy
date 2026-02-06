@@ -1,8 +1,7 @@
-package repository
+package mongodb
 
 import (
 	"context"
-	"fmt"
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
@@ -11,6 +10,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 
 	"wedding-invitation-backend/internal/domain/models"
+	"wedding-invitation-backend/internal/domain/repository"
 )
 
 type mongoRSVPRepository struct {
@@ -33,7 +33,7 @@ func (r *mongoRSVPRepository) GetByID(ctx context.Context, id primitive.ObjectID
 	err := r.collection.FindOne(ctx, bson.M{"_id": id}).Decode(&rsvp)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
-			return nil, ErrNotFound
+			return nil, repository.ErrNotFound
 		}
 		return nil, err
 	}
@@ -48,7 +48,7 @@ func (r *mongoRSVPRepository) GetByEmail(ctx context.Context, weddingID primitiv
 	}).Decode(&rsvp)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
-			return nil, ErrNotFound
+			return nil, repository.ErrNotFound
 		}
 		return nil, err
 	}
@@ -223,7 +223,7 @@ func (r *mongoRSVPRepository) MarkConfirmationSent(ctx context.Context, id primi
 
 func (r *mongoRSVPRepository) GetSubmissionTrend(ctx context.Context, weddingID primitive.ObjectID, days int) ([]models.DailyCount, error) {
 	startDate := time.Now().AddDate(0, 0, -days).Truncate(24 * time.Hour)
-	
+
 	matchStage := bson.D{
 		{"$match", bson.D{
 			{"wedding_id", weddingID},

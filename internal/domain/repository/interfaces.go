@@ -2,10 +2,15 @@ package repository
 
 import (
 	"context"
+	"errors"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"time"
 	"wedding-invitation-backend/internal/domain/models"
+)
+
+var (
+	ErrNotFound = errors.New("document not found")
 )
 
 // UserRepository defines database operations for users
@@ -56,6 +61,7 @@ type GuestRepository interface {
 	Create(ctx context.Context, guest *models.Guest) error
 	CreateMany(ctx context.Context, guests []*models.Guest) error
 	GetByID(ctx context.Context, id primitive.ObjectID) (*models.Guest, error)
+	GetByEmail(ctx context.Context, weddingID primitive.ObjectID, email string) (*models.Guest, error)
 	ListByWedding(ctx context.Context, weddingID primitive.ObjectID, page, pageSize int, filters GuestFilters) ([]*models.Guest, int64, error)
 	Update(ctx context.Context, guest *models.Guest) error
 	Delete(ctx context.Context, id primitive.ObjectID) error
@@ -78,10 +84,34 @@ type MediaRepository interface {
 
 // AnalyticsRepository defines database operations for analytics (for Phase 4)
 type AnalyticsRepository interface {
-	TrackPageView(ctx context.Context, event *models.PageViewEvent) error
-	TrackInteraction(ctx context.Context, event *models.InteractionEvent) error
-	GetWeddingAnalytics(ctx context.Context, weddingID primitive.ObjectID, dateRange DateRange) (*models.WeddingAnalytics, error)
-	GetSystemAnalytics(ctx context.Context, dateRange DateRange) (*models.SystemAnalytics, error)
+	// Page Views
+	TrackPageView(ctx context.Context, pageView *models.PageView) error
+	GetPageViews(ctx context.Context, weddingID primitive.ObjectID, filter *models.AnalyticsFilter) ([]*models.PageView, int64, error)
+
+	// RSVP Analytics
+	TrackRSVPEvent(ctx context.Context, event *models.RSVPAnalytics) error
+	GetRSVPAnalytics(ctx context.Context, weddingID primitive.ObjectID, filter *models.AnalyticsFilter) ([]*models.RSVPAnalytics, int64, error)
+
+	// Conversion Events
+	TrackConversion(ctx context.Context, event *models.ConversionEvent) error
+	GetConversions(ctx context.Context, weddingID primitive.ObjectID, filter *models.AnalyticsFilter) ([]*models.ConversionEvent, int64, error)
+
+	// Aggregated Analytics
+	GetWeddingAnalytics(ctx context.Context, weddingID primitive.ObjectID) (*models.WeddingAnalytics, error)
+	UpdateWeddingAnalytics(ctx context.Context, weddingID primitive.ObjectID) error
+
+	// System Analytics
+	GetSystemAnalytics(ctx context.Context) (*models.SystemAnalytics, error)
+	UpdateSystemAnalytics(ctx context.Context) error
+
+	// Reports
+	GetAnalyticsSummary(ctx context.Context, weddingID primitive.ObjectID, period string) (*models.AnalyticsSummary, error)
+	GetPopularPages(ctx context.Context, weddingID primitive.ObjectID, limit int) ([]models.PageStats, error)
+	GetTrafficSources(ctx context.Context, weddingID primitive.ObjectID, limit int) ([]models.TrafficSourceStats, error)
+	GetDailyMetrics(ctx context.Context, weddingID primitive.ObjectID, startDate, endDate time.Time) ([]models.DailyMetrics, error)
+
+	// Cleanup
+	CleanupOldAnalytics(ctx context.Context, olderThan time.Time) error
 }
 
 // Filter types for repository queries
@@ -115,38 +145,38 @@ type RSVPFilters struct {
 }
 
 type GuestFilters struct {
-	RSVPStatus        string `json:"rsvp_status"`
-	Side              string `json:"side"`
-	Relationship      string `json:"relationship"`
-	Search            string `json:"search"`
-	VIP               *bool  `json:"vip"`
-	InvitationStatus  string `json:"invitation_status"`
-	InvitedVia        string `json:"invited_via"`
-	AllowPlusOne      *bool  `json:"allow_plus_one"`
+	RSVPStatus       string `json:"rsvp_status"`
+	Side             string `json:"side"`
+	Relationship     string `json:"relationship"`
+	Search           string `json:"search"`
+	VIP              *bool  `json:"vip"`
+	InvitationStatus string `json:"invitation_status"`
+	InvitedVia       string `json:"invited_via"`
+	AllowPlusOne     *bool  `json:"allow_plus_one"`
 }
 
 type GuestStatistics struct {
-	TotalGuests       int64 `json:"total_guests"`
-	InvitedDigital    int64 `json:"invited_digital"`
-	InvitedManual     int64 `json:"invited_manual"`
-	RSVPAttending     int64 `json:"rsvp_attending"`
-	RSVPNotAttending  int64 `json:"rsvp_not_attending"`
-	RSVPPending       int64 `json:"rsvp_pending"`
-	PlusOnesAllowed   int64 `json:"plus_ones_allowed"`
-	VIPGuests         int64 `json:"vip_guests"`
+	TotalGuests      int64 `json:"total_guests"`
+	InvitedDigital   int64 `json:"invited_digital"`
+	InvitedManual    int64 `json:"invited_manual"`
+	RSVPAttending    int64 `json:"rsvp_attending"`
+	RSVPNotAttending int64 `json:"rsvp_not_attending"`
+	RSVPPending      int64 `json:"rsvp_pending"`
+	PlusOnesAllowed  int64 `json:"plus_ones_allowed"`
+	VIPGuests        int64 `json:"vip_guests"`
 }
 
 type MediaFilter struct {
-	MimeType     string             `json:"mimeType"`
-	CreatedBy    *primitive.ObjectID `json:"createdBy"`
-	CreatedAfter *time.Time         `json:"createdAfter"`
-	CreatedBefore *time.Time        `json:"createdBefore"`
-	HasThumbnails bool              `json:"hasThumbnails"`
+	MimeType      string              `json:"mimeType"`
+	CreatedBy     *primitive.ObjectID `json:"createdBy"`
+	CreatedAfter  *time.Time          `json:"createdAfter"`
+	CreatedBefore *time.Time          `json:"createdBefore"`
+	HasThumbnails bool                `json:"hasThumbnails"`
 }
 
 type ListOptions struct {
-	Limit  int64 `json:"limit"`
-	Offset int64 `json:"offset"`
+	Limit  int64  `json:"limit"`
+	Offset int64  `json:"offset"`
 	Sort   bson.D `json:"sort"`
 }
 

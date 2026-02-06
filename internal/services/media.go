@@ -9,7 +9,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/google/uuid"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.uber.org/zap"
 	"wedding-invitation-backend/internal/domain/models"
@@ -38,23 +37,23 @@ type mediaService struct {
 
 // MediaServiceConfig contains configuration for media service
 type MediaServiceConfig struct {
-	MaxFileSize       int64            `json:"maxFileSize"`
-	MaxTotalSize      int64            `json:"maxTotalSize"`
-	MaxFiles          int              `json:"maxFiles"`
-	AllowedTypes      []string         `json:"allowedTypes"`
-	ThumbnailSizes    []ThumbnailSize  `json:"thumbnailSizes"`
-	EnableWebP        bool             `json:"enableWebP"`
-	PresignExpiry     time.Duration    `json:"presignExpiry"`
-	BaseURL           string           `json:"baseUrl"`
+	MaxFileSize    int64           `json:"maxFileSize"`
+	MaxTotalSize   int64           `json:"maxTotalSize"`
+	MaxFiles       int             `json:"maxFiles"`
+	AllowedTypes   []string        `json:"allowedTypes"`
+	ThumbnailSizes []ThumbnailSize `json:"thumbnailSizes"`
+	EnableWebP     bool            `json:"enableWebP"`
+	PresignExpiry  time.Duration   `json:"presignExpiry"`
+	BaseURL        string          `json:"baseUrl"`
 }
 
 // DefaultMediaServiceConfig returns default configuration
 func DefaultMediaServiceConfig() *MediaServiceConfig {
 	return &MediaServiceConfig{
-		MaxFileSize:    5 * 1024 * 1024, // 5MB
-		MaxTotalSize:   20 * 1024 * 1024, // 20MB
-		MaxFiles:       10,
-		AllowedTypes:   []string{"image/jpeg", "image/png", "image/webp"},
+		MaxFileSize:  5 * 1024 * 1024,  // 5MB
+		MaxTotalSize: 20 * 1024 * 1024, // 20MB
+		MaxFiles:     10,
+		AllowedTypes: []string{"image/jpeg", "image/png", "image/webp"},
 		ThumbnailSizes: []ThumbnailSize{
 			{Name: "small", Width: 150, Height: 150},
 			{Name: "medium", Width: 400, Height: 400},
@@ -78,7 +77,7 @@ func NewMediaService(
 	if config == nil {
 		config = DefaultMediaServiceConfig()
 	}
-	
+
 	return &mediaService{
 		mediaRepo:      mediaRepo,
 		storageService: storageService,
@@ -121,7 +120,7 @@ func (s *mediaService) UploadFile(ctx context.Context, file io.Reader, header *m
 	storageKey := s.generateStorageKey(mediaID, validationResult.Extension)
 
 	// Upload original file
-	originalURL, err := s.storageService.Upload(ctx, storageKey, processed.OriginalData, 
+	originalURL, err := s.storageService.Upload(ctx, storageKey, processed.OriginalData,
 		validationResult.MimeType, s.buildMetadata(processed.Metadata))
 	if err != nil {
 		return nil, fmt.Errorf("failed to upload original file: %w", err)
@@ -131,10 +130,10 @@ func (s *mediaService) UploadFile(ctx context.Context, file io.Reader, header *m
 	thumbnails := make(map[string]string)
 	for name, thumbData := range processed.Thumbnails {
 		thumbKey := s.generateThumbnailKey(mediaID, name, validationResult.Extension)
-		thumbURL, err := s.storageService.Upload(ctx, thumbKey, thumbData, 
+		thumbURL, err := s.storageService.Upload(ctx, thumbKey, thumbData,
 			validationResult.MimeType, nil)
 		if err != nil {
-			s.logger.Warn("Failed to upload thumbnail", 
+			s.logger.Warn("Failed to upload thumbnail",
 				zap.String("thumbnail", name),
 				zap.Error(err))
 			continue
@@ -170,7 +169,7 @@ func (s *mediaService) UploadFile(ctx context.Context, file io.Reader, header *m
 // UploadFiles handles multiple file uploads
 func (s *mediaService) UploadFiles(ctx context.Context, files map[string][]*multipart.FileHeader, userID primitive.ObjectID) ([]*models.Media, error) {
 	var allFiles []*multipart.FileHeader
-	
+
 	// Flatten files map
 	for _, fileHeaders := range files {
 		allFiles = append(allFiles, fileHeaders...)
@@ -191,16 +190,16 @@ func (s *mediaService) UploadFiles(ctx context.Context, files map[string][]*mult
 	}
 
 	if totalSize > s.config.MaxTotalSize {
-		return nil, fmt.Errorf("total upload size %d exceeds maximum allowed size %d", 
+		return nil, fmt.Errorf("total upload size %d exceeds maximum allowed size %d",
 			totalSize, s.config.MaxTotalSize)
 	}
 
 	var mediaFiles []*models.Media
-	
+
 	for _, fileHeader := range allFiles {
 		file, err := fileHeader.Open()
 		if err != nil {
-			s.logger.Error("Failed to open uploaded file", 
+			s.logger.Error("Failed to open uploaded file",
 				zap.String("filename", fileHeader.Filename),
 				zap.Error(err))
 			continue
@@ -209,7 +208,7 @@ func (s *mediaService) UploadFiles(ctx context.Context, files map[string][]*mult
 
 		media, err := s.UploadFile(ctx, file, fileHeader, userID)
 		if err != nil {
-			s.logger.Error("Failed to upload file", 
+			s.logger.Error("Failed to upload file",
 				zap.String("filename", fileHeader.Filename),
 				zap.Error(err))
 			continue
@@ -234,16 +233,16 @@ func (s *mediaService) GetMedia(ctx context.Context, mediaID primitive.ObjectID)
 func (s *mediaService) GetUserMedia(ctx context.Context, userID primitive.ObjectID, page, pageSize int, filters repository.MediaFilter) ([]*models.Media, int64, error) {
 	// Set created by filter if not already set
 	filters.CreatedBy = &userID
-	
+
 	offset := int64((page - 1) * pageSize)
 	limit := int64(pageSize)
-	
+
 	opts := repository.ListOptions{
 		Limit:  limit,
 		Offset: offset,
 		Sort:   primitive.D{{Key: "createdAt", Value: -1}},
 	}
-	
+
 	return s.mediaRepo.List(ctx, filters, opts)
 }
 
@@ -254,12 +253,12 @@ func (s *mediaService) DeleteMedia(ctx context.Context, mediaID, userID primitiv
 	if err != nil {
 		return fmt.Errorf("media not found: %w", err)
 	}
-	
+
 	// Check ownership
 	if media.CreatedBy != userID {
 		return fmt.Errorf("unauthorized: you can only delete your own media")
 	}
-	
+
 	// Soft delete the media record
 	return s.mediaRepo.SoftDelete(ctx, mediaID)
 }
@@ -270,19 +269,19 @@ func (s *mediaService) GeneratePresignedUploadURL(ctx context.Context, filename,
 	if size > s.config.MaxFileSize {
 		return nil, fmt.Errorf("file size %d exceeds maximum allowed size %d", size, s.config.MaxFileSize)
 	}
-	
+
 	// Extract file extension
 	ext := strings.ToLower(strings.TrimPrefix(filepath.Ext(filename), "."))
 	if ext == "" {
 		return nil, fmt.Errorf("file must have an extension")
 	}
-	
+
 	// Map extension to MIME type
 	mimeType := s.extensionToMimeType(ext)
 	if mimeType == "" {
 		return nil, fmt.Errorf("unsupported file extension: %s", ext)
 	}
-	
+
 	// Check if MIME type is allowed
 	allowed := false
 	for _, allowedType := range s.config.AllowedTypes {
@@ -294,22 +293,22 @@ func (s *mediaService) GeneratePresignedUploadURL(ctx context.Context, filename,
 	if !allowed {
 		return nil, fmt.Errorf("file type not allowed: %s", mimeType)
 	}
-	
+
 	// Generate unique storage key
 	mediaID := primitive.NewObjectID()
 	storageKey := s.generateStorageKey(mediaID, ext)
-	
+
 	// Generate presigned upload URL
 	presignedInfo, err := s.storageService.GeneratePresignedUploadURL(
 		ctx, storageKey, contentType, size, s.config.PresignExpiry)
 	if err != nil {
 		return nil, fmt.Errorf("failed to generate presigned upload URL: %w", err)
 	}
-	
+
 	// Store media ID in presigned info for later processing
 	presignedInfo.Key = storageKey
 	presignedInfo.Fields["mediaId"] = mediaID.Hex()
-	
+
 	return presignedInfo, nil
 }
 
@@ -321,10 +320,10 @@ func (s *mediaService) ProcessUploadedFile(ctx context.Context, presignedInfo *P
 	// 3. Process the image (thumbnails, metadata)
 	// 4. Upload thumbnails
 	// 5. Create media record in database
-	
+
 	// For now, return a placeholder
 	mediaID := primitive.NewObjectID()
-	
+
 	return &models.Media{
 		ID:          mediaID,
 		Filename:    "uploaded-file.jpg",
@@ -357,22 +356,22 @@ func (s *mediaService) buildMetadata(metadata *ImageMetadata) map[string]string 
 		"height": fmt.Sprintf("%d", metadata.Height),
 		"format": metadata.Format,
 	}
-	
+
 	if metadata.EXIF != nil {
 		for key, value := range metadata.EXIF {
 			result["exif_"+key] = fmt.Sprintf("%v", value)
 		}
 	}
-	
+
 	return result
 }
 
 func (s *mediaService) cleanupFailedUpload(ctx context.Context, originalKey string, thumbnails map[string]string) {
 	// Delete original file
 	s.storageService.Delete(ctx, originalKey)
-	
+
 	// Delete thumbnails
-	for name, url := range thumbnails {
+	for _, url := range thumbnails {
 		// Extract key from URL (simple implementation)
 		key := strings.TrimPrefix(url, s.config.BaseURL+"/")
 		s.storageService.Delete(ctx, key)

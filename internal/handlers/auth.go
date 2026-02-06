@@ -118,11 +118,6 @@ type ResetPasswordRequest struct {
 	NewPassword string `json:"new_password" binding:"required,min=8,max=72"`
 }
 
-// ErrorResponse represents an error response
-type ErrorResponse struct {
-	Error string `json:"error"`
-}
-
 // RegisterHandler handles user registration
 func (h *AuthHandler) RegisterHandler(c *gin.Context) {
 	var req RegistrationRequest

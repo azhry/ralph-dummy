@@ -433,10 +433,6 @@ func (h *WeddingHandler) ListPublicWeddings(c *gin.Context) {
 
 // Response types
 
-type SuccessResponse struct {
-	Message string `json:"message"`
-}
-
 type PaginatedWeddingsResponse struct {
 	Weddings []*models.Wedding `json:"weddings"`
 	Total    int64             `json:"total"`
