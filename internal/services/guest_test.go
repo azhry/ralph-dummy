@@ -5,21 +5,21 @@ import (
 	"testing"
 	"time"
 
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
+	"github.com/stretchr/testify/mock"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"wedding-invitation-backend/internal/domain/models"
 	"wedding-invitation-backend/internal/domain/repository"
 )
 
 // MockGuestRepository for testing
 type MockGuestRepository struct {
-	guests       map[primitive.ObjectID]*models.Guest
-	batchGuests  map[string][]*models.Guest
-	createError  error
-	getError     error
-	updateError  error
-	deleteError  error
+	guests      map[primitive.ObjectID]*models.Guest
+	batchGuests map[string][]*models.Guest
+	createError error
+	getError    error
+	updateError error
+	deleteError error
 }
 
 func NewMockGuestRepository() *MockGuestRepository {
@@ -33,7 +33,7 @@ func (m *MockGuestRepository) Create(ctx context.Context, guest *models.Guest) e
 	if m.createError != nil {
 		return m.createError
 	}
-	
+
 	id := primitive.NewObjectID()
 	guest.ID = id
 	guest.CreatedAt = time.Now()
@@ -57,10 +57,10 @@ func (m *MockGuestRepository) GetByID(ctx context.Context, id primitive.ObjectID
 	if m.getError != nil {
 		return nil, m.getError
 	}
-	
+
 	guest, exists := m.guests[id]
 	if !exists {
-		return nil, repository.ErrGuestNotFound
+		return nil, repository.ErrNotFound
 	}
 	return guest, nil
 }
@@ -71,12 +71,12 @@ func (m *MockGuestRepository) GetByEmail(ctx context.Context, weddingID primitiv
 			return guest, nil
 		}
 	}
-	return nil, repository.ErrGuestNotFound
+	return nil, repository.ErrNotFound
 }
 
 func (m *MockGuestRepository) ListByWedding(ctx context.Context, weddingID primitive.ObjectID, page, pageSize int, filters repository.GuestFilters) ([]*models.Guest, int64, error) {
 	var guests []*models.Guest
-	
+
 	for _, guest := range m.guests {
 		if guest.WeddingID == weddingID {
 			// Apply filters
@@ -90,7 +90,7 @@ func (m *MockGuestRepository) ListByWedding(ctx context.Context, weddingID primi
 			}
 		}
 	}
-	
+
 	return guests, int64(len(guests)), nil
 }
 
@@ -98,11 +98,11 @@ func (m *MockGuestRepository) Update(ctx context.Context, guest *models.Guest) e
 	if m.updateError != nil {
 		return m.updateError
 	}
-	
+
 	if _, exists := m.guests[guest.ID]; !exists {
-		return repository.ErrGuestNotFound
+		return repository.ErrNotFound
 	}
-	
+
 	guest.UpdatedAt = time.Now()
 	m.guests[guest.ID] = guest
 	return nil
@@ -112,11 +112,11 @@ func (m *MockGuestRepository) Delete(ctx context.Context, id primitive.ObjectID)
 	if m.deleteError != nil {
 		return m.deleteError
 	}
-	
+
 	if _, exists := m.guests[id]; !exists {
-		return repository.ErrGuestNotFound
+		return repository.ErrNotFound
 	}
-	
+
 	delete(m.guests, id)
 	return nil
 }
@@ -130,7 +130,7 @@ func (m *MockGuestRepository) ImportBatch(ctx context.Context, guests []*models.
 		guest.UpdatedAt = time.Now()
 		m.guests[id] = guest
 	}
-	
+
 	m.batchGuests[batchID] = guests
 	return nil
 }
@@ -140,44 +140,20 @@ func (m *MockGuestRepository) GetByImportBatch(ctx context.Context, weddingID pr
 	if !exists {
 		return []*models.Guest{}, nil
 	}
-	
+
 	var result []*models.Guest
 	for _, guest := range guests {
 		if guest.WeddingID == weddingID {
 			result = append(result, guest)
 		}
 	}
-	
+
 	return result, nil
-}
-
-// MockWeddingRepository for testing
-type MockWeddingRepository struct {
-	weddings map[primitive.ObjectID]*models.Wedding
-	getError error
-}
-
-func NewMockWeddingRepository() *MockWeddingRepository {
-	return &MockWeddingRepository{
-		weddings: make(map[primitive.ObjectID]*models.Wedding),
-	}
-}
-
-func (m *MockWeddingRepository) GetByID(ctx context.Context, id primitive.ObjectID) (*models.Wedding, error) {
-	if m.getError != nil {
-		return nil, m.getError
-	}
-	
-	wedding, exists := m.weddings[id]
-	if !exists {
-		return nil, ErrWeddingNotFound
-	}
-	return wedding, nil
 }
 
 func TestGuestService_CreateGuest(t *testing.T) {
 	guestRepo := NewMockGuestRepository()
-	weddingRepo := NewMockWeddingRepository()
+	weddingRepo := &MockWeddingRepository{}
 	service := NewGuestService(guestRepo, weddingRepo)
 
 	// Create test wedding
@@ -187,7 +163,9 @@ func TestGuestService_CreateGuest(t *testing.T) {
 		ID:     weddingID,
 		UserID: userID,
 	}
-	weddingRepo.weddings[weddingID] = wedding
+
+	// Setup mock expectations
+	weddingRepo.On("GetByID", mock.Anything, weddingID).Return(wedding, nil)
 
 	// Test data
 	guest := &models.Guest{
@@ -201,11 +179,13 @@ func TestGuestService_CreateGuest(t *testing.T) {
 	err := service.CreateGuest(context.Background(), weddingID, userID, guest)
 	assert.NoError(t, err)
 	assert.NotEmpty(t, guest.ID)
+
+	weddingRepo.AssertExpectations(t)
 }
 
 func TestGuestService_CreateGuest_Unauthorized(t *testing.T) {
 	guestRepo := NewMockGuestRepository()
-	weddingRepo := NewMockWeddingRepository()
+	weddingRepo := &MockWeddingRepository{}
 	service := NewGuestService(guestRepo, weddingRepo)
 
 	// Create test wedding
@@ -232,7 +212,7 @@ func TestGuestService_CreateGuest_Unauthorized(t *testing.T) {
 
 func TestGuestService_CreateGuest_ValidationError(t *testing.T) {
 	guestRepo := NewMockGuestRepository()
-	weddingRepo := NewMockWeddingRepository()
+	weddingRepo := &MockWeddingRepository{}
 	service := NewGuestService(guestRepo, weddingRepo)
 
 	// Create test wedding
@@ -258,7 +238,7 @@ func TestGuestService_CreateGuest_ValidationError(t *testing.T) {
 
 func TestGuestService_CreateGuest_DuplicateEmail(t *testing.T) {
 	guestRepo := NewMockGuestRepository()
-	weddingRepo := NewMockWeddingRepository()
+	weddingRepo := &MockWeddingRepository{}
 	service := NewGuestService(guestRepo, weddingRepo)
 
 	// Create test wedding
@@ -294,7 +274,7 @@ func TestGuestService_CreateGuest_DuplicateEmail(t *testing.T) {
 
 func TestGuestService_GetGuestByID(t *testing.T) {
 	guestRepo := NewMockGuestRepository()
-	weddingRepo := NewMockWeddingRepository()
+	weddingRepo := &MockWeddingRepository{}
 	service := NewGuestService(guestRepo, weddingRepo)
 
 	// Create test wedding
@@ -323,7 +303,7 @@ func TestGuestService_GetGuestByID(t *testing.T) {
 
 func TestGuestService_UpdateGuest(t *testing.T) {
 	guestRepo := NewMockGuestRepository()
-	weddingRepo := NewMockWeddingRepository()
+	weddingRepo := &MockWeddingRepository{}
 	service := NewGuestService(guestRepo, weddingRepo)
 
 	// Create test wedding
@@ -352,7 +332,7 @@ func TestGuestService_UpdateGuest(t *testing.T) {
 
 func TestGuestService_DeleteGuest(t *testing.T) {
 	guestRepo := NewMockGuestRepository()
-	weddingRepo := NewMockWeddingRepository()
+	weddingRepo := &MockWeddingRepository{}
 	service := NewGuestService(guestRepo, weddingRepo)
 
 	// Create test wedding
@@ -384,7 +364,7 @@ func TestGuestService_DeleteGuest(t *testing.T) {
 
 func TestGuestService_CreateManyGuests(t *testing.T) {
 	guestRepo := NewMockGuestRepository()
-	weddingRepo := NewMockWeddingRepository()
+	weddingRepo := &MockWeddingRepository{}
 	service := NewGuestService(guestRepo, weddingRepo)
 
 	// Create test wedding

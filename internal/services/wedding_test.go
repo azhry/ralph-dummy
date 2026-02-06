@@ -14,164 +14,6 @@ import (
 	"wedding-invitation-backend/internal/domain/repository"
 )
 
-// MockWeddingRepository is a mock implementation of WeddingRepository
-type MockWeddingRepository struct {
-	mock.Mock
-}
-
-func (m *MockWeddingRepository) Create(ctx context.Context, wedding *models.Wedding) error {
-	args := m.Called(ctx, wedding)
-	return args.Error(0)
-}
-
-func (m *MockWeddingRepository) GetByID(ctx context.Context, id primitive.ObjectID) (*models.Wedding, error) {
-	args := m.Called(ctx, id)
-	if args.Get(0) == nil {
-		return nil, args.Error(1)
-	}
-	return args.Get(0).(*models.Wedding), args.Error(1)
-}
-
-func (m *MockWeddingRepository) GetBySlug(ctx context.Context, slug string) (*models.Wedding, error) {
-	args := m.Called(ctx, slug)
-	if args.Get(0) == nil {
-		return nil, args.Error(1)
-	}
-	return args.Get(0).(*models.Wedding), args.Error(1)
-}
-
-func (m *MockWeddingRepository) GetByUserID(ctx context.Context, userID primitive.ObjectID, page, pageSize int, filters repository.WeddingFilters) ([]*models.Wedding, int64, error) {
-	args := m.Called(ctx, userID, page, pageSize, filters)
-	return args.Get(0).([]*models.Wedding), args.Get(1).(int64), args.Error(2)
-}
-
-func (m *MockWeddingRepository) Update(ctx context.Context, wedding *models.Wedding) error {
-	args := m.Called(ctx, wedding)
-	return args.Error(0)
-}
-
-func (m *MockWeddingRepository) Delete(ctx context.Context, id primitive.ObjectID) error {
-	args := m.Called(ctx, id)
-	return args.Error(0)
-}
-
-func (m *MockWeddingRepository) ExistsBySlug(ctx context.Context, slug string) (bool, error) {
-	args := m.Called(ctx, slug)
-	return args.Bool(0), args.Error(1)
-}
-
-func (m *MockWeddingRepository) ListPublic(ctx context.Context, page, pageSize int, filters repository.PublicWeddingFilters) ([]*models.Wedding, int64, error) {
-	args := m.Called(ctx, page, pageSize, filters)
-	return args.Get(0).([]*models.Wedding), args.Get(1).(int64), args.Error(2)
-}
-
-func (m *MockWeddingRepository) IncrementViewCount(ctx context.Context, id primitive.ObjectID) error {
-	args := m.Called(ctx, id)
-	return args.Error(0)
-}
-
-func (m *MockWeddingRepository) UpdateRSVPCount(ctx context.Context, weddingID primitive.ObjectID) error {
-	args := m.Called(ctx, weddingID)
-	return args.Error(0)
-}
-
-// MockUserRepository is a mock implementation of UserRepository
-type MockUserRepository struct {
-	mock.Mock
-}
-
-func (m *MockUserRepository) Create(ctx context.Context, user *models.User) error {
-	args := m.Called(ctx, user)
-	return args.Error(0)
-}
-
-func (m *MockUserRepository) GetByID(ctx context.Context, id primitive.ObjectID) (*models.User, error) {
-	args := m.Called(ctx, id)
-	if args.Get(0) == nil {
-		return nil, args.Error(1)
-	}
-	return args.Get(0).(*models.User), args.Error(1)
-}
-
-func (m *MockUserRepository) GetByEmail(ctx context.Context, email string) (*models.User, error) {
-	args := m.Called(ctx, email)
-	if args.Get(0) == nil {
-		return nil, args.Error(1)
-	}
-	return args.Get(0).(*models.User), args.Error(1)
-}
-
-func (m *MockUserRepository) Update(ctx context.Context, user *models.User) error {
-	args := m.Called(ctx, user)
-	return args.Error(0)
-}
-
-func (m *MockUserRepository) Delete(ctx context.Context, id primitive.ObjectID) error {
-	args := m.Called(ctx, id)
-	return args.Error(0)
-}
-
-func (m *MockUserRepository) List(ctx context.Context, page, pageSize int, filters repository.UserFilters) ([]*models.User, int64, error) {
-	args := m.Called(ctx, page, pageSize, filters)
-	return args.Get(0).([]*models.User), args.Get(1).(int64), args.Error(2)
-}
-
-func (m *MockUserRepository) ExistsByEmail(ctx context.Context, email string) (bool, error) {
-	args := m.Called(ctx, email)
-	return args.Bool(0), args.Error(1)
-}
-
-func (m *MockUserRepository) AddWeddingID(ctx context.Context, userID, weddingID primitive.ObjectID) error {
-	args := m.Called(ctx, userID, weddingID)
-	return args.Error(0)
-}
-
-func (m *MockUserRepository) RemoveWeddingID(ctx context.Context, userID, weddingID primitive.ObjectID) error {
-	args := m.Called(ctx, userID, weddingID)
-	return args.Error(0)
-}
-
-func (m *MockUserRepository) UpdatePassword(ctx context.Context, userID primitive.ObjectID, hashedPassword string) error {
-	args := m.Called(ctx, userID, hashedPassword)
-	return args.Error(0)
-}
-
-func (m *MockUserRepository) SetEmailVerified(ctx context.Context, userID primitive.ObjectID) error {
-	args := m.Called(ctx, userID)
-	return args.Error(0)
-}
-
-func (m *MockUserRepository) SetPasswordResetToken(ctx context.Context, userID primitive.ObjectID, token string, expiresAt time.Time) error {
-	args := m.Called(ctx, userID, token, expiresAt)
-	return args.Error(0)
-}
-
-func (m *MockUserRepository) GetByPasswordResetToken(ctx context.Context, token string) (*models.User, error) {
-	args := m.Called(ctx, token)
-	if args.Get(0) == nil {
-		return nil, args.Error(1)
-	}
-	return args.Get(0).(*models.User), args.Error(1)
-}
-
-func (m *MockUserRepository) UpdateStatus(ctx context.Context, userID primitive.ObjectID, status string) error {
-	args := m.Called(ctx, userID, status)
-	return args.Error(0)
-}
-
-func (m *MockUserRepository) GetStatistics(ctx context.Context) (*models.UserStatistics, error) {
-	args := m.Called(ctx)
-	if args.Get(0) == nil {
-		return nil, args.Error(1)
-	}
-	return args.Get(0).(*models.UserStatistics), args.Error(1)
-}
-
-func (m *MockUserRepository) Search(ctx context.Context, query string, page, pageSize int) ([]*models.User, int64, error) {
-	args := m.Called(ctx, query, page, pageSize)
-	return args.Get(0).([]*models.User), args.Get(1).(int64), args.Error(2)
-}
-
 func createTestWedding() *models.Wedding {
 	return &models.Wedding{
 		Title: "Test Wedding",
@@ -199,9 +41,9 @@ func createTestWedding() *models.Wedding {
 			},
 		},
 		Event: models.EventDetails{
-			Title:       "Wedding Ceremony",
-			Date:        time.Now().AddDate(0, 6, 0),
-			VenueName:   "Test Venue",
+			Title:        "Wedding Ceremony",
+			Date:         time.Now().AddDate(0, 6, 0),
+			VenueName:    "Test Venue",
 			VenueAddress: "123 Test St",
 		},
 		Theme: models.ThemeSettings{
@@ -220,7 +62,7 @@ func TestWeddingService_CreateWedding(t *testing.T) {
 	mockWeddingRepo := new(MockWeddingRepository)
 	mockUserRepo := new(MockUserRepository)
 	service := NewWeddingService(mockWeddingRepo, mockUserRepo)
-	
+
 	userID := primitive.NewObjectID()
 	wedding := createTestWedding()
 
@@ -249,7 +91,7 @@ func TestWeddingService_CreateWedding_WithAutoSlug(t *testing.T) {
 	mockWeddingRepo := new(MockWeddingRepository)
 	mockUserRepo := new(MockUserRepository)
 	service := NewWeddingService(mockWeddingRepo, mockUserRepo)
-	
+
 	userID := primitive.NewObjectID()
 	wedding := createTestWedding()
 	wedding.Slug = "" // Empty slug to test auto-generation
@@ -273,7 +115,7 @@ func TestWeddingService_CreateWedding_SlugExists(t *testing.T) {
 	mockWeddingRepo := new(MockWeddingRepository)
 	mockUserRepo := new(MockUserRepository)
 	service := NewWeddingService(mockWeddingRepo, mockUserRepo)
-	
+
 	userID := primitive.NewObjectID()
 	wedding := createTestWedding()
 
@@ -292,7 +134,7 @@ func TestWeddingService_CreateWedding_InvalidData(t *testing.T) {
 	mockWeddingRepo := new(MockWeddingRepository)
 	mockUserRepo := new(MockUserRepository)
 	service := NewWeddingService(mockWeddingRepo, mockUserRepo)
-	
+
 	userID := primitive.NewObjectID()
 
 	// Test missing title
@@ -317,7 +159,7 @@ func TestWeddingService_GetWeddingByID(t *testing.T) {
 	mockWeddingRepo := new(MockWeddingRepository)
 	mockUserRepo := new(MockUserRepository)
 	service := NewWeddingService(mockWeddingRepo, mockUserRepo)
-	
+
 	userID := primitive.NewObjectID()
 	weddingID := primitive.NewObjectID()
 	wedding := createTestWedding()
@@ -337,7 +179,7 @@ func TestWeddingService_GetWeddingByID(t *testing.T) {
 
 	// Reset mock for next test
 	mockWeddingRepo.ExpectedCalls = nil
-	
+
 	// Test successful retrieval (public access)
 	otherUserID := primitive.NewObjectID()
 	mockWeddingRepo.On("GetByID", ctx, weddingID).Return(wedding, nil)
@@ -355,7 +197,7 @@ func TestWeddingService_GetWeddingByID_NotFound(t *testing.T) {
 	mockWeddingRepo := new(MockWeddingRepository)
 	mockUserRepo := new(MockUserRepository)
 	service := NewWeddingService(mockWeddingRepo, mockUserRepo)
-	
+
 	weddingID := primitive.NewObjectID()
 
 	// Test not found
@@ -374,7 +216,7 @@ func TestWeddingService_GetWeddingByID_AccessDenied(t *testing.T) {
 	mockWeddingRepo := new(MockWeddingRepository)
 	mockUserRepo := new(MockUserRepository)
 	service := NewWeddingService(mockWeddingRepo, mockUserRepo)
-	
+
 	userID := primitive.NewObjectID()
 	weddingID := primitive.NewObjectID()
 	wedding := createTestWedding()
@@ -399,7 +241,7 @@ func TestWeddingService_GetUserWeddings(t *testing.T) {
 	mockWeddingRepo := new(MockWeddingRepository)
 	mockUserRepo := new(MockUserRepository)
 	service := NewWeddingService(mockWeddingRepo, mockUserRepo)
-	
+
 	userID := primitive.NewObjectID()
 	weddings := []*models.Wedding{createTestWedding()}
 	filters := repository.WeddingFilters{}
@@ -419,7 +261,7 @@ func TestWeddingService_UpdateWedding(t *testing.T) {
 	mockWeddingRepo := new(MockWeddingRepository)
 	mockUserRepo := new(MockUserRepository)
 	service := NewWeddingService(mockWeddingRepo, mockUserRepo)
-	
+
 	userID := primitive.NewObjectID()
 	weddingID := primitive.NewObjectID()
 	existingWedding := createTestWedding()
@@ -445,7 +287,7 @@ func TestWeddingService_UpdateWedding_NotOwner(t *testing.T) {
 	mockWeddingRepo := new(MockWeddingRepository)
 	mockUserRepo := new(MockUserRepository)
 	service := NewWeddingService(mockWeddingRepo, mockUserRepo)
-	
+
 	userID := primitive.NewObjectID()
 	weddingID := primitive.NewObjectID()
 	existingWedding := createTestWedding()
@@ -469,7 +311,7 @@ func TestWeddingService_DeleteWedding(t *testing.T) {
 	mockWeddingRepo := new(MockWeddingRepository)
 	mockUserRepo := new(MockUserRepository)
 	service := NewWeddingService(mockWeddingRepo, mockUserRepo)
-	
+
 	userID := primitive.NewObjectID()
 	weddingID := primitive.NewObjectID()
 	wedding := createTestWedding()
@@ -493,7 +335,7 @@ func TestWeddingService_PublishWedding(t *testing.T) {
 	mockWeddingRepo := new(MockWeddingRepository)
 	mockUserRepo := new(MockUserRepository)
 	service := NewWeddingService(mockWeddingRepo, mockUserRepo)
-	
+
 	userID := primitive.NewObjectID()
 	weddingID := primitive.NewObjectID()
 	wedding := createTestWedding()
@@ -515,7 +357,7 @@ func TestWeddingService_ListPublicWeddings(t *testing.T) {
 	mockWeddingRepo := new(MockWeddingRepository)
 	mockUserRepo := new(MockUserRepository)
 	service := NewWeddingService(mockWeddingRepo, mockUserRepo)
-	
+
 	weddings := []*models.Wedding{createTestWedding()}
 	filters := repository.PublicWeddingFilters{}
 
@@ -534,7 +376,7 @@ func TestWeddingService_ValidateWedding_InvalidTheme(t *testing.T) {
 	mockWeddingRepo := new(MockWeddingRepository)
 	mockUserRepo := new(MockUserRepository)
 	service := NewWeddingService(mockWeddingRepo, mockUserRepo)
-	
+
 	userID := primitive.NewObjectID()
 	wedding := createTestWedding()
 	wedding.Theme.ThemeID = "" // Invalid theme
@@ -549,7 +391,7 @@ func TestWeddingService_ValidateWedding_InvalidRSVP(t *testing.T) {
 	mockWeddingRepo := new(MockWeddingRepository)
 	mockUserRepo := new(MockUserRepository)
 	service := NewWeddingService(mockWeddingRepo, mockUserRepo)
-	
+
 	userID := primitive.NewObjectID()
 	wedding := createTestWedding()
 	wedding.RSVP.MaxPlusOnes = 10 // Invalid max plus ones

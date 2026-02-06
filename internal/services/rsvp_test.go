@@ -6,9 +6,9 @@ import (
 	"testing"
 	"time"
 
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 
 	"wedding-invitation-backend/internal/domain/models"
 	"wedding-invitation-backend/internal/domain/repository"
@@ -76,9 +76,9 @@ func (m *MockRSVPRepository) Delete(ctx context.Context, id primitive.ObjectID) 
 
 func (m *MockRSVPRepository) GetStatistics(ctx context.Context, weddingID primitive.ObjectID) (*models.RSVPStatistics, error) {
 	stats := &models.RSVPStatistics{
-		TotalResponses:    len(m.rsvps),
-		DietaryCounts:     make(map[string]int),
-		SubmissionTrend:    []models.DailyCount{},
+		TotalResponses:  len(m.rsvps),
+		DietaryCounts:   make(map[string]int),
+		SubmissionTrend: []models.DailyCount{},
 	}
 	return stats, nil
 }
@@ -94,71 +94,6 @@ func (m *MockRSVPRepository) MarkConfirmationSent(ctx context.Context, id primit
 
 func (m *MockRSVPRepository) GetSubmissionTrend(ctx context.Context, weddingID primitive.ObjectID, days int) ([]models.DailyCount, error) {
 	return []models.DailyCount{}, nil
-}
-
-// MockWeddingRepository for testing
-type MockWeddingRepository struct {
-	weddings   map[primitive.ObjectID]*models.Wedding
-	getError   error
-	updateError error
-}
-
-func NewMockWeddingRepository() *MockWeddingRepository {
-	return &MockWeddingRepository{
-		weddings: make(map[primitive.ObjectID]*models.Wedding),
-	}
-}
-
-func (m *MockWeddingRepository) Create(ctx context.Context, wedding *models.Wedding) error {
-	m.weddings[wedding.ID] = wedding
-	return nil
-}
-
-func (m *MockWeddingRepository) GetByID(ctx context.Context, id primitive.ObjectID) (*models.Wedding, error) {
-	if m.getError != nil {
-		return nil, m.getError
-	}
-	if wedding, exists := m.weddings[id]; exists {
-		return wedding, nil
-	}
-	return nil, repository.ErrNotFound
-}
-
-func (m *MockWeddingRepository) Update(ctx context.Context, wedding *models.Wedding) error {
-	if m.updateError != nil {
-		return m.updateError
-	}
-	m.weddings[wedding.ID] = wedding
-	return nil
-}
-
-func (m *MockWeddingRepository) UpdateRSVPCount(ctx context.Context, weddingID primitive.ObjectID) error {
-	return nil
-}
-
-// Implement other methods minimally for testing
-func (m *MockWeddingRepository) GetBySlug(ctx context.Context, slug string) (*models.Wedding, error) {
-	return nil, nil
-}
-
-func (m *MockWeddingRepository) GetByUserID(ctx context.Context, userID primitive.ObjectID, page, pageSize int, filters repository.WeddingFilters) ([]*models.Wedding, int64, error) {
-	return nil, 0, nil
-}
-
-func (m *MockWeddingRepository) Delete(ctx context.Context, id primitive.ObjectID) error {
-	return nil
-}
-
-func (m *MockWeddingRepository) ExistsBySlug(ctx context.Context, slug string) (bool, error) {
-	return false, nil
-}
-
-func (m *MockWeddingRepository) ListPublic(ctx context.Context, page, pageSize int, filters repository.PublicWeddingFilters) ([]*models.Wedding, int64, error) {
-	return nil, 0, nil
-}
-
-func (m *MockWeddingRepository) IncrementViewCount(ctx context.Context, id primitive.ObjectID) error {
-	return nil
 }
 
 func TestRSVPService_SubmitRSVP(t *testing.T) {
@@ -353,14 +288,14 @@ func TestRSVPService_UpdateRSVP(t *testing.T) {
 
 	// Create existing RSVP
 	rsvp := &models.RSVP{
-		ID:             primitive.NewObjectID(),
-		WeddingID:      weddingID,
-		FirstName:      "John",
-		LastName:       "Doe",
-		Status:         "attending",
+		ID:              primitive.NewObjectID(),
+		WeddingID:       weddingID,
+		FirstName:       "John",
+		LastName:        "Doe",
+		Status:          "attending",
 		AttendanceCount: 1,
-		PlusOneCount:   0,
-		SubmittedAt:    time.Now().Add(-1 * time.Hour), // 1 hour ago
+		PlusOneCount:    0,
+		SubmittedAt:     time.Now().Add(-1 * time.Hour), // 1 hour ago
 	}
 	rsvpRepo.rsvps[rsvp.ID] = rsvp
 
@@ -411,13 +346,13 @@ func TestRSVPService_UpdateRSVP_CannotModify(t *testing.T) {
 
 	// Create old RSVP (more than 24 hours ago)
 	rsvp := &models.RSVP{
-		ID:             primitive.NewObjectID(),
-		WeddingID:      weddingID,
-		FirstName:      "John",
-		LastName:       "Doe",
-		Status:         "attending",
+		ID:              primitive.NewObjectID(),
+		WeddingID:       weddingID,
+		FirstName:       "John",
+		LastName:        "Doe",
+		Status:          "attending",
 		AttendanceCount: 1,
-		SubmittedAt:    time.Now().Add(-25 * time.Hour), // 25 hours ago
+		SubmittedAt:     time.Now().Add(-25 * time.Hour), // 25 hours ago
 	}
 	rsvpRepo.rsvps[rsvp.ID] = rsvp
 
@@ -584,17 +519,4 @@ func TestRSVPService_ExportRSVPs(t *testing.T) {
 	require.NoError(t, err)
 	assert.Equal(t, 1, len(rsvps))
 	assert.Equal(t, "John", rsvps[0].FirstName)
-}
-
-// Helper functions
-func boolPtr(b bool) *bool {
-	return &b
-}
-
-func stringPtr(s string) *string {
-	return &s
-}
-
-func intPtr(i int) *int {
-	return &i
 }

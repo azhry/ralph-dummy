@@ -12,84 +12,6 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-// MockUserRepository is a mock implementation of UserRepository
-type MockUserRepository struct {
-	mock.Mock
-}
-
-func (m *MockUserRepository) Create(ctx context.Context, user *models.User) error {
-	args := m.Called(ctx, user)
-	return args.Error(0)
-}
-
-func (m *MockUserRepository) GetByID(ctx context.Context, id primitive.ObjectID) (*models.User, error) {
-	args := m.Called(ctx, id)
-	return args.Get(0).(*models.User), args.Error(1)
-}
-
-func (m *MockUserRepository) GetByEmail(ctx context.Context, email string) (*models.User, error) {
-	args := m.Called(ctx, email)
-	user := args.Get(0)
-	if user == nil {
-		return nil, args.Error(1)
-	}
-	return user.(*models.User), args.Error(1)
-}
-
-func (m *MockUserRepository) GetByVerificationToken(ctx context.Context, token string) (*models.User, error) {
-	args := m.Called(ctx, token)
-	if args.Get(0) == nil {
-		return nil, args.Error(1)
-	}
-	return args.Get(0).(*models.User), args.Error(1)
-}
-
-func (m *MockUserRepository) GetByResetToken(ctx context.Context, token string) (*models.User, error) {
-	args := m.Called(ctx, token)
-	if args.Get(0) == nil {
-		return nil, args.Error(1)
-	}
-	return args.Get(0).(*models.User), args.Error(1)
-}
-
-func (m *MockUserRepository) Update(ctx context.Context, user *models.User) error {
-	args := m.Called(ctx, user)
-	return args.Error(0)
-}
-
-func (m *MockUserRepository) Delete(ctx context.Context, id primitive.ObjectID) error {
-	args := m.Called(ctx, id)
-	return args.Error(0)
-}
-
-func (m *MockUserRepository) List(ctx context.Context, page, pageSize int, filters repository.UserFilters) ([]*models.User, int64, error) {
-	args := m.Called(ctx, page, pageSize, filters)
-	if args.Get(0) == nil {
-		return nil, args.Get(1).(int64), args.Error(2)
-	}
-	return args.Get(0).([]*models.User), args.Get(1).(int64), args.Error(2)
-}
-
-func (m *MockUserRepository) AddWeddingID(ctx context.Context, userID, weddingID primitive.ObjectID) error {
-	args := m.Called(ctx, userID, weddingID)
-	return args.Error(0)
-}
-
-func (m *MockUserRepository) RemoveWeddingID(ctx context.Context, userID, weddingID primitive.ObjectID) error {
-	args := m.Called(ctx, userID, weddingID)
-	return args.Error(0)
-}
-
-func (m *MockUserRepository) UpdateLastLogin(ctx context.Context, userID primitive.ObjectID) error {
-	args := m.Called(ctx, userID)
-	return args.Error(0)
-}
-
-func (m *MockUserRepository) SetEmailVerified(ctx context.Context, userID primitive.ObjectID) error {
-	args := m.Called(ctx, userID)
-	return args.Error(0)
-}
-
 func setupUserService() (*UserService, *MockUserRepository) {
 	mockRepo := &MockUserRepository{}
 	service := NewUserService(mockRepo)
@@ -580,9 +502,4 @@ func TestUserService_isValidPhone(t *testing.T) {
 			assert.False(t, service.isValidPhone(phone), "Phone %s should be invalid", phone)
 		}
 	})
-}
-
-// Helper function to create string pointers
-func stringPtr(s string) *string {
-	return &s
 }
