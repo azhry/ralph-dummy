@@ -6,10 +6,13 @@ import (
 	"testing"
 	"time"
 
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 
+	"wedding-invitation-backend/internal/config"
 	"wedding-invitation-backend/internal/domain/models"
 	"wedding-invitation-backend/internal/domain/repository"
 )
@@ -28,8 +31,8 @@ func TestMongoRSVPRepository_Create(t *testing.T) {
 	// Test data
 	weddingID := primitive.NewObjectID()
 	rsvp := &models.RSVP{
-		ID:              primitive.NewObjectID(),
-		WeddingID:       weddingID,
+		ID:               primitive.NewObjectID(),
+		WeddingID:        weddingID,
 		FirstName:        "John",
 		LastName:         "Doe",
 		Email:            "john.doe@example.com",
@@ -73,14 +76,14 @@ func TestMongoRSVPRepository_GetByID(t *testing.T) {
 
 	// Test existing RSVP
 	rsvp := &models.RSVP{
-		ID:             primitive.NewObjectID(),
-		WeddingID:      primitive.NewObjectID(),
-		FirstName:      "Jane",
-		LastName:       "Smith",
-		Status:         "not-attending",
+		ID:              primitive.NewObjectID(),
+		WeddingID:       primitive.NewObjectID(),
+		FirstName:       "Jane",
+		LastName:        "Smith",
+		Status:          "not-attending",
 		AttendanceCount: 1,
-		SubmittedAt:    time.Now(),
-		Source:         "web",
+		SubmittedAt:     time.Now(),
+		Source:          "web",
 	}
 
 	err = repo.Create(context.Background(), rsvp)
@@ -112,14 +115,14 @@ func TestMongoRSVPRepository_GetByEmail(t *testing.T) {
 
 	// Test existing RSVP
 	rsvp := &models.RSVP{
-		ID:         primitive.NewObjectID(),
-		WeddingID:  weddingID,
-		FirstName:  "Test",
-		LastName:   "User",
-		Email:      email,
-		Status:     "attending",
+		ID:          primitive.NewObjectID(),
+		WeddingID:   weddingID,
+		FirstName:   "Test",
+		LastName:    "User",
+		Email:       email,
+		Status:      "attending",
 		SubmittedAt: time.Now(),
-		Source:     "web",
+		Source:      "web",
 	}
 
 	err = repo.Create(context.Background(), rsvp)
@@ -147,15 +150,15 @@ func TestMongoRSVPRepository_ListByWedding(t *testing.T) {
 	rsvps := make([]*models.RSVP, 5)
 	for i := 0; i < 5; i++ {
 		rsvps[i] = &models.RSVP{
-			ID:             primitive.NewObjectID(),
-			WeddingID:      weddingID,
-			FirstName:      fmt.Sprintf("User%d", i),
-			LastName:       "Test",
-			Email:          fmt.Sprintf("user%d@test.com", i),
-			Status:         "attending",
+			ID:              primitive.NewObjectID(),
+			WeddingID:       weddingID,
+			FirstName:       fmt.Sprintf("User%d", i),
+			LastName:        "Test",
+			Email:           fmt.Sprintf("user%d@test.com", i),
+			Status:          "attending",
 			AttendanceCount: 1,
-			SubmittedAt:    time.Now().Add(time.Duration(i) * time.Hour),
-			Source:         "web",
+			SubmittedAt:     time.Now().Add(time.Duration(i) * time.Hour),
+			Source:          "web",
 		}
 		err := repo.Create(context.Background(), rsvps[i])
 		require.NoError(t, err)
@@ -202,14 +205,14 @@ func TestMongoRSVPRepository_Update(t *testing.T) {
 
 	// Create RSVP
 	rsvp := &models.RSVP{
-		ID:             primitive.NewObjectID(),
-		WeddingID:      primitive.NewObjectID(),
-		FirstName:      "Original",
-		LastName:       "Name",
-		Status:         "attending",
+		ID:              primitive.NewObjectID(),
+		WeddingID:       primitive.NewObjectID(),
+		FirstName:       "Original",
+		LastName:        "Name",
+		Status:          "attending",
 		AttendanceCount: 1,
-		SubmittedAt:    time.Now(),
-		Source:         "web",
+		SubmittedAt:     time.Now(),
+		Source:          "web",
 	}
 
 	err := repo.Create(context.Background(), rsvp)
@@ -243,14 +246,14 @@ func TestMongoRSVPRepository_Delete(t *testing.T) {
 
 	// Create RSVP
 	rsvp := &models.RSVP{
-		ID:             primitive.NewObjectID(),
-		WeddingID:      primitive.NewObjectID(),
-		FirstName:      "ToDelete",
-		LastName:       "User",
-		Status:         "attending",
+		ID:              primitive.NewObjectID(),
+		WeddingID:       primitive.NewObjectID(),
+		FirstName:       "ToDelete",
+		LastName:        "User",
+		Status:          "attending",
 		AttendanceCount: 1,
-		SubmittedAt:    time.Now(),
-		Source:         "web",
+		SubmittedAt:     time.Now(),
+		Source:          "web",
 	}
 
 	err := repo.Create(context.Background(), rsvp)
@@ -291,7 +294,7 @@ func TestMongoRSVPRepository_GetStatistics(t *testing.T) {
 			FirstName:       fmt.Sprintf("User%d", i),
 			LastName:        "Test",
 			Status:          status,
-			AttendanceCount:  1,
+			AttendanceCount: 1,
 			PlusOneCount:    i % 2, // Alternate 0 and 1
 			DietarySelected: []string{"vegetarian", "vegan", "gluten-free", "vegetarian"}[i : i+1],
 			SubmittedAt:     time.Now(),
@@ -371,14 +374,14 @@ func TestMongoRSVPRepository_GetSubmissionTrend(t *testing.T) {
 	// Create test RSVPs over the last few days
 	for i := 0; i < 5; i++ {
 		rsvp := &models.RSVP{
-			ID:             primitive.NewObjectID(),
-			WeddingID:      weddingID,
-			FirstName:      fmt.Sprintf("User%d", i),
-			LastName:       "Test",
-			Status:         "attending",
+			ID:              primitive.NewObjectID(),
+			WeddingID:       weddingID,
+			FirstName:       fmt.Sprintf("User%d", i),
+			LastName:        "Test",
+			Status:          "attending",
 			AttendanceCount: 1,
-			SubmittedAt:    time.Now().AddDate(0, 0, -i), // i days ago
-			Source:         "web",
+			SubmittedAt:     time.Now().AddDate(0, 0, -i), // i days ago
+			Source:          "web",
 		}
 		err := repo.Create(context.Background(), rsvp)
 		require.NoError(t, err)
@@ -395,4 +398,21 @@ func TestMongoRSVPRepository_GetSubmissionTrend(t *testing.T) {
 		totalCount += day.Count
 	}
 	assert.True(t, totalCount > 0)
+}
+
+// Temporary setupTestDB function to make tests compile
+func setupTestDB(t *testing.T, dbName string) (*mongo.Client, *mongo.Database) {
+	testDBConfig := &config.DatabaseConfig{
+		URI:      "mongodb://localhost:27017",
+		Database: "wedding_test_" + primitive.NewObjectID().Hex(),
+		Timeout:  10,
+	}
+
+	client, err := mongo.Connect(context.Background(), options.Client().ApplyURI(testDBConfig.URI))
+	if err != nil {
+		t.Skipf("Skipping integration tests: Cannot connect to MongoDB: %v", err)
+		return nil, nil
+	}
+
+	return client, client.Database(testDBConfig.Database)
 }

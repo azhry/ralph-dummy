@@ -72,6 +72,9 @@ func TestMultiRateLimiter(t *testing.T) {
 		router.ServeHTTP(w, req)
 
 		if i < 5 {
+			if w.Code != http.StatusOK {
+				t.Logf("Expected 200, got %d. Response body: %s", w.Code, w.Body.String())
+			}
 			assert.Equal(t, http.StatusOK, w.Code)
 		} else {
 			assert.Equal(t, http.StatusTooManyRequests, w.Code)
@@ -177,7 +180,7 @@ func TestValidationMiddleware(t *testing.T) {
 		Slug  string `json:"slug" validate:"slug"`
 	}
 
-	router.POST("/test", vm.ValidateBody(TestRequest{}), func(c *gin.Context) {
+	router.POST("/test", vm.ValidateBody(&TestRequest{}), func(c *gin.Context) {
 		req := c.MustGet("validated_request").(*TestRequest)
 		c.JSON(http.StatusOK, gin.H{"name": req.Name})
 	})

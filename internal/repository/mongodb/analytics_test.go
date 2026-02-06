@@ -8,8 +8,13 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 
+	"wedding-invitation-backend/internal/config"
 	"wedding-invitation-backend/internal/domain/models"
+	"wedding-invitation-backend/internal/domain/repository"
+	"wedding-invitation-backend/pkg/database"
 )
 
 func TestAnalyticsRepository_TrackPageView(t *testing.T) {
@@ -206,12 +211,12 @@ func TestAnalyticsRepository_TrackConversion(t *testing.T) {
 	sessionID := "test-session-123"
 
 	conversion := &models.ConversionEvent{
-		WeddingID:  weddingID,
-		SessionID:  sessionID,
-		Event:      "rsvp_completed",
-		Value:      1.0,
-		Currency:   "USD",
-		Timestamp:  time.Now(),
+		WeddingID: weddingID,
+		SessionID: sessionID,
+		Event:     "rsvp_completed",
+		Value:     1.0,
+		Currency:  "USD",
+		Timestamp: time.Now(),
 		Properties: map[string]interface{}{
 			"source": "web",
 			"page":   "rsvp",
@@ -416,7 +421,7 @@ func TestAnalyticsRepository_GetDailyMetrics(t *testing.T) {
 	// Create test data spanning multiple days
 	for i := 0; i < 7; i++ {
 		date := startDate.AddDate(0, 0, i)
-		
+
 		// Create 2-3 page views per day
 		for j := 0; j < 2+i%2; j++ {
 			pageView := &models.PageView{
@@ -510,9 +515,35 @@ func TestAnalyticsRepository_CleanupOldAnalytics(t *testing.T) {
 
 // Helper functions
 
-func setupTestAnalyticsRepository(t *testing.T) (AnalyticsRepository, func()) {
-	db, cleanup := setupTestDB(t)
+func setupTestAnalyticsRepository(t *testing.T) (repository.AnalyticsRepository, func()) {
+	// Setup test database
+	testDBConfig := &config.DatabaseConfig{
+		URI:      "mongodb://localhost:27017",
+		Database: "wedding_test_" + primitive.NewObjectID().Hex(),
+		Timeout:  10,
+	}
+
+	db, err := database.NewMongoDB(testDBConfig)
+	if err != nil {
+		t.Skipf("Skipping integration tests: MongoDB not available: %v", err)
+		return nil, func() {}
+	}
+
 	repo := NewAnalyticsRepository(db.Database)
+
+	// Setup cleanup function
+	cleanup := func() {
+		if db != nil {
+			db.Close(context.Background())
+			// Drop test database
+			client, err := mongo.Connect(context.Background(), options.Client().ApplyURI(testDBConfig.URI))
+			if err == nil {
+				client.Database(testDBConfig.Database).Drop(context.Background())
+				client.Disconnect(context.Background())
+			}
+		}
+	}
+
 	return repo, cleanup
 }
 

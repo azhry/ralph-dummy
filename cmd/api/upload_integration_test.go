@@ -27,21 +27,21 @@ func TestUploadIntegration(t *testing.T) {
 	// Setup test environment
 	gin.SetMode(gin.TestMode)
 	logger := zaptest.NewLogger(t)
-	
+
 	// Create mock services
 	mockMediaService := new(MockMediaServiceForIntegration)
 	uploadHandler := handlers.NewUploadHandler(mockMediaService, logger)
-	
+
 	// Create router with upload routes
 	router := gin.New()
-	
+
 	// Mock auth middleware to set user ID
 	router.Use(func(c *gin.Context) {
 		userID := primitive.NewObjectID()
 		c.Set("userID", userID.Hex())
 		c.Next()
 	})
-	
+
 	// Add upload routes
 	v1 := router.Group("/api/v1")
 	{
@@ -51,11 +51,11 @@ func TestUploadIntegration(t *testing.T) {
 		v1.GET("/media", uploadHandler.HandleListMedia)
 		v1.DELETE("/media/:id", uploadHandler.HandleDeleteMedia)
 	}
-	
+
 	userID := primitive.NewObjectID()
 	testMedia := createTestMedia()
 	testMedia.CreatedBy = userID
-	
+
 	t.Run("Complete upload workflow", func(t *testing.T) {
 		// Step 1: Generate presigned URL
 		presignedInfo := &services.PresignedUploadInfo{
@@ -63,98 +63,98 @@ func TestUploadIntegration(t *testing.T) {
 			Fields: map[string]string{"mediaId": testMedia.ID.Hex()},
 			Key:    "uploads/test.jpg",
 		}
-		
-		mockMediaService.On("GeneratePresignedUploadURL", mock.Anything, "test.jpg", "image/jpeg", int64(1024000), userID).
+
+		mockMediaService.On("GeneratePresignedUploadURL", mock.Anything, "test.jpg", "image/jpeg", int64(1024000), mock.AnythingOfType("primitive.ObjectID")).
 			Return(presignedInfo, nil).Once()
-		
+
 		presignReq := handlers.PresignedURLRequest{
 			Filename:    "test.jpg",
 			ContentType: "image/jpeg",
 			Size:        1024000,
 		}
-		
+
 		presignBody, err := json.Marshal(presignReq)
 		require.NoError(t, err)
-		
+
 		req := httptest.NewRequest(http.MethodPost, "/api/v1/upload/presign", bytes.NewBuffer(presignBody))
 		req.Header.Set("Content-Type", "application/json")
-		
+
 		w := httptest.NewRecorder()
 		router.ServeHTTP(w, req)
-		
+
 		assert.Equal(t, http.StatusOK, w.Code)
-		
+
 		var presignResp handlers.PresignedUploadResponse
 		err = json.Unmarshal(w.Body.Bytes(), &presignResp)
 		require.NoError(t, err)
 		assert.Equal(t, presignedInfo.URL, presignResp.UploadURL)
 		assert.Equal(t, testMedia.ID.Hex(), presignResp.MediaID)
-		
+
 		// Step 2: Process uploaded file (simulate direct upload completion)
 		mockMediaService.On("ProcessUploadedFile", mock.Anything, mock.AnythingOfType("*services.PresignedUploadInfo"), userID).
 			Return(testMedia, nil).Once()
-		
+
 		confirmReq := handlers.ConfirmUploadRequest{
 			MediaID: testMedia.ID.Hex(),
 			Key:     presignedInfo.Key,
 		}
-		
+
 		confirmBody, err := json.Marshal(confirmReq)
 		require.NoError(t, err)
-		
+
 		req = httptest.NewRequest(http.MethodPost, "/api/v1/upload/confirm", bytes.NewBuffer(confirmBody))
 		req.Header.Set("Content-Type", "application/json")
-		
+
 		w = httptest.NewRecorder()
 		router.ServeHTTP(w, req)
-		
+
 		assert.Equal(t, http.StatusOK, w.Code)
-		
+
 		var mediaResp handlers.UploadResponse
 		err = json.Unmarshal(w.Body.Bytes(), &mediaResp)
 		require.NoError(t, err)
 		assert.Equal(t, testMedia.ID.Hex(), mediaResp.ID)
 		assert.Equal(t, testMedia.Filename, mediaResp.Filename)
-		
+
 		// Step 3: Retrieve media
 		mockMediaService.On("GetMedia", mock.Anything, testMedia.ID).Return(testMedia, nil).Once()
-		
+
 		req = httptest.NewRequest(http.MethodGet, "/api/v1/media/"+testMedia.ID.Hex(), nil)
 		w = httptest.NewRecorder()
 		router.ServeHTTP(w, req)
-		
+
 		assert.Equal(t, http.StatusOK, w.Code)
-		
+
 		var getMediaResp handlers.UploadResponse
 		err = json.Unmarshal(w.Body.Bytes(), &getMediaResp)
 		require.NoError(t, err)
 		assert.Equal(t, testMedia.ID.Hex(), getMediaResp.ID)
-		
+
 		// Step 4: List user media
 		mockMediaService.On("GetUserMedia", mock.Anything, userID, 1, 10, mock.AnythingOfType("repository.MediaFilter")).
 			Return([]*models.Media{testMedia}, int64(1), nil).Once()
-		
+
 		req = httptest.NewRequest(http.MethodGet, "/api/v1/media?page=1&pageSize=10", nil)
 		w = httptest.NewRecorder()
 		router.ServeHTTP(w, req)
-		
+
 		assert.Equal(t, http.StatusOK, w.Code)
-		
+
 		var listResp handlers.MediaListResponse
 		err = json.Unmarshal(w.Body.Bytes(), &listResp)
 		require.NoError(t, err)
 		assert.Len(t, listResp.Media, 1)
 		assert.Equal(t, int64(1), listResp.Total)
-		
+
 		// Step 5: Delete media
 		mockMediaService.On("DeleteMedia", mock.Anything, testMedia.ID, userID).Return(nil).Once()
-		
+
 		req = httptest.NewRequest(http.MethodDelete, "/api/v1/media/"+testMedia.ID.Hex(), nil)
 		w = httptest.NewRecorder()
 		router.ServeHTTP(w, req)
-		
+
 		assert.Equal(t, http.StatusOK, w.Code)
-		
+
 		mockMediaService.AssertExpectations(t)
 	})
 }
