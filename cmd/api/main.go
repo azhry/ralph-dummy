@@ -52,6 +52,7 @@ func main() {
 	userRepo := repo.NewMongoUserRepository(db.Database)
 	weddingRepo := repo.NewMongoWeddingRepository(db.Database)
 	rsvpRepo := repo.NewMongoRSVPRepository(db.Database)
+	guestRepo := repo.NewGuestRepository(db.Database)
 
 	// Initialize JWT manager
 	jwtManager := utils.NewJWTManager(
@@ -67,15 +68,17 @@ func main() {
 	userService := services.NewUserService(userRepo)
 	weddingService := services.NewWeddingService(weddingRepo, userRepo)
 	rsvpService := services.NewRSVPService(rsvpRepo, weddingRepo)
+	guestService := services.NewGuestService(guestRepo, weddingRepo)
 
 	// Initialize handlers
 	userHandler := handlers.NewUserHandler(userService)
 	weddingHandler := handlers.NewWeddingHandler(weddingService)
 	rsvpHandler := handlers.NewRSVPHandler(rsvpService)
 	publicHandler := handlers.NewPublicHandler(weddingService, rsvpService)
+	guestHandler := handlers.NewGuestHandler(guestService)
 
 	// Setup router
-	router := setupRouter(cfg, authService, userHandler, weddingHandler, rsvpHandler, publicHandler, jwtManager, logger)
+	router := setupRouter(cfg, authService, userHandler, weddingHandler, rsvpHandler, publicHandler, guestHandler, jwtManager, logger)
 
 	// Create HTTP server
 	server := &http.Server{
@@ -118,6 +121,7 @@ func setupRouter(
 	weddingHandler *handlers.WeddingHandler,
 	rsvpHandler *handlers.RSVPHandler,
 	publicHandler *handlers.PublicHandler,
+	guestHandler *handlers.GuestHandler,
 	jwtManager *utils.JWTManager,
 	logger *zap.Logger,
 ) *gin.Engine {
@@ -282,11 +286,22 @@ func setupRouter(
 			protected.GET("/weddings/:id/rsvps", rsvpHandler.GetRSVPs)
 			protected.GET("/weddings/:id/rsvps/statistics", rsvpHandler.GetRSVPStatistics)
 			protected.GET("/weddings/:id/rsvps/export", rsvpHandler.ExportRSVPs)
+
+			// Guest management routes
+			protected.POST("/weddings/:wedding_id/guests", guestHandler.CreateGuest)
+			protected.POST("/weddings/:wedding_id/guests/bulk", guestHandler.BulkCreateGuests)
+			protected.POST("/weddings/:wedding_id/guests/import", guestHandler.ImportGuestsCSV)
+			protected.GET("/weddings/:wedding_id/guests", guestHandler.ListGuests)
 		}
 
 		// Individual RSVP routes
 		v1.PUT("/rsvps/:id", rsvpHandler.UpdateRSVP)
 		v1.DELETE("/rsvps/:id", rsvpHandler.DeleteRSVP)
+
+		// Individual guest routes
+		v1.GET("/guests/:id", guestHandler.GetGuest)
+		v1.PUT("/guests/:id", guestHandler.UpdateGuest)
+		v1.DELETE("/guests/:id", guestHandler.DeleteGuest)
 
 		// Public routes
 		public := v1.Group("/public")

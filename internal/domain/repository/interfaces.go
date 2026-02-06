@@ -101,11 +101,25 @@ type RSVPFilters struct {
 }
 
 type GuestFilters struct {
-	RSVPStatus   string `json:"rsvp_status"`
-	Side         string `json:"side"`
-	Relationship string `json:"relationship"`
-	Search       string `json:"search"`
-	VIP          *bool  `json:"vip"`
+	RSVPStatus        string `json:"rsvp_status"`
+	Side              string `json:"side"`
+	Relationship      string `json:"relationship"`
+	Search            string `json:"search"`
+	VIP               *bool  `json:"vip"`
+	InvitationStatus  string `json:"invitation_status"`
+	InvitedVia        string `json:"invited_via"`
+	AllowPlusOne      *bool  `json:"allow_plus_one"`
+}
+
+type GuestStatistics struct {
+	TotalGuests       int64 `json:"total_guests"`
+	InvitedDigital    int64 `json:"invited_digital"`
+	InvitedManual     int64 `json:"invited_manual"`
+	RSVPAttending     int64 `json:"rsvp_attending"`
+	RSVPNotAttending  int64 `json:"rsvp_not_attending"`
+	RSVPPending       int64 `json:"rsvp_pending"`
+	PlusOnesAllowed   int64 `json:"plus_ones_allowed"`
+	VIPGuests         int64 `json:"vip_guests"`
 }
 
 type DateRange struct {

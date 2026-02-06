@@ -23,6 +23,8 @@ var (
 	ErrUnauthorized        = errors.New("unauthorized")
 	ErrTooManyPlusOnes     = errors.New("too many plus ones")
 	ErrRSVPCannotModify    = errors.New("rsvp cannot be modified after 24 hours")
+	ErrGuestNotFound       = errors.New("guest not found")
+	ErrDuplicateGuest      = errors.New("guest with this email already exists")
 )
 
 // RSVPService provides business logic for RSVP management
