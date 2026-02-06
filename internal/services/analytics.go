@@ -49,6 +49,8 @@ type AnalyticsService interface {
 	// Validation
 	IsValidPage(page string) bool
 	IsValidEvent(event string) bool
+	ValidatePeriod(period string) bool
+	SanitizeCustomData(data map[string]interface{}) map[string]interface{}
 }
 
 type analyticsService struct {

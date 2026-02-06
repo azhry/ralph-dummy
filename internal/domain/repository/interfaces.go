@@ -99,10 +99,12 @@ type AnalyticsRepository interface {
 	// Aggregated Analytics
 	GetWeddingAnalytics(ctx context.Context, weddingID primitive.ObjectID) (*models.WeddingAnalytics, error)
 	UpdateWeddingAnalytics(ctx context.Context, weddingID primitive.ObjectID) error
+	RefreshWeddingAnalytics(ctx context.Context, weddingID primitive.ObjectID) error
 
 	// System Analytics
 	GetSystemAnalytics(ctx context.Context) (*models.SystemAnalytics, error)
 	UpdateSystemAnalytics(ctx context.Context) error
+	RefreshSystemAnalytics(ctx context.Context) error
 
 	// Reports
 	GetAnalyticsSummary(ctx context.Context, weddingID primitive.ObjectID, period string) (*models.AnalyticsSummary, error)

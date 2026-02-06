@@ -10,8 +10,8 @@ import (
 	time "time"
 
 	bson "go.mongodb.org/mongo-driver/bson/primitive"
+	gomock "go.uber.org/mock/gomock"
 	http "net/http"
-	gomock "github.com/golang/mock/gomock"
 
 	models "wedding-invitation-backend/internal/domain/models"
 )

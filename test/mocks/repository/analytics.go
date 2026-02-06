@@ -11,7 +11,7 @@ import (
 
 	bson "go.mongodb.org/mongo-driver/bson/primitive"
 	mongo "go.mongodb.org/mongo-driver/mongo"
-	gomock "github.com/golang/mock/gomock"
+	gomock "go.uber.org/mock/gomock"
 
 	models "wedding-invitation-backend/internal/domain/models"
 )
