@@ -3,7 +3,6 @@ package handlers
 import (
 	"errors"
 	"net/http"
-	"strconv"
 	"strings"
 	"time"
 
@@ -11,7 +10,6 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"wedding-invitation-backend/internal/domain/models"
 	"wedding-invitation-backend/internal/services"
-	"wedding-invitation-backend/internal/utils"
 )
 
 // PublicHandler handles public wedding operations
@@ -48,7 +46,7 @@ type PublicWeddingResponse struct {
 	ContactEmail    string                  `json:"contact_email"`
 	SiteTitle       string                  `json:"site_title"`
 	MetaDescription string                  `json:"meta_description"`
-	Events          []models.Event          `json:"events"`
+	Events          []models.EventDetails   `json:"events"`
 	GalleryImages   []string                `json:"gallery_images"`
 	AllowPlusOne    bool                    `json:"allow_plus_one"`
 	CollectDietary  bool                    `json:"collect_dietary"`
@@ -169,26 +167,66 @@ func (h *PublicHandler) SubmitRSVP(c *gin.Context) {
 		return
 	}
 
-	// Create RSVP model
-	rsvp := &models.RSVP{
-		WeddingID:           wedding.ID,
-		Name:                req.Name,
+	// Parse name into first and last name
+	nameParts := strings.SplitN(req.Name, " ", 2)
+	firstName := nameParts[0]
+	lastName := ""
+	if len(nameParts) > 1 {
+		lastName = nameParts[1]
+	}
+
+	// Convert status
+	status := "not-attending"
+	if req.Attending {
+		status = "attending"
+	}
+
+	// Convert custom answers from map[string]string to []models.CustomAnswer
+	customAnswers := make([]models.CustomAnswer, 0)
+	for question, answer := range req.CustomAnswers {
+		customAnswers = append(customAnswers, models.CustomAnswer{
+			QuestionID: question,
+			Question:   question, // Using question ID as question for now
+			Answer:     answer,
+		})
+	}
+
+	// Handle plus one
+	var plusOnes []models.PlusOneInfo
+	if req.PlusOneName != "" && req.NumberOfGuests > 1 {
+		plusOneNameParts := strings.SplitN(req.PlusOneName, " ", 2)
+		plusOneFirstName := plusOneNameParts[0]
+		plusOneLastName := ""
+		if len(plusOneNameParts) > 1 {
+			plusOneLastName = plusOneNameParts[1]
+		}
+		plusOnes = []models.PlusOneInfo{{
+			FirstName: plusOneFirstName,
+			LastName:  plusOneLastName,
+			Dietary:   req.DietaryRestrictions,
+		}}
+	}
+
+	// Create RSVP submission request
+	submitReq := services.SubmitRSVPRequest{
+		FirstName:           firstName,
+		LastName:            lastName,
 		Email:               req.Email,
 		Phone:               req.Phone,
-		Attending:           req.Attending,
-		NumberOfGuests:      req.NumberOfGuests,
-		PlusOneName:         req.PlusOneName,
+		Status:              status,
+		AttendanceCount:     req.NumberOfGuests,
+		PlusOnes:            plusOnes,
 		DietaryRestrictions: req.DietaryRestrictions,
-		Message:             req.Message,
-		CustomAnswers:       req.CustomAnswers,
-		Source:              models.RSVPSourceWeb,
+		AdditionalNotes:     req.Message,
+		CustomAnswers:       customAnswers,
+		Source:              string(models.RSVPSourceWeb),
 		IPAddress:           c.ClientIP(),
 		UserAgent:           c.GetHeader("User-Agent"),
-		SubmittedAt:         time.Now(),
 	}
 
 	// Submit RSVP
-	if err := h.rsvpService.SubmitRSVP(c.Request.Context(), rsvp); err != nil {
+	rsvp, err := h.rsvpService.SubmitRSVP(c.Request.Context(), wedding.ID, submitReq)
+	if err != nil {
 		if err.Error() == "RSVP period is not open" || err.Error() == "RSVP deadline has passed" {
 			c.JSON(http.StatusBadRequest, ErrorResponse{Error: "RSVP period is not open"})
 			return
@@ -201,15 +239,24 @@ func (h *PublicHandler) SubmitRSVP(c *gin.Context) {
 		return
 	}
 
+	// Get plus one name for response
+	plusOneName := ""
+	if len(rsvp.PlusOnes) > 0 {
+		plusOneName = rsvp.PlusOnes[0].FirstName + " " + rsvp.PlusOnes[0].LastName
+	}
+
+	// Convert attending status
+	attending := rsvp.Status == "attending"
+
 	// Convert to response
 	response := &PublicRSVPResponse{
 		ID:               rsvp.ID,
 		WeddingID:        rsvp.WeddingID,
-		Name:             rsvp.Name,
+		Name:             rsvp.GetFullName(),
 		Email:            rsvp.Email,
-		Attending:        rsvp.Attending,
-		NumberOfGuests:   rsvp.NumberOfGuests,
-		PlusOneName:      rsvp.PlusOneName,
+		Attending:        attending,
+		NumberOfGuests:   rsvp.AttendanceCount,
+		PlusOneName:      plusOneName,
 		SubmittedAt:      rsvp.SubmittedAt,
 		ConfirmationSent: rsvp.ConfirmationSent,
 	}
@@ -219,31 +266,43 @@ func (h *PublicHandler) SubmitRSVP(c *gin.Context) {
 
 // convertToPublicResponse converts a wedding model to public response
 func (h *PublicHandler) convertToPublicResponse(wedding *models.Wedding) *PublicWeddingResponse {
+	// Convert gallery images to URLs
+	galleryImages := make([]string, len(wedding.GalleryImages))
+	for i, img := range wedding.GalleryImages {
+		galleryImages[i] = img.URL
+	}
+
+	// Handle RSVP deadline
+	var rsvpDeadline time.Time
+	if wedding.RSVP.Deadline != nil {
+		rsvpDeadline = *wedding.RSVP.Deadline
+	}
+
 	return &PublicWeddingResponse{
 		Slug:            wedding.Slug,
 		Theme:           wedding.Theme.ThemeID,
-		GroomName:       wedding.Couple.GroomName,
-		BrideName:       wedding.Couple.BrideName,
-		GroomRole:       wedding.Couple.GroomRole,
-		BrideRole:       wedding.Couple.BrideRole,
-		GroomBio:        wedding.Couple.GroomBio,
-		BrideBio:        wedding.Couple.BrideBio,
-		GroomPhotoURL:   wedding.Couple.GroomPhotoURL,
-		BridePhotoURL:   wedding.Couple.BridePhotoURL,
-		LoveStory:       wedding.Couple.LoveStory,
-		WeddingDate:     wedding.EventDetails.WeddingDate,
-		VenueName:       wedding.EventDetails.VenueName,
-		VenueAddress:    wedding.EventDetails.VenueAddress,
-		VenueMapURL:     wedding.EventDetails.VenueMapURL,
-		ContactEmail:    wedding.EventDetails.ContactEmail,
-		SiteTitle:       wedding.SEO.SiteTitle,
-		MetaDescription: wedding.SEO.MetaDescription,
-		Events:          wedding.EventDetails.Events,
-		GalleryImages:   wedding.Gallery.Images,
+		GroomName:       wedding.Couple.Partner1.FullName,
+		BrideName:       wedding.Couple.Partner2.FullName,
+		GroomRole:       "Partner 1", // Default roles
+		BrideRole:       "Partner 2",
+		GroomBio:        wedding.Couple.Partner1.FirstName + " is one half of the happy couple.",
+		BrideBio:        wedding.Couple.Partner2.FirstName + " is the other half of the happy couple.",
+		GroomPhotoURL:   wedding.Couple.Partner1.PhotoURL,
+		BridePhotoURL:   wedding.Couple.Partner2.PhotoURL,
+		LoveStory:       wedding.Couple.Story,
+		WeddingDate:     wedding.Event.Date,
+		VenueName:       wedding.Event.VenueName,
+		VenueAddress:    wedding.Event.VenueAddress,
+		VenueMapURL:     wedding.Event.VenueMapURL,
+		ContactEmail:    "", // No contact email field in wedding model
+		SiteTitle:       wedding.Title,
+		MetaDescription: wedding.ShareMessage,
+		Events:          []models.EventDetails{wedding.Event},
+		GalleryImages:   galleryImages,
 		AllowPlusOne:    wedding.RSVP.AllowPlusOne,
 		CollectDietary:  wedding.RSVP.CollectDietary,
 		CustomQuestions: wedding.RSVP.CustomQuestions,
-		RSVPDeadline:    wedding.RSVP.Deadline,
+		RSVPDeadline:    rsvpDeadline,
 		RSVPStatus:      h.getRSVPStatus(wedding),
 	}
 }
@@ -257,13 +316,13 @@ func (h *PublicHandler) getRSVPStatus(wedding *models.Wedding) string {
 		return "closed"
 	}
 
-	// Check if RSVP period is open
-	if wedding.RSVP.OpenDate.After(now) {
-		return "upcoming"
+	// Check if RSVP is enabled
+	if !wedding.RSVP.Enabled {
+		return "closed"
 	}
 
 	// Check if RSVP deadline has passed
-	if wedding.RSVP.Deadline.Before(now) {
+	if wedding.RSVP.Deadline != nil && wedding.RSVP.Deadline.Before(now) {
 		return "closed"
 	}
 

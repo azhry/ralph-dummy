@@ -11,17 +11,16 @@ import (
 
 	"wedding-invitation-backend/internal/domain/models"
 	"wedding-invitation-backend/internal/services"
-	"wedding-invitation-backend/internal/utils"
 )
 
 // AnalyticsHandler handles analytics-related requests
 type AnalyticsHandler struct {
 	analyticsService services.AnalyticsService
-	weddingService   services.WeddingService
+	weddingService   *services.WeddingService
 }
 
 // NewAnalyticsHandler creates a new analytics handler
-func NewAnalyticsHandler(analyticsService services.AnalyticsService, weddingService services.WeddingService) *AnalyticsHandler {
+func NewAnalyticsHandler(analyticsService services.AnalyticsService, weddingService *services.WeddingService) *AnalyticsHandler {
 	return &AnalyticsHandler{
 		analyticsService: analyticsService,
 		weddingService:   weddingService,
@@ -119,7 +118,7 @@ func (h *AnalyticsHandler) TrackPageView(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusCreated, gin.H{Message: "Page view tracked successfully"})
+	c.JSON(http.StatusCreated, gin.H{"message": "Page view tracked successfully"})
 }
 
 // TrackRSVPSubmission tracks an RSVP submission event
@@ -179,7 +178,7 @@ func (h *AnalyticsHandler) TrackRSVPSubmission(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusCreated, gin.H{Message: "RSVP submission tracked successfully"})
+	c.JSON(http.StatusCreated, gin.H{"message": "RSVP submission tracked successfully"})
 }
 
 // TrackRSVPAbandonment tracks an RSVP abandonment event
@@ -232,7 +231,7 @@ func (h *AnalyticsHandler) TrackRSVPAbandonment(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusCreated, gin.H{Message: "RSVP abandonment tracked successfully"})
+	c.JSON(http.StatusCreated, gin.H{"message": "RSVP abandonment tracked successfully"})
 }
 
 // TrackConversion tracks a conversion event
@@ -282,7 +281,7 @@ func (h *AnalyticsHandler) TrackConversion(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusCreated, gin.H{Message: "Conversion tracked successfully"})
+	c.JSON(http.StatusCreated, gin.H{"message": "Conversion tracked successfully"})
 }
 
 // GetWeddingAnalytics retrieves wedding analytics
@@ -317,7 +316,7 @@ func (h *AnalyticsHandler) GetWeddingAnalytics(c *gin.Context) {
 	}
 
 	// Verify wedding ownership
-	wedding, err := h.weddingService.GetWeddingByID(c.Request.Context(), weddingID)
+	wedding, err := h.weddingService.GetWeddingByID(c.Request.Context(), weddingID, userID)
 	if err != nil {
 		if err.Error() == "wedding not found" {
 			c.JSON(http.StatusNotFound, ErrorResponse{Error: "Wedding not found"})
@@ -339,7 +338,7 @@ func (h *AnalyticsHandler) GetWeddingAnalytics(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{Data: analytics})
+	c.JSON(http.StatusOK, gin.H{"data": analytics})
 }
 
 // GetAnalyticsSummary retrieves analytics summary
@@ -375,7 +374,7 @@ func (h *AnalyticsHandler) GetAnalyticsSummary(c *gin.Context) {
 	}
 
 	// Verify wedding ownership
-	wedding, err := h.weddingService.GetWeddingByID(c.Request.Context(), weddingID)
+	wedding, err := h.weddingService.GetWeddingByID(c.Request.Context(), weddingID, userID)
 	if err != nil {
 		if err.Error() == "wedding not found" {
 			c.JSON(http.StatusNotFound, ErrorResponse{Error: "Wedding not found"})
@@ -404,7 +403,7 @@ func (h *AnalyticsHandler) GetAnalyticsSummary(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{Data: summary})
+	c.JSON(http.StatusOK, gin.H{"data": summary})
 }
 
 // GetPageViews retrieves page views with filtering
@@ -445,7 +444,7 @@ func (h *AnalyticsHandler) GetPageViews(c *gin.Context) {
 	}
 
 	// Verify wedding ownership
-	wedding, err := h.weddingService.GetWeddingByID(c.Request.Context(), weddingID)
+	wedding, err := h.weddingService.GetWeddingByID(c.Request.Context(), weddingID, userID)
 	if err != nil {
 		if err.Error() == "wedding not found" {
 			c.JSON(http.StatusNotFound, ErrorResponse{Error: "Wedding not found"})
@@ -519,7 +518,7 @@ func (h *AnalyticsHandler) GetPageViews(c *gin.Context) {
 		Offset:    filter.Offset,
 	}
 
-	c.JSON(http.StatusOK, gin.H{Data: response})
+	c.JSON(http.StatusOK, gin.H{"data": response})
 }
 
 // GetPopularPages retrieves popular pages for a wedding
@@ -555,7 +554,7 @@ func (h *AnalyticsHandler) GetPopularPages(c *gin.Context) {
 	}
 
 	// Verify wedding ownership
-	wedding, err := h.weddingService.GetWeddingByID(c.Request.Context(), weddingID)
+	wedding, err := h.weddingService.GetWeddingByID(c.Request.Context(), weddingID, userID)
 	if err != nil {
 		if err.Error() == "wedding not found" {
 			c.JSON(http.StatusNotFound, ErrorResponse{Error: "Wedding not found"})
@@ -588,7 +587,7 @@ func (h *AnalyticsHandler) GetPopularPages(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{Data: pages})
+	c.JSON(http.StatusOK, gin.H{"data": pages})
 }
 
 // GetSystemAnalytics retrieves system-wide analytics
@@ -614,7 +613,7 @@ func (h *AnalyticsHandler) GetSystemAnalytics(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{Data: analytics})
+	c.JSON(http.StatusOK, gin.H{"data": analytics})
 }
 
 // RefreshAnalytics refreshes analytics data
@@ -649,7 +648,7 @@ func (h *AnalyticsHandler) RefreshAnalytics(c *gin.Context) {
 	}
 
 	// Verify wedding ownership
-	wedding, err := h.weddingService.GetWeddingByID(c.Request.Context(), weddingID)
+	wedding, err := h.weddingService.GetWeddingByID(c.Request.Context(), weddingID, userID)
 	if err != nil {
 		if err.Error() == "wedding not found" {
 			c.JSON(http.StatusNotFound, ErrorResponse{Error: "Wedding not found"})
@@ -671,7 +670,7 @@ func (h *AnalyticsHandler) RefreshAnalytics(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{Message: "Analytics refreshed successfully"})
+	c.JSON(http.StatusOK, gin.H{"message": "Analytics refreshed successfully"})
 }
 
 // RefreshSystemAnalytics refreshes system analytics
@@ -697,7 +696,7 @@ func (h *AnalyticsHandler) RefreshSystemAnalytics(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{Message: "System analytics refreshed successfully"})
+	c.JSON(http.StatusOK, gin.H{"message": "System analytics refreshed successfully"})
 }
 
 // Response types

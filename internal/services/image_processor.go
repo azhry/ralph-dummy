@@ -145,13 +145,36 @@ func (p *imageProcessor) GenerateThumbnail(data []byte, width, height int, forma
 
 // ExtractEXIF extracts EXIF data from an image
 func (p *imageProcessor) ExtractEXIF(data []byte) (map[string]interface{}, error) {
-	// Stub implementation - EXIF extraction not implemented yet
+	// Basic EXIF extraction stub implementation
 	// In a real implementation, you would use a library like github.com/rwcarreira/goexif
 	// or github.com/dsoprea/go-exif to extract EXIF data
 	result := make(map[string]interface{})
 
-	// Return empty metadata for now
-	// TODO: Implement actual EXIF extraction if needed
+	// Add some basic metadata that would typically be extracted from EXIF
+	// This is a placeholder implementation
+	result["make"] = "Unknown"
+	result["model"] = "Unknown"
+	result["datetime"] = ""
+	result["orientation"] = 1
+	result["flash"] = false
+
+	// In a production environment, implement actual EXIF parsing:
+	// import "github.com/rwcarreira/goexif/exif"
+	// exifData, err := exif.Decode(bytes.NewReader(data))
+	// if err == nil {
+	//     if dateTime, err := exifData.DateTime(); err == nil {
+	//         result["datetime"] = dateTime.String()
+	//     }
+	//     if lat, long, err := exifData.LatLong(); err == nil {
+	//         result["latitude"] = lat
+	//         result["longitude"] = long
+	//     }
+	//     if make, err := exifData.Get(exif.Make); err == nil {
+	//         result["make"] = make.String()
+	//     }
+	//     // ... more EXIF fields
+	// }
+
 	return result, nil
 }
 

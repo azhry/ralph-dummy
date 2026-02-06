@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"context"
 	"fmt"
+	"mime/multipart"
 	"net/http"
 	"strconv"
 
@@ -287,8 +287,8 @@ func (h *UploadHandler) HandleConfirmUpload(c *gin.Context) {
 		return
 	}
 
-	mediaID, err := primitive.ObjectIDFromHex(req.MediaID)
-	if err != nil {
+	// Validate MediaID format
+	if _, err := primitive.ObjectIDFromHex(req.MediaID); err != nil {
 		respondWithError(c, http.StatusBadRequest, "Invalid media ID format")
 		return
 	}

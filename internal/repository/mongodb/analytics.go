@@ -11,39 +11,11 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 
 	"wedding-invitation-backend/internal/domain/models"
+	"wedding-invitation-backend/internal/domain/repository"
 )
 
-// AnalyticsRepository represents the analytics repository interface
-type AnalyticsRepository interface {
-	// Page Views
-	TrackPageView(ctx context.Context, pageView *models.PageView) error
-	GetPageViews(ctx context.Context, weddingID primitive.ObjectID, filter *models.AnalyticsFilter) ([]*models.PageView, int64, error)
-
-	// RSVP Analytics
-	TrackRSVPEvent(ctx context.Context, event *models.RSVPAnalytics) error
-	GetRSVPAnalytics(ctx context.Context, weddingID primitive.ObjectID, filter *models.AnalyticsFilter) ([]*models.RSVPAnalytics, int64, error)
-
-	// Conversion Events
-	TrackConversion(ctx context.Context, event *models.ConversionEvent) error
-	GetConversions(ctx context.Context, weddingID primitive.ObjectID, filter *models.AnalyticsFilter) ([]*models.ConversionEvent, int64, error)
-
-	// Aggregated Analytics
-	GetWeddingAnalytics(ctx context.Context, weddingID primitive.ObjectID) (*models.WeddingAnalytics, error)
-	UpdateWeddingAnalytics(ctx context.Context, weddingID primitive.ObjectID) error
-
-	// System Analytics
-	GetSystemAnalytics(ctx context.Context) (*models.SystemAnalytics, error)
-	UpdateSystemAnalytics(ctx context.Context) error
-
-	// Reports
-	GetAnalyticsSummary(ctx context.Context, weddingID primitive.ObjectID, period string) (*models.AnalyticsSummary, error)
-	GetPopularPages(ctx context.Context, weddingID primitive.ObjectID, limit int) ([]models.PageStats, error)
-	GetTrafficSources(ctx context.Context, weddingID primitive.ObjectID, limit int) ([]models.TrafficSourceStats, error)
-	GetDailyMetrics(ctx context.Context, weddingID primitive.ObjectID, startDate, endDate time.Time) ([]models.DailyMetrics, error)
-
-	// Cleanup
-	CleanupOldAnalytics(ctx context.Context, olderThan time.Time) error
-}
+// Ensure analyticsRepository implements the domain repository interface
+var _ repository.AnalyticsRepository = (*analyticsRepository)(nil)
 
 type analyticsRepository struct {
 	db               *mongo.Database
@@ -55,7 +27,7 @@ type analyticsRepository struct {
 }
 
 // NewAnalyticsRepository creates a new analytics repository
-func NewAnalyticsRepository(db *mongo.Database) AnalyticsRepository {
+func NewAnalyticsRepository(db *mongo.Database) repository.AnalyticsRepository {
 	return &analyticsRepository{
 		db:               db,
 		pageViews:        db.Collection("page_views"),
@@ -888,4 +860,18 @@ func (r *analyticsRepository) CleanupOldAnalytics(ctx context.Context, olderThan
 	}
 
 	return nil
+}
+
+// RefreshWeddingAnalytics forces a refresh of wedding-specific analytics
+func (r *analyticsRepository) RefreshWeddingAnalytics(ctx context.Context, weddingID primitive.ObjectID) error {
+	// This would typically trigger a comprehensive recalculation
+	// For now, we'll delegate to the UpdateWeddingAnalytics method
+	return r.UpdateWeddingAnalytics(ctx, weddingID)
+}
+
+// RefreshSystemAnalytics forces a refresh of system-wide analytics
+func (r *analyticsRepository) RefreshSystemAnalytics(ctx context.Context) error {
+	// This would typically trigger a comprehensive recalculation
+	// For now, we'll delegate to the UpdateSystemAnalytics method
+	return r.UpdateSystemAnalytics(ctx)
 }

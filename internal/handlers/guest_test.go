@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -41,7 +42,7 @@ func (m *MockGuestService) CreateGuest(ctx context.Context, weddingID, userID pr
 	if m.createError != nil {
 		return m.createError
 	}
-	
+
 	id := primitive.NewObjectID()
 	guest.ID = id
 	guest.WeddingID = weddingID
@@ -56,17 +57,17 @@ func (m *MockGuestService) GetGuestByID(ctx context.Context, guestID, userID pri
 	if m.getError != nil {
 		return nil, m.getError
 	}
-	
+
 	guest, exists := m.guests[guestID]
 	if !exists {
 		return nil, services.ErrGuestNotFound
 	}
-	
+
 	// Check ownership (simplified for test)
 	if guest.CreatedBy != userID {
 		return nil, services.ErrUnauthorized
 	}
-	
+
 	return guest, nil
 }
 
@@ -74,7 +75,7 @@ func (m *MockGuestService) ListGuests(ctx context.Context, weddingID, userID pri
 	if m.listError != nil {
 		return nil, 0, m.listError
 	}
-	
+
 	var guests []*models.Guest
 	for _, guest := range m.guests {
 		if guest.WeddingID == weddingID && guest.CreatedBy == userID {
@@ -84,7 +85,7 @@ func (m *MockGuestService) ListGuests(ctx context.Context, weddingID, userID pri
 			}
 		}
 	}
-	
+
 	return guests, int64(len(guests)), nil
 }
 
@@ -92,16 +93,16 @@ func (m *MockGuestService) UpdateGuest(ctx context.Context, guestID, userID prim
 	if m.updateError != nil {
 		return m.updateError
 	}
-	
+
 	existing, exists := m.guests[guestID]
 	if !exists {
 		return services.ErrGuestNotFound
 	}
-	
+
 	if existing.CreatedBy != userID {
 		return services.ErrUnauthorized
 	}
-	
+
 	guest.ID = guestID
 	guest.WeddingID = existing.WeddingID
 	guest.CreatedBy = existing.CreatedBy
@@ -115,16 +116,16 @@ func (m *MockGuestService) DeleteGuest(ctx context.Context, guestID, userID prim
 	if m.deleteError != nil {
 		return m.deleteError
 	}
-	
+
 	guest, exists := m.guests[guestID]
 	if !exists {
 		return services.ErrGuestNotFound
 	}
-	
+
 	if guest.CreatedBy != userID {
 		return services.ErrUnauthorized
 	}
-	
+
 	delete(m.guests, guestID)
 	return nil
 }
@@ -133,7 +134,7 @@ func (m *MockGuestService) CreateManyGuests(ctx context.Context, weddingID, user
 	if m.bulkCreateError != nil {
 		return m.bulkCreateError
 	}
-	
+
 	for _, guest := range guests {
 		id := primitive.NewObjectID()
 		guest.ID = id
@@ -143,7 +144,7 @@ func (m *MockGuestService) CreateManyGuests(ctx context.Context, weddingID, user
 		guest.UpdatedAt = time.Now()
 		m.guests[id] = guest
 	}
-	
+
 	return nil
 }
 
@@ -151,7 +152,7 @@ func (m *MockGuestService) ImportGuestsFromCSV(ctx context.Context, weddingID, u
 	if m.importError != nil {
 		return nil, m.importError
 	}
-	
+
 	return &models.GuestImportResult{
 		SuccessCount: 2,
 		ErrorCount:   0,
@@ -170,7 +171,7 @@ func (m *MockGuestService) GetImportBatch(ctx context.Context, weddingID, userID
 	return guests, nil
 }
 
-func setupTestRouter() *gin.Engine {
+func setupGuestTestRouter() *gin.Engine {
 	gin.SetMode(gin.TestMode)
 	return gin.New()
 }
@@ -178,7 +179,7 @@ func setupTestRouter() *gin.Engine {
 func TestGuestHandler_CreateGuest(t *testing.T) {
 	mockService := NewMockGuestService()
 	handler := NewGuestHandler(mockService)
-	router := setupTestRouter()
+	router := setupGuestTestRouter()
 
 	weddingID := primitive.NewObjectID()
 	userID := primitive.NewObjectID()
@@ -193,15 +194,15 @@ func TestGuestHandler_CreateGuest(t *testing.T) {
 
 	// Test data
 	req := CreateGuestRequest{
-		FirstName:   "John",
-		LastName:    "Doe",
-		Email:       "john@example.com",
-		Phone:       "+1234567890",
+		FirstName:    "John",
+		LastName:     "Doe",
+		Email:        "john@example.com",
+		Phone:        "+1234567890",
 		Relationship: "Friend",
-		Side:        "groom",
+		Side:         "groom",
 		AllowPlusOne: true,
 		MaxPlusOnes:  1,
-		VIP:         false,
+		VIP:          false,
 	}
 
 	reqBody, _ := json.Marshal(req)
@@ -212,7 +213,7 @@ func TestGuestHandler_CreateGuest(t *testing.T) {
 	router.ServeHTTP(w, reqHTTP)
 
 	assert.Equal(t, http.StatusCreated, w.Code)
-	
+
 	var response map[string]interface{}
 	err := json.Unmarshal(w.Body.Bytes(), &response)
 	require.NoError(t, err)
@@ -223,7 +224,7 @@ func TestGuestHandler_CreateGuest(t *testing.T) {
 func TestGuestHandler_CreateGuest_ValidationError(t *testing.T) {
 	mockService := NewMockGuestService()
 	handler := NewGuestHandler(mockService)
-	router := setupTestRouter()
+	router := setupGuestTestRouter()
 
 	weddingID := primitive.NewObjectID()
 	userID := primitive.NewObjectID()
@@ -249,7 +250,7 @@ func TestGuestHandler_CreateGuest_ValidationError(t *testing.T) {
 	router.ServeHTTP(w, reqHTTP)
 
 	assert.Equal(t, http.StatusBadRequest, w.Code)
-	
+
 	var response map[string]interface{}
 	err := json.Unmarshal(w.Body.Bytes(), &response)
 	require.NoError(t, err)
@@ -259,7 +260,7 @@ func TestGuestHandler_CreateGuest_ValidationError(t *testing.T) {
 func TestGuestHandler_GetGuest(t *testing.T) {
 	mockService := NewMockGuestService()
 	handler := NewGuestHandler(mockService)
-	router := setupTestRouter()
+	router := setupGuestTestRouter()
 
 	weddingID := primitive.NewObjectID()
 	userID := primitive.NewObjectID()
@@ -287,12 +288,12 @@ func TestGuestHandler_GetGuest(t *testing.T) {
 	router.ServeHTTP(w, reqHTTP)
 
 	assert.Equal(t, http.StatusOK, w.Code)
-	
+
 	var response map[string]interface{}
 	err := json.Unmarshal(w.Body.Bytes(), &response)
 	require.NoError(t, err)
 	assert.NotNil(t, response["data"])
-	
+
 	data := response["data"].(map[string]interface{})
 	assert.Equal(t, "John", data["first_name"])
 	assert.Equal(t, "Doe", data["last_name"])
@@ -301,7 +302,7 @@ func TestGuestHandler_GetGuest(t *testing.T) {
 func TestGuestHandler_GetGuest_NotFound(t *testing.T) {
 	mockService := NewMockGuestService()
 	handler := NewGuestHandler(mockService)
-	router := setupTestRouter()
+	router := setupGuestTestRouter()
 
 	userID := primitive.NewObjectID()
 
@@ -319,7 +320,7 @@ func TestGuestHandler_GetGuest_NotFound(t *testing.T) {
 	router.ServeHTTP(w, reqHTTP)
 
 	assert.Equal(t, http.StatusNotFound, w.Code)
-	
+
 	var response map[string]interface{}
 	err := json.Unmarshal(w.Body.Bytes(), &response)
 	require.NoError(t, err)
@@ -329,7 +330,7 @@ func TestGuestHandler_GetGuest_NotFound(t *testing.T) {
 func TestGuestHandler_ListGuests(t *testing.T) {
 	mockService := NewMockGuestService()
 	handler := NewGuestHandler(mockService)
-	router := setupTestRouter()
+	router := setupGuestTestRouter()
 
 	weddingID := primitive.NewObjectID()
 	userID := primitive.NewObjectID()
@@ -358,12 +359,12 @@ func TestGuestHandler_ListGuests(t *testing.T) {
 	router.ServeHTTP(w, reqHTTP)
 
 	assert.Equal(t, http.StatusOK, w.Code)
-	
+
 	var response map[string]interface{}
 	err := json.Unmarshal(w.Body.Bytes(), &response)
 	require.NoError(t, err)
 	assert.NotNil(t, response["data"])
-	
+
 	data := response["data"].(map[string]interface{})
 	assert.Equal(t, float64(2), data["total"])
 	assert.Equal(t, float64(1), data["page"])
@@ -373,7 +374,7 @@ func TestGuestHandler_ListGuests(t *testing.T) {
 func TestGuestHandler_UpdateGuest(t *testing.T) {
 	mockService := NewMockGuestService()
 	handler := NewGuestHandler(mockService)
-	router := setupTestRouter()
+	router := setupGuestTestRouter()
 
 	weddingID := primitive.NewObjectID()
 	userID := primitive.NewObjectID()
@@ -396,9 +397,11 @@ func TestGuestHandler_UpdateGuest(t *testing.T) {
 	router.PUT("/guests/:id", handler.UpdateGuest)
 
 	// Update request
+	updated := "Updated"
+	name := "Name"
 	req := UpdateGuestRequest{
-		FirstName: "Updated",
-		LastName:  "Name",
+		FirstName: &updated,
+		LastName:  &name,
 	}
 
 	reqBody, _ := json.Marshal(req)
@@ -409,7 +412,7 @@ func TestGuestHandler_UpdateGuest(t *testing.T) {
 	router.ServeHTTP(w, reqHTTP)
 
 	assert.Equal(t, http.StatusOK, w.Code)
-	
+
 	var response map[string]interface{}
 	err := json.Unmarshal(w.Body.Bytes(), &response)
 	require.NoError(t, err)
@@ -419,7 +422,7 @@ func TestGuestHandler_UpdateGuest(t *testing.T) {
 func TestGuestHandler_DeleteGuest(t *testing.T) {
 	mockService := NewMockGuestService()
 	handler := NewGuestHandler(mockService)
-	router := setupTestRouter()
+	router := setupGuestTestRouter()
 
 	weddingID := primitive.NewObjectID()
 	userID := primitive.NewObjectID()
@@ -447,7 +450,7 @@ func TestGuestHandler_DeleteGuest(t *testing.T) {
 	router.ServeHTTP(w, reqHTTP)
 
 	assert.Equal(t, http.StatusOK, w.Code)
-	
+
 	var response map[string]interface{}
 	err := json.Unmarshal(w.Body.Bytes(), &response)
 	require.NoError(t, err)
@@ -457,7 +460,7 @@ func TestGuestHandler_DeleteGuest(t *testing.T) {
 func TestGuestHandler_BulkCreateGuests(t *testing.T) {
 	mockService := NewMockGuestService()
 	handler := NewGuestHandler(mockService)
-	router := setupTestRouter()
+	router := setupGuestTestRouter()
 
 	weddingID := primitive.NewObjectID()
 	userID := primitive.NewObjectID()
@@ -486,12 +489,12 @@ func TestGuestHandler_BulkCreateGuests(t *testing.T) {
 	router.ServeHTTP(w, reqHTTP)
 
 	assert.Equal(t, http.StatusCreated, w.Code)
-	
+
 	var response map[string]interface{}
 	err := json.Unmarshal(w.Body.Bytes(), &response)
 	require.NoError(t, err)
 	assert.Equal(t, "Guests created successfully", response["message"])
-	
+
 	data := response["data"].(map[string]interface{})
 	assert.Equal(t, float64(2), data["created_count"])
 }

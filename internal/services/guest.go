@@ -14,6 +14,17 @@ import (
 	"wedding-invitation-backend/internal/domain/repository"
 )
 
+// GuestServiceInterface defines the contract for guest service operations
+type GuestServiceInterface interface {
+	CreateGuest(ctx context.Context, weddingID, userID primitive.ObjectID, guest *models.Guest) error
+	GetGuestByID(ctx context.Context, guestID, userID primitive.ObjectID) (*models.Guest, error)
+	ListGuests(ctx context.Context, weddingID, userID primitive.ObjectID, page, pageSize int, filters repository.GuestFilters) ([]*models.Guest, int64, error)
+	UpdateGuest(ctx context.Context, guestID, userID primitive.ObjectID, guest *models.Guest) error
+	DeleteGuest(ctx context.Context, guestID, userID primitive.ObjectID) error
+	CreateManyGuests(ctx context.Context, weddingID, userID primitive.ObjectID, guests []*models.Guest) error
+	ImportGuestsFromCSV(ctx context.Context, weddingID, userID primitive.ObjectID, csvData io.Reader) (*models.GuestImportResult, error)
+}
+
 // GuestService handles guest-related business logic
 type GuestService struct {
 	guestRepo   repository.GuestRepository

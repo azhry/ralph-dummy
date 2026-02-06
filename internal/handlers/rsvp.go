@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"context"
 	"net/http"
 	"strconv"
 
@@ -40,19 +39,19 @@ func NewRSVPHandler(rsvpService *services.RSVPService) *RSVPHandler {
 func (h *RSVPHandler) SubmitRSVP(c *gin.Context) {
 	weddingID, err := primitive.ObjectIDFromHex(c.Param("id"))
 	if err != nil {
-		c.JSON(http.StatusBadRequest, ErrorResponse{Error: "Invalid wedding ID"})
+		utils.ErrorResponse(c, http.StatusBadRequest, "Invalid wedding ID")
 		return
 	}
 
 	var req services.SubmitRSVPRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusBadRequest, ErrorResponse{Error: "Invalid request body: " + err.Error()})
+		utils.ErrorResponse(c, http.StatusBadRequest, "Invalid request body: "+err.Error())
 		return
 	}
 
 	// Validate request
 	if err := utils.ValidateStruct(&req); err != nil {
-		c.JSON(http.StatusBadRequest, ErrorResponse{Error: err.Error()})
+		utils.ErrorResponse(c, http.StatusBadRequest, err.Error())
 		return
 	}
 
@@ -65,27 +64,27 @@ func (h *RSVPHandler) SubmitRSVP(c *gin.Context) {
 	if err != nil {
 		switch err {
 		case services.ErrWeddingNotFound:
-			c.JSON(http.StatusNotFound, ErrorResponse{Error: "Wedding not found"})
+			utils.ErrorResponse(c, http.StatusNotFound, "Wedding not found")
 			return
 		case services.ErrRSVPClosed:
-			c.JSON(http.StatusUnprocessableEntity, ErrorResponse{Error: "RSVP is not open for this wedding"})
+			utils.ErrorResponse(c, http.StatusUnprocessableEntity, "RSVP is not open for this wedding")
 			return
 		case services.ErrInvalidRSVPStatus:
-			c.JSON(http.StatusBadRequest, ErrorResponse{Error: "Invalid RSVP status"})
+			utils.ErrorResponse(c, http.StatusBadRequest, "Invalid RSVP status")
 			return
 		case services.ErrDuplicateRSVP:
-			c.JSON(http.StatusConflict, ErrorResponse{Error: "RSVP already submitted for this email"})
+			utils.ErrorResponse(c, http.StatusConflict, "RSVP already submitted for this email")
 			return
 		case services.ErrTooManyPlusOnes:
-			c.JSON(http.StatusBadRequest, ErrorResponse{Error: "Too many plus ones"})
+			utils.ErrorResponse(c, http.StatusBadRequest, "Too many plus ones")
 			return
 		default:
-			c.JSON(http.StatusInternalServerError, ErrorResponse{Error: "Failed to submit RSVP"})
+			utils.ErrorResponse(c, http.StatusInternalServerError, "Failed to submit RSVP")
 			return
 		}
 	}
 
-	c.JSON(http.StatusCreated, gin.H{"data": rsvp})
+	utils.Response(c, http.StatusCreated, rsvp)
 }
 
 // GetRSVPs godoc
@@ -108,20 +107,14 @@ func (h *RSVPHandler) SubmitRSVP(c *gin.Context) {
 func (h *RSVPHandler) GetRSVPs(c *gin.Context) {
 	weddingID, err := primitive.ObjectIDFromHex(c.Param("id"))
 	if err != nil {
-		c.JSON(http.StatusBadRequest, ErrorResponse{Error: "Invalid wedding ID"})
+		utils.ErrorResponse(c, http.StatusBadRequest, "Invalid wedding ID")
 		return
 	}
 
 	// Get user ID from context (should be set by auth middleware)
-	userIDStr, exists := c.Get("user_id")
-	if !exists {
-		c.JSON(http.StatusUnauthorized, ErrorResponse{Error: "User not authenticated"})
-		return
-	}
-
-	userID, err := primitive.ObjectIDFromHex(userIDStr.(string))
+	userID, err := utils.GetUserIDFromContext(c)
 	if err != nil {
-		c.JSON(http.StatusUnauthorized, ErrorResponse{Error: "Invalid user ID"})
+		utils.ErrorResponse(c, http.StatusUnauthorized, "User not authenticated")
 		return
 	}
 
@@ -147,13 +140,13 @@ func (h *RSVPHandler) GetRSVPs(c *gin.Context) {
 	if err != nil {
 		switch err {
 		case services.ErrWeddingNotFound:
-			c.JSON(http.StatusNotFound, ErrorResponse{Error: "Wedding not found"})
+			utils.ErrorResponse(c, http.StatusNotFound, "Wedding not found")
 			return
 		case services.ErrUnauthorized:
-			c.JSON(http.StatusForbidden, ErrorResponse{Error: "Not authorized to view RSVPs for this wedding"})
+			utils.ErrorResponse(c, http.StatusForbidden, "Not authorized to view RSVPs for this wedding")
 			return
 		default:
-			c.JSON(http.StatusInternalServerError, ErrorResponse{Error: "Failed to get RSVPs"})
+			utils.ErrorResponse(c, http.StatusInternalServerError, "Failed to get RSVPs")
 			return
 		}
 	}
@@ -182,20 +175,20 @@ func (h *RSVPHandler) GetRSVPs(c *gin.Context) {
 func (h *RSVPHandler) GetRSVPStatistics(c *gin.Context) {
 	weddingID, err := primitive.ObjectIDFromHex(c.Param("id"))
 	if err != nil {
-		c.JSON(http.StatusBadRequest, ErrorResponse{Error: "Invalid wedding ID"})
+		utils.ErrorResponse(c, http.StatusBadRequest, "Invalid wedding ID")
 		return
 	}
 
 	// Get user ID from context
 	userIDStr, exists := c.Get("user_id")
 	if !exists {
-		c.JSON(http.StatusUnauthorized, ErrorResponse{Error: "User not authenticated"})
+		utils.ErrorResponse(c, http.StatusUnauthorized, "User not authenticated")
 		return
 	}
 
 	userID, err := primitive.ObjectIDFromHex(userIDStr.(string))
 	if err != nil {
-		c.JSON(http.StatusUnauthorized, ErrorResponse{Error: "Invalid user ID"})
+		utils.ErrorResponse(c, http.StatusUnauthorized, "Invalid user ID")
 		return
 	}
 
@@ -203,13 +196,13 @@ func (h *RSVPHandler) GetRSVPStatistics(c *gin.Context) {
 	if err != nil {
 		switch err {
 		case services.ErrWeddingNotFound:
-			c.JSON(http.StatusNotFound, ErrorResponse{Error: "Wedding not found"})
+			utils.ErrorResponse(c, http.StatusNotFound, "Wedding not found")
 			return
 		case services.ErrUnauthorized:
-			c.JSON(http.StatusForbidden, ErrorResponse{Error: "Not authorized to view statistics for this wedding"})
+			utils.ErrorResponse(c, http.StatusForbidden, "Not authorized to view statistics for this wedding")
 			return
 		default:
-			c.JSON(http.StatusInternalServerError, ErrorResponse{Error: "Failed to get RSVP statistics"})
+			utils.ErrorResponse(c, http.StatusInternalServerError, "Failed to get RSVP statistics")
 			return
 		}
 	}
@@ -235,19 +228,19 @@ func (h *RSVPHandler) GetRSVPStatistics(c *gin.Context) {
 func (h *RSVPHandler) UpdateRSVP(c *gin.Context) {
 	rsvpID, err := primitive.ObjectIDFromHex(c.Param("id"))
 	if err != nil {
-		c.JSON(http.StatusBadRequest, ErrorResponse{Error: "Invalid RSVP ID"})
+		utils.ErrorResponse(c, http.StatusBadRequest, "Invalid RSVP ID")
 		return
 	}
 
 	var req services.UpdateRSVPRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusBadRequest, ErrorResponse{Error: "Invalid request body: " + err.Error()})
+		utils.ErrorResponse(c, http.StatusBadRequest, "Invalid request body: "+err.Error())
 		return
 	}
 
 	// Validate request
 	if err := utils.ValidateStruct(&req); err != nil {
-		c.JSON(http.StatusBadRequest, ErrorResponse{Error: err.Error()})
+		utils.ErrorResponse(c, http.StatusBadRequest, err.Error())
 		return
 	}
 
@@ -255,19 +248,19 @@ func (h *RSVPHandler) UpdateRSVP(c *gin.Context) {
 	if err != nil {
 		switch err {
 		case services.ErrRSVPNotFound:
-			c.JSON(http.StatusNotFound, ErrorResponse{Error: "RSVP not found"})
+			utils.ErrorResponse(c, http.StatusNotFound, "RSVP not found")
 			return
 		case services.ErrRSVPCannotModify:
-			c.JSON(http.StatusUnprocessableEntity, ErrorResponse{Error: "RSVP cannot be modified after 24 hours"})
+			utils.ErrorResponse(c, http.StatusUnprocessableEntity, "RSVP cannot be modified after 24 hours")
 			return
 		case services.ErrInvalidRSVPStatus:
-			c.JSON(http.StatusBadRequest, ErrorResponse{Error: "Invalid RSVP status"})
+			utils.ErrorResponse(c, http.StatusBadRequest, "Invalid RSVP status")
 			return
 		case services.ErrTooManyPlusOnes:
-			c.JSON(http.StatusBadRequest, ErrorResponse{Error: "Too many plus ones"})
+			utils.ErrorResponse(c, http.StatusBadRequest, "Too many plus ones")
 			return
 		default:
-			c.JSON(http.StatusInternalServerError, ErrorResponse{Error: "Failed to update RSVP"})
+			utils.ErrorResponse(c, http.StatusInternalServerError, "Failed to update RSVP")
 			return
 		}
 	}
@@ -290,20 +283,20 @@ func (h *RSVPHandler) UpdateRSVP(c *gin.Context) {
 func (h *RSVPHandler) DeleteRSVP(c *gin.Context) {
 	rsvpID, err := primitive.ObjectIDFromHex(c.Param("id"))
 	if err != nil {
-		c.JSON(http.StatusBadRequest, ErrorResponse{Error: "Invalid RSVP ID"})
+		utils.ErrorResponse(c, http.StatusBadRequest, "Invalid RSVP ID")
 		return
 	}
 
 	// Get user ID from context
 	userIDStr, exists := c.Get("user_id")
 	if !exists {
-		c.JSON(http.StatusUnauthorized, ErrorResponse{Error: "User not authenticated"})
+		utils.ErrorResponse(c, http.StatusUnauthorized, "User not authenticated")
 		return
 	}
 
 	userID, err := primitive.ObjectIDFromHex(userIDStr.(string))
 	if err != nil {
-		c.JSON(http.StatusUnauthorized, ErrorResponse{Error: "Invalid user ID"})
+		utils.ErrorResponse(c, http.StatusUnauthorized, "Invalid user ID")
 		return
 	}
 
@@ -311,13 +304,13 @@ func (h *RSVPHandler) DeleteRSVP(c *gin.Context) {
 	if err != nil {
 		switch err {
 		case services.ErrRSVPNotFound:
-			c.JSON(http.StatusNotFound, ErrorResponse{Error: "RSVP not found"})
+			utils.ErrorResponse(c, http.StatusNotFound, "RSVP not found")
 			return
 		case services.ErrUnauthorized:
-			c.JSON(http.StatusForbidden, ErrorResponse{Error: "Not authorized to delete this RSVP"})
+			utils.ErrorResponse(c, http.StatusForbidden, "Not authorized to delete this RSVP")
 			return
 		default:
-			c.JSON(http.StatusInternalServerError, ErrorResponse{Error: "Failed to delete RSVP"})
+			utils.ErrorResponse(c, http.StatusInternalServerError, "Failed to delete RSVP")
 			return
 		}
 	}
@@ -340,20 +333,20 @@ func (h *RSVPHandler) DeleteRSVP(c *gin.Context) {
 func (h *RSVPHandler) ExportRSVPs(c *gin.Context) {
 	weddingID, err := primitive.ObjectIDFromHex(c.Param("id"))
 	if err != nil {
-		c.JSON(http.StatusBadRequest, ErrorResponse{Error: "Invalid wedding ID"})
+		utils.ErrorResponse(c, http.StatusBadRequest, "Invalid wedding ID")
 		return
 	}
 
 	// Get user ID from context
 	userIDStr, exists := c.Get("user_id")
 	if !exists {
-		c.JSON(http.StatusUnauthorized, ErrorResponse{Error: "User not authenticated"})
+		utils.ErrorResponse(c, http.StatusUnauthorized, "User not authenticated")
 		return
 	}
 
 	userID, err := primitive.ObjectIDFromHex(userIDStr.(string))
 	if err != nil {
-		c.JSON(http.StatusUnauthorized, ErrorResponse{Error: "Invalid user ID"})
+		utils.ErrorResponse(c, http.StatusUnauthorized, "Invalid user ID")
 		return
 	}
 
@@ -361,13 +354,13 @@ func (h *RSVPHandler) ExportRSVPs(c *gin.Context) {
 	if err != nil {
 		switch err {
 		case services.ErrWeddingNotFound:
-			c.JSON(http.StatusNotFound, ErrorResponse{Error: "Wedding not found"})
+			utils.ErrorResponse(c, http.StatusNotFound, "Wedding not found")
 			return
 		case services.ErrUnauthorized:
-			c.JSON(http.StatusForbidden, ErrorResponse{Error: "Not authorized to export RSVPs for this wedding"})
+			utils.ErrorResponse(c, http.StatusForbidden, "Not authorized to export RSVPs for this wedding")
 			return
 		default:
-			c.JSON(http.StatusInternalServerError, ErrorResponse{Error: "Failed to export RSVPs"})
+			utils.ErrorResponse(c, http.StatusInternalServerError, "Failed to export RSVPs")
 			return
 		}
 	}
