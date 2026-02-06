@@ -2,6 +2,7 @@ package services
 
 import (
 	"context"
+	"time"
 	"wedding-invitation-backend/internal/domain/models"
 	"wedding-invitation-backend/internal/domain/repository"
 
@@ -67,6 +68,105 @@ func (m *MockWeddingRepository) IncrementViewCount(ctx context.Context, id primi
 
 func (m *MockWeddingRepository) UpdateRSVPCount(ctx context.Context, weddingID primitive.ObjectID) error {
 	args := m.Called(ctx, weddingID)
+	return args.Error(0)
+}
+
+// MockAnalyticsRepository is a mock implementation of AnalyticsRepository
+type MockAnalyticsRepository struct {
+	mock.Mock
+}
+
+func (m *MockAnalyticsRepository) TrackPageView(ctx context.Context, pageView *models.PageView) error {
+	args := m.Called(ctx, pageView)
+	return args.Error(0)
+}
+
+func (m *MockAnalyticsRepository) GetPageViews(ctx context.Context, weddingID primitive.ObjectID, filter *models.AnalyticsFilter) ([]*models.PageView, int64, error) {
+	args := m.Called(ctx, weddingID, filter)
+	return args.Get(0).([]*models.PageView), args.Get(1).(int64), args.Error(2)
+}
+
+func (m *MockAnalyticsRepository) TrackRSVPEvent(ctx context.Context, event *models.RSVPAnalytics) error {
+	args := m.Called(ctx, event)
+	return args.Error(0)
+}
+
+func (m *MockAnalyticsRepository) GetRSVPAnalytics(ctx context.Context, weddingID primitive.ObjectID, filter *models.AnalyticsFilter) ([]*models.RSVPAnalytics, int64, error) {
+	args := m.Called(ctx, weddingID, filter)
+	return args.Get(0).([]*models.RSVPAnalytics), args.Get(1).(int64), args.Error(2)
+}
+
+func (m *MockAnalyticsRepository) TrackConversion(ctx context.Context, event *models.ConversionEvent) error {
+	args := m.Called(ctx, event)
+	return args.Error(0)
+}
+
+func (m *MockAnalyticsRepository) GetConversions(ctx context.Context, weddingID primitive.ObjectID, filter *models.AnalyticsFilter) ([]*models.ConversionEvent, int64, error) {
+	args := m.Called(ctx, weddingID, filter)
+	return args.Get(0).([]*models.ConversionEvent), args.Get(1).(int64), args.Error(2)
+}
+
+func (m *MockAnalyticsRepository) GetWeddingAnalytics(ctx context.Context, weddingID primitive.ObjectID) (*models.WeddingAnalytics, error) {
+	args := m.Called(ctx, weddingID)
+	if args.Get(0) == nil {
+		return nil, args.Error(1)
+	}
+	return args.Get(0).(*models.WeddingAnalytics), args.Error(1)
+}
+
+func (m *MockAnalyticsRepository) UpdateWeddingAnalytics(ctx context.Context, weddingID primitive.ObjectID) error {
+	args := m.Called(ctx, weddingID)
+	return args.Error(0)
+}
+
+func (m *MockAnalyticsRepository) RefreshWeddingAnalytics(ctx context.Context, weddingID primitive.ObjectID) error {
+	args := m.Called(ctx, weddingID)
+	return args.Error(0)
+}
+
+func (m *MockAnalyticsRepository) GetSystemAnalytics(ctx context.Context) (*models.SystemAnalytics, error) {
+	args := m.Called(ctx)
+	if args.Get(0) == nil {
+		return nil, args.Error(1)
+	}
+	return args.Get(0).(*models.SystemAnalytics), args.Error(1)
+}
+
+func (m *MockAnalyticsRepository) UpdateSystemAnalytics(ctx context.Context) error {
+	args := m.Called(ctx)
+	return args.Error(0)
+}
+
+func (m *MockAnalyticsRepository) RefreshSystemAnalytics(ctx context.Context) error {
+	args := m.Called(ctx)
+	return args.Error(0)
+}
+
+func (m *MockAnalyticsRepository) GetAnalyticsSummary(ctx context.Context, weddingID primitive.ObjectID, period string) (*models.AnalyticsSummary, error) {
+	args := m.Called(ctx, weddingID, period)
+	if args.Get(0) == nil {
+		return nil, args.Error(1)
+	}
+	return args.Get(0).(*models.AnalyticsSummary), args.Error(1)
+}
+
+func (m *MockAnalyticsRepository) GetPopularPages(ctx context.Context, weddingID primitive.ObjectID, limit int) ([]models.PageStats, error) {
+	args := m.Called(ctx, weddingID, limit)
+	return args.Get(0).([]models.PageStats), args.Error(1)
+}
+
+func (m *MockAnalyticsRepository) GetTrafficSources(ctx context.Context, weddingID primitive.ObjectID, limit int) ([]models.TrafficSourceStats, error) {
+	args := m.Called(ctx, weddingID, limit)
+	return args.Get(0).([]models.TrafficSourceStats), args.Error(1)
+}
+
+func (m *MockAnalyticsRepository) GetDailyMetrics(ctx context.Context, weddingID primitive.ObjectID, startDate, endDate time.Time) ([]models.DailyMetrics, error) {
+	args := m.Called(ctx, weddingID, startDate, endDate)
+	return args.Get(0).([]models.DailyMetrics), args.Error(1)
+}
+
+func (m *MockAnalyticsRepository) CleanupOldAnalytics(ctx context.Context, olderThan time.Time) error {
+	args := m.Called(ctx, olderThan)
 	return args.Error(0)
 }
 

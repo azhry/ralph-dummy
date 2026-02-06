@@ -2,7 +2,6 @@ package services
 
 import (
 	"context"
-	"net/http"
 	"net/http/httptest"
 	"testing"
 	"time"
@@ -14,12 +13,11 @@ import (
 	"go.uber.org/zap/zaptest"
 
 	"wedding-invitation-backend/internal/domain/models"
-	repoMocks "wedding-invitation-backend/test/mocks/repository"
 )
 
 func TestAnalyticsService_TrackPageView(t *testing.T) {
-	analyticsRepo := &repoMocks.MockAnalyticsRepository{}
-	weddingRepo := &repoMocks.MockWeddingRepository{}
+	analyticsRepo := &MockAnalyticsRepository{}
+	weddingRepo := &MockWeddingRepository{}
 	logger := zaptest.NewLogger(t)
 
 	service := NewAnalyticsService(analyticsRepo, weddingRepo, logger)
@@ -99,8 +97,8 @@ func TestAnalyticsService_TrackPageView(t *testing.T) {
 }
 
 func TestAnalyticsService_TrackRSVPSubmission(t *testing.T) {
-	analyticsRepo := &repoMocks.MockAnalyticsRepository{}
-	weddingRepo := &repoMocks.MockWeddingRepository{}
+	analyticsRepo := &MockAnalyticsRepository{}
+	weddingRepo := &MockWeddingRepository{}
 	logger := zaptest.NewLogger(t)
 
 	service := NewAnalyticsService(analyticsRepo, weddingRepo, logger)
@@ -150,8 +148,8 @@ func TestAnalyticsService_TrackRSVPSubmission(t *testing.T) {
 }
 
 func TestAnalyticsService_TrackRSVPAbandonment(t *testing.T) {
-	analyticsRepo := &repoMocks.MockAnalyticsRepository{}
-	weddingRepo := &repoMocks.MockWeddingRepository{}
+	analyticsRepo := &MockAnalyticsRepository{}
+	weddingRepo := &MockWeddingRepository{}
 	logger := zaptest.NewLogger(t)
 
 	service := NewAnalyticsService(analyticsRepo, weddingRepo, logger)
@@ -198,8 +196,8 @@ func TestAnalyticsService_TrackRSVPAbandonment(t *testing.T) {
 }
 
 func TestAnalyticsService_TrackConversion(t *testing.T) {
-	analyticsRepo := &repoMocks.MockAnalyticsRepository{}
-	weddingRepo := &repoMocks.MockWeddingRepository{}
+	analyticsRepo := &MockAnalyticsRepository{}
+	weddingRepo := &MockWeddingRepository{}
 	logger := zaptest.NewLogger(t)
 
 	service := NewAnalyticsService(analyticsRepo, weddingRepo, logger)
@@ -244,8 +242,8 @@ func TestAnalyticsService_TrackConversion(t *testing.T) {
 }
 
 func TestAnalyticsService_GetWeddingAnalytics(t *testing.T) {
-	analyticsRepo := &repoMocks.MockAnalyticsRepository{}
-	weddingRepo := &repoMocks.MockWeddingRepository{}
+	analyticsRepo := &MockAnalyticsRepository{}
+	weddingRepo := &MockWeddingRepository{}
 	logger := zaptest.NewLogger(t)
 
 	service := NewAnalyticsService(analyticsRepo, weddingRepo, logger)
@@ -254,12 +252,12 @@ func TestAnalyticsService_GetWeddingAnalytics(t *testing.T) {
 	weddingID := primitive.NewObjectID()
 
 	expectedAnalytics := &models.WeddingAnalytics{
-		WeddingID:       weddingID,
-		PageViews:       100,
-		UniqueSessions:  50,
-		RSVPCount:       25,
-		ConversionRate:  25.0,
-		LastUpdated:     time.Now(),
+		WeddingID:      weddingID,
+		PageViews:      100,
+		UniqueSessions: 50,
+		RSVPCount:      25,
+		ConversionRate: 25.0,
+		LastUpdated:    time.Now(),
 	}
 
 	t.Run("Success", func(t *testing.T) {
@@ -284,8 +282,8 @@ func TestAnalyticsService_GetWeddingAnalytics(t *testing.T) {
 }
 
 func TestAnalyticsService_GetSystemAnalytics(t *testing.T) {
-	analyticsRepo := &repoMocks.MockAnalyticsRepository{}
-	weddingRepo := &repoMocks.MockWeddingRepository{}
+	analyticsRepo := &MockAnalyticsRepository{}
+	weddingRepo := &MockWeddingRepository{}
 	logger := zaptest.NewLogger(t)
 
 	service := NewAnalyticsService(analyticsRepo, weddingRepo, logger)
@@ -328,8 +326,8 @@ func TestAnalyticsService_GetSystemAnalytics(t *testing.T) {
 }
 
 func TestAnalyticsService_RefreshWeddingAnalytics(t *testing.T) {
-	analyticsRepo := &repoMocks.MockAnalyticsRepository{}
-	weddingRepo := &repoMocks.MockWeddingRepository{}
+	analyticsRepo := &MockAnalyticsRepository{}
+	weddingRepo := &MockWeddingRepository{}
 	logger := zaptest.NewLogger(t)
 
 	service := NewAnalyticsService(analyticsRepo, weddingRepo, logger)
@@ -357,8 +355,8 @@ func TestAnalyticsService_RefreshWeddingAnalytics(t *testing.T) {
 }
 
 func TestAnalyticsService_RefreshSystemAnalytics(t *testing.T) {
-	analyticsRepo := &repoMocks.MockAnalyticsRepository{}
-	weddingRepo := &repoMocks.MockWeddingRepository{}
+	analyticsRepo := &MockAnalyticsRepository{}
+	weddingRepo := &MockWeddingRepository{}
 	logger := zaptest.NewLogger(t)
 
 	service := NewAnalyticsService(analyticsRepo, weddingRepo, logger)
@@ -385,8 +383,8 @@ func TestAnalyticsService_RefreshSystemAnalytics(t *testing.T) {
 }
 
 func TestAnalyticsService_CleanupOldAnalytics(t *testing.T) {
-	analyticsRepo := &repoMocks.MockAnalyticsRepository{}
-	weddingRepo := &repoMocks.MockWeddingRepository{}
+	analyticsRepo := &MockAnalyticsRepository{}
+	weddingRepo := &MockWeddingRepository{}
 	logger := zaptest.NewLogger(t)
 
 	service := NewAnalyticsService(analyticsRepo, weddingRepo, logger)
@@ -414,8 +412,8 @@ func TestAnalyticsService_CleanupOldAnalytics(t *testing.T) {
 }
 
 func TestAnalyticsService_GetAnalyticsSummary(t *testing.T) {
-	analyticsRepo := &repoMocks.MockAnalyticsRepository{}
-	weddingRepo := &repoMocks.MockWeddingRepository{}
+	analyticsRepo := &MockAnalyticsRepository{}
+	weddingRepo := &MockWeddingRepository{}
 	logger := zaptest.NewLogger(t)
 
 	service := NewAnalyticsService(analyticsRepo, weddingRepo, logger)
@@ -536,11 +534,11 @@ func TestAnalyticsService_HelperMethods(t *testing.T) {
 
 	t.Run("SanitizeCustomData", func(t *testing.T) {
 		input := map[string]interface{}{
-			"valid_key":     "valid_value",
-			"invalid key!":  "value1",
-			"key@special":   "value2",
+			"valid_key":    "valid_value",
+			"invalid key!": "value1",
+			"key@special":  "value2",
 			"very_long_key_name_that_exceeds_fifty_characters_limit": "short_value",
-			"normal_key":    "very_long_value_that_exceeds_two_hundred_characters_limit_and_should_be_truncated_to_exactly_two_hundred_characters" + string(make([]byte, 50, 50)),
+			"normal_key": "very_long_value_that_exceeds_two_hundred_characters_limit_and_should_be_truncated_to_exactly_two_hundred_characters" + string(make([]byte, 50, 50)),
 		}
 
 		result := service.SanitizeCustomData(input)
@@ -554,10 +552,10 @@ func TestAnalyticsService_HelperMethods(t *testing.T) {
 
 	t.Run("ParseUserAgent", func(t *testing.T) {
 		testCases := []struct {
-			userAgent        string
-			expectedDevice   string
-			expectedBrowser  string
-			expectedOS       string
+			userAgent       string
+			expectedDevice  string
+			expectedBrowser string
+			expectedOS      string
 		}{
 			{"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36", "desktop", "chrome", "windows"},
 			{"Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Mobile/15E148 Safari/604.1", "mobile", "safari", "ios"},
@@ -577,10 +575,10 @@ func TestAnalyticsService_HelperMethods(t *testing.T) {
 
 	t.Run("GetClientIP", func(t *testing.T) {
 		testCases := []struct {
-			name           string
-			headers        map[string]string
-			remoteAddr     string
-			expectedIP     string
+			name       string
+			headers    map[string]string
+			remoteAddr string
+			expectedIP string
 		}{
 			{
 				name: "X-Forwarded-For header",
