@@ -44,12 +44,14 @@ func TestUploadIntegration(t *testing.T) {
 
 	// Add upload routes
 	v1 := router.Group("/api/v1")
+	protected := v1.Group("/")
 	{
-		v1.POST("/upload/single", uploadHandler.HandleSingleUpload)
-		v1.POST("/upload/presign", uploadHandler.HandlePresignURL)
-		v1.GET("/media/:id", uploadHandler.HandleGetMedia)
-		v1.GET("/media", uploadHandler.HandleListMedia)
-		v1.DELETE("/media/:id", uploadHandler.HandleDeleteMedia)
+		protected.POST("/upload/single", uploadHandler.HandleSingleUpload)
+		protected.POST("/upload/presign", uploadHandler.HandlePresignURL)
+		protected.POST("/upload/confirm", uploadHandler.HandleConfirmUpload)
+		protected.GET("/media/:id", uploadHandler.HandleGetMedia)
+		protected.GET("/media", uploadHandler.HandleListMedia)
+		protected.DELETE("/media/:id", uploadHandler.HandleDeleteMedia)
 	}
 
 	userID := primitive.NewObjectID()
