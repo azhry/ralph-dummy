@@ -14,12 +14,12 @@ import (
 
 // PublicHandler handles public wedding operations
 type PublicHandler struct {
-	weddingService *services.WeddingService
-	rsvpService    *services.RSVPService
+	weddingService services.PublicWeddingService
+	rsvpService    services.PublicRSVPService
 }
 
 // NewPublicHandler creates a new public handler
-func NewPublicHandler(weddingService *services.WeddingService, rsvpService *services.RSVPService) *PublicHandler {
+func NewPublicHandler(weddingService services.PublicWeddingService, rsvpService services.PublicRSVPService) *PublicHandler {
 	return &PublicHandler{
 		weddingService: weddingService,
 		rsvpService:    rsvpService,
