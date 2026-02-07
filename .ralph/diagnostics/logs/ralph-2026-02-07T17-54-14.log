@@ -1,0 +1,100 @@
+2026-02-07T17:54:14.424686Z DEBUG ralph_core::config: Loading configuration from file path=ralph.yml
+2026-02-07T17:54:14.424839Z DEBUG ralph_core::config: Configuration loaded backend=opencode has_v1_fields=false custom_hats=0
+2026-02-07T17:54:14.424864Z DEBUG keyring: creating entry with service ralph, user telegram-bot-token, and no target
+2026-02-07T17:54:14.424880Z DEBUG keyring: created entry KeyutilsCredential { session: KeyRing { id: KeySerialId(216265051) }, persistent: Some(KeyRing { id: KeySerialId(515422917) }), description: "keyring-rs:telegram-bot-token@ralph" }
+2026-02-07T17:54:14.424886Z DEBUG keyring: get password from entry KeyutilsCredential { session: KeyRing { id: KeySerialId(216265051) }, persistent: Some(KeyRing { id: KeySerialId(515422917) }), description: "keyring-rs:telegram-bot-token@ralph" }
+2026-02-07T17:54:14.431858Z DEBUG ralph_core::loop_lock: Acquired loop lock at /ralph-dummy/.ralph/loop.lock
+2026-02-07T17:54:14.431874Z DEBUG ralph: Acquired loop lock, running as primary loop
+2026-02-07T17:54:14.431904Z DEBUG ralph::process_management: Skipping setpgid: keeping foreground process group 2434340
+2026-02-07T17:54:14.431919Z DEBUG ralph::loop_runner: Resolving prompt content inline_prompt=None prompt_file=PROMPT.md
+2026-02-07T17:54:14.431926Z DEBUG ralph::loop_runner: Checking prompt file path=PROMPT.md exists=true
+2026-02-07T17:54:14.431945Z DEBUG ralph::loop_runner: Read prompt from file path=PROMPT.md len=3035
+2026-02-07T17:54:14.432026Z DEBUG ralph::loop_runner: Wrote loop ID marker file loop_id=primary-20260207-175414 marker="/ralph-dummy/.ralph/current-loop-id"
+2026-02-07T17:54:14.432146Z DEBUG ralph::loop_runner: Created events file for this run: .ralph/events-20260207-175414.jsonl
+2026-02-07T17:54:14.432176Z DEBUG ralph_core::event_loop: Solo mode: Ralph is the only coordinator
+2026-02-07T17:54:14.432254Z DEBUG keyring: creating entry with service ralph, user telegram-bot-token, and no target
+2026-02-07T17:54:14.432266Z DEBUG keyring: created entry KeyutilsCredential { session: KeyRing { id: KeySerialId(216265051) }, persistent: Some(KeyRing { id: KeySerialId(515422917) }), description: "keyring-rs:telegram-bot-token@ralph" }
+2026-02-07T17:54:14.432271Z DEBUG keyring: get password from entry KeyutilsCredential { session: KeyRing { id: KeySerialId(216265051) }, persistent: Some(KeyRing { id: KeySerialId(515422917) }), description: "keyring-rs:telegram-bot-token@ralph" }
+2026-02-07T17:54:14.432446Z  INFO ralph_telegram::service: Telegram service starting bot_token=8410...PUjY workspace=/ralph-dummy timeout_secs=120
+2026-02-07T17:54:14.432726Z DEBUG reqwest::connect: starting new connection: https://api.telegram.org/
+2026-02-07T17:54:14.432737Z DEBUG reqwest::connect: starting new connection: https://api.telegram.org/
+2026-02-07T17:54:14.432922Z DEBUG hyper::client::connect::dns: resolving host="api.telegram.org"
+2026-02-07T17:54:14.432958Z DEBUG hyper::client::connect::dns: resolving host="api.telegram.org"
+2026-02-07T17:54:14.433875Z DEBUG hyper::client::connect::http: connecting to 149.154.166.110:443
+2026-02-07T17:54:14.433932Z DEBUG hyper::client::connect::http: connecting to 149.154.166.110:443
+2026-02-07T17:54:14.607162Z DEBUG hyper::client::connect::http: connected to 149.154.166.110:443
+2026-02-07T17:54:14.607246Z DEBUG rustls::client::hs: No cached session for DnsName("api.telegram.org")
+2026-02-07T17:54:14.607362Z DEBUG rustls::client::hs: Not resuming any session
+2026-02-07T17:54:14.607520Z DEBUG hyper::client::connect::http: connected to 149.154.166.110:443
+2026-02-07T17:54:14.607554Z DEBUG rustls::client::hs: No cached session for DnsName("api.telegram.org")
+2026-02-07T17:54:14.607589Z DEBUG rustls::client::hs: Not resuming any session
+2026-02-07T17:54:14.778612Z DEBUG rustls::client::hs: Using ciphersuite TLS13_AES_256_GCM_SHA384
+2026-02-07T17:54:14.778681Z DEBUG rustls::client::tls13: Not resuming
+2026-02-07T17:54:14.778802Z DEBUG rustls::client::tls13: TLS1.3 encrypted extensions: [ServerNameAck, Protocols([ProtocolName(6832)])]
+2026-02-07T17:54:14.778819Z DEBUG rustls::client::hs: ALPN protocol is Some(b"h2")
+2026-02-07T17:54:14.780535Z DEBUG h2::client: binding client connection
+2026-02-07T17:54:14.780564Z DEBUG h2::client: client connection bound
+2026-02-07T17:54:14.780586Z DEBUG h2::codec::framed_write: send frame=Settings { flags: (0x0), enable_push: 0, initial_window_size: 2097152, max_frame_size: 16384 }
+2026-02-07T17:54:14.780693Z DEBUG hyper::client::pool: pooling idle connection for ("https", api.telegram.org)
+2026-02-07T17:54:14.780761Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=WindowUpdate { stream_id: StreamId(0), size_increment: 5177345 }
+2026-02-07T17:54:14.780773Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1), flags: (0x4: END_HEADERS) }
+2026-02-07T17:54:14.780794Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1), flags: (0x1: END_STREAM) }
+2026-02-07T17:54:14.780872Z DEBUG rustls::client::hs: Using ciphersuite TLS13_AES_256_GCM_SHA384
+2026-02-07T17:54:14.780886Z DEBUG rustls::client::tls13: Not resuming
+2026-02-07T17:54:14.780967Z DEBUG rustls::client::tls13: TLS1.3 encrypted extensions: [ServerNameAck, Protocols([ProtocolName(6832)])]
+2026-02-07T17:54:14.780973Z DEBUG rustls::client::hs: ALPN protocol is Some(b"h2")
+2026-02-07T17:54:14.782169Z DEBUG h2::client: binding client connection
+2026-02-07T17:54:14.782197Z DEBUG h2::client: client connection bound
+2026-02-07T17:54:14.782212Z DEBUG h2::codec::framed_write: send frame=Settings { flags: (0x0), enable_push: 0, initial_window_size: 2097152, max_frame_size: 16384 }
+2026-02-07T17:54:14.782313Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=WindowUpdate { stream_id: StreamId(0), size_increment: 5177345 }
+2026-02-07T17:54:14.782331Z DEBUG hyper::client::pool: pooling idle connection for ("https", api.telegram.org)
+2026-02-07T17:54:14.782429Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1), flags: (0x4: END_HEADERS) }
+2026-02-07T17:54:14.782444Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1), flags: (0x1: END_STREAM) }
+2026-02-07T17:54:14.951221Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Settings { flags: (0x0), max_concurrent_streams: 128, initial_window_size: 65536, max_frame_size: 16777215 }
+2026-02-07T17:54:14.951261Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Settings { flags: (0x1: ACK) }
+2026-02-07T17:54:14.951270Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(0), size_increment: 2147418112 }
+2026-02-07T17:54:14.951276Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Settings { flags: (0x1: ACK) }
+2026-02-07T17:54:14.951279Z DEBUG Connection{peer=Client}: h2::proto::settings: received settings ACK; applying Settings { flags: (0x0), enable_push: 0, initial_window_size: 2097152, max_frame_size: 16384 }
+2026-02-07T17:54:14.951290Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1), size_increment: 2147418111 }
+2026-02-07T17:54:14.954634Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Settings { flags: (0x0), max_concurrent_streams: 128, initial_window_size: 65536, max_frame_size: 16777215 }
+2026-02-07T17:54:14.954647Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Settings { flags: (0x1: ACK) }
+2026-02-07T17:54:14.954653Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(0), size_increment: 2147418112 }
+2026-02-07T17:54:14.954656Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Settings { flags: (0x1: ACK) }
+2026-02-07T17:54:14.954659Z DEBUG Connection{peer=Client}: h2::proto::settings: received settings ACK; applying Settings { flags: (0x0), enable_push: 0, initial_window_size: 2097152, max_frame_size: 16384 }
+2026-02-07T17:54:14.954664Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1), size_increment: 2147418111 }
+2026-02-07T17:54:15.122778Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1), flags: (0x4: END_HEADERS) }
+2026-02-07T17:54:15.122837Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1), flags: (0x1: END_STREAM) }
+2026-02-07T17:54:15.122934Z  INFO ralph_telegram::service: Registered bot commands with Telegram API
+2026-02-07T17:54:15.122943Z  INFO ralph_telegram::service: Telegram polling task started loop_id=main
+2026-02-07T17:54:15.123014Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T17:54:15.123105Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(3), flags: (0x4: END_HEADERS) }
+2026-02-07T17:54:15.123140Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(3), flags: (0x1: END_STREAM) }
+2026-02-07T17:54:15.157429Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1), flags: (0x4: END_HEADERS) }
+2026-02-07T17:54:15.157473Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1), flags: (0x1: END_STREAM) }
+2026-02-07T17:54:15.157802Z  INFO ralph_telegram::service: Sent greeting to chat 1167233989
+2026-02-07T17:54:15.157814Z  INFO ralph_telegram::service: Telegram service started — polling for incoming messages
+2026-02-07T17:54:15.157819Z  INFO ralph::loop_runner: Robot human-in-the-loop service active bot_token=8410...PUjY timeout_secs=120
+2026-02-07T17:54:15.157863Z DEBUG ralph_core::event_loop: Published task.start event topic="task.start"
+2026-02-07T17:54:15.158024Z DEBUG ralph_core::event_logger: Event logged topic=task.start iteration=0
+2026-02-07T17:54:15.259651Z DEBUG ralph::loop_runner: Execution mode configured execution_mode=autonomous
+2026-02-07T17:54:15.259889Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T17:54:15.259988Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(3), flags: (0x4: END_HEADERS) }
+2026-02-07T17:54:15.260019Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(3), flags: (0x1: END_STREAM) }
+2026-02-07T17:54:15.293597Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(3), size_increment: 2147418111 }
+2026-02-07T17:54:15.455436Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(3), size_increment: 2147418111 }
+2026-02-07T17:54:15.662921Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(3), flags: (0x4: END_HEADERS) }
+2026-02-07T17:54:15.662995Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(3), flags: (0x1: END_STREAM) }
+2026-02-07T17:54:15.663194Z  INFO ralph_telegram::service: Sent farewell to chat 1167233989
+2026-02-07T17:54:15.663211Z  INFO ralph_telegram::service: Telegram service stopped workspace=/ralph-dummy
+2026-02-07T17:54:15.663286Z  INFO ralph_core::event_loop: Wrapping up: restart_requested. 0 iterations in 1s. reason=restart_requested iterations=0 duration=1s
+2026-02-07T17:54:15.663308Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=GoAway { error_code: NO_ERROR, last_stream_id: StreamId(0) }
+2026-02-07T17:54:15.663329Z DEBUG Connection{peer=Client}: h2::proto::connection: Connection::poll; connection error error=GoAway(b"", NO_ERROR, Library)
+2026-02-07T17:54:15.663319Z DEBUG ralph_core::event_logger: Event logged topic=loop.terminate iteration=0
+2026-02-07T17:54:15.663373Z DEBUG Connection{peer=Client}: rustls::common_state: Sending warning alert CloseNotify
+2026-02-07T17:54:25.297588Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(3), flags: (0x4: END_HEADERS) }
+2026-02-07T17:54:25.297660Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(3), flags: (0x1: END_STREAM) }
+2026-02-07T17:54:25.297779Z  INFO ralph_telegram::service: Telegram polling task stopped loop_id=main
+2026-02-07T17:54:25.297885Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=GoAway { error_code: NO_ERROR, last_stream_id: StreamId(0) }
+2026-02-07T17:54:25.297903Z DEBUG Connection{peer=Client}: h2::proto::connection: Connection::poll; connection error error=GoAway(b"", NO_ERROR, Library)
+2026-02-07T17:54:25.297953Z DEBUG Connection{peer=Client}: rustls::common_state: Sending warning alert CloseNotify
+2026-02-07T18:15:13.175071Z  INFO ralph: Restart requested — exec-replacing process

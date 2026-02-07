@@ -1,0 +1,29 @@
+2026-02-07T17:53:59.291393Z DEBUG ralph_core::config: Loading configuration from file path=ralph.yml
+2026-02-07T17:53:59.291645Z DEBUG ralph_core::config: Configuration loaded backend=opencode has_v1_fields=false custom_hats=0
+2026-02-07T17:53:59.291698Z DEBUG keyring: creating entry with service ralph, user telegram-bot-token, and no target
+2026-02-07T17:53:59.291724Z DEBUG keyring: created entry KeyutilsCredential { session: KeyRing { id: KeySerialId(216265051) }, persistent: Some(KeyRing { id: KeySerialId(515422917) }), description: "keyring-rs:telegram-bot-token@ralph" }
+2026-02-07T17:53:59.291733Z DEBUG keyring: get password from entry KeyutilsCredential { session: KeyRing { id: KeySerialId(216265051) }, persistent: Some(KeyRing { id: KeySerialId(515422917) }), description: "keyring-rs:telegram-bot-token@ralph" }
+2026-02-07T17:53:59.298464Z DEBUG ralph_core::loop_lock: Acquired loop lock at /ralph-dummy/.ralph/loop.lock
+2026-02-07T17:53:59.298487Z DEBUG ralph: Acquired loop lock, running as primary loop
+2026-02-07T17:53:59.298538Z DEBUG ralph::process_management: Skipping setpgid: keeping foreground process group 2434036
+2026-02-07T17:53:59.298555Z DEBUG ralph::loop_runner: Resolving prompt content inline_prompt=None prompt_file=PROMPT.md
+2026-02-07T17:53:59.298566Z DEBUG ralph::loop_runner: Checking prompt file path=PROMPT.md exists=true
+2026-02-07T17:53:59.298585Z DEBUG ralph::loop_runner: Read prompt from file path=PROMPT.md len=3035
+2026-02-07T17:53:59.298678Z DEBUG ralph::loop_runner: Wrote loop ID marker file loop_id=primary-20260207-175359 marker="/ralph-dummy/.ralph/current-loop-id"
+2026-02-07T17:53:59.298782Z DEBUG ralph::loop_runner: Created events file for this run: .ralph/events-20260207-175359.jsonl
+2026-02-07T17:53:59.298833Z DEBUG ralph_core::event_loop: Solo mode: Ralph is the only coordinator
+2026-02-07T17:53:59.298942Z DEBUG keyring: creating entry with service ralph, user telegram-bot-token, and no target
+2026-02-07T17:53:59.298955Z DEBUG keyring: created entry KeyutilsCredential { session: KeyRing { id: KeySerialId(216265051) }, persistent: Some(KeyRing { id: KeySerialId(515422917) }), description: "keyring-rs:telegram-bot-token@ralph" }
+2026-02-07T17:53:59.298960Z DEBUG keyring: get password from entry KeyutilsCredential { session: KeyRing { id: KeySerialId(216265051) }, persistent: Some(KeyRing { id: KeySerialId(515422917) }), description: "keyring-rs:telegram-bot-token@ralph" }
+2026-02-07T17:53:59.299242Z  INFO ralph_telegram::service: Telegram service starting bot_token=8410...PUjY workspace=/ralph-dummy timeout_secs=120
+2026-02-07T17:53:59.299721Z DEBUG reqwest::connect: starting new connection: https://api.telegram.org/
+2026-02-07T17:53:59.299720Z DEBUG reqwest::connect: starting new connection: https://api.telegram.org/
+2026-02-07T17:53:59.300097Z DEBUG hyper::client::connect::dns: resolving host="api.telegram.org"
+2026-02-07T17:53:59.300145Z DEBUG hyper::client::connect::dns: resolving host="api.telegram.org"
+2026-02-07T17:54:04.301322Z  WARN ralph_telegram::service: Failed to register bot commands error=A network error: error sending request for url (https://api.telegram.org/token:redacted/SetMyCommands): error trying to connect: operation timed out
+2026-02-07T17:54:04.301382Z  INFO ralph_telegram::service: Telegram polling task started loop_id=main
+2026-02-07T17:54:04.301344Z  WARN ralph_telegram::service: Telegram send failed, retrying with backoff attempt=1 max_retries=3 error=failed to send telegram message after 1 attempts: A network error: error sending request for url (https://api.telegram.org/token:redacted/SendMessage): error trying to connect: operation timed out
+2026-02-07T17:54:04.301448Z DEBUG reqwest::connect: starting new connection: https://api.telegram.org/
+2026-02-07T17:54:04.301677Z DEBUG hyper::client::connect::dns: resolving host="api.telegram.org"
+2026-02-07T17:54:05.301566Z DEBUG reqwest::connect: starting new connection: https://api.telegram.org/
+2026-02-07T17:54:05.301821Z DEBUG hyper::client::connect::dns: resolving host="api.telegram.org"

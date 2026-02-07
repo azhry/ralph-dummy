@@ -3169,3 +3169,16 @@
 2026-02-07T15:42:41.002288Z DEBUG Connection{peer=Client}: h2::proto::connection: Connection::poll; connection error error=GoAway(b"", NO_ERROR, Library)
 2026-02-07T15:42:41.002371Z DEBUG Connection{peer=Client}: rustls::common_state: Sending warning alert CloseNotify
 2026-02-07T15:42:41.004947Z  INFO ralph_core::landing: Beginning landing sequence loop_id=primary
+2026-02-07T15:42:41.075391Z  INFO ralph_core::landing: Auto-committed changes during landing loop_id=primary commit=Some("805e50e39ea96d4db92e312a52c186da8d9db096") files=13
+2026-02-07T15:42:41.736837Z  INFO ralph_core::landing: Generated handoff file loop_id=primary path=/ralph-dummy/.ralph/agent/handoff.md completed=77 open=0
+2026-02-07T15:42:41.740908Z  INFO ralph_core::loop_completion: Landing completed with auto-commit commit=Some("805e50e39ea96d4db92e312a52c186da8d9db096") handoff=/ralph-dummy/.ralph/agent/handoff.md
+2026-02-07T15:42:41.741008Z DEBUG ralph_core::loop_completion: Primary loop completed with landing
+2026-02-07T15:42:41.741039Z  INFO ralph::loop_runner: Primary loop landed successfully committed=true handoff=/ralph-dummy/.ralph/agent/handoff.md open_tasks=0
+2026-02-07T15:42:41.741095Z DEBUG ralph::loop_runner: No pending merges in queue
+2026-02-07T15:42:48.516721Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(855), flags: (0x4: END_HEADERS) }
+2026-02-07T15:42:48.516766Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(855), flags: (0x1: END_STREAM) }
+2026-02-07T15:42:48.516857Z  INFO ralph_telegram::service: Telegram polling task stopped loop_id=main
+2026-02-07T15:42:48.517082Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=GoAway { error_code: NO_ERROR, last_stream_id: StreamId(0) }
+2026-02-07T15:42:48.517105Z DEBUG Connection{peer=Client}: h2::proto::connection: Connection::poll; connection error error=GoAway(b"", NO_ERROR, Library)
+2026-02-07T15:42:48.517145Z DEBUG Connection{peer=Client}: rustls::common_state: Sending warning alert CloseNotify
+2026-02-07T15:45:19.918954Z DEBUG ralph_core::loop_lock: Releasing loop lock at /ralph-dummy/.ralph/loop.lock
