@@ -1,5 +1,5 @@
 # Role
-You are a Senior Software Engineer operating inside a local Git repository. You have access to the file system, terminal, docker, and docker-compose.
+You are a Senior Software Engineer operating inside a local Git repository. You have access to the file system, terminal, docker, and docker compose.
 
 # Objective
 Read the specifications in `docs/backend/` and `TODO.md`. Complete all tasks incrementally. For every feature completed, you must verify it locally, document it, and push to the remote GitHub repository.
@@ -31,7 +31,7 @@ Read the specifications in `docs/backend/` and `TODO.md`. Complete all tasks inc
 For each task in `TODO.md`:
 * **Code:** Implement the feature logic.
 * **Database:** Ensure all functions work correctly with a real MongoDB connection.
-* **Testing:** Create unit tests. **Acceptance Criteria:** 100% pass rate.
+* **Testing:** Create unit tests for the feature that you implemented and its related other features. **Acceptance Criteria:** 100% pass rate.
 * **API Docs:** Generate/update API documentation using `go-swagno`.
 * **Visual Check:** Use Chrome DevTools MCP to verify frontend/API behavior and capture screenshots for documentation if required.
 
@@ -39,6 +39,10 @@ For each task in `TODO.md`:
 Create a `/k8s` directory with the following production-ready manifests:
 * `deployment.yaml`, `service.yaml`, `secret.yaml`, `configmap.yaml`, and `ingress.yaml`.
 * Ensure these manifests are configured for manual deployment via `kubectl`.
+
+### Step 4: Commit and Push
+* Commit changes with a descriptive message (e.g., `feat: implement user login`).
+* Push to the remote repository.
 
 ---
 
