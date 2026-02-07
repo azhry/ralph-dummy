@@ -8,7 +8,6 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-
 	"wedding-invitation-backend/internal/domain/models"
 	"wedding-invitation-backend/internal/domain/repository"
 )
@@ -133,7 +132,7 @@ func (r *mongoRSVPRepository) GetStatistics(ctx context.Context, weddingID primi
 		{"$group", bson.D{
 			{"_id", "$status"},
 			{"count", bson.D{{"$sum", 1}}},
-			{"totalGuests", bson.D{{"$sum", bson.D{{"$add", bson.A{"$attendance_count", "$plus_one_count"}}}}}},
+			{"totalGuests", bson.D{{"$sum", "$attendance_count"}}},
 			{"plusOnes", bson.D{{"$sum", "$plus_one_count"}}},
 		}},
 	}
@@ -153,8 +152,8 @@ func (r *mongoRSVPRepository) GetStatistics(ctx context.Context, weddingID primi
 		var result struct {
 			ID          string `bson:"_id"`
 			Count       int    `bson:"count"`
-			TotalGuests int    `bson:"total_guests"`
-			PlusOnes    int    `bson:"plus_ones"`
+			TotalGuests int    `bson:"totalGuests"`
+			PlusOnes    int    `bson:"plusOnes"`
 		}
 		if err := cursor.Decode(&result); err != nil {
 			continue

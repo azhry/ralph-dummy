@@ -518,7 +518,7 @@ func TestAnalyticsRepository_CleanupOldAnalytics(t *testing.T) {
 func setupTestAnalyticsRepository(t *testing.T) (repository.AnalyticsRepository, func()) {
 	// Setup test database
 	testDBConfig := &config.DatabaseConfig{
-		URI:      "mongodb://localhost:27017",
+		URI:      "mongodb://admin:password123@localhost:27017/wedding_invitations?authSource=admin",
 		Database: "wedding_test_" + primitive.NewObjectID().Hex(),
 		Timeout:  10,
 	}

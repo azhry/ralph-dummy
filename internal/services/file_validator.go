@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"mime/multipart"
+	"path/filepath"
 	"strings"
 )
 
@@ -44,10 +45,12 @@ func NewFileValidator(allowedTypes []string, maxSize int64) FileValidator {
 // Validate validates a file based on its content and metadata
 func (v *fileValidator) Validate(ctx context.Context, file io.Reader, header *multipart.FileHeader) (*ValidationResult, error) {
 	// Check file extension
-	ext := strings.ToLower(strings.TrimPrefix(strings.TrimPrefix(header.Filename, "."), "."))
+	ext := strings.ToLower(filepath.Ext(header.Filename))
 	if ext == "" {
 		return nil, fmt.Errorf("file must have an extension")
 	}
+	// Remove the leading dot from extension
+	ext = strings.TrimPrefix(ext, ".")
 
 	// Map extension to MIME type
 	mimeType := v.extensionToMimeType(ext)
@@ -130,11 +133,11 @@ func (v *fileValidator) MagicNumberInfo(data []byte) string {
 	if len(data) == 0 {
 		return "empty file"
 	}
-	
+
 	limit := 16
 	if len(data) < limit {
 		limit = len(data)
 	}
-	
+
 	return hex.EncodeToString(data[:limit])
 }

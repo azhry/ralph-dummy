@@ -419,6 +419,7 @@ func TestWeddingHandler_PublishWedding(t *testing.T) {
 
 	userID := primitive.NewObjectID()
 	wedding := createTestWedding()
+	wedding.UserID = userID // Ensure the wedding belongs to the test user
 
 	// First call for permission check
 	mockService.On("GetWeddingByID", mock.Anything, wedding.ID, userID).Return(wedding, nil)

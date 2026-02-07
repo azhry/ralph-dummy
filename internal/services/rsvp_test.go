@@ -296,6 +296,7 @@ func TestRSVPService_DeleteRSVP(t *testing.T) {
 		Status: "published",
 	}
 	weddingRepo.On("GetByID", mock.Anything, weddingID).Return(wedding, nil)
+	weddingRepo.On("UpdateRSVPCount", mock.Anything, weddingID).Return(nil)
 
 	// Create RSVP
 	rsvp := &models.RSVP{

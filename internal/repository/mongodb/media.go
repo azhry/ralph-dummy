@@ -26,17 +26,22 @@ func NewMediaRepository(db *mongo.Database) repository.MediaRepository {
 
 // Create creates a new media record
 func (r *mediaRepository) Create(ctx context.Context, media *models.Media) error {
+	// Generate ID if not set
+	if media.ID.IsZero() {
+		media.ID = primitive.NewObjectID()
+	}
+
 	media.BeforeCreate()
-	
+
 	result, err := r.collection.InsertOne(ctx, media)
 	if err != nil {
 		return fmt.Errorf("failed to insert media: %w", err)
 	}
-	
+
 	if oid, ok := result.InsertedID.(primitive.ObjectID); ok {
 		media.ID = oid
 	}
-	
+
 	return nil
 }
 
@@ -69,7 +74,7 @@ func (r *mediaRepository) GetByStorageKey(ctx context.Context, key string) (*mod
 // List retrieves media records with filtering and pagination
 func (r *mediaRepository) List(ctx context.Context, filter repository.MediaFilter, opts repository.ListOptions) ([]*models.Media, int64, error) {
 	query := bson.M{"deletedAt": bson.M{"$exists": false}}
-	
+
 	if filter.MimeType != "" {
 		query["mimeType"] = filter.MimeType
 	}
@@ -126,7 +131,7 @@ func (r *mediaRepository) List(ctx context.Context, filter repository.MediaFilte
 // Update updates a media record
 func (r *mediaRepository) Update(ctx context.Context, media *models.Media) error {
 	media.BeforeUpdate()
-	
+
 	result, err := r.collection.UpdateOne(
 		ctx,
 		bson.M{"_id": media.ID},
@@ -135,11 +140,11 @@ func (r *mediaRepository) Update(ctx context.Context, media *models.Media) error
 	if err != nil {
 		return fmt.Errorf("failed to update media: %w", err)
 	}
-	
+
 	if result.MatchedCount == 0 {
 		return fmt.Errorf("media not found")
 	}
-	
+
 	return nil
 }
 
@@ -149,11 +154,11 @@ func (r *mediaRepository) Delete(ctx context.Context, id primitive.ObjectID) err
 	if err != nil {
 		return fmt.Errorf("failed to delete media: %w", err)
 	}
-	
+
 	if result.DeletedCount == 0 {
 		return fmt.Errorf("media not found")
 	}
-	
+
 	return nil
 }
 
@@ -168,11 +173,11 @@ func (r *mediaRepository) SoftDelete(ctx context.Context, id primitive.ObjectID)
 	if err != nil {
 		return fmt.Errorf("failed to soft delete media: %w", err)
 	}
-	
+
 	if result.MatchedCount == 0 {
 		return fmt.Errorf("media not found")
 	}
-	
+
 	return nil
 }
 
@@ -181,18 +186,18 @@ func (r *mediaRepository) GetOrphaned(ctx context.Context, before time.Time) ([]
 	query := bson.M{
 		"deletedAt": bson.M{"$lt": before},
 	}
-	
+
 	cursor, err := r.collection.Find(ctx, query)
 	if err != nil {
 		return nil, fmt.Errorf("failed to find orphaned media: %w", err)
 	}
 	defer cursor.Close(ctx)
-	
+
 	var media []*models.Media
 	if err := cursor.All(ctx, &media); err != nil {
 		return nil, fmt.Errorf("failed to decode orphaned media: %w", err)
 	}
-	
+
 	return media, nil
 }
 

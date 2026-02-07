@@ -11,7 +11,6 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
-
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.uber.org/zap/zaptest"
 	"wedding-invitation-backend/internal/domain/models"
@@ -65,12 +64,20 @@ func (m *MockMediaRepository) Create(ctx context.Context, media *models.Media) e
 
 func (m *MockMediaRepository) GetByID(ctx context.Context, id primitive.ObjectID) (*models.Media, error) {
 	args := m.Called(ctx, id)
-	return args.Get(0).(*models.Media), args.Error(1)
+	result := args.Get(0)
+	if result == nil {
+		return nil, args.Error(1)
+	}
+	return result.(*models.Media), args.Error(1)
 }
 
 func (m *MockMediaRepository) GetByStorageKey(ctx context.Context, key string) (*models.Media, error) {
 	args := m.Called(ctx, key)
-	return args.Get(0).(*models.Media), args.Error(1)
+	result := args.Get(0)
+	if result == nil {
+		return nil, args.Error(1)
+	}
+	return result.(*models.Media), args.Error(1)
 }
 
 func (m *MockMediaRepository) List(ctx context.Context, filter repository.MediaFilter, opts repository.ListOptions) ([]*models.Media, int64, error) {
@@ -101,6 +108,37 @@ func (m *MockMediaRepository) GetOrphaned(ctx context.Context, before time.Time)
 func (m *MockMediaRepository) GetByCreatedBy(ctx context.Context, userID primitive.ObjectID, opts repository.ListOptions) ([]*models.Media, int64, error) {
 	args := m.Called(ctx, userID, opts)
 	return args.Get(0).([]*models.Media), args.Get(1).(int64), args.Error(2)
+}
+
+// MockImageProcessor for testing
+type MockImageProcessor struct {
+	mock.Mock
+}
+
+func (m *MockImageProcessor) Process(ctx context.Context, reader io.Reader, mimeType string) (*ProcessedImage, error) {
+	args := m.Called(ctx, reader, mimeType)
+	if args.Get(0) == nil {
+		return nil, args.Error(1)
+	}
+	return args.Get(0).(*ProcessedImage), args.Error(1)
+}
+
+func (m *MockImageProcessor) GenerateThumbnail(data []byte, width, height int, format string) ([]byte, error) {
+	args := m.Called(data, width, height, format)
+	return args.Get(0).([]byte), args.Error(1)
+}
+
+func (m *MockImageProcessor) ExtractEXIF(data []byte) (map[string]interface{}, error) {
+	args := m.Called(data)
+	if args.Get(0) == nil {
+		return nil, args.Error(1)
+	}
+	return args.Get(0).(map[string]interface{}), args.Error(1)
+}
+
+func (m *MockImageProcessor) ConvertToWebP(data []byte, quality float32) ([]byte, error) {
+	args := m.Called(data, quality)
+	return args.Get(0).([]byte), args.Error(1)
 }
 
 func TestFileValidator_Validate(t *testing.T) {
@@ -177,16 +215,31 @@ func TestMediaService_UploadFile(t *testing.T) {
 	// Create mocks
 	mockRepo := new(MockMediaRepository)
 	mockStorage := new(MockStorageService)
+	mockImageProcessor := new(MockImageProcessor)
 	validator := NewFileValidator([]string{"image/jpeg", "image/png", "image/webp"}, 5*1024*1024)
-	imageProcessor := NewImageProcessor([]ThumbnailSize{}, false) // No thumbnails for simplicity
 
 	config := DefaultMediaServiceConfig()
-	service := NewMediaService(mockRepo, mockStorage, validator, imageProcessor, logger, config)
+	service := NewMediaService(mockRepo, mockStorage, validator, mockImageProcessor, logger, config)
 
 	userID := primitive.NewObjectID()
 
-	// Valid JPEG file content
-	jpegContent := []byte{0xFF, 0xD8, 0xFF, 0xE0, 0x00, 0x10, 0x4A, 0x46, 0x49, 0x46, 0x00, 0x01}
+	// Valid minimal JPEG file content (1x1 pixel)
+	jpegContent := []byte{
+		0xFF, 0xD8, 0xFF, 0xE0, 0x00, 0x10, 0x4A, 0x46, 0x49, 0x46, 0x00, 0x01,
+		0x01, 0x01, 0x00, 0x48, 0x00, 0x48, 0x00, 0x00, 0xFF, 0xDB, 0x00, 0x43,
+		0x00, 0x08, 0x06, 0x06, 0x07, 0x06, 0x05, 0x08, 0x07, 0x07, 0x07, 0x09,
+		0x09, 0x08, 0x0A, 0x0C, 0x14, 0x0D, 0x0C, 0x0B, 0x0B, 0x0C, 0x19, 0x12,
+		0x13, 0x0F, 0x14, 0x1D, 0x1A, 0x1F, 0x1E, 0x1D, 0x1A, 0x1C, 0x1C, 0x20,
+		0x24, 0x2E, 0x27, 0x20, 0x22, 0x2C, 0x23, 0x1C, 0x1C, 0x28, 0x37, 0x29,
+		0x2C, 0x30, 0x31, 0x34, 0x34, 0x34, 0x1F, 0x27, 0x39, 0x3D, 0x38, 0x32,
+		0x3C, 0x2E, 0x33, 0x34, 0x32, 0xFF, 0xC0, 0x00, 0x11, 0x08, 0x00, 0x01,
+		0x00, 0x01, 0x01, 0x01, 0x11, 0x00, 0x02, 0x11, 0x01, 0x03, 0x11, 0x01,
+		0xFF, 0xC4, 0x00, 0x14, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0xFF, 0xC4,
+		0x00, 0x14, 0x10, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xDA, 0x00, 0x0C,
+		0x03, 0x01, 0x00, 0x02, 0x11, 0x03, 0x11, 0x00, 0x3F, 0x00, 0x80, 0xFF, 0xD9,
+	}
 
 	tests := []struct {
 		name        string
@@ -201,6 +254,17 @@ func TestMediaService_UploadFile(t *testing.T) {
 			filename: "test.jpg",
 			fileSize: int64(len(jpegContent)),
 			setupMocks: func() {
+				// Mock image processing
+				mockImageProcessor.On("Process", mock.Anything, mock.AnythingOfType("*bytes.Reader"), "image/jpeg").
+					Return(&ProcessedImage{
+						OriginalData: jpegContent,
+						Thumbnails:   make(map[string][]byte),
+						Metadata: &ImageMetadata{
+							Width:  100,
+							Height: 100,
+							Format: "jpeg",
+						},
+					}, nil)
 				mockStorage.On("Upload", mock.Anything, mock.AnythingOfType("string"),
 					mock.AnythingOfType("[]uint8"), "image/jpeg", mock.AnythingOfType("map[string]string")).
 					Return("http://example.com/uploads/test.jpg", nil)

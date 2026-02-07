@@ -341,7 +341,7 @@ func TestWeddingService_PublishWedding(t *testing.T) {
 	wedding.UserID = userID
 
 	// Test successful publishing
-	mockWeddingRepo.On("GetByID", ctx, weddingID).Return(wedding, nil).Twice()
+	mockWeddingRepo.On("GetByID", ctx, weddingID).Return(wedding, nil).Once()
 	mockWeddingRepo.On("Update", ctx, mock.AnythingOfType("*models.Wedding")).Return(nil)
 
 	err := service.PublishWedding(ctx, weddingID, userID)
@@ -379,6 +379,9 @@ func TestWeddingService_ValidateWedding_InvalidTheme(t *testing.T) {
 	wedding := createTestWedding()
 	wedding.Theme.ThemeID = "" // Invalid theme
 
+	// Mock slug existence check
+	mockWeddingRepo.On("ExistsBySlug", ctx, wedding.Slug).Return(false, nil)
+
 	err := service.CreateWedding(ctx, wedding, userID)
 	assert.Error(t, err)
 	assert.Contains(t, err.Error(), "theme ID is required")
@@ -393,6 +396,9 @@ func TestWeddingService_ValidateWedding_InvalidRSVP(t *testing.T) {
 	userID := primitive.NewObjectID()
 	wedding := createTestWedding()
 	wedding.RSVP.MaxPlusOnes = 10 // Invalid max plus ones
+
+	// Mock slug existence check
+	mockWeddingRepo.On("ExistsBySlug", ctx, wedding.Slug).Return(false, nil)
 
 	err := service.CreateWedding(ctx, wedding, userID)
 	assert.Error(t, err)

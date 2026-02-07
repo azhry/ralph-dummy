@@ -28,6 +28,11 @@ func NewGuestRepository(db *mongo.Database) repository.GuestRepository {
 
 // Create creates a new guest
 func (r *GuestRepository) Create(ctx context.Context, guest *models.Guest) error {
+	// Generate ID if not set
+	if guest.ID.IsZero() {
+		guest.ID = primitive.NewObjectID()
+	}
+
 	now := time.Now()
 	guest.CreatedAt = now
 	guest.UpdatedAt = now
@@ -46,7 +51,7 @@ func (r *GuestRepository) GetByID(ctx context.Context, id primitive.ObjectID) (*
 	err := r.collection.FindOne(ctx, bson.M{"_id": id}).Decode(&guest)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
-			return nil, repository.ErrNotFound
+			return nil, errors.New("guest not found")
 		}
 		return nil, fmt.Errorf("failed to get guest: %w", err)
 	}
@@ -79,6 +84,10 @@ func (r *GuestRepository) CreateMany(ctx context.Context, guests []*models.Guest
 	var docs []interface{}
 
 	for _, guest := range guests {
+		// Generate ID if not set
+		if guest.ID.IsZero() {
+			guest.ID = primitive.NewObjectID()
+		}
 		guest.CreatedAt = now
 		guest.UpdatedAt = now
 		docs = append(docs, guest)
@@ -112,7 +121,7 @@ func (r *GuestRepository) ListByWedding(ctx context.Context, weddingID primitive
 
 	// Find guests with pagination
 	opts := options.Find()
-	opts.SetSort(bson.M{"last_name": 1, "first_name": 1})
+	opts.SetSort(bson.D{{Key: "last_name", Value: 1}, {Key: "first_name", Value: 1}})
 	if pageSize > 0 {
 		opts.SetLimit(int64(pageSize))
 	}

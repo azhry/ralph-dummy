@@ -63,14 +63,14 @@ func (s *WeddingService) CreateWedding(ctx context.Context, wedding *models.Wedd
 	wedding.GalleryEnabled = false
 	wedding.IsPublic = false
 
-	// Set default theme if not provided
-	if wedding.Theme.ThemeID == "" {
-		wedding.Theme.ThemeID = "default"
-	}
-
 	// Validate theme settings
 	if err := s.validateThemeSettings(&wedding.Theme); err != nil {
 		return err
+	}
+
+	// Set default theme if not provided
+	if wedding.Theme.ThemeID == "" {
+		wedding.Theme.ThemeID = "default"
 	}
 
 	// Validate RSVP settings

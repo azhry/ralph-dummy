@@ -485,7 +485,11 @@ func TestUserHandler_GetUsersList(t *testing.T) {
 	})
 
 	t.Run("service error", func(t *testing.T) {
-		mockUserService.On("GetUsersList", mock.Anything, mock.Anything, mock.Anything, mock.Anything).Return(nil, errors.New("database error"))
+		// Clear previous expectations
+		mockUserService.ExpectedCalls = nil
+		mockUserService.Calls = nil
+
+		mockUserService.On("GetUsersList", mock.Anything, mock.Anything, mock.Anything, mock.AnythingOfType("repository.UserFilters")).Return(nil, errors.New("database error"))
 
 		req, _ := http.NewRequest("GET", "/api/v1/admin/users", nil)
 		w := httptest.NewRecorder()
@@ -589,7 +593,11 @@ func TestUserHandler_DeleteUser(t *testing.T) {
 	})
 
 	t.Run("user not found", func(t *testing.T) {
-		mockUserService.On("DeleteUser", mock.Anything, mock.Anything).Return(errors.New("user not found"))
+		// Clear previous expectations
+		mockUserService.ExpectedCalls = nil
+		mockUserService.Calls = nil
+
+		mockUserService.On("DeleteUser", mock.Anything, userID).Return(errors.New("user not found"))
 
 		req, _ := http.NewRequest("DELETE", "/api/v1/admin/users/"+userID.Hex(), nil)
 		w := httptest.NewRecorder()
@@ -718,6 +726,10 @@ func TestUserHandler_RemoveWeddingFromUser(t *testing.T) {
 	})
 
 	t.Run("user not found", func(t *testing.T) {
+		// Clear previous expectations
+		mockUserService.ExpectedCalls = nil
+		mockUserService.Calls = nil
+
 		mockUserService.On("RemoveWeddingFromUser", mock.Anything, mock.Anything, mock.Anything).Return(errors.New("user not found"))
 
 		req, _ := http.NewRequest("DELETE", "/api/v1/users/weddings/"+weddingID.Hex(), nil)

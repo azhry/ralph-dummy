@@ -740,8 +740,11 @@ func (r *analyticsRepository) GetDailyMetrics(ctx context.Context, weddingID pri
 			"page_views": bson.M{"$sum": 1},
 			"sessions":   bson.M{"$addToSet": "$session_id"},
 		}},
+		{"$addFields": bson.M{
+			"date_str": bson.M{"$dateToString": bson.M{"format": "%Y-%m-%d", "date": bson.M{"$dateFromParts": bson.M{"year": "$_id.year", "month": "$_id.month", "day": "$_id.day"}}}},
+		}},
 		{"$project": bson.M{
-			"date":       bson.M{"$dateToString": bson.M{"format": "%Y-%m-%d", "date": "$_id"}},
+			"date":       "$date_str",
 			"page_views": 1,
 			"sessions":   bson.M{"$size": "$sessions"},
 		}},
@@ -787,8 +790,11 @@ func (r *analyticsRepository) GetDailyMetrics(ctx context.Context, weddingID pri
 			},
 			"rsvps": bson.M{"$sum": 1},
 		}},
+		{"$addFields": bson.M{
+			"date_str": bson.M{"$dateToString": bson.M{"format": "%Y-%m-%d", "date": bson.M{"$dateFromParts": bson.M{"year": "$_id.year", "month": "$_id.month", "day": "$_id.day"}}}},
+		}},
 		{"$project": bson.M{
-			"date":  bson.M{"$dateToString": bson.M{"format": "%Y-%m-%d", "date": "$_id"}},
+			"date":  "$date_str",
 			"rsvps": 1,
 		}},
 	}
