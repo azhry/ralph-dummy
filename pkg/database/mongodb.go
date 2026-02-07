@@ -178,13 +178,7 @@ func (m *MongoDB) EnsureIndexes(ctx context.Context) error {
 
 	// Wedding analytics indexes
 	weddingAnalytics := m.Collection("wedding_analytics")
-	if _, err := weddingAnalytics.Indexes().CreateOne(ctx, mongo.IndexModel{
-		Keys:    bson.D{{Key: "_id", Value: 1}},
-		Options: options.Index().SetUnique(true),
-	}); err != nil {
-		return fmt.Errorf("failed to create wedding_analytics _id index: %w", err)
-	}
-
+	// Note: _id index is automatically created by MongoDB and is always unique
 	if _, err := weddingAnalytics.Indexes().CreateOne(ctx, mongo.IndexModel{
 		Keys: bson.D{{Key: "last_updated", Value: -1}},
 	}); err != nil {
@@ -192,13 +186,8 @@ func (m *MongoDB) EnsureIndexes(ctx context.Context) error {
 	}
 
 	// System analytics indexes
-	systemAnalytics := m.Collection("system_analytics")
-	if _, err := systemAnalytics.Indexes().CreateOne(ctx, mongo.IndexModel{
-		Keys:    bson.D{{Key: "_id", Value: 1}},
-		Options: options.Index().SetUnique(true),
-	}); err != nil {
-		return fmt.Errorf("failed to create system_analytics _id index: %w", err)
-	}
+	// Note: _id index is automatically created by MongoDB and is always unique
+	_ = m.Collection("system_analytics") // Initialize collection to ensure it exists
 
 	return nil
 }
