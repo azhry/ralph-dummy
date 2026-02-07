@@ -5993,3 +5993,17 @@
 2026-02-07T14:24:33.535726Z DEBUG ralph_core::event_logger: Event logged topic=loop.terminate iteration=10
 2026-02-07T14:24:33.538379Z  INFO ralph_core::landing: Beginning landing sequence loop_id=primary
 2026-02-07T14:24:33.538544Z  WARN ralph_core::landing: Landing with 3 open tasks loop_id=primary open_tasks=["task-1770473901-46fe", "task-1770473906-07ec", "task-1770473919-a45e"]
+2026-02-07T14:24:33.588398Z  INFO ralph_core::landing: Auto-committed changes during landing loop_id=primary commit=Some("7cb076f8e0482b33bf32e7ade41fe0a1061e3037") files=6
+2026-02-07T14:24:33.661114Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1927), size_increment: 2147418111 }
+2026-02-07T14:24:34.383505Z  INFO ralph_core::landing: Generated handoff file loop_id=primary path=/ralph-dummy/.ralph/agent/handoff.md completed=74 open=3
+2026-02-07T14:24:34.387261Z  INFO ralph_core::loop_completion: Landing completed with auto-commit commit=Some("7cb076f8e0482b33bf32e7ade41fe0a1061e3037") handoff=/ralph-dummy/.ralph/agent/handoff.md
+2026-02-07T14:24:34.387280Z DEBUG ralph_core::loop_completion: Primary loop completed with landing
+2026-02-07T14:24:34.387287Z  INFO ralph::loop_runner: Primary loop landed successfully committed=true handoff=/ralph-dummy/.ralph/agent/handoff.md open_tasks=3
+2026-02-07T14:24:34.387314Z DEBUG ralph::loop_runner: No pending merges in queue
+2026-02-07T14:24:43.662993Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1927), flags: (0x4: END_HEADERS) }
+2026-02-07T14:24:43.663043Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1927), flags: (0x1: END_STREAM) }
+2026-02-07T14:24:43.663132Z  INFO ralph_telegram::service: Telegram polling task stopped loop_id=main
+2026-02-07T14:24:43.663316Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=GoAway { error_code: NO_ERROR, last_stream_id: StreamId(0) }
+2026-02-07T14:24:43.663353Z DEBUG Connection{peer=Client}: h2::proto::connection: Connection::poll; connection error error=GoAway(b"", NO_ERROR, Library)
+2026-02-07T14:24:43.663454Z DEBUG Connection{peer=Client}: rustls::common_state: Sending warning alert CloseNotify
+2026-02-07T14:26:20.495172Z DEBUG ralph_core::loop_lock: Releasing loop lock at /ralph-dummy/.ralph/loop.lock
