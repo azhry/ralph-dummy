@@ -2,6 +2,7 @@ package services
 
 import (
 	"context"
+	"errors"
 	"net/http/httptest"
 	"testing"
 	"time"
@@ -52,7 +53,13 @@ func TestAnalyticsService_TrackPageView(t *testing.T) {
 	})
 
 	t.Run("Error - wedding not found", func(t *testing.T) {
-		weddingRepo.On("GetByID", ctx, weddingID).Return(nil, assert.AnError)
+		// Create fresh mocks for this test
+		analyticsRepo := &MockAnalyticsRepository{}
+		weddingRepo := &MockWeddingRepository{}
+		logger := zaptest.NewLogger(t)
+		service := NewAnalyticsService(analyticsRepo, weddingRepo, logger)
+
+		weddingRepo.On("GetByID", ctx, weddingID).Return(nil, errors.New("wedding not found"))
 
 		err := service.TrackPageView(ctx, weddingID, sessionID, page, req)
 		require.Error(t, err)
@@ -62,6 +69,12 @@ func TestAnalyticsService_TrackPageView(t *testing.T) {
 	})
 
 	t.Run("Error - unpublished wedding", func(t *testing.T) {
+		// Create fresh mocks for this test
+		analyticsRepo := &MockAnalyticsRepository{}
+		weddingRepo := &MockWeddingRepository{}
+		logger := zaptest.NewLogger(t)
+		service := NewAnalyticsService(analyticsRepo, weddingRepo, logger)
+
 		// Mock wedding exists but is not published
 		wedding := &models.Wedding{
 			ID:     weddingID,
@@ -77,6 +90,12 @@ func TestAnalyticsService_TrackPageView(t *testing.T) {
 	})
 
 	t.Run("Error - tracking failed", func(t *testing.T) {
+		// Create fresh mocks for this test
+		analyticsRepo := &MockAnalyticsRepository{}
+		weddingRepo := &MockWeddingRepository{}
+		logger := zaptest.NewLogger(t)
+		service := NewAnalyticsService(analyticsRepo, weddingRepo, logger)
+
 		// Mock wedding exists and is published
 		wedding := &models.Wedding{
 			ID:     weddingID,
@@ -85,7 +104,7 @@ func TestAnalyticsService_TrackPageView(t *testing.T) {
 		weddingRepo.On("GetByID", ctx, weddingID).Return(wedding, nil)
 
 		// Mock tracking failure
-		analyticsRepo.On("TrackPageView", ctx, mock.AnythingOfType("*models.PageView")).Return(assert.AnError)
+		analyticsRepo.On("TrackPageView", ctx, mock.AnythingOfType("*models.PageView")).Return(errors.New("tracking failed"))
 
 		err := service.TrackPageView(ctx, weddingID, sessionID, page, req)
 		require.Error(t, err)
@@ -127,7 +146,7 @@ func TestAnalyticsService_TrackRSVPSubmission(t *testing.T) {
 		analyticsRepo.On("TrackRSVPEvent", ctx, mock.AnythingOfType("*models.RSVPAnalytics")).Return(nil)
 
 		// Mock successful conversion tracking
-		analyticsRepo.On("TrackConversion", ctx, weddingID, sessionID, "rsvp_completed", 1.0, mock.AnythingOfType("map[string]interface {}")).Return(nil)
+		analyticsRepo.On("TrackConversion", ctx, mock.AnythingOfType("*models.ConversionEvent")).Return(nil)
 
 		err := service.TrackRSVPSubmission(ctx, weddingID, rsvpID, sessionID, source, timeToComplete, req)
 		require.NoError(t, err)
@@ -137,7 +156,13 @@ func TestAnalyticsService_TrackRSVPSubmission(t *testing.T) {
 	})
 
 	t.Run("Error - wedding not found", func(t *testing.T) {
-		weddingRepo.On("GetByID", ctx, weddingID).Return(nil, assert.AnError)
+		// Create fresh mocks for this test
+		analyticsRepo := &MockAnalyticsRepository{}
+		weddingRepo := &MockWeddingRepository{}
+		logger := zaptest.NewLogger(t)
+		service := NewAnalyticsService(analyticsRepo, weddingRepo, logger)
+
+		weddingRepo.On("GetByID", ctx, weddingID).Return(nil, errors.New("wedding not found"))
 
 		err := service.TrackRSVPSubmission(ctx, weddingID, rsvpID, sessionID, source, timeToComplete, req)
 		require.Error(t, err)
@@ -175,7 +200,7 @@ func TestAnalyticsService_TrackRSVPAbandonment(t *testing.T) {
 		analyticsRepo.On("TrackRSVPEvent", ctx, mock.AnythingOfType("*models.RSVPAnalytics")).Return(nil)
 
 		// Mock successful conversion tracking
-		analyticsRepo.On("TrackConversion", ctx, weddingID, sessionID, "rsvp_abandoned", 0.0, mock.AnythingOfType("map[string]interface {}")).Return(nil)
+		analyticsRepo.On("TrackConversion", ctx, mock.AnythingOfType("*models.ConversionEvent")).Return(nil)
 
 		err := service.TrackRSVPAbandonment(ctx, weddingID, sessionID, abandonedStep, formErrors, req)
 		require.NoError(t, err)
@@ -185,7 +210,7 @@ func TestAnalyticsService_TrackRSVPAbandonment(t *testing.T) {
 	})
 
 	t.Run("Error - wedding not found", func(t *testing.T) {
-		weddingRepo.On("GetByID", ctx, weddingID).Return(nil, assert.AnError)
+		weddingRepo.On("GetByID", ctx, weddingID).Return(nil, errors.New("wedding not found"))
 
 		err := service.TrackRSVPAbandonment(ctx, weddingID, sessionID, abandonedStep, formErrors, req)
 		require.Error(t, err)
@@ -231,7 +256,7 @@ func TestAnalyticsService_TrackConversion(t *testing.T) {
 	})
 
 	t.Run("Error - wedding not found", func(t *testing.T) {
-		weddingRepo.On("GetByID", ctx, weddingID).Return(nil, assert.AnError)
+		weddingRepo.On("GetByID", ctx, weddingID).Return(nil, errors.New("wedding not found"))
 
 		err := service.TrackConversion(ctx, weddingID, sessionID, event, value, properties)
 		require.Error(t, err)

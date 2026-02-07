@@ -1,4 +1,738 @@
 {
   "swagger": "2.0",
-  "paths": {}
+  "info": {
+    "title": "Wedding Invitation Backend API",
+    "description": "This is the REST API documentation for the Wedding Invitation Backend system. The API provides endpoints for managing wedding invitations, guests, RSVPs, and user authentication.",
+    "version": "1.0",
+    "contact": {
+      "name": "API Support",
+      "email": "support@swagger.io"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:8080",
+  "basePath": "/api/v1",
+  "schemes": ["http", "https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "tags": ["authentication"],
+        "summary": "Register a new user",
+        "description": "Create a new user account with email and password",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserRegistration"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "User registered successfully",
+            "schema": {
+              "$ref": "#/definitions/AuthResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "409": {
+            "description": "User already exists"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": ["authentication"],
+        "summary": "User login",
+        "description": "Authenticate user and return JWT tokens",
+        "parameters": [
+          {
+            "name": "credentials",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoginRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login successful",
+            "schema": {
+              "$ref": "#/definitions/AuthResponse"
+            }
+          },
+          "401": {
+            "description": "Invalid credentials"
+          }
+        }
+      }
+    },
+    "/auth/refresh": {
+      "post": {
+        "tags": ["authentication"],
+        "summary": "Refresh access token",
+        "description": "Use refresh token to get new access token",
+        "parameters": [
+          {
+            "name": "refreshToken",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "refresh_token": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Token refreshed successfully",
+            "schema": {
+              "$ref": "#/definitions/AuthResponse"
+            }
+          },
+          "401": {
+            "description": "Invalid refresh token"
+          }
+        }
+      }
+    },
+    "/weddings": {
+      "get": {
+        "tags": ["weddings"],
+        "summary": "Get user weddings",
+        "description": "Get all weddings for the authenticated user",
+        "security": [{"Bearer": []}],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "type": "integer",
+            "default": 1
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "type": "integer",
+            "default": 10
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of weddings",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "weddings": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Wedding"
+                  }
+                },
+                "total": {
+                  "type": "integer"
+                },
+                "page": {
+                  "type": "integer"
+                },
+                "limit": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["weddings"],
+        "summary": "Create new wedding",
+        "description": "Create a new wedding for the authenticated user",
+        "security": [{"Bearer": []}],
+        "parameters": [
+          {
+            "name": "wedding",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateWeddingRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Wedding created successfully",
+            "schema": {
+              "$ref": "#/definitions/Wedding"
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/weddings/{id}": {
+      "get": {
+        "tags": ["weddings"],
+        "summary": "Get wedding by ID",
+        "description": "Get a specific wedding by ID (accessible if public or owned)",
+        "security": [{"Bearer": []}],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Wedding details",
+            "schema": {
+              "$ref": "#/definitions/Wedding"
+            }
+          },
+          "404": {
+            "description": "Wedding not found"
+          }
+        }
+      },
+      "put": {
+        "tags": ["weddings"],
+        "summary": "Update wedding",
+        "description": "Update wedding details (only accessible by owner)",
+        "security": [{"Bearer": []}],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "wedding",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateWeddingRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Wedding updated successfully",
+            "schema": {
+              "$ref": "#/definitions/Wedding"
+            }
+          },
+          "404": {
+            "description": "Wedding not found"
+          },
+          "403": {
+            "description": "Not authorized"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["weddings"],
+        "summary": "Delete wedding",
+        "description": "Delete a wedding (only accessible by owner)",
+        "security": [{"Bearer": []}],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Wedding deleted successfully"
+          },
+          "404": {
+            "description": "Wedding not found"
+          },
+          "403": {
+            "description": "Not authorized"
+          }
+        }
+      }
+    },
+    "/public/weddings/{slug}": {
+      "get": {
+        "tags": ["public"],
+        "summary": "Get public wedding by slug",
+        "description": "Get wedding details using public slug (no authentication required)",
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Public wedding details",
+            "schema": {
+              "$ref": "#/definitions/PublicWedding"
+            }
+          },
+          "404": {
+            "description": "Wedding not found"
+          }
+        }
+      }
+    },
+    "/public/weddings/{slug}/rsvp": {
+      "post": {
+        "tags": ["public", "rsvp"],
+        "summary": "Submit RSVP",
+        "description": "Submit RSVP for a public wedding (no authentication required)",
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "rsvp",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RSVPSubmission"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "RSVP submitted successfully",
+            "schema": {
+              "$ref": "#/definitions/RSVP"
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/guests": {
+      "get": {
+        "tags": ["guests"],
+        "summary": "Get wedding guests",
+        "description": "Get all guests for a specific wedding",
+        "security": [{"Bearer": []}],
+        "parameters": [
+          {
+            "name": "wedding_id",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "type": "integer",
+            "default": 1
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "type": "integer",
+            "default": 50
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of guests",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "guests": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Guest"
+                  }
+                },
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/analytics/dashboard": {
+      "get": {
+        "tags": ["analytics"],
+        "summary": "Get analytics dashboard",
+        "description": "Get comprehensive analytics for user's weddings",
+        "security": [{"Bearer": []}],
+        "responses": {
+          "200": {
+            "description": "Analytics dashboard data",
+            "schema": {
+              "$ref": "#/definitions/AnalyticsDashboard"
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "tags": ["system"],
+        "summary": "Health check",
+        "description": "Check if the API is running",
+        "responses": {
+          "200": {
+            "description": "API is healthy",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "JWT token in format: Bearer {token}"
+    }
+  },
+  "definitions": {
+    "UserRegistration": {
+      "type": "object",
+      "required": ["email", "password", "first_name", "last_name"],
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "password": {
+          "type": "string",
+          "minLength": 8
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        }
+      }
+    },
+    "LoginRequest": {
+      "type": "object",
+      "required": ["email", "password"],
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "AuthResponse": {
+      "type": "object",
+      "properties": {
+        "access_token": {
+          "type": "string"
+        },
+        "refresh_token": {
+          "type": "string"
+        },
+        "token_type": {
+          "type": "string",
+          "example": "Bearer"
+        },
+        "expires_in": {
+          "type": "integer"
+        },
+        "user": {
+          "$ref": "#/definitions/User"
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Wedding": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "couple_names": {
+          "type": "string"
+        },
+        "wedding_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "venue": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["draft", "published", "archived"]
+        },
+        "is_public": {
+          "type": "boolean"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "CreateWeddingRequest": {
+      "type": "object",
+      "required": ["couple_names", "wedding_date"],
+      "properties": {
+        "couple_names": {
+          "type": "string"
+        },
+        "wedding_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "venue": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "is_public": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "UpdateWeddingRequest": {
+      "type": "object",
+      "properties": {
+        "couple_names": {
+          "type": "string"
+        },
+        "wedding_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "venue": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "is_public": {
+          "type": "boolean"
+        }
+      }
+    },
+    "PublicWedding": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "couple_names": {
+          "type": "string"
+        },
+        "wedding_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "venue": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "RSVPSubmission": {
+      "type": "object",
+      "required": ["first_name", "last_name", "email", "status"],
+      "properties": {
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["attending", "not-attending", "maybe"]
+        },
+        "attendance_count": {
+          "type": "integer",
+          "default": 1
+        },
+        "dietary_restrictions": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "RSVP": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "wedding_id": {
+          "type": "string"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "attendance_count": {
+          "type": "integer"
+        },
+        "submitted_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Guest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "wedding_id": {
+          "type": "string"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "relationship": {
+          "type": "string"
+        },
+        "side": {
+          "type": "string",
+          "enum": ["bride", "groom", "both"]
+        },
+        "rsvp_status": {
+          "type": "string",
+          "enum": ["pending", "attending", "not-attending", "maybe"]
+        },
+        "invitation_sent": {
+          "type": "boolean"
+        }
+      }
+    },
+    "AnalyticsDashboard": {
+      "type": "object",
+      "properties": {
+        "total_weddings": {
+          "type": "integer"
+        },
+        "total_guests": {
+          "type": "integer"
+        },
+        "total_rsvps": {
+          "type": "integer"
+        },
+        "rsvp_rate": {
+          "type": "number"
+        },
+        "page_views": {
+          "type": "integer"
+        },
+        "recent_activity": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  }
 }

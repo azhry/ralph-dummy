@@ -13,6 +13,7 @@ var validate = validator.New()
 func init() {
 	// Register custom validators if needed
 	validate.RegisterValidation("custom", validateCustom)
+	validate.RegisterValidation("slug", validateSlugFunc)
 }
 
 // ValidateStruct validates a struct and returns validation errors
@@ -112,6 +113,23 @@ func getErrorMessage(err validator.FieldError) string {
 func validateCustom(fl validator.FieldLevel) bool {
 	// Add custom validation logic here
 	return true
+}
+
+// validateSlugFunc validates a slug field
+func validateSlugFunc(fl validator.FieldLevel) bool {
+	slug := fl.Field().String()
+
+	if slug == "" {
+		return false
+	}
+
+	if len(slug) < 3 || len(slug) > 50 {
+		return false
+	}
+
+	// Slug should only contain alphanumeric characters and hyphens
+	slugRegex := regexp.MustCompile(`^[a-z0-9]+(?:-[a-z0-9]+)*$`)
+	return slugRegex.MatchString(slug)
 }
 
 // SanitizeString sanitizes a string by trimming spaces and converting to lowercase if needed
