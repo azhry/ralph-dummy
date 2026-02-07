@@ -1,0 +1,809 @@
+2026-02-07T19:04:11.238538Z DEBUG ralph_core::config: Loading configuration from file path=ralph.yml
+2026-02-07T19:04:11.238786Z DEBUG ralph_core::config: Configuration loaded backend=opencode has_v1_fields=false custom_hats=0
+2026-02-07T19:04:11.238832Z DEBUG keyring: creating entry with service ralph, user telegram-bot-token, and no target
+2026-02-07T19:04:11.238875Z DEBUG keyring: created entry KeyutilsCredential { session: KeyRing { id: KeySerialId(216265051) }, persistent: Some(KeyRing { id: KeySerialId(515422917) }), description: "keyring-rs:telegram-bot-token@ralph" }
+2026-02-07T19:04:11.238882Z DEBUG keyring: get password from entry KeyutilsCredential { session: KeyRing { id: KeySerialId(216265051) }, persistent: Some(KeyRing { id: KeySerialId(515422917) }), description: "keyring-rs:telegram-bot-token@ralph" }
+2026-02-07T19:04:11.253057Z DEBUG ralph_core::loop_lock: Acquired loop lock at /ralph-dummy/.ralph/loop.lock
+2026-02-07T19:04:11.253107Z DEBUG ralph: Acquired loop lock, running as primary loop
+2026-02-07T19:04:11.253155Z DEBUG ralph::process_management: Skipping setpgid: keeping foreground process group 2514268
+2026-02-07T19:04:11.253170Z DEBUG ralph::loop_runner: Resolving prompt content inline_prompt=None prompt_file=PROMPT.md
+2026-02-07T19:04:11.253177Z DEBUG ralph::loop_runner: Checking prompt file path=PROMPT.md exists=true
+2026-02-07T19:04:11.253196Z DEBUG ralph::loop_runner: Read prompt from file path=PROMPT.md len=3035
+2026-02-07T19:04:11.253292Z DEBUG ralph::loop_runner: Wrote loop ID marker file loop_id=primary-20260207-190411 marker="/ralph-dummy/.ralph/current-loop-id"
+2026-02-07T19:04:11.253406Z DEBUG ralph::loop_runner: Created events file for this run: .ralph/events-20260207-190411.jsonl
+2026-02-07T19:04:11.253487Z DEBUG ralph::loop_runner: Cleared scratchpad for fresh objective: "/ralph-dummy/.ralph/agent/scratchpad.md"
+2026-02-07T19:04:11.253522Z DEBUG ralph_core::event_loop: Solo mode: Ralph is the only coordinator
+2026-02-07T19:04:11.253607Z DEBUG keyring: creating entry with service ralph, user telegram-bot-token, and no target
+2026-02-07T19:04:11.253620Z DEBUG keyring: created entry KeyutilsCredential { session: KeyRing { id: KeySerialId(216265051) }, persistent: Some(KeyRing { id: KeySerialId(515422917) }), description: "keyring-rs:telegram-bot-token@ralph" }
+2026-02-07T19:04:11.253625Z DEBUG keyring: get password from entry KeyutilsCredential { session: KeyRing { id: KeySerialId(216265051) }, persistent: Some(KeyRing { id: KeySerialId(515422917) }), description: "keyring-rs:telegram-bot-token@ralph" }
+2026-02-07T19:04:11.253885Z  INFO ralph_telegram::service: Telegram service starting bot_token=8410...PUjY workspace=/ralph-dummy timeout_secs=120
+2026-02-07T19:04:11.254176Z DEBUG reqwest::connect: starting new connection: https://api.telegram.org/
+2026-02-07T19:04:11.254202Z DEBUG reqwest::connect: starting new connection: https://api.telegram.org/
+2026-02-07T19:04:11.254400Z DEBUG hyper::client::connect::dns: resolving host="api.telegram.org"
+2026-02-07T19:04:11.254435Z DEBUG hyper::client::connect::dns: resolving host="api.telegram.org"
+2026-02-07T19:04:11.273614Z DEBUG hyper::client::connect::http: connecting to 149.154.166.110:443
+2026-02-07T19:04:11.273629Z DEBUG hyper::client::connect::http: connecting to 149.154.166.110:443
+2026-02-07T19:04:11.447043Z DEBUG hyper::client::connect::http: connected to 149.154.166.110:443
+2026-02-07T19:04:11.447134Z DEBUG rustls::client::hs: No cached session for DnsName("api.telegram.org")
+2026-02-07T19:04:11.447218Z DEBUG rustls::client::hs: Not resuming any session
+2026-02-07T19:04:11.447715Z DEBUG hyper::client::connect::http: connected to 149.154.166.110:443
+2026-02-07T19:04:11.447739Z DEBUG rustls::client::hs: No cached session for DnsName("api.telegram.org")
+2026-02-07T19:04:11.447774Z DEBUG rustls::client::hs: Not resuming any session
+2026-02-07T19:04:11.622655Z DEBUG rustls::client::hs: Using ciphersuite TLS13_AES_256_GCM_SHA384
+2026-02-07T19:04:11.622711Z DEBUG rustls::client::tls13: Not resuming
+2026-02-07T19:04:11.622829Z DEBUG rustls::client::tls13: TLS1.3 encrypted extensions: [ServerNameAck, Protocols([ProtocolName(6832)])]
+2026-02-07T19:04:11.622857Z DEBUG rustls::client::hs: ALPN protocol is Some(b"h2")
+2026-02-07T19:04:11.624307Z DEBUG h2::client: binding client connection
+2026-02-07T19:04:11.624336Z DEBUG h2::client: client connection bound
+2026-02-07T19:04:11.624357Z DEBUG h2::codec::framed_write: send frame=Settings { flags: (0x0), enable_push: 0, initial_window_size: 2097152, max_frame_size: 16384 }
+2026-02-07T19:04:11.624497Z DEBUG rustls::client::hs: Using ciphersuite TLS13_AES_256_GCM_SHA384
+2026-02-07T19:04:11.624526Z DEBUG rustls::client::tls13: Not resuming
+2026-02-07T19:04:11.624531Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=WindowUpdate { stream_id: StreamId(0), size_increment: 5177345 }
+2026-02-07T19:04:11.624558Z DEBUG hyper::client::pool: pooling idle connection for ("https", api.telegram.org)
+2026-02-07T19:04:11.624619Z DEBUG rustls::client::tls13: TLS1.3 encrypted extensions: [ServerNameAck, Protocols([ProtocolName(6832)])]
+2026-02-07T19:04:11.624627Z DEBUG rustls::client::hs: ALPN protocol is Some(b"h2")
+2026-02-07T19:04:11.624657Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1), flags: (0x4: END_HEADERS) }
+2026-02-07T19:04:11.624679Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1), flags: (0x1: END_STREAM) }
+2026-02-07T19:04:11.625383Z DEBUG h2::client: binding client connection
+2026-02-07T19:04:11.625419Z DEBUG h2::client: client connection bound
+2026-02-07T19:04:11.625434Z DEBUG h2::codec::framed_write: send frame=Settings { flags: (0x0), enable_push: 0, initial_window_size: 2097152, max_frame_size: 16384 }
+2026-02-07T19:04:11.625486Z DEBUG hyper::client::pool: pooling idle connection for ("https", api.telegram.org)
+2026-02-07T19:04:11.625521Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=WindowUpdate { stream_id: StreamId(0), size_increment: 5177345 }
+2026-02-07T19:04:11.625533Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1), flags: (0x4: END_HEADERS) }
+2026-02-07T19:04:11.625546Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1), flags: (0x1: END_STREAM) }
+2026-02-07T19:04:11.797092Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Settings { flags: (0x0), max_concurrent_streams: 128, initial_window_size: 65536, max_frame_size: 16777215 }
+2026-02-07T19:04:11.797133Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Settings { flags: (0x1: ACK) }
+2026-02-07T19:04:11.797142Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(0), size_increment: 2147418112 }
+2026-02-07T19:04:11.797148Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Settings { flags: (0x1: ACK) }
+2026-02-07T19:04:11.797151Z DEBUG Connection{peer=Client}: h2::proto::settings: received settings ACK; applying Settings { flags: (0x0), enable_push: 0, initial_window_size: 2097152, max_frame_size: 16384 }
+2026-02-07T19:04:11.797156Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1), size_increment: 2147418111 }
+2026-02-07T19:04:11.798292Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Settings { flags: (0x0), max_concurrent_streams: 128, initial_window_size: 65536, max_frame_size: 16777215 }
+2026-02-07T19:04:11.798307Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Settings { flags: (0x1: ACK) }
+2026-02-07T19:04:11.798312Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(0), size_increment: 2147418112 }
+2026-02-07T19:04:11.798723Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Settings { flags: (0x1: ACK) }
+2026-02-07T19:04:11.798732Z DEBUG Connection{peer=Client}: h2::proto::settings: received settings ACK; applying Settings { flags: (0x0), enable_push: 0, initial_window_size: 2097152, max_frame_size: 16384 }
+2026-02-07T19:04:11.798758Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1), size_increment: 2147418111 }
+2026-02-07T19:04:11.969877Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1), flags: (0x4: END_HEADERS) }
+2026-02-07T19:04:11.969925Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1), flags: (0x1: END_STREAM) }
+2026-02-07T19:04:11.970047Z  INFO ralph_telegram::service: Registered bot commands with Telegram API
+2026-02-07T19:04:11.970053Z  INFO ralph_telegram::service: Telegram polling task started loop_id=main
+2026-02-07T19:04:11.970118Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:04:11.970180Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(3), flags: (0x4: END_HEADERS) }
+2026-02-07T19:04:11.970209Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(3), flags: (0x1: END_STREAM) }
+2026-02-07T19:04:11.995929Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1), flags: (0x4: END_HEADERS) }
+2026-02-07T19:04:11.995953Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1), flags: (0x1: END_STREAM) }
+2026-02-07T19:04:11.996156Z  INFO ralph_telegram::service: Sent greeting to chat 1167233989
+2026-02-07T19:04:11.996173Z  INFO ralph_telegram::service: Telegram service started — polling for incoming messages
+2026-02-07T19:04:11.996178Z  INFO ralph::loop_runner: Robot human-in-the-loop service active bot_token=8410...PUjY timeout_secs=120
+2026-02-07T19:04:11.996216Z DEBUG ralph_core::event_loop: Published task.start event topic="task.start"
+2026-02-07T19:04:11.996362Z DEBUG ralph_core::event_logger: Event logged topic=task.start iteration=0
+2026-02-07T19:04:12.097218Z DEBUG ralph::loop_runner: Execution mode configured execution_mode=autonomous
+2026-02-07T19:04:12.097387Z DEBUG ralph::loop_runner: Iteration 1/100 - ralph active
+2026-02-07T19:04:12.097501Z  INFO ralph_core::event_loop: Memory injection check: enabled=true, inject=Auto, workspace_root="/ralph-dummy"
+2026-02-07T19:04:12.097515Z  INFO ralph_core::event_loop: Looking for memories at: "/ralph-dummy/.ralph/agent/memories.md" (exists: false)
+2026-02-07T19:04:12.097523Z  INFO ralph_core::event_loop: Successfully loaded 0 memories from store
+2026-02-07T19:04:12.097526Z  INFO ralph_core::event_loop: Memory store is empty - no memories to inject
+2026-02-07T19:04:12.097539Z DEBUG ralph_core::event_loop: Injected ralph-tools skill from registry
+2026-02-07T19:04:12.097544Z DEBUG ralph_core::event_loop: Injected robot interaction skill from registry
+2026-02-07T19:04:12.097562Z DEBUG ralph_core::event_loop: Scratchpad not found at "/ralph-dummy/.ralph/agent/scratchpad.md", skipping injection
+2026-02-07T19:04:12.097757Z  INFO ralph_core::event_loop: Injecting ready tasks (1 ready, 1 open, 80 closed) into prompt
+2026-02-07T19:04:12.097774Z DEBUG ralph_core::event_loop: build_prompt: routing to HatlessRalph (solo mode)
+2026-02-07T19:04:12.100289Z DEBUG ralph::loop_runner: Using global backend for 'ralph': opencode
+2026-02-07T19:04:12.100497Z DEBUG ralph_adapters::cli_backend: Built CLI command command=opencode args_count=2 prompt_len=23333 interactive=false uses_stdin=false uses_temp_file=false
+2026-02-07T19:04:12.101833Z DEBUG ralph_adapters::pty_executor: Spawning PTY output reader thread (streaming mode)
+2026-02-07T19:04:12.144026Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(3), size_increment: 2147418111 }
+2026-02-07T19:04:22.146118Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(3), flags: (0x4: END_HEADERS) }
+2026-02-07T19:04:22.146187Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(3), flags: (0x1: END_STREAM) }
+2026-02-07T19:04:22.146363Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:04:22.146438Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(5), flags: (0x4: END_HEADERS) }
+2026-02-07T19:04:22.146469Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(5), flags: (0x1: END_STREAM) }
+2026-02-07T19:04:22.320135Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(5), size_increment: 2147418111 }
+2026-02-07T19:04:32.321333Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(5), flags: (0x4: END_HEADERS) }
+2026-02-07T19:04:32.321389Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(5), flags: (0x1: END_STREAM) }
+2026-02-07T19:04:32.321494Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:04:32.321570Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(7), flags: (0x4: END_HEADERS) }
+2026-02-07T19:04:32.321600Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(7), flags: (0x1: END_STREAM) }
+2026-02-07T19:04:32.494383Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(7), size_increment: 2147418111 }
+2026-02-07T19:04:42.496660Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(7), flags: (0x4: END_HEADERS) }
+2026-02-07T19:04:42.496707Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(7), flags: (0x1: END_STREAM) }
+2026-02-07T19:04:42.496822Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:04:42.496877Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(9), flags: (0x4: END_HEADERS) }
+2026-02-07T19:04:42.496897Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(9), flags: (0x1: END_STREAM) }
+2026-02-07T19:04:42.669800Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(9), size_increment: 2147418111 }
+2026-02-07T19:04:52.671105Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(9), flags: (0x4: END_HEADERS) }
+2026-02-07T19:04:52.671164Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(9), flags: (0x1: END_STREAM) }
+2026-02-07T19:04:52.671263Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:04:52.671329Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(11), flags: (0x4: END_HEADERS) }
+2026-02-07T19:04:52.671364Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(11), flags: (0x1: END_STREAM) }
+2026-02-07T19:04:52.854144Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(11), size_increment: 2147418111 }
+2026-02-07T19:05:00.084367Z DEBUG ralph_adapters::pty_executor: PTY reader: EOF
+2026-02-07T19:05:00.084449Z DEBUG ralph_adapters::pty_executor: Output channel closed
+2026-02-07T19:05:00.135557Z DEBUG ralph_core::event_loop: Publishing event from JSONL topic=task.start
+2026-02-07T19:05:00.135595Z DEBUG ralph::loop_runner: Iteration 2/100 - ralph active
+2026-02-07T19:05:00.135673Z  INFO ralph_core::event_loop: Memory injection check: enabled=true, inject=Auto, workspace_root="/ralph-dummy"
+2026-02-07T19:05:00.135685Z  INFO ralph_core::event_loop: Looking for memories at: "/ralph-dummy/.ralph/agent/memories.md" (exists: false)
+2026-02-07T19:05:00.135692Z  INFO ralph_core::event_loop: Successfully loaded 0 memories from store
+2026-02-07T19:05:00.135706Z  INFO ralph_core::event_loop: Memory store is empty - no memories to inject
+2026-02-07T19:05:00.135721Z DEBUG ralph_core::event_loop: Injected ralph-tools skill from registry
+2026-02-07T19:05:00.135728Z DEBUG ralph_core::event_loop: Injected robot interaction skill from registry
+2026-02-07T19:05:00.135759Z  INFO ralph_core::event_loop: Injecting scratchpad (1028 chars) into prompt
+2026-02-07T19:05:00.135934Z  INFO ralph_core::event_loop: Injecting ready tasks (1 ready, 1 open, 80 closed) into prompt
+2026-02-07T19:05:00.135957Z DEBUG ralph_core::event_loop: build_prompt: routing to HatlessRalph (solo mode)
+2026-02-07T19:05:00.137400Z DEBUG ralph::loop_runner: Using global backend for 'ralph': opencode
+2026-02-07T19:05:00.137528Z DEBUG ralph_adapters::cli_backend: Built CLI command command=opencode args_count=2 prompt_len=21953 interactive=false uses_stdin=false uses_temp_file=false
+2026-02-07T19:05:00.138718Z DEBUG ralph_adapters::pty_executor: Spawning PTY output reader thread (streaming mode)
+2026-02-07T19:05:02.857366Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(11), flags: (0x4: END_HEADERS) }
+2026-02-07T19:05:02.857407Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(11), flags: (0x1: END_STREAM) }
+2026-02-07T19:05:02.857529Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:05:02.857666Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(13), flags: (0x4: END_HEADERS) }
+2026-02-07T19:05:02.857694Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(13), flags: (0x1: END_STREAM) }
+2026-02-07T19:05:03.031305Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(13), size_increment: 2147418111 }
+2026-02-07T19:05:13.033486Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(13), flags: (0x4: END_HEADERS) }
+2026-02-07T19:05:13.033533Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(13), flags: (0x1: END_STREAM) }
+2026-02-07T19:05:13.033640Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:05:13.033691Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(15), flags: (0x4: END_HEADERS) }
+2026-02-07T19:05:13.033710Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(15), flags: (0x1: END_STREAM) }
+2026-02-07T19:05:13.210722Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(15), size_increment: 2147418111 }
+2026-02-07T19:05:23.213952Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(15), flags: (0x4: END_HEADERS) }
+2026-02-07T19:05:23.214002Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(15), flags: (0x1: END_STREAM) }
+2026-02-07T19:05:23.214160Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:05:23.214220Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(17), flags: (0x4: END_HEADERS) }
+2026-02-07T19:05:23.214240Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(17), flags: (0x1: END_STREAM) }
+2026-02-07T19:05:23.388732Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(17), size_increment: 2147418111 }
+2026-02-07T19:05:28.125418Z DEBUG ralph_adapters::pty_executor: PTY reader: EOF
+2026-02-07T19:05:28.125512Z DEBUG ralph_adapters::pty_executor: Output channel closed
+2026-02-07T19:05:28.177393Z DEBUG ralph::loop_runner: No pending events after iteration. Agent may have failed to publish a valid event. Expected one of: []. Loop will terminate on next iteration. hat=ralph expected_topics=[]
+2026-02-07T19:05:28.177438Z DEBUG ralph_core::event_loop: Injecting fallback event to recover - triggering Ralph with task.resume
+2026-02-07T19:05:28.177453Z DEBUG ralph::loop_runner: Iteration 3/100 - ralph active
+2026-02-07T19:05:28.177516Z  INFO ralph_core::event_loop: Memory injection check: enabled=true, inject=Auto, workspace_root="/ralph-dummy"
+2026-02-07T19:05:28.177525Z  INFO ralph_core::event_loop: Looking for memories at: "/ralph-dummy/.ralph/agent/memories.md" (exists: false)
+2026-02-07T19:05:28.177530Z  INFO ralph_core::event_loop: Successfully loaded 0 memories from store
+2026-02-07T19:05:28.177532Z  INFO ralph_core::event_loop: Memory store is empty - no memories to inject
+2026-02-07T19:05:28.177553Z DEBUG ralph_core::event_loop: Injected ralph-tools skill from registry
+2026-02-07T19:05:28.177563Z DEBUG ralph_core::event_loop: Injected robot interaction skill from registry
+2026-02-07T19:05:28.177596Z  INFO ralph_core::event_loop: Injecting scratchpad (1359 chars) into prompt
+2026-02-07T19:05:28.177772Z  INFO ralph_core::event_loop: Injecting ready tasks (1 ready, 1 open, 80 closed) into prompt
+2026-02-07T19:05:28.177789Z DEBUG ralph_core::event_loop: build_prompt: routing to HatlessRalph (solo mode)
+2026-02-07T19:05:28.179210Z DEBUG ralph::loop_runner: Using global backend for 'ralph': opencode
+2026-02-07T19:05:28.179336Z DEBUG ralph_adapters::cli_backend: Built CLI command command=opencode args_count=2 prompt_len=21884 interactive=false uses_stdin=false uses_temp_file=false
+2026-02-07T19:05:28.180595Z DEBUG ralph_adapters::pty_executor: Spawning PTY output reader thread (streaming mode)
+2026-02-07T19:05:33.389764Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(17), flags: (0x4: END_HEADERS) }
+2026-02-07T19:05:33.389845Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(17), flags: (0x1: END_STREAM) }
+2026-02-07T19:05:33.390009Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:05:33.390141Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(19), flags: (0x4: END_HEADERS) }
+2026-02-07T19:05:33.390185Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(19), flags: (0x1: END_STREAM) }
+2026-02-07T19:05:33.570211Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(19), size_increment: 2147418111 }
+2026-02-07T19:05:41.625844Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=GoAway { error_code: NO_ERROR, last_stream_id: StreamId(0) }
+2026-02-07T19:05:41.625898Z DEBUG Connection{peer=Client}: h2::proto::connection: Connection::poll; connection error error=GoAway(b"", NO_ERROR, Library)
+2026-02-07T19:05:41.625966Z DEBUG Connection{peer=Client}: rustls::common_state: Sending warning alert CloseNotify
+2026-02-07T19:05:41.945587Z DEBUG ralph_adapters::pty_executor: PTY reader: EOF
+2026-02-07T19:05:41.945698Z DEBUG ralph_adapters::pty_executor: Output channel closed
+2026-02-07T19:05:41.997123Z DEBUG ralph::loop_runner: No pending events after iteration. Agent may have failed to publish a valid event. Expected one of: []. Loop will terminate on next iteration. hat=ralph expected_topics=[]
+2026-02-07T19:05:41.997161Z DEBUG ralph_core::event_loop: Injecting fallback event to recover - triggering Ralph with task.resume
+2026-02-07T19:05:41.997177Z DEBUG ralph::loop_runner: Iteration 4/100 - ralph active
+2026-02-07T19:05:41.997241Z  INFO ralph_core::event_loop: Memory injection check: enabled=true, inject=Auto, workspace_root="/ralph-dummy"
+2026-02-07T19:05:41.997250Z  INFO ralph_core::event_loop: Looking for memories at: "/ralph-dummy/.ralph/agent/memories.md" (exists: false)
+2026-02-07T19:05:41.997255Z  INFO ralph_core::event_loop: Successfully loaded 0 memories from store
+2026-02-07T19:05:41.997257Z  INFO ralph_core::event_loop: Memory store is empty - no memories to inject
+2026-02-07T19:05:41.997280Z DEBUG ralph_core::event_loop: Injected ralph-tools skill from registry
+2026-02-07T19:05:41.997287Z DEBUG ralph_core::event_loop: Injected robot interaction skill from registry
+2026-02-07T19:05:41.997323Z  INFO ralph_core::event_loop: Injecting scratchpad (1359 chars) into prompt
+2026-02-07T19:05:41.997494Z  INFO ralph_core::event_loop: Injecting ready tasks (1 ready, 1 open, 80 closed) into prompt
+2026-02-07T19:05:41.997516Z DEBUG ralph_core::event_loop: build_prompt: routing to HatlessRalph (solo mode)
+2026-02-07T19:05:41.998879Z DEBUG ralph::loop_runner: Using global backend for 'ralph': opencode
+2026-02-07T19:05:41.998997Z DEBUG ralph_adapters::cli_backend: Built CLI command command=opencode args_count=2 prompt_len=21884 interactive=false uses_stdin=false uses_temp_file=false
+2026-02-07T19:05:42.000278Z DEBUG ralph_adapters::pty_executor: Spawning PTY output reader thread (streaming mode)
+2026-02-07T19:05:43.573683Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(19), flags: (0x4: END_HEADERS) }
+2026-02-07T19:05:43.573724Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(19), flags: (0x1: END_STREAM) }
+2026-02-07T19:05:43.573854Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:05:43.573940Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(21), flags: (0x4: END_HEADERS) }
+2026-02-07T19:05:43.573974Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(21), flags: (0x1: END_STREAM) }
+2026-02-07T19:05:43.746764Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(21), size_increment: 2147418111 }
+2026-02-07T19:05:51.793322Z DEBUG ralph_adapters::pty_executor: PTY reader: EOF
+2026-02-07T19:05:51.793417Z DEBUG ralph_adapters::pty_executor: Output channel closed
+2026-02-07T19:05:51.844426Z DEBUG ralph::loop_runner: No pending events after iteration. Agent may have failed to publish a valid event. Expected one of: []. Loop will terminate on next iteration. hat=ralph expected_topics=[]
+2026-02-07T19:05:51.844483Z DEBUG ralph_core::event_loop: Injecting fallback event to recover - triggering Ralph with task.resume
+2026-02-07T19:05:51.844507Z DEBUG ralph::loop_runner: Iteration 5/100 - ralph active
+2026-02-07T19:05:51.844613Z  INFO ralph_core::event_loop: Memory injection check: enabled=true, inject=Auto, workspace_root="/ralph-dummy"
+2026-02-07T19:05:51.844628Z  INFO ralph_core::event_loop: Looking for memories at: "/ralph-dummy/.ralph/agent/memories.md" (exists: false)
+2026-02-07T19:05:51.844636Z  INFO ralph_core::event_loop: Successfully loaded 0 memories from store
+2026-02-07T19:05:51.844640Z  INFO ralph_core::event_loop: Memory store is empty - no memories to inject
+2026-02-07T19:05:51.844653Z DEBUG ralph_core::event_loop: Injected ralph-tools skill from registry
+2026-02-07T19:05:51.844662Z DEBUG ralph_core::event_loop: Injected robot interaction skill from registry
+2026-02-07T19:05:51.844713Z  INFO ralph_core::event_loop: Injecting scratchpad (1359 chars) into prompt
+2026-02-07T19:05:51.845021Z  INFO ralph_core::event_loop: Injecting ready tasks (1 ready, 1 open, 80 closed) into prompt
+2026-02-07T19:05:51.845052Z DEBUG ralph_core::event_loop: build_prompt: routing to HatlessRalph (solo mode)
+2026-02-07T19:05:51.846480Z DEBUG ralph::loop_runner: Using global backend for 'ralph': opencode
+2026-02-07T19:05:51.846684Z DEBUG ralph_adapters::cli_backend: Built CLI command command=opencode args_count=2 prompt_len=21884 interactive=false uses_stdin=false uses_temp_file=false
+2026-02-07T19:05:51.848291Z DEBUG ralph_adapters::pty_executor: Spawning PTY output reader thread (streaming mode)
+2026-02-07T19:05:53.750260Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(21), flags: (0x4: END_HEADERS) }
+2026-02-07T19:05:53.750311Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(21), flags: (0x1: END_STREAM) }
+2026-02-07T19:05:53.750443Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:05:53.750522Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(23), flags: (0x4: END_HEADERS) }
+2026-02-07T19:05:53.750554Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(23), flags: (0x1: END_STREAM) }
+2026-02-07T19:05:53.923482Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(23), size_increment: 2147418111 }
+2026-02-07T19:06:03.924902Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(23), flags: (0x4: END_HEADERS) }
+2026-02-07T19:06:03.924977Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(23), flags: (0x1: END_STREAM) }
+2026-02-07T19:06:03.925171Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:06:03.925245Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(25), flags: (0x4: END_HEADERS) }
+2026-02-07T19:06:03.925281Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(25), flags: (0x1: END_STREAM) }
+2026-02-07T19:06:04.101300Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(25), size_increment: 2147418111 }
+2026-02-07T19:06:11.308512Z DEBUG ralph_adapters::pty_executor: PTY reader: EOF
+2026-02-07T19:06:11.308608Z DEBUG ralph_adapters::pty_executor: Output channel closed
+2026-02-07T19:06:11.308963Z DEBUG ralph::loop_runner: No pending events after iteration. Agent may have failed to publish a valid event. Expected one of: []. Loop will terminate on next iteration. hat=ralph expected_topics=[]
+2026-02-07T19:06:11.308986Z DEBUG ralph_core::event_loop: Injecting fallback event to recover - triggering Ralph with task.resume
+2026-02-07T19:06:11.309014Z DEBUG ralph::loop_runner: Iteration 6/100 - ralph active
+2026-02-07T19:06:11.309119Z  INFO ralph_core::event_loop: Memory injection check: enabled=true, inject=Auto, workspace_root="/ralph-dummy"
+2026-02-07T19:06:11.309136Z  INFO ralph_core::event_loop: Looking for memories at: "/ralph-dummy/.ralph/agent/memories.md" (exists: false)
+2026-02-07T19:06:11.309142Z  INFO ralph_core::event_loop: Successfully loaded 0 memories from store
+2026-02-07T19:06:11.309146Z  INFO ralph_core::event_loop: Memory store is empty - no memories to inject
+2026-02-07T19:06:11.309160Z DEBUG ralph_core::event_loop: Injected ralph-tools skill from registry
+2026-02-07T19:06:11.309173Z DEBUG ralph_core::event_loop: Injected robot interaction skill from registry
+2026-02-07T19:06:11.309214Z  INFO ralph_core::event_loop: Injecting scratchpad (1359 chars) into prompt
+2026-02-07T19:06:11.309417Z  INFO ralph_core::event_loop: Injecting ready tasks (1 ready, 1 open, 80 closed) into prompt
+2026-02-07T19:06:11.309445Z DEBUG ralph_core::event_loop: build_prompt: routing to HatlessRalph (solo mode)
+2026-02-07T19:06:11.312529Z DEBUG ralph::loop_runner: Using global backend for 'ralph': opencode
+2026-02-07T19:06:11.312737Z DEBUG ralph_adapters::cli_backend: Built CLI command command=opencode args_count=2 prompt_len=21884 interactive=false uses_stdin=false uses_temp_file=false
+2026-02-07T19:06:11.314254Z DEBUG ralph_adapters::pty_executor: Spawning PTY output reader thread (streaming mode)
+2026-02-07T19:06:14.111132Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(25), flags: (0x4: END_HEADERS) }
+2026-02-07T19:06:14.111204Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(25), flags: (0x1: END_STREAM) }
+2026-02-07T19:06:14.111444Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:06:14.111569Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(27), flags: (0x4: END_HEADERS) }
+2026-02-07T19:06:14.111660Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(27), flags: (0x1: END_STREAM) }
+2026-02-07T19:06:14.284934Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(27), size_increment: 2147418111 }
+2026-02-07T19:06:24.286246Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(27), flags: (0x4: END_HEADERS) }
+2026-02-07T19:06:24.286296Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(27), flags: (0x1: END_STREAM) }
+2026-02-07T19:06:24.286389Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:06:24.286462Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(29), flags: (0x4: END_HEADERS) }
+2026-02-07T19:06:24.286492Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(29), flags: (0x1: END_STREAM) }
+2026-02-07T19:06:24.466421Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(29), size_increment: 2147418111 }
+2026-02-07T19:06:29.893257Z DEBUG ralph_adapters::pty_executor: PTY reader: EOF
+2026-02-07T19:06:29.893357Z DEBUG ralph_adapters::pty_executor: Output channel closed
+2026-02-07T19:06:29.944088Z DEBUG ralph::loop_runner: No pending events after iteration. Agent may have failed to publish a valid event. Expected one of: []. Loop will terminate on next iteration. hat=ralph expected_topics=[]
+2026-02-07T19:06:29.944116Z DEBUG ralph_core::event_loop: Injecting fallback event to recover - triggering Ralph with task.resume
+2026-02-07T19:06:29.944132Z DEBUG ralph::loop_runner: Iteration 7/100 - ralph active
+2026-02-07T19:06:29.944212Z  INFO ralph_core::event_loop: Memory injection check: enabled=true, inject=Auto, workspace_root="/ralph-dummy"
+2026-02-07T19:06:29.944223Z  INFO ralph_core::event_loop: Looking for memories at: "/ralph-dummy/.ralph/agent/memories.md" (exists: false)
+2026-02-07T19:06:29.944228Z  INFO ralph_core::event_loop: Successfully loaded 0 memories from store
+2026-02-07T19:06:29.944230Z  INFO ralph_core::event_loop: Memory store is empty - no memories to inject
+2026-02-07T19:06:29.944238Z DEBUG ralph_core::event_loop: Injected ralph-tools skill from registry
+2026-02-07T19:06:29.944243Z DEBUG ralph_core::event_loop: Injected robot interaction skill from registry
+2026-02-07T19:06:29.944275Z  INFO ralph_core::event_loop: Injecting scratchpad (1359 chars) into prompt
+2026-02-07T19:06:29.944471Z  INFO ralph_core::event_loop: Injecting ready tasks (1 ready, 1 open, 80 closed) into prompt
+2026-02-07T19:06:29.944495Z DEBUG ralph_core::event_loop: build_prompt: routing to HatlessRalph (solo mode)
+2026-02-07T19:06:29.945927Z DEBUG ralph::loop_runner: Using global backend for 'ralph': opencode
+2026-02-07T19:06:29.946051Z DEBUG ralph_adapters::cli_backend: Built CLI command command=opencode args_count=2 prompt_len=21884 interactive=false uses_stdin=false uses_temp_file=false
+2026-02-07T19:06:29.947338Z DEBUG ralph_adapters::pty_executor: Spawning PTY output reader thread (streaming mode)
+2026-02-07T19:06:34.470203Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(29), flags: (0x4: END_HEADERS) }
+2026-02-07T19:06:34.470271Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(29), flags: (0x1: END_STREAM) }
+2026-02-07T19:06:34.470423Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:06:34.470490Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(31), flags: (0x4: END_HEADERS) }
+2026-02-07T19:06:34.470521Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(31), flags: (0x1: END_STREAM) }
+2026-02-07T19:06:34.644112Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(31), size_increment: 2147418111 }
+2026-02-07T19:06:44.645701Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(31), flags: (0x4: END_HEADERS) }
+2026-02-07T19:06:44.645749Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(31), flags: (0x1: END_STREAM) }
+2026-02-07T19:06:44.645894Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:06:44.645958Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(33), flags: (0x4: END_HEADERS) }
+2026-02-07T19:06:44.645988Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(33), flags: (0x1: END_STREAM) }
+2026-02-07T19:06:44.818830Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(33), size_increment: 2147418111 }
+2026-02-07T19:06:54.821195Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(33), flags: (0x4: END_HEADERS) }
+2026-02-07T19:06:54.821251Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(33), flags: (0x1: END_STREAM) }
+2026-02-07T19:06:54.821344Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:06:54.821427Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(35), flags: (0x4: END_HEADERS) }
+2026-02-07T19:06:54.821458Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(35), flags: (0x1: END_STREAM) }
+2026-02-07T19:06:54.994550Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(35), size_increment: 2147418111 }
+2026-02-07T19:07:04.996416Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(35), flags: (0x4: END_HEADERS) }
+2026-02-07T19:07:04.996496Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(35), flags: (0x1: END_STREAM) }
+2026-02-07T19:07:04.996588Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:07:04.996645Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(37), flags: (0x4: END_HEADERS) }
+2026-02-07T19:07:04.996675Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(37), flags: (0x1: END_STREAM) }
+2026-02-07T19:07:05.169555Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(37), size_increment: 2147418111 }
+2026-02-07T19:07:06.791948Z DEBUG ralph_adapters::pty_executor: PTY reader: EOF
+2026-02-07T19:07:06.792026Z DEBUG ralph_adapters::pty_executor: Output channel closed
+2026-02-07T19:07:06.843894Z DEBUG ralph::loop_runner: No pending events after iteration. Agent may have failed to publish a valid event. Expected one of: []. Loop will terminate on next iteration. hat=ralph expected_topics=[]
+2026-02-07T19:07:06.843920Z DEBUG ralph_core::event_loop: Injecting fallback event to recover - triggering Ralph with task.resume
+2026-02-07T19:07:06.843941Z DEBUG ralph::loop_runner: Iteration 8/100 - ralph active
+2026-02-07T19:07:06.844009Z  INFO ralph_core::event_loop: Memory injection check: enabled=true, inject=Auto, workspace_root="/ralph-dummy"
+2026-02-07T19:07:06.844019Z  INFO ralph_core::event_loop: Looking for memories at: "/ralph-dummy/.ralph/agent/memories.md" (exists: false)
+2026-02-07T19:07:06.844024Z  INFO ralph_core::event_loop: Successfully loaded 0 memories from store
+2026-02-07T19:07:06.844026Z  INFO ralph_core::event_loop: Memory store is empty - no memories to inject
+2026-02-07T19:07:06.844034Z DEBUG ralph_core::event_loop: Injected ralph-tools skill from registry
+2026-02-07T19:07:06.844039Z DEBUG ralph_core::event_loop: Injected robot interaction skill from registry
+2026-02-07T19:07:06.844103Z  INFO ralph_core::event_loop: Injecting scratchpad (1359 chars) into prompt
+2026-02-07T19:07:06.844315Z  INFO ralph_core::event_loop: Injecting ready tasks (2 ready, 2 open, 80 closed) into prompt
+2026-02-07T19:07:06.844341Z DEBUG ralph_core::event_loop: build_prompt: routing to HatlessRalph (solo mode)
+2026-02-07T19:07:06.846175Z DEBUG ralph::loop_runner: Using global backend for 'ralph': opencode
+2026-02-07T19:07:06.846295Z DEBUG ralph_adapters::cli_backend: Built CLI command command=opencode args_count=2 prompt_len=22008 interactive=false uses_stdin=false uses_temp_file=false
+2026-02-07T19:07:06.847830Z DEBUG ralph_adapters::pty_executor: Spawning PTY output reader thread (streaming mode)
+2026-02-07T19:07:15.170347Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(37), flags: (0x4: END_HEADERS) }
+2026-02-07T19:07:15.170403Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(37), flags: (0x1: END_STREAM) }
+2026-02-07T19:07:15.170520Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:07:15.170600Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(39), flags: (0x4: END_HEADERS) }
+2026-02-07T19:07:15.170640Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(39), flags: (0x1: END_STREAM) }
+2026-02-07T19:07:15.343360Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(39), size_increment: 2147418111 }
+2026-02-07T19:07:15.380513Z DEBUG ralph_adapters::pty_executor: PTY reader: EOF
+2026-02-07T19:07:15.380617Z DEBUG ralph_adapters::pty_executor: Output channel closed
+2026-02-07T19:07:15.380882Z DEBUG ralph::loop_runner: No pending events after iteration. Agent may have failed to publish a valid event. Expected one of: []. Loop will terminate on next iteration. hat=ralph expected_topics=[]
+2026-02-07T19:07:15.380906Z DEBUG ralph_core::event_loop: Injecting fallback event to recover - triggering Ralph with task.resume
+2026-02-07T19:07:15.380923Z DEBUG ralph::loop_runner: Iteration 9/100 - ralph active
+2026-02-07T19:07:15.381002Z  INFO ralph_core::event_loop: Memory injection check: enabled=true, inject=Auto, workspace_root="/ralph-dummy"
+2026-02-07T19:07:15.381014Z  INFO ralph_core::event_loop: Looking for memories at: "/ralph-dummy/.ralph/agent/memories.md" (exists: false)
+2026-02-07T19:07:15.381020Z  INFO ralph_core::event_loop: Successfully loaded 0 memories from store
+2026-02-07T19:07:15.381023Z  INFO ralph_core::event_loop: Memory store is empty - no memories to inject
+2026-02-07T19:07:15.381035Z DEBUG ralph_core::event_loop: Injected ralph-tools skill from registry
+2026-02-07T19:07:15.381042Z DEBUG ralph_core::event_loop: Injected robot interaction skill from registry
+2026-02-07T19:07:15.381091Z  INFO ralph_core::event_loop: Injecting scratchpad (1359 chars) into prompt
+2026-02-07T19:07:15.381278Z  INFO ralph_core::event_loop: Injecting ready tasks (2 ready, 2 open, 80 closed) into prompt
+2026-02-07T19:07:15.381305Z DEBUG ralph_core::event_loop: build_prompt: routing to HatlessRalph (solo mode)
+2026-02-07T19:07:15.383025Z DEBUG ralph::loop_runner: Using global backend for 'ralph': opencode
+2026-02-07T19:07:15.383162Z DEBUG ralph_adapters::cli_backend: Built CLI command command=opencode args_count=2 prompt_len=22008 interactive=false uses_stdin=false uses_temp_file=false
+2026-02-07T19:07:15.384409Z DEBUG ralph_adapters::pty_executor: Spawning PTY output reader thread (streaming mode)
+2026-02-07T19:07:25.345129Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(39), flags: (0x4: END_HEADERS) }
+2026-02-07T19:07:25.345189Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(39), flags: (0x1: END_STREAM) }
+2026-02-07T19:07:25.345306Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:07:25.345376Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(41), flags: (0x4: END_HEADERS) }
+2026-02-07T19:07:25.345395Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(41), flags: (0x1: END_STREAM) }
+2026-02-07T19:07:25.526462Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(41), size_increment: 2147418111 }
+2026-02-07T19:07:35.050650Z DEBUG ralph_adapters::pty_executor: PTY reader: EOF
+2026-02-07T19:07:35.050803Z DEBUG ralph_adapters::pty_executor: Output channel closed
+2026-02-07T19:07:35.051057Z DEBUG ralph::loop_runner: No pending events after iteration. Agent may have failed to publish a valid event. Expected one of: []. Loop will terminate on next iteration. hat=ralph expected_topics=[]
+2026-02-07T19:07:35.051106Z DEBUG ralph_core::event_loop: Injecting fallback event to recover - triggering Ralph with task.resume
+2026-02-07T19:07:35.051129Z DEBUG ralph::loop_runner: Iteration 10/100 - ralph active
+2026-02-07T19:07:35.051200Z  INFO ralph_core::event_loop: Memory injection check: enabled=true, inject=Auto, workspace_root="/ralph-dummy"
+2026-02-07T19:07:35.051209Z  INFO ralph_core::event_loop: Looking for memories at: "/ralph-dummy/.ralph/agent/memories.md" (exists: false)
+2026-02-07T19:07:35.051214Z  INFO ralph_core::event_loop: Successfully loaded 0 memories from store
+2026-02-07T19:07:35.051217Z  INFO ralph_core::event_loop: Memory store is empty - no memories to inject
+2026-02-07T19:07:35.051234Z DEBUG ralph_core::event_loop: Injected ralph-tools skill from registry
+2026-02-07T19:07:35.051240Z DEBUG ralph_core::event_loop: Injected robot interaction skill from registry
+2026-02-07T19:07:35.051280Z  INFO ralph_core::event_loop: Injecting scratchpad (1359 chars) into prompt
+2026-02-07T19:07:35.051477Z  INFO ralph_core::event_loop: Injecting ready tasks (2 ready, 2 open, 80 closed) into prompt
+2026-02-07T19:07:35.051502Z DEBUG ralph_core::event_loop: build_prompt: routing to HatlessRalph (solo mode)
+2026-02-07T19:07:35.052668Z DEBUG ralph::loop_runner: Using global backend for 'ralph': opencode
+2026-02-07T19:07:35.052794Z DEBUG ralph_adapters::cli_backend: Built CLI command command=opencode args_count=2 prompt_len=22008 interactive=false uses_stdin=false uses_temp_file=false
+2026-02-07T19:07:35.054304Z DEBUG ralph_adapters::pty_executor: Spawning PTY output reader thread (streaming mode)
+2026-02-07T19:07:35.527321Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(41), flags: (0x4: END_HEADERS) }
+2026-02-07T19:07:35.527377Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(41), flags: (0x1: END_STREAM) }
+2026-02-07T19:07:35.527527Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:07:35.527582Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(43), flags: (0x4: END_HEADERS) }
+2026-02-07T19:07:35.527607Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(43), flags: (0x1: END_STREAM) }
+2026-02-07T19:07:35.701355Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(43), size_increment: 2147418111 }
+2026-02-07T19:07:45.703159Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(43), flags: (0x4: END_HEADERS) }
+2026-02-07T19:07:45.703237Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(43), flags: (0x1: END_STREAM) }
+2026-02-07T19:07:45.703383Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:07:45.703504Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(45), flags: (0x4: END_HEADERS) }
+2026-02-07T19:07:45.703572Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(45), flags: (0x1: END_STREAM) }
+2026-02-07T19:07:45.877677Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(45), size_increment: 2147418111 }
+2026-02-07T19:07:49.128786Z DEBUG ralph_adapters::pty_executor: PTY reader: EOF
+2026-02-07T19:07:49.128912Z DEBUG ralph_adapters::pty_executor: Output channel closed
+2026-02-07T19:07:49.180270Z DEBUG ralph::loop_runner: No pending events after iteration. Agent may have failed to publish a valid event. Expected one of: []. Loop will terminate on next iteration. hat=ralph expected_topics=[]
+2026-02-07T19:07:49.180297Z DEBUG ralph_core::event_loop: Injecting fallback event to recover - triggering Ralph with task.resume
+2026-02-07T19:07:49.180312Z DEBUG ralph::loop_runner: Iteration 11/100 - ralph active
+2026-02-07T19:07:49.180394Z  INFO ralph_core::event_loop: Memory injection check: enabled=true, inject=Auto, workspace_root="/ralph-dummy"
+2026-02-07T19:07:49.180405Z  INFO ralph_core::event_loop: Looking for memories at: "/ralph-dummy/.ralph/agent/memories.md" (exists: false)
+2026-02-07T19:07:49.180410Z  INFO ralph_core::event_loop: Successfully loaded 0 memories from store
+2026-02-07T19:07:49.180413Z  INFO ralph_core::event_loop: Memory store is empty - no memories to inject
+2026-02-07T19:07:49.180422Z DEBUG ralph_core::event_loop: Injected ralph-tools skill from registry
+2026-02-07T19:07:49.180430Z DEBUG ralph_core::event_loop: Injected robot interaction skill from registry
+2026-02-07T19:07:49.180456Z  INFO ralph_core::event_loop: Injecting scratchpad (1359 chars) into prompt
+2026-02-07T19:07:49.180662Z  INFO ralph_core::event_loop: Injecting ready tasks (2 ready, 2 open, 80 closed) into prompt
+2026-02-07T19:07:49.180688Z DEBUG ralph_core::event_loop: build_prompt: routing to HatlessRalph (solo mode)
+2026-02-07T19:07:49.181671Z DEBUG ralph::loop_runner: Using global backend for 'ralph': opencode
+2026-02-07T19:07:49.181790Z DEBUG ralph_adapters::cli_backend: Built CLI command command=opencode args_count=2 prompt_len=22008 interactive=false uses_stdin=false uses_temp_file=false
+2026-02-07T19:07:49.183498Z DEBUG ralph_adapters::pty_executor: Spawning PTY output reader thread (streaming mode)
+2026-02-07T19:07:55.879660Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(45), flags: (0x4: END_HEADERS) }
+2026-02-07T19:07:55.879728Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(45), flags: (0x1: END_STREAM) }
+2026-02-07T19:07:55.879930Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:07:55.880015Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(47), flags: (0x4: END_HEADERS) }
+2026-02-07T19:07:55.880048Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(47), flags: (0x1: END_STREAM) }
+2026-02-07T19:07:56.052944Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(47), size_increment: 2147418111 }
+2026-02-07T19:07:58.873923Z DEBUG ralph_adapters::pty_executor: PTY reader: EOF
+2026-02-07T19:07:58.874053Z DEBUG ralph_adapters::pty_executor: Output channel closed
+2026-02-07T19:07:58.874275Z DEBUG ralph::loop_runner: No pending events after iteration. Agent may have failed to publish a valid event. Expected one of: []. Loop will terminate on next iteration. hat=ralph expected_topics=[]
+2026-02-07T19:07:58.874298Z DEBUG ralph_core::event_loop: Injecting fallback event to recover - triggering Ralph with task.resume
+2026-02-07T19:07:58.874315Z DEBUG ralph::loop_runner: Iteration 12/100 - ralph active
+2026-02-07T19:07:58.874392Z  INFO ralph_core::event_loop: Memory injection check: enabled=true, inject=Auto, workspace_root="/ralph-dummy"
+2026-02-07T19:07:58.874415Z  INFO ralph_core::event_loop: Looking for memories at: "/ralph-dummy/.ralph/agent/memories.md" (exists: false)
+2026-02-07T19:07:58.874421Z  INFO ralph_core::event_loop: Successfully loaded 0 memories from store
+2026-02-07T19:07:58.874435Z  INFO ralph_core::event_loop: Memory store is empty - no memories to inject
+2026-02-07T19:07:58.874453Z DEBUG ralph_core::event_loop: Injected ralph-tools skill from registry
+2026-02-07T19:07:58.874459Z DEBUG ralph_core::event_loop: Injected robot interaction skill from registry
+2026-02-07T19:07:58.874491Z  INFO ralph_core::event_loop: Injecting scratchpad (1359 chars) into prompt
+2026-02-07T19:07:58.874674Z  INFO ralph_core::event_loop: Injecting ready tasks (2 ready, 2 open, 80 closed) into prompt
+2026-02-07T19:07:58.874691Z DEBUG ralph_core::event_loop: build_prompt: routing to HatlessRalph (solo mode)
+2026-02-07T19:07:58.875829Z DEBUG ralph::loop_runner: Using global backend for 'ralph': opencode
+2026-02-07T19:07:58.875982Z DEBUG ralph_adapters::cli_backend: Built CLI command command=opencode args_count=2 prompt_len=22008 interactive=false uses_stdin=false uses_temp_file=false
+2026-02-07T19:07:58.877479Z DEBUG ralph_adapters::pty_executor: Spawning PTY output reader thread (streaming mode)
+2026-02-07T19:08:06.070017Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(47), flags: (0x4: END_HEADERS) }
+2026-02-07T19:08:06.070097Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(47), flags: (0x1: END_STREAM) }
+2026-02-07T19:08:06.070220Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:08:06.070294Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(49), flags: (0x4: END_HEADERS) }
+2026-02-07T19:08:06.070324Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(49), flags: (0x1: END_STREAM) }
+2026-02-07T19:08:06.243362Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(49), size_increment: 2147418111 }
+2026-02-07T19:08:16.420771Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(49), flags: (0x4: END_HEADERS) }
+2026-02-07T19:08:16.420822Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(49), flags: (0x1: END_STREAM) }
+2026-02-07T19:08:16.420922Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:08:16.420987Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(51), flags: (0x4: END_HEADERS) }
+2026-02-07T19:08:16.421017Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(51), flags: (0x1: END_STREAM) }
+2026-02-07T19:08:16.593825Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(51), size_increment: 2147418111 }
+2026-02-07T19:08:16.629045Z DEBUG ralph_adapters::pty_executor: PTY reader: EOF
+2026-02-07T19:08:16.629268Z DEBUG ralph_adapters::pty_executor: Output channel closed
+2026-02-07T19:08:16.629616Z DEBUG ralph::loop_runner: No pending events after iteration. Agent may have failed to publish a valid event. Expected one of: []. Loop will terminate on next iteration. hat=ralph expected_topics=[]
+2026-02-07T19:08:16.629649Z DEBUG ralph_core::event_loop: Injecting fallback event to recover - triggering Ralph with task.resume
+2026-02-07T19:08:16.629668Z DEBUG ralph::loop_runner: Iteration 13/100 - ralph active
+2026-02-07T19:08:16.629756Z  INFO ralph_core::event_loop: Memory injection check: enabled=true, inject=Auto, workspace_root="/ralph-dummy"
+2026-02-07T19:08:16.629767Z  INFO ralph_core::event_loop: Looking for memories at: "/ralph-dummy/.ralph/agent/memories.md" (exists: false)
+2026-02-07T19:08:16.629772Z  INFO ralph_core::event_loop: Successfully loaded 0 memories from store
+2026-02-07T19:08:16.629775Z  INFO ralph_core::event_loop: Memory store is empty - no memories to inject
+2026-02-07T19:08:16.629784Z DEBUG ralph_core::event_loop: Injected ralph-tools skill from registry
+2026-02-07T19:08:16.629808Z DEBUG ralph_core::event_loop: Injected robot interaction skill from registry
+2026-02-07T19:08:16.629833Z  INFO ralph_core::event_loop: Injecting scratchpad (1359 chars) into prompt
+2026-02-07T19:08:16.630050Z  INFO ralph_core::event_loop: Injecting ready tasks (2 ready, 2 open, 80 closed) into prompt
+2026-02-07T19:08:16.630104Z DEBUG ralph_core::event_loop: build_prompt: routing to HatlessRalph (solo mode)
+2026-02-07T19:08:16.631407Z DEBUG ralph::loop_runner: Using global backend for 'ralph': opencode
+2026-02-07T19:08:16.631555Z DEBUG ralph_adapters::cli_backend: Built CLI command command=opencode args_count=2 prompt_len=22008 interactive=false uses_stdin=false uses_temp_file=false
+2026-02-07T19:08:16.633018Z DEBUG ralph_adapters::pty_executor: Spawning PTY output reader thread (streaming mode)
+2026-02-07T19:08:26.595255Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(51), flags: (0x4: END_HEADERS) }
+2026-02-07T19:08:26.595309Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(51), flags: (0x1: END_STREAM) }
+2026-02-07T19:08:26.595432Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:08:26.595491Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(53), flags: (0x4: END_HEADERS) }
+2026-02-07T19:08:26.595511Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(53), flags: (0x1: END_STREAM) }
+2026-02-07T19:08:26.768365Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(53), size_increment: 2147418111 }
+2026-02-07T19:08:36.770237Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(53), flags: (0x4: END_HEADERS) }
+2026-02-07T19:08:36.770288Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(53), flags: (0x1: END_STREAM) }
+2026-02-07T19:08:36.770398Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:08:36.770468Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(55), flags: (0x4: END_HEADERS) }
+2026-02-07T19:08:36.770507Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(55), flags: (0x1: END_STREAM) }
+2026-02-07T19:08:36.947958Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(55), size_increment: 2147418111 }
+2026-02-07T19:08:46.964356Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(55), flags: (0x4: END_HEADERS) }
+2026-02-07T19:08:46.964406Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(55), flags: (0x1: END_STREAM) }
+2026-02-07T19:08:46.964501Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:08:46.964551Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(57), flags: (0x4: END_HEADERS) }
+2026-02-07T19:08:46.964572Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(57), flags: (0x1: END_STREAM) }
+2026-02-07T19:08:47.137371Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(57), size_increment: 2147418111 }
+2026-02-07T19:08:54.082149Z DEBUG ralph_adapters::pty_executor: PTY reader: EOF
+2026-02-07T19:08:54.082270Z DEBUG ralph_adapters::pty_executor: Output channel closed
+2026-02-07T19:08:54.082563Z DEBUG ralph::loop_runner: No pending events after iteration. Agent may have failed to publish a valid event. Expected one of: []. Loop will terminate on next iteration. hat=ralph expected_topics=[]
+2026-02-07T19:08:54.082583Z DEBUG ralph_core::event_loop: Injecting fallback event to recover - triggering Ralph with task.resume
+2026-02-07T19:08:54.082612Z DEBUG ralph::loop_runner: Iteration 14/100 - ralph active
+2026-02-07T19:08:54.082689Z  INFO ralph_core::event_loop: Memory injection check: enabled=true, inject=Auto, workspace_root="/ralph-dummy"
+2026-02-07T19:08:54.082700Z  INFO ralph_core::event_loop: Looking for memories at: "/ralph-dummy/.ralph/agent/memories.md" (exists: false)
+2026-02-07T19:08:54.082705Z  INFO ralph_core::event_loop: Successfully loaded 0 memories from store
+2026-02-07T19:08:54.082708Z  INFO ralph_core::event_loop: Memory store is empty - no memories to inject
+2026-02-07T19:08:54.082720Z DEBUG ralph_core::event_loop: Injected ralph-tools skill from registry
+2026-02-07T19:08:54.082725Z DEBUG ralph_core::event_loop: Injected robot interaction skill from registry
+2026-02-07T19:08:54.082754Z  INFO ralph_core::event_loop: Injecting scratchpad (1484 chars) into prompt
+2026-02-07T19:08:54.082946Z  INFO ralph_core::event_loop: Injecting ready tasks (2 ready, 2 open, 80 closed) into prompt
+2026-02-07T19:08:54.082965Z DEBUG ralph_core::event_loop: build_prompt: routing to HatlessRalph (solo mode)
+2026-02-07T19:08:54.084259Z DEBUG ralph::loop_runner: Using global backend for 'ralph': opencode
+2026-02-07T19:08:54.084391Z DEBUG ralph_adapters::cli_backend: Built CLI command command=opencode args_count=2 prompt_len=22133 interactive=false uses_stdin=false uses_temp_file=false
+2026-02-07T19:08:54.085661Z DEBUG ralph_adapters::pty_executor: Spawning PTY output reader thread (streaming mode)
+2026-02-07T19:08:57.140204Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(57), flags: (0x4: END_HEADERS) }
+2026-02-07T19:08:57.140256Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(57), flags: (0x1: END_STREAM) }
+2026-02-07T19:08:57.140382Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:08:57.140438Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(59), flags: (0x4: END_HEADERS) }
+2026-02-07T19:08:57.140460Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(59), flags: (0x1: END_STREAM) }
+2026-02-07T19:08:57.314151Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(59), size_increment: 2147418111 }
+2026-02-07T19:09:07.316057Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(59), flags: (0x4: END_HEADERS) }
+2026-02-07T19:09:07.316145Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(59), flags: (0x1: END_STREAM) }
+2026-02-07T19:09:07.316242Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:09:07.316319Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(61), flags: (0x4: END_HEADERS) }
+2026-02-07T19:09:07.316347Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(61), flags: (0x1: END_STREAM) }
+2026-02-07T19:09:07.490724Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(61), size_increment: 2147418111 }
+2026-02-07T19:09:17.492705Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(61), flags: (0x4: END_HEADERS) }
+2026-02-07T19:09:17.492755Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(61), flags: (0x1: END_STREAM) }
+2026-02-07T19:09:17.492883Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:09:17.492939Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(63), flags: (0x4: END_HEADERS) }
+2026-02-07T19:09:17.492960Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(63), flags: (0x1: END_STREAM) }
+2026-02-07T19:09:17.667212Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(63), size_increment: 2147418111 }
+2026-02-07T19:09:27.669413Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(63), flags: (0x4: END_HEADERS) }
+2026-02-07T19:09:27.669464Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(63), flags: (0x1: END_STREAM) }
+2026-02-07T19:09:27.669556Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:09:27.669618Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(65), flags: (0x4: END_HEADERS) }
+2026-02-07T19:09:27.669648Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(65), flags: (0x1: END_STREAM) }
+2026-02-07T19:09:27.842493Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(65), size_increment: 2147418111 }
+2026-02-07T19:09:35.075509Z DEBUG ralph_adapters::pty_executor: PTY reader: EOF
+2026-02-07T19:09:35.075585Z DEBUG ralph_adapters::pty_executor: Output channel closed
+2026-02-07T19:09:35.126892Z DEBUG ralph::loop_runner: No pending events after iteration. Agent may have failed to publish a valid event. Expected one of: []. Loop will terminate on next iteration. hat=ralph expected_topics=[]
+2026-02-07T19:09:35.126939Z DEBUG ralph_core::event_loop: Injecting fallback event to recover - triggering Ralph with task.resume
+2026-02-07T19:09:35.126962Z DEBUG ralph::loop_runner: Iteration 15/100 - ralph active
+2026-02-07T19:09:35.127044Z  INFO ralph_core::event_loop: Memory injection check: enabled=true, inject=Auto, workspace_root="/ralph-dummy"
+2026-02-07T19:09:35.127056Z  INFO ralph_core::event_loop: Looking for memories at: "/ralph-dummy/.ralph/agent/memories.md" (exists: false)
+2026-02-07T19:09:35.127100Z  INFO ralph_core::event_loop: Successfully loaded 0 memories from store
+2026-02-07T19:09:35.127110Z  INFO ralph_core::event_loop: Memory store is empty - no memories to inject
+2026-02-07T19:09:35.127126Z DEBUG ralph_core::event_loop: Injected ralph-tools skill from registry
+2026-02-07T19:09:35.127159Z DEBUG ralph_core::event_loop: Injected robot interaction skill from registry
+2026-02-07T19:09:35.127206Z  INFO ralph_core::event_loop: Injecting scratchpad (1484 chars) into prompt
+2026-02-07T19:09:35.127403Z  INFO ralph_core::event_loop: Injecting ready tasks (2 ready, 2 open, 80 closed) into prompt
+2026-02-07T19:09:35.127429Z DEBUG ralph_core::event_loop: build_prompt: routing to HatlessRalph (solo mode)
+2026-02-07T19:09:35.128394Z DEBUG ralph::loop_runner: Using global backend for 'ralph': opencode
+2026-02-07T19:09:35.128510Z DEBUG ralph_adapters::cli_backend: Built CLI command command=opencode args_count=2 prompt_len=22133 interactive=false uses_stdin=false uses_temp_file=false
+2026-02-07T19:09:35.129823Z DEBUG ralph_adapters::pty_executor: Spawning PTY output reader thread (streaming mode)
+2026-02-07T19:09:37.843195Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(65), flags: (0x4: END_HEADERS) }
+2026-02-07T19:09:37.843253Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(65), flags: (0x1: END_STREAM) }
+2026-02-07T19:09:37.843399Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:09:37.843464Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(67), flags: (0x4: END_HEADERS) }
+2026-02-07T19:09:37.843491Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(67), flags: (0x1: END_STREAM) }
+2026-02-07T19:09:38.016459Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(67), size_increment: 2147418111 }
+2026-02-07T19:09:48.017535Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(67), flags: (0x4: END_HEADERS) }
+2026-02-07T19:09:48.017598Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(67), flags: (0x1: END_STREAM) }
+2026-02-07T19:09:48.017693Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:09:48.017756Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(69), flags: (0x4: END_HEADERS) }
+2026-02-07T19:09:48.017785Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(69), flags: (0x1: END_STREAM) }
+2026-02-07T19:09:48.190700Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(69), size_increment: 2147418111 }
+2026-02-07T19:09:48.248422Z DEBUG ralph_adapters::pty_executor: PTY reader: EOF
+2026-02-07T19:09:48.248555Z DEBUG ralph_adapters::pty_executor: Output channel closed
+2026-02-07T19:09:48.248751Z DEBUG ralph::loop_runner: No pending events after iteration. Agent may have failed to publish a valid event. Expected one of: []. Loop will terminate on next iteration. hat=ralph expected_topics=[]
+2026-02-07T19:09:48.248767Z DEBUG ralph_core::event_loop: Injecting fallback event to recover - triggering Ralph with task.resume
+2026-02-07T19:09:48.248783Z DEBUG ralph::loop_runner: Iteration 16/100 - ralph active
+2026-02-07T19:09:48.248869Z  INFO ralph_core::event_loop: Memory injection check: enabled=true, inject=Auto, workspace_root="/ralph-dummy"
+2026-02-07T19:09:48.248879Z  INFO ralph_core::event_loop: Looking for memories at: "/ralph-dummy/.ralph/agent/memories.md" (exists: false)
+2026-02-07T19:09:48.248884Z  INFO ralph_core::event_loop: Successfully loaded 0 memories from store
+2026-02-07T19:09:48.248886Z  INFO ralph_core::event_loop: Memory store is empty - no memories to inject
+2026-02-07T19:09:48.248898Z DEBUG ralph_core::event_loop: Injected ralph-tools skill from registry
+2026-02-07T19:09:48.248904Z DEBUG ralph_core::event_loop: Injected robot interaction skill from registry
+2026-02-07T19:09:48.248930Z  INFO ralph_core::event_loop: Injecting scratchpad (1484 chars) into prompt
+2026-02-07T19:09:48.249145Z  INFO ralph_core::event_loop: Injecting ready tasks (2 ready, 2 open, 80 closed) into prompt
+2026-02-07T19:09:48.249186Z DEBUG ralph_core::event_loop: build_prompt: routing to HatlessRalph (solo mode)
+2026-02-07T19:09:48.250226Z DEBUG ralph::loop_runner: Using global backend for 'ralph': opencode
+2026-02-07T19:09:48.250386Z DEBUG ralph_adapters::cli_backend: Built CLI command command=opencode args_count=2 prompt_len=22133 interactive=false uses_stdin=false uses_temp_file=false
+2026-02-07T19:09:48.252022Z DEBUG ralph_adapters::pty_executor: Spawning PTY output reader thread (streaming mode)
+2026-02-07T19:09:58.191617Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(69), flags: (0x4: END_HEADERS) }
+2026-02-07T19:09:58.191681Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(69), flags: (0x1: END_STREAM) }
+2026-02-07T19:09:58.191841Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:09:58.191902Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(71), flags: (0x4: END_HEADERS) }
+2026-02-07T19:09:58.191925Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(71), flags: (0x1: END_STREAM) }
+2026-02-07T19:09:58.365330Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(71), size_increment: 2147418111 }
+2026-02-07T19:10:08.367002Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(71), flags: (0x4: END_HEADERS) }
+2026-02-07T19:10:08.367110Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(71), flags: (0x1: END_STREAM) }
+2026-02-07T19:10:08.367255Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:10:08.367354Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(73), flags: (0x4: END_HEADERS) }
+2026-02-07T19:10:08.367410Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(73), flags: (0x1: END_STREAM) }
+2026-02-07T19:10:08.540625Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(73), size_increment: 2147418111 }
+2026-02-07T19:10:18.542134Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(73), flags: (0x4: END_HEADERS) }
+2026-02-07T19:10:18.542178Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(73), flags: (0x1: END_STREAM) }
+2026-02-07T19:10:18.542305Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:10:18.542361Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(75), flags: (0x4: END_HEADERS) }
+2026-02-07T19:10:18.542391Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(75), flags: (0x1: END_STREAM) }
+2026-02-07T19:10:18.715918Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(75), size_increment: 2147418111 }
+2026-02-07T19:10:28.716769Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(75), flags: (0x4: END_HEADERS) }
+2026-02-07T19:10:28.716840Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(75), flags: (0x1: END_STREAM) }
+2026-02-07T19:10:28.716967Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:10:28.717036Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(77), flags: (0x4: END_HEADERS) }
+2026-02-07T19:10:28.717094Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(77), flags: (0x1: END_STREAM) }
+2026-02-07T19:10:28.894508Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(77), size_increment: 2147418111 }
+2026-02-07T19:10:38.897024Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(77), flags: (0x4: END_HEADERS) }
+2026-02-07T19:10:38.897099Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(77), flags: (0x1: END_STREAM) }
+2026-02-07T19:10:38.897210Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:10:38.897278Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(79), flags: (0x4: END_HEADERS) }
+2026-02-07T19:10:38.897312Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(79), flags: (0x1: END_STREAM) }
+2026-02-07T19:10:39.070165Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(79), size_increment: 2147418111 }
+2026-02-07T19:10:44.302220Z DEBUG ralph_adapters::pty_executor: PTY reader: EOF
+2026-02-07T19:10:44.302325Z DEBUG ralph_adapters::pty_executor: Output channel closed
+2026-02-07T19:10:44.302702Z DEBUG ralph::loop_runner: No pending events after iteration. Agent may have failed to publish a valid event. Expected one of: []. Loop will terminate on next iteration. hat=ralph expected_topics=[]
+2026-02-07T19:10:44.302726Z DEBUG ralph_core::event_loop: Injecting fallback event to recover - triggering Ralph with task.resume
+2026-02-07T19:10:44.302748Z DEBUG ralph::loop_runner: Iteration 17/100 - ralph active
+2026-02-07T19:10:44.302847Z  INFO ralph_core::event_loop: Memory injection check: enabled=true, inject=Auto, workspace_root="/ralph-dummy"
+2026-02-07T19:10:44.302861Z  INFO ralph_core::event_loop: Looking for memories at: "/ralph-dummy/.ralph/agent/memories.md" (exists: false)
+2026-02-07T19:10:44.302887Z  INFO ralph_core::event_loop: Successfully loaded 0 memories from store
+2026-02-07T19:10:44.302891Z  INFO ralph_core::event_loop: Memory store is empty - no memories to inject
+2026-02-07T19:10:44.302902Z DEBUG ralph_core::event_loop: Injected ralph-tools skill from registry
+2026-02-07T19:10:44.302913Z DEBUG ralph_core::event_loop: Injected robot interaction skill from registry
+2026-02-07T19:10:44.302941Z  INFO ralph_core::event_loop: Injecting scratchpad (1484 chars) into prompt
+2026-02-07T19:10:44.303196Z  INFO ralph_core::event_loop: Injecting ready tasks (2 ready, 2 open, 80 closed) into prompt
+2026-02-07T19:10:44.303230Z DEBUG ralph_core::event_loop: build_prompt: routing to HatlessRalph (solo mode)
+2026-02-07T19:10:44.304203Z DEBUG ralph::loop_runner: Using global backend for 'ralph': opencode
+2026-02-07T19:10:44.304368Z DEBUG ralph_adapters::cli_backend: Built CLI command command=opencode args_count=2 prompt_len=22133 interactive=false uses_stdin=false uses_temp_file=false
+2026-02-07T19:10:44.305882Z DEBUG ralph_adapters::pty_executor: Spawning PTY output reader thread (streaming mode)
+2026-02-07T19:10:49.071864Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(79), flags: (0x4: END_HEADERS) }
+2026-02-07T19:10:49.071914Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(79), flags: (0x1: END_STREAM) }
+2026-02-07T19:10:49.072034Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:10:49.072133Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(81), flags: (0x4: END_HEADERS) }
+2026-02-07T19:10:49.072163Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(81), flags: (0x1: END_STREAM) }
+2026-02-07T19:10:49.244978Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(81), size_increment: 2147418111 }
+2026-02-07T19:10:59.246512Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(81), flags: (0x4: END_HEADERS) }
+2026-02-07T19:10:59.246560Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(81), flags: (0x1: END_STREAM) }
+2026-02-07T19:10:59.246680Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:10:59.246736Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(83), flags: (0x4: END_HEADERS) }
+2026-02-07T19:10:59.246756Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(83), flags: (0x1: END_STREAM) }
+2026-02-07T19:10:59.420334Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(83), size_increment: 2147418111 }
+2026-02-07T19:11:09.421370Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(83), flags: (0x4: END_HEADERS) }
+2026-02-07T19:11:09.421421Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(83), flags: (0x1: END_STREAM) }
+2026-02-07T19:11:09.421517Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:11:09.421573Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(85), flags: (0x4: END_HEADERS) }
+2026-02-07T19:11:09.421602Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(85), flags: (0x1: END_STREAM) }
+2026-02-07T19:11:09.594499Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(85), size_increment: 2147418111 }
+2026-02-07T19:11:19.595936Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(85), flags: (0x4: END_HEADERS) }
+2026-02-07T19:11:19.595992Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(85), flags: (0x1: END_STREAM) }
+2026-02-07T19:11:19.596126Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:11:19.596187Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(87), flags: (0x4: END_HEADERS) }
+2026-02-07T19:11:19.596215Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(87), flags: (0x1: END_STREAM) }
+2026-02-07T19:11:19.769670Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(87), size_increment: 2147418111 }
+2026-02-07T19:11:20.781428Z DEBUG ralph_adapters::pty_executor: PTY reader: EOF
+2026-02-07T19:11:20.781550Z DEBUG ralph_adapters::pty_executor: Output channel closed
+2026-02-07T19:11:20.833005Z DEBUG ralph::loop_runner: No pending events after iteration. Agent may have failed to publish a valid event. Expected one of: []. Loop will terminate on next iteration. hat=ralph expected_topics=[]
+2026-02-07T19:11:20.833036Z DEBUG ralph_core::event_loop: Injecting fallback event to recover - triggering Ralph with task.resume
+2026-02-07T19:11:20.833052Z DEBUG ralph::loop_runner: Iteration 18/100 - ralph active
+2026-02-07T19:11:20.833159Z  INFO ralph_core::event_loop: Memory injection check: enabled=true, inject=Auto, workspace_root="/ralph-dummy"
+2026-02-07T19:11:20.833172Z  INFO ralph_core::event_loop: Looking for memories at: "/ralph-dummy/.ralph/agent/memories.md" (exists: false)
+2026-02-07T19:11:20.833178Z  INFO ralph_core::event_loop: Successfully loaded 0 memories from store
+2026-02-07T19:11:20.833181Z  INFO ralph_core::event_loop: Memory store is empty - no memories to inject
+2026-02-07T19:11:20.833196Z DEBUG ralph_core::event_loop: Injected ralph-tools skill from registry
+2026-02-07T19:11:20.833204Z DEBUG ralph_core::event_loop: Injected robot interaction skill from registry
+2026-02-07T19:11:20.833234Z  INFO ralph_core::event_loop: Injecting scratchpad (1484 chars) into prompt
+2026-02-07T19:11:20.833434Z  INFO ralph_core::event_loop: Injecting ready tasks (2 ready, 2 open, 80 closed) into prompt
+2026-02-07T19:11:20.833458Z DEBUG ralph_core::event_loop: build_prompt: routing to HatlessRalph (solo mode)
+2026-02-07T19:11:20.834565Z DEBUG ralph::loop_runner: Using global backend for 'ralph': opencode
+2026-02-07T19:11:20.834691Z DEBUG ralph_adapters::cli_backend: Built CLI command command=opencode args_count=2 prompt_len=22133 interactive=false uses_stdin=false uses_temp_file=false
+2026-02-07T19:11:20.836441Z DEBUG ralph_adapters::pty_executor: Spawning PTY output reader thread (streaming mode)
+2026-02-07T19:11:29.770797Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(87), flags: (0x4: END_HEADERS) }
+2026-02-07T19:11:29.770848Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(87), flags: (0x1: END_STREAM) }
+2026-02-07T19:11:29.770967Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:11:29.771029Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(89), flags: (0x4: END_HEADERS) }
+2026-02-07T19:11:29.771056Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(89), flags: (0x1: END_STREAM) }
+2026-02-07T19:11:29.944011Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(89), size_increment: 2147418111 }
+2026-02-07T19:11:30.504507Z DEBUG ralph_adapters::pty_executor: PTY reader: EOF
+2026-02-07T19:11:30.504647Z DEBUG ralph_adapters::pty_executor: Output channel closed
+2026-02-07T19:11:30.504844Z DEBUG ralph::loop_runner: No pending events after iteration. Agent may have failed to publish a valid event. Expected one of: []. Loop will terminate on next iteration. hat=ralph expected_topics=[]
+2026-02-07T19:11:30.504861Z DEBUG ralph_core::event_loop: Injecting fallback event to recover - triggering Ralph with task.resume
+2026-02-07T19:11:30.504888Z DEBUG ralph::loop_runner: Iteration 19/100 - ralph active
+2026-02-07T19:11:30.504966Z  INFO ralph_core::event_loop: Memory injection check: enabled=true, inject=Auto, workspace_root="/ralph-dummy"
+2026-02-07T19:11:30.504976Z  INFO ralph_core::event_loop: Looking for memories at: "/ralph-dummy/.ralph/agent/memories.md" (exists: false)
+2026-02-07T19:11:30.504981Z  INFO ralph_core::event_loop: Successfully loaded 0 memories from store
+2026-02-07T19:11:30.504983Z  INFO ralph_core::event_loop: Memory store is empty - no memories to inject
+2026-02-07T19:11:30.504993Z DEBUG ralph_core::event_loop: Injected ralph-tools skill from registry
+2026-02-07T19:11:30.505002Z DEBUG ralph_core::event_loop: Injected robot interaction skill from registry
+2026-02-07T19:11:30.505030Z  INFO ralph_core::event_loop: Injecting scratchpad (1484 chars) into prompt
+2026-02-07T19:11:30.505254Z  INFO ralph_core::event_loop: Injecting ready tasks (2 ready, 2 open, 80 closed) into prompt
+2026-02-07T19:11:30.505276Z DEBUG ralph_core::event_loop: build_prompt: routing to HatlessRalph (solo mode)
+2026-02-07T19:11:30.507778Z DEBUG ralph::loop_runner: Using global backend for 'ralph': opencode
+2026-02-07T19:11:30.507914Z DEBUG ralph_adapters::cli_backend: Built CLI command command=opencode args_count=2 prompt_len=22133 interactive=false uses_stdin=false uses_temp_file=false
+2026-02-07T19:11:30.509354Z DEBUG ralph_adapters::pty_executor: Spawning PTY output reader thread (streaming mode)
+2026-02-07T19:11:39.944646Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(89), flags: (0x4: END_HEADERS) }
+2026-02-07T19:11:39.944706Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(89), flags: (0x1: END_STREAM) }
+2026-02-07T19:11:39.944836Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:11:39.944896Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(91), flags: (0x4: END_HEADERS) }
+2026-02-07T19:11:39.944918Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(91), flags: (0x1: END_STREAM) }
+2026-02-07T19:11:40.117874Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(91), size_increment: 2147418111 }
+2026-02-07T19:11:50.119287Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(91), flags: (0x4: END_HEADERS) }
+2026-02-07T19:11:50.119348Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(91), flags: (0x1: END_STREAM) }
+2026-02-07T19:11:50.119462Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:11:50.119527Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(93), flags: (0x4: END_HEADERS) }
+2026-02-07T19:11:50.119561Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(93), flags: (0x1: END_STREAM) }
+2026-02-07T19:11:50.295923Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(93), size_increment: 2147418111 }
+2026-02-07T19:12:00.297153Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(93), flags: (0x4: END_HEADERS) }
+2026-02-07T19:12:00.297206Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(93), flags: (0x1: END_STREAM) }
+2026-02-07T19:12:00.297302Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:12:00.297362Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(95), flags: (0x4: END_HEADERS) }
+2026-02-07T19:12:00.297384Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(95), flags: (0x1: END_STREAM) }
+2026-02-07T19:12:00.470992Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(95), size_increment: 2147418111 }
+2026-02-07T19:12:10.471777Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(95), flags: (0x4: END_HEADERS) }
+2026-02-07T19:12:10.471828Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(95), flags: (0x1: END_STREAM) }
+2026-02-07T19:12:10.471941Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:12:10.471991Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(97), flags: (0x4: END_HEADERS) }
+2026-02-07T19:12:10.472010Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(97), flags: (0x1: END_STREAM) }
+2026-02-07T19:12:10.645640Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(97), size_increment: 2147418111 }
+2026-02-07T19:12:13.883472Z DEBUG ralph_adapters::pty_executor: PTY reader: EOF
+2026-02-07T19:12:13.883590Z DEBUG ralph_adapters::pty_executor: Output channel closed
+2026-02-07T19:12:13.936813Z DEBUG ralph::loop_runner: No pending events after iteration. Agent may have failed to publish a valid event. Expected one of: []. Loop will terminate on next iteration. hat=ralph expected_topics=[]
+2026-02-07T19:12:13.936877Z DEBUG ralph_core::event_loop: Injecting fallback event to recover - triggering Ralph with task.resume
+2026-02-07T19:12:13.936899Z DEBUG ralph::loop_runner: Iteration 20/100 - ralph active
+2026-02-07T19:12:13.937004Z  INFO ralph_core::event_loop: Memory injection check: enabled=true, inject=Auto, workspace_root="/ralph-dummy"
+2026-02-07T19:12:13.937019Z  INFO ralph_core::event_loop: Looking for memories at: "/ralph-dummy/.ralph/agent/memories.md" (exists: false)
+2026-02-07T19:12:13.937025Z  INFO ralph_core::event_loop: Successfully loaded 0 memories from store
+2026-02-07T19:12:13.937028Z  INFO ralph_core::event_loop: Memory store is empty - no memories to inject
+2026-02-07T19:12:13.937058Z DEBUG ralph_core::event_loop: Injected ralph-tools skill from registry
+2026-02-07T19:12:13.937088Z DEBUG ralph_core::event_loop: Injected robot interaction skill from registry
+2026-02-07T19:12:13.937123Z  INFO ralph_core::event_loop: Injecting scratchpad (1484 chars) into prompt
+2026-02-07T19:12:13.937344Z  INFO ralph_core::event_loop: Injecting ready tasks (2 ready, 2 open, 80 closed) into prompt
+2026-02-07T19:12:13.937383Z DEBUG ralph_core::event_loop: build_prompt: routing to HatlessRalph (solo mode)
+2026-02-07T19:12:13.938798Z DEBUG ralph::loop_runner: Using global backend for 'ralph': opencode
+2026-02-07T19:12:13.939021Z DEBUG ralph_adapters::cli_backend: Built CLI command command=opencode args_count=2 prompt_len=22133 interactive=false uses_stdin=false uses_temp_file=false
+2026-02-07T19:12:13.940974Z DEBUG ralph_adapters::pty_executor: Spawning PTY output reader thread (streaming mode)
+2026-02-07T19:12:20.663355Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(97), flags: (0x4: END_HEADERS) }
+2026-02-07T19:12:20.663422Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(97), flags: (0x1: END_STREAM) }
+2026-02-07T19:12:20.663553Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:12:20.663634Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(99), flags: (0x4: END_HEADERS) }
+2026-02-07T19:12:20.663665Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(99), flags: (0x1: END_STREAM) }
+2026-02-07T19:12:20.837162Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(99), size_increment: 2147418111 }
+2026-02-07T19:12:30.839595Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(99), flags: (0x4: END_HEADERS) }
+2026-02-07T19:12:30.839682Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(99), flags: (0x1: END_STREAM) }
+2026-02-07T19:12:30.839798Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:12:30.839854Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(101), flags: (0x4: END_HEADERS) }
+2026-02-07T19:12:30.839874Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(101), flags: (0x1: END_STREAM) }
+2026-02-07T19:12:31.013006Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(101), size_increment: 2147418111 }
+2026-02-07T19:12:32.357175Z DEBUG ralph_adapters::pty_executor: PTY reader: EOF
+2026-02-07T19:12:32.357271Z DEBUG ralph_adapters::pty_executor: Output channel closed
+2026-02-07T19:12:32.408639Z DEBUG ralph::loop_runner: No pending events after iteration. Agent may have failed to publish a valid event. Expected one of: []. Loop will terminate on next iteration. hat=ralph expected_topics=[]
+2026-02-07T19:12:32.408668Z DEBUG ralph_core::event_loop: Injecting fallback event to recover - triggering Ralph with task.resume
+2026-02-07T19:12:32.408682Z DEBUG ralph::loop_runner: Iteration 21/100 - ralph active
+2026-02-07T19:12:32.408765Z  INFO ralph_core::event_loop: Memory injection check: enabled=true, inject=Auto, workspace_root="/ralph-dummy"
+2026-02-07T19:12:32.408775Z  INFO ralph_core::event_loop: Looking for memories at: "/ralph-dummy/.ralph/agent/memories.md" (exists: false)
+2026-02-07T19:12:32.408781Z  INFO ralph_core::event_loop: Successfully loaded 0 memories from store
+2026-02-07T19:12:32.408783Z  INFO ralph_core::event_loop: Memory store is empty - no memories to inject
+2026-02-07T19:12:32.408793Z DEBUG ralph_core::event_loop: Injected ralph-tools skill from registry
+2026-02-07T19:12:32.408800Z DEBUG ralph_core::event_loop: Injected robot interaction skill from registry
+2026-02-07T19:12:32.408827Z  INFO ralph_core::event_loop: Injecting scratchpad (1484 chars) into prompt
+2026-02-07T19:12:32.409012Z  INFO ralph_core::event_loop: Injecting ready tasks (2 ready, 2 open, 80 closed) into prompt
+2026-02-07T19:12:32.409038Z DEBUG ralph_core::event_loop: build_prompt: routing to HatlessRalph (solo mode)
+2026-02-07T19:12:32.410123Z DEBUG ralph::loop_runner: Using global backend for 'ralph': opencode
+2026-02-07T19:12:32.410283Z DEBUG ralph_adapters::cli_backend: Built CLI command command=opencode args_count=2 prompt_len=22133 interactive=false uses_stdin=false uses_temp_file=false
+2026-02-07T19:12:32.411778Z DEBUG ralph_adapters::pty_executor: Spawning PTY output reader thread (streaming mode)
+2026-02-07T19:12:41.013692Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(101), flags: (0x4: END_HEADERS) }
+2026-02-07T19:12:41.013746Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(101), flags: (0x1: END_STREAM) }
+2026-02-07T19:12:41.013884Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:12:41.013941Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(103), flags: (0x4: END_HEADERS) }
+2026-02-07T19:12:41.013962Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(103), flags: (0x1: END_STREAM) }
+2026-02-07T19:12:41.187011Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(103), size_increment: 2147418111 }
+2026-02-07T19:12:51.188666Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(103), flags: (0x4: END_HEADERS) }
+2026-02-07T19:12:51.188756Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(103), flags: (0x1: END_STREAM) }
+2026-02-07T19:12:51.188882Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:12:51.188955Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(105), flags: (0x4: END_HEADERS) }
+2026-02-07T19:12:51.188990Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(105), flags: (0x1: END_STREAM) }
+2026-02-07T19:12:51.363186Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(105), size_increment: 2147418111 }
+2026-02-07T19:13:01.364198Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(105), flags: (0x4: END_HEADERS) }
+2026-02-07T19:13:01.364252Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(105), flags: (0x1: END_STREAM) }
+2026-02-07T19:13:01.364358Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:13:01.364413Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(107), flags: (0x4: END_HEADERS) }
+2026-02-07T19:13:01.364446Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(107), flags: (0x1: END_STREAM) }
+2026-02-07T19:13:01.537366Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(107), size_increment: 2147418111 }
+2026-02-07T19:13:02.642627Z DEBUG ralph_adapters::pty_executor: PTY reader: EOF
+2026-02-07T19:13:02.642718Z DEBUG ralph_adapters::pty_executor: Output channel closed
+2026-02-07T19:13:02.694384Z DEBUG ralph::loop_runner: No pending events after iteration. Agent may have failed to publish a valid event. Expected one of: []. Loop will terminate on next iteration. hat=ralph expected_topics=[]
+2026-02-07T19:13:02.694433Z DEBUG ralph_core::event_loop: Injecting fallback event to recover - triggering Ralph with task.resume
+2026-02-07T19:13:02.694449Z DEBUG ralph::loop_runner: Iteration 22/100 - ralph active
+2026-02-07T19:13:02.694540Z  INFO ralph_core::event_loop: Memory injection check: enabled=true, inject=Auto, workspace_root="/ralph-dummy"
+2026-02-07T19:13:02.694553Z  INFO ralph_core::event_loop: Looking for memories at: "/ralph-dummy/.ralph/agent/memories.md" (exists: false)
+2026-02-07T19:13:02.694560Z  INFO ralph_core::event_loop: Successfully loaded 0 memories from store
+2026-02-07T19:13:02.694563Z  INFO ralph_core::event_loop: Memory store is empty - no memories to inject
+2026-02-07T19:13:02.694581Z DEBUG ralph_core::event_loop: Injected ralph-tools skill from registry
+2026-02-07T19:13:02.694587Z DEBUG ralph_core::event_loop: Injected robot interaction skill from registry
+2026-02-07T19:13:02.694621Z  INFO ralph_core::event_loop: Injecting scratchpad (1484 chars) into prompt
+2026-02-07T19:13:02.694813Z  INFO ralph_core::event_loop: Injecting ready tasks (2 ready, 2 open, 80 closed) into prompt
+2026-02-07T19:13:02.694840Z DEBUG ralph_core::event_loop: build_prompt: routing to HatlessRalph (solo mode)
+2026-02-07T19:13:02.695965Z DEBUG ralph::loop_runner: Using global backend for 'ralph': opencode
+2026-02-07T19:13:02.696168Z DEBUG ralph_adapters::cli_backend: Built CLI command command=opencode args_count=2 prompt_len=22133 interactive=false uses_stdin=false uses_temp_file=false
+2026-02-07T19:13:02.697921Z DEBUG ralph_adapters::pty_executor: Spawning PTY output reader thread (streaming mode)
+2026-02-07T19:13:11.539366Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(107), flags: (0x4: END_HEADERS) }
+2026-02-07T19:13:11.539409Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(107), flags: (0x1: END_STREAM) }
+2026-02-07T19:13:11.539551Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:13:11.539630Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(109), flags: (0x4: END_HEADERS) }
+2026-02-07T19:13:11.539669Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(109), flags: (0x1: END_STREAM) }
+2026-02-07T19:13:11.712592Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(109), size_increment: 2147418111 }
+2026-02-07T19:13:21.713572Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(109), flags: (0x4: END_HEADERS) }
+2026-02-07T19:13:21.713617Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(109), flags: (0x1: END_STREAM) }
+2026-02-07T19:13:21.713712Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:13:21.713782Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(111), flags: (0x4: END_HEADERS) }
+2026-02-07T19:13:21.713811Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(111), flags: (0x1: END_STREAM) }
+2026-02-07T19:13:21.887458Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(111), size_increment: 2147418111 }
+2026-02-07T19:13:30.650387Z DEBUG ralph_adapters::pty_executor: PTY reader: EOF
+2026-02-07T19:13:30.650464Z DEBUG ralph_adapters::pty_executor: Output channel closed
+2026-02-07T19:13:30.650731Z DEBUG ralph::loop_runner: No pending events after iteration. Agent may have failed to publish a valid event. Expected one of: []. Loop will terminate on next iteration. hat=ralph expected_topics=[]
+2026-02-07T19:13:30.650747Z DEBUG ralph_core::event_loop: Injecting fallback event to recover - triggering Ralph with task.resume
+2026-02-07T19:13:30.650762Z DEBUG ralph::loop_runner: Iteration 23/100 - ralph active
+2026-02-07T19:13:30.650860Z  INFO ralph_core::event_loop: Memory injection check: enabled=true, inject=Auto, workspace_root="/ralph-dummy"
+2026-02-07T19:13:30.650877Z  INFO ralph_core::event_loop: Looking for memories at: "/ralph-dummy/.ralph/agent/memories.md" (exists: false)
+2026-02-07T19:13:30.650886Z  INFO ralph_core::event_loop: Successfully loaded 0 memories from store
+2026-02-07T19:13:30.650890Z  INFO ralph_core::event_loop: Memory store is empty - no memories to inject
+2026-02-07T19:13:30.650900Z DEBUG ralph_core::event_loop: Injected ralph-tools skill from registry
+2026-02-07T19:13:30.650905Z DEBUG ralph_core::event_loop: Injected robot interaction skill from registry
+2026-02-07T19:13:30.650937Z  INFO ralph_core::event_loop: Injecting scratchpad (1484 chars) into prompt
+2026-02-07T19:13:30.651180Z  INFO ralph_core::event_loop: Injecting ready tasks (2 ready, 2 open, 80 closed) into prompt
+2026-02-07T19:13:30.651205Z DEBUG ralph_core::event_loop: build_prompt: routing to HatlessRalph (solo mode)
+2026-02-07T19:13:30.653269Z DEBUG ralph::loop_runner: Using global backend for 'ralph': opencode
+2026-02-07T19:13:30.653479Z DEBUG ralph_adapters::cli_backend: Built CLI command command=opencode args_count=2 prompt_len=22133 interactive=false uses_stdin=false uses_temp_file=false
+2026-02-07T19:13:30.655143Z DEBUG ralph_adapters::pty_executor: Spawning PTY output reader thread (streaming mode)
+2026-02-07T19:13:31.889412Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(111), flags: (0x4: END_HEADERS) }
+2026-02-07T19:13:31.889463Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(111), flags: (0x1: END_STREAM) }
+2026-02-07T19:13:31.889589Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:13:31.889657Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(113), flags: (0x4: END_HEADERS) }
+2026-02-07T19:13:31.889692Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(113), flags: (0x1: END_STREAM) }
+2026-02-07T19:13:32.066341Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(113), size_increment: 2147418111 }
+2026-02-07T19:13:42.070826Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(113), flags: (0x4: END_HEADERS) }
+2026-02-07T19:13:42.070887Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(113), flags: (0x1: END_STREAM) }
+2026-02-07T19:13:42.070988Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T19:13:42.071046Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(115), flags: (0x4: END_HEADERS) }
+2026-02-07T19:13:42.071096Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(115), flags: (0x1: END_STREAM) }
+2026-02-07T19:13:42.244461Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(115), size_increment: 2147418111 }
+2026-02-07T19:13:43.447351Z DEBUG ralph::loop_runner: Interrupt received (SIGINT), terminating immediately...
+2026-02-07T19:13:43.447697Z DEBUG ralph::loop_runner: Sending SIGTERM to process group 2514268
+2026-02-07T19:13:43.447758Z DEBUG ralph::loop_runner: SIGTERM received, terminating immediately...

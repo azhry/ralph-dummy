@@ -2512,3 +2512,10 @@
 2026-02-07T19:03:20.598371Z DEBUG ralph_core::event_logger: Event logged topic=loop.terminate iteration=40
 2026-02-07T19:03:20.598409Z DEBUG Connection{peer=Client}: rustls::common_state: Sending warning alert CloseNotify
 2026-02-07T19:03:20.601221Z  INFO ralph_core::landing: Beginning landing sequence loop_id=primary
+2026-02-07T19:03:20.688692Z  INFO ralph_core::landing: Auto-committed changes during landing loop_id=primary commit=Some("08ccadee627f3e9d3efa0686ae218ddb7f8d8e96") files=21
+2026-02-07T19:03:21.349146Z  INFO ralph_core::landing: Generated handoff file loop_id=primary path=/ralph-dummy/.ralph/agent/handoff.md completed=80 open=0
+2026-02-07T19:03:21.353166Z  INFO ralph_core::loop_completion: Landing completed with auto-commit commit=Some("08ccadee627f3e9d3efa0686ae218ddb7f8d8e96") handoff=/ralph-dummy/.ralph/agent/handoff.md
+2026-02-07T19:03:21.353186Z DEBUG ralph_core::loop_completion: Primary loop completed with landing
+2026-02-07T19:03:21.353193Z  INFO ralph::loop_runner: Primary loop landed successfully committed=true handoff=/ralph-dummy/.ralph/agent/handoff.md open_tasks=0
+2026-02-07T19:03:21.353219Z DEBUG ralph::loop_runner: No pending merges in queue
+2026-02-07T19:03:21.364247Z DEBUG ralph_core::loop_lock: Releasing loop lock at /ralph-dummy/.ralph/loop.lock

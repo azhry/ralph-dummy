@@ -1,0 +1,28 @@
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /health                   --> main.(*Application).initializeRouter.func2 (5 handlers)
+[GIN-debug] GET    /api/v1/weddings          --> main.(*Application).setupRoutes.func1 (5 handlers)
+[GIN-debug] POST   /api/v1/weddings          --> wedding-invitation-backend/internal/handlers.(*WeddingHandler).CreateWedding-fm (5 handlers)
+[GIN-debug] GET    /api/v1/weddings/:id      --> wedding-invitation-backend/internal/handlers.(*WeddingHandler).GetWedding-fm (5 handlers)
+[GIN-debug] PUT    /api/v1/weddings/:id      --> wedding-invitation-backend/internal/handlers.(*WeddingHandler).UpdateWedding-fm (5 handlers)
+[GIN-debug] DELETE /api/v1/weddings/:id      --> wedding-invitation-backend/internal/handlers.(*WeddingHandler).DeleteWedding-fm (5 handlers)
+[GIN-debug] GET    /api/v1/rsvps             --> main.(*Application).setupRoutes.func2 (5 handlers)
+[GIN-debug] POST   /api/v1/rsvps             --> main.(*Application).setupRoutes.func3 (5 handlers)
+[GIN-debug] GET    /api/v1/rsvps/:id         --> wedding-invitation-backend/internal/handlers.(*RSVPHandler).GetRSVPs-fm (5 handlers)
+[GIN-debug] PUT    /api/v1/rsvps/:id         --> wedding-invitation-backend/internal/handlers.(*RSVPHandler).UpdateRSVP-fm (5 handlers)
+[GIN-debug] DELETE /api/v1/rsvps/:id         --> wedding-invitation-backend/internal/handlers.(*RSVPHandler).DeleteRSVP-fm (5 handlers)
+[GIN-debug] GET    /api/v1/guests            --> main.(*Application).setupRoutes.func4 (5 handlers)
+[GIN-debug] POST   /api/v1/guests            --> wedding-invitation-backend/internal/handlers.(*GuestHandler).CreateGuest-fm (5 handlers)
+[GIN-debug] GET    /api/v1/guests/:id        --> wedding-invitation-backend/internal/handlers.(*GuestHandler).GetGuest-fm (5 handlers)
+[GIN-debug] PUT    /api/v1/guests/:id        --> wedding-invitation-backend/internal/handlers.(*GuestHandler).UpdateGuest-fm (5 handlers)
+[GIN-debug] DELETE /api/v1/guests/:id        --> wedding-invitation-backend/internal/handlers.(*GuestHandler).DeleteGuest-fm (5 handlers)
+[GIN-debug] GET    /api/v1/info              --> main.(*Application).setupRoutes.func5 (5 handlers)
+[GIN-debug] GET    /swagger/*any_path        --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (5 handlers)
+2026/02/07 21:49:21 Starting Wedding Invitation Backend API server on port 8080
+2026/02/07 21:49:21 API documentation available at http://localhost:8080/swagger/index.html
+2026/02/07 21:49:21 Health check available at http://localhost:8080/health
+[GIN] 2026/02/07 - 21:49:30 | 200 |      89.996µs |             ::1 | GET      "/health"
+[GIN] 2026/02/07 - 21:49:42 | 200 |     114.727µs |             ::1 | GET      "/api/v1/info"
+[GIN] 2026/02/07 - 21:49:47 | 400 |     775.146µs |             ::1 | POST     "/api/v1/weddings"
