@@ -31,7 +31,8 @@ Read the specifications in `docs/backend/` and `TODO.md`. Complete all tasks inc
 For each task in `TODO.md`:
 * **Code:** Implement the feature logic.
 * **Database:** Ensure all functions work correctly with a real MongoDB connection.
-* **Testing:** Create unit tests for the feature that you implemented and its related other features. **Acceptance Criteria:** 100% pass rate.
+* **Unit Testing:** Create unit tests for the feature that you implemented and its related other features. **Acceptance Criteria:** 100% pass rate.
+* **Integration Testing:** Create integration tests for all the features or API endpoints with real MongoDB connections. **Acceptance Criteria:** 100% pass rate.
 * **API Docs:** Generate/update API documentation using `go-swagno`.
 * **Visual Check:** Use Chrome DevTools MCP to verify frontend/API behavior and capture screenshots for documentation if required.
 
