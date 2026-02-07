@@ -186,7 +186,7 @@ func TestGuestHandler_CreateGuest(t *testing.T) {
 
 	// Mock user context
 	router.Use(func(c *gin.Context) {
-		c.Set("user_id", userID)
+		c.Set("user_id", userID.Hex())
 		c.Next()
 	})
 
@@ -231,7 +231,7 @@ func TestGuestHandler_CreateGuest_ValidationError(t *testing.T) {
 
 	// Mock user context
 	router.Use(func(c *gin.Context) {
-		c.Set("user_id", userID)
+		c.Set("user_id", userID.Hex())
 		c.Next()
 	})
 
@@ -276,7 +276,7 @@ func TestGuestHandler_GetGuest(t *testing.T) {
 
 	// Mock user context
 	router.Use(func(c *gin.Context) {
-		c.Set("user_id", userID)
+		c.Set("user_id", userID.Hex())
 		c.Next()
 	})
 
@@ -308,7 +308,7 @@ func TestGuestHandler_GetGuest_NotFound(t *testing.T) {
 
 	// Mock user context
 	router.Use(func(c *gin.Context) {
-		c.Set("user_id", userID)
+		c.Set("user_id", userID.Hex())
 		c.Next()
 	})
 
@@ -347,7 +347,7 @@ func TestGuestHandler_ListGuests(t *testing.T) {
 
 	// Mock user context
 	router.Use(func(c *gin.Context) {
-		c.Set("user_id", userID)
+		c.Set("user_id", userID.Hex())
 		c.Next()
 	})
 
@@ -390,7 +390,7 @@ func TestGuestHandler_UpdateGuest(t *testing.T) {
 
 	// Mock user context
 	router.Use(func(c *gin.Context) {
-		c.Set("user_id", userID)
+		c.Set("user_id", userID.Hex())
 		c.Next()
 	})
 
@@ -438,7 +438,7 @@ func TestGuestHandler_DeleteGuest(t *testing.T) {
 
 	// Mock user context
 	router.Use(func(c *gin.Context) {
-		c.Set("user_id", userID)
+		c.Set("user_id", userID.Hex())
 		c.Next()
 	})
 
@@ -467,7 +467,7 @@ func TestGuestHandler_BulkCreateGuests(t *testing.T) {
 
 	// Mock user context
 	router.Use(func(c *gin.Context) {
-		c.Set("user_id", userID)
+		c.Set("user_id", userID.Hex())
 		c.Next()
 	})
 
