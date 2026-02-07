@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: wedding-invitation-backend-service
+  labels:
+    app: wedding-invitation-backend
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    app: wedding-invitation-backend
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wedding-invitation-backend-headless
+  labels:
+    app: wedding-invitation-backend
+spec:
+  type: ClusterIP
+  clusterIP: None
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    app: wedding-invitation-backend

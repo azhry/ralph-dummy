@@ -90,7 +90,9 @@ Review TODO.md
 Break large tasks into small, actionable steps
 
 Make sure it runs on my local machine first with working .env values, connect to localhost mongodb etc
+Make deployment.yaml, service.yaml, secret.yaml, configmap.yaml, and ingress.yaml that i can use to deploy to kubernetes cluster manually.
 
 acceptance criteria are:
-- all functions should work correctly
+- all functions should work correctly with real database connection or any other external service connection
+- should create api documentation with go-swagno
 - should create unit tests and all passed
