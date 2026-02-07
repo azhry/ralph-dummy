@@ -291,9 +291,44 @@ db.runCommand({compact: "weddings"})
 
 ---
 
-**Document Version**: 1.2  
+**Document Version**: 1.3  
 **Last Updated**: 2026-02-07  
 **Agent**: opencode (big-pickle)  
 **Status**: Production Ready ✅
+
+## 🔍 Integration Testing (Latest)
+
+### Integration Test Suite Created
+- **Location**: `tests/integration/api_integration_test.go`
+- **Coverage**: 13 comprehensive tests covering all API endpoints
+- **Tests Passing**: 13/13 (100% success rate)
+- **Focus**: Testing against running server with real HTTP requests
+
+### Test Categories
+1. **Basic Endpoints**: Health check, API info
+2. **Wedding Management**: CRUD operations
+3. **Guest Management**: Creation and retrieval
+4. **RSVP Management**: Status tracking
+5. **Error Handling**: Invalid requests, authentication
+6. **Security**: Input validation, method restrictions
+7. **Performance**: Concurrent request handling
+
+### Running Integration Tests
+```bash
+# Start the backend server
+go run cmd/api/main.go
+
+# In another terminal, run integration tests
+go test ./tests/integration -v
+```
+
+### Key Results
+- ✅ All 13 integration tests pass
+- ✅ Server starts correctly on port 8080
+- ✅ Health endpoints respond properly
+- ✅ API documentation accessible at `/swagger/index.html`
+- ✅ Error handling works as expected
+- ✅ Input validation prevents invalid data
+- ✅ Concurrent requests handled gracefully
 
 This document serves as a guide for future AI agents working on the Wedding Invitation Backend project. It contains architectural decisions, patterns, and best practices established during development.
