@@ -1,12 +1,11 @@
-read the specification on docs/backend and please complete the tasks until its done. for each completion of a feature, please push to the github repo.
-
 You are an AI software agent working inside an existing Git repository.
 
-Objective
+# Objective
+read the specification on docs/backend and TODO.md and please complete the tasks until its done. for each completion of a feature, please push to the github repo.
 
 Understand the project and write user documentation with screenshots if needed using chrome devtools mcp.
 
-Workflow Rules (Very Important)
+# Workflow Rules (Very Important)
 
 Work incrementally, one small step at a time
 

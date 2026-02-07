@@ -5479,3 +5479,16 @@
 2026-02-07T09:25:51.457352Z  INFO ralph_core::event_loop: Wrapping up: completed. 3 iterations in 2h 31m 28s. reason=completed iterations=3 duration=2h 31m 28s
 2026-02-07T09:25:51.457384Z DEBUG ralph_core::event_logger: Event logged topic=loop.terminate iteration=3
 2026-02-07T09:25:51.460234Z  INFO ralph_core::landing: Beginning landing sequence loop_id=primary
+2026-02-07T09:25:53.050720Z  INFO ralph_core::landing: Auto-committed changes during landing loop_id=primary commit=Some("1f7d1eb25a148dfee9cf7ad0be0dd5f6ef00dcdd") files=7
+2026-02-07T09:25:54.367559Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1787), flags: (0x4: END_HEADERS) }
+2026-02-07T09:25:54.367617Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1787), flags: (0x1: END_STREAM) }
+2026-02-07T09:25:54.367695Z  INFO ralph_telegram::service: Telegram polling task stopped loop_id=main
+2026-02-07T09:25:54.367902Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=GoAway { error_code: NO_ERROR, last_stream_id: StreamId(0) }
+2026-02-07T09:25:54.367926Z DEBUG Connection{peer=Client}: h2::proto::connection: Connection::poll; connection error error=GoAway(b"", NO_ERROR, Library)
+2026-02-07T09:25:54.367977Z DEBUG Connection{peer=Client}: rustls::common_state: Sending warning alert CloseNotify
+2026-02-07T09:25:55.447769Z  INFO ralph_core::landing: Generated handoff file loop_id=primary path=/ralph-dummy/.ralph/agent/handoff.md completed=65 open=0
+2026-02-07T09:25:55.451428Z  INFO ralph_core::loop_completion: Landing completed with auto-commit commit=Some("1f7d1eb25a148dfee9cf7ad0be0dd5f6ef00dcdd") handoff=/ralph-dummy/.ralph/agent/handoff.md
+2026-02-07T09:25:55.451454Z DEBUG ralph_core::loop_completion: Primary loop completed with landing
+2026-02-07T09:25:55.451465Z  INFO ralph::loop_runner: Primary loop landed successfully committed=true handoff=/ralph-dummy/.ralph/agent/handoff.md open_tasks=0
+2026-02-07T09:25:55.451498Z DEBUG ralph::loop_runner: No pending merges in queue
+2026-02-07T11:22:33.023309Z DEBUG ralph_core::loop_lock: Releasing loop lock at /ralph-dummy/.ralph/loop.lock
