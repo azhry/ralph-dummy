@@ -60,7 +60,7 @@ func (m *MockGuestService) GetGuestByID(ctx context.Context, guestID, userID pri
 
 	guest, exists := m.guests[guestID]
 	if !exists {
-		return nil, services.ErrGuestNotFound
+		return nil, repository.ErrNotFound
 	}
 
 	// Check ownership (simplified for test)
@@ -96,7 +96,7 @@ func (m *MockGuestService) UpdateGuest(ctx context.Context, guestID, userID prim
 
 	existing, exists := m.guests[guestID]
 	if !exists {
-		return services.ErrGuestNotFound
+		return repository.ErrNotFound
 	}
 
 	if existing.CreatedBy != userID {
@@ -119,7 +119,7 @@ func (m *MockGuestService) DeleteGuest(ctx context.Context, guestID, userID prim
 
 	guest, exists := m.guests[guestID]
 	if !exists {
-		return services.ErrGuestNotFound
+		return repository.ErrNotFound
 	}
 
 	if guest.CreatedBy != userID {
@@ -194,15 +194,17 @@ func TestGuestHandler_CreateGuest(t *testing.T) {
 
 	// Test data
 	req := CreateGuestRequest{
-		FirstName:    "John",
-		LastName:     "Doe",
-		Email:        "john@example.com",
-		Phone:        "+1234567890",
-		Relationship: "Friend",
-		Side:         "groom",
-		AllowPlusOne: true,
-		MaxPlusOnes:  1,
-		VIP:          false,
+		FirstName:        "John",
+		LastName:         "Doe",
+		Email:            "john@example.com",
+		Phone:            "+1234567890",
+		Relationship:     "Friend",
+		Side:             "groom",
+		InvitedVia:       "digital",
+		InvitationStatus: "pending",
+		AllowPlusOne:     true,
+		MaxPlusOnes:      1,
+		VIP:              false,
 	}
 
 	reqBody, _ := json.Marshal(req)
@@ -217,6 +219,7 @@ func TestGuestHandler_CreateGuest(t *testing.T) {
 	var response map[string]interface{}
 	err := json.Unmarshal(w.Body.Bytes(), &response)
 	require.NoError(t, err)
+	assert.Equal(t, true, response["success"])
 	assert.Equal(t, "Guest created successfully", response["message"])
 	assert.NotNil(t, response["data"])
 }
@@ -254,7 +257,8 @@ func TestGuestHandler_CreateGuest_ValidationError(t *testing.T) {
 	var response map[string]interface{}
 	err := json.Unmarshal(w.Body.Bytes(), &response)
 	require.NoError(t, err)
-	assert.Contains(t, response["error"], "required")
+	assert.Equal(t, false, response["success"])
+	assert.Contains(t, response["error"], "Validation failed")
 }
 
 func TestGuestHandler_GetGuest(t *testing.T) {
@@ -324,7 +328,8 @@ func TestGuestHandler_GetGuest_NotFound(t *testing.T) {
 	var response map[string]interface{}
 	err := json.Unmarshal(w.Body.Bytes(), &response)
 	require.NoError(t, err)
-	assert.Contains(t, response["error"], "Guest not found")
+	assert.Equal(t, false, response["success"])
+	assert.Equal(t, "Guest not found", response["error"])
 }
 
 func TestGuestHandler_ListGuests(t *testing.T) {
@@ -354,7 +359,7 @@ func TestGuestHandler_ListGuests(t *testing.T) {
 	router.GET("/weddings/:wedding_id/guests", handler.ListGuests)
 
 	w := httptest.NewRecorder()
-	reqHTTP, _ := http.NewRequest("GET", fmt.Sprintf("/weddings/%s/guests?page=1&page_size=10", weddingID.Hex()), nil)
+	reqHTTP, _ := http.NewRequest("GET", fmt.Sprintf("/weddings/%s/guests?page=1&size=10", weddingID.Hex()), nil)
 
 	router.ServeHTTP(w, reqHTTP)
 
@@ -363,12 +368,11 @@ func TestGuestHandler_ListGuests(t *testing.T) {
 	var response map[string]interface{}
 	err := json.Unmarshal(w.Body.Bytes(), &response)
 	require.NoError(t, err)
+	assert.Equal(t, true, response["success"])
 	assert.NotNil(t, response["data"])
-
-	data := response["data"].(map[string]interface{})
-	assert.Equal(t, float64(2), data["total"])
-	assert.Equal(t, float64(1), data["page"])
-	assert.Equal(t, float64(10), data["page_size"])
+	assert.Equal(t, float64(2), response["total"])
+	assert.Equal(t, float64(1), response["page"])
+	assert.Equal(t, float64(10), response["size"])
 }
 
 func TestGuestHandler_UpdateGuest(t *testing.T) {
@@ -416,7 +420,8 @@ func TestGuestHandler_UpdateGuest(t *testing.T) {
 	var response map[string]interface{}
 	err := json.Unmarshal(w.Body.Bytes(), &response)
 	require.NoError(t, err)
-	assert.Equal(t, "Guest updated successfully", response["message"])
+	assert.Equal(t, true, response["success"])
+	assert.NotNil(t, response["data"])
 }
 
 func TestGuestHandler_DeleteGuest(t *testing.T) {
@@ -493,8 +498,9 @@ func TestGuestHandler_BulkCreateGuests(t *testing.T) {
 	var response map[string]interface{}
 	err := json.Unmarshal(w.Body.Bytes(), &response)
 	require.NoError(t, err)
+	assert.Equal(t, true, response["success"])
 	assert.Equal(t, "Guests created successfully", response["message"])
 
 	data := response["data"].(map[string]interface{})
-	assert.Equal(t, float64(2), data["created_count"])
+	assert.Equal(t, float64(2), data["total"])
 }
