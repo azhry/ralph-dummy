@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/require"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 
@@ -99,7 +100,7 @@ func (m *MockRSVPRepository) GetSubmissionTrend(ctx context.Context, weddingID p
 func TestRSVPService_SubmitRSVP(t *testing.T) {
 	// Setup
 	rsvpRepo := NewMockRSVPRepository()
-	weddingRepo := NewMockWeddingRepository()
+	weddingRepo := &MockWeddingRepository{}
 	service := NewRSVPService(rsvpRepo, weddingRepo)
 
 	weddingID := primitive.NewObjectID()
@@ -110,12 +111,13 @@ func TestRSVPService_SubmitRSVP(t *testing.T) {
 		ID:     weddingID,
 		UserID: userID,
 		Status: "published",
-		RSVP: &models.RSVPSettings{
-			Enabled:     boolPtr(true),
+		RSVP: models.RSVPSettings{
+			Enabled:     true,
 			MaxPlusOnes: 2,
 		},
 	}
-	weddingRepo.weddings[weddingID] = wedding
+	weddingRepo.On("GetByID", mock.Anything, weddingID).Return(wedding, nil)
+	weddingRepo.On("UpdateRSVPCount", mock.Anything, weddingID).Return(nil)
 
 	// Test successful submission
 	req := SubmitRSVPRequest{
@@ -141,7 +143,7 @@ func TestRSVPService_SubmitRSVP(t *testing.T) {
 
 func TestRSVPService_SubmitRSVP_WeddingNotFound(t *testing.T) {
 	rsvpRepo := NewMockRSVPRepository()
-	weddingRepo := NewMockWeddingRepository()
+	weddingRepo := &MockWeddingRepository{}
 	service := NewRSVPService(rsvpRepo, weddingRepo)
 
 	nonExistentID := primitive.NewObjectID()
@@ -152,14 +154,19 @@ func TestRSVPService_SubmitRSVP_WeddingNotFound(t *testing.T) {
 		AttendanceCount: 1,
 	}
 
+	// Set up mock expectation for wedding not found
+	weddingRepo.On("GetByID", mock.Anything, nonExistentID).Return(nil, repository.ErrNotFound)
+
 	_, err := service.SubmitRSVP(context.Background(), nonExistentID, req)
 	assert.Error(t, err)
 	assert.Equal(t, ErrWeddingNotFound, err)
+
+	weddingRepo.AssertExpectations(t)
 }
 
 func TestRSVPService_SubmitRSVP_RSVPNotOpen(t *testing.T) {
 	rsvpRepo := NewMockRSVPRepository()
-	weddingRepo := NewMockWeddingRepository()
+	weddingRepo := &MockWeddingRepository{}
 	service := NewRSVPService(rsvpRepo, weddingRepo)
 
 	weddingID := primitive.NewObjectID()
@@ -171,7 +178,7 @@ func TestRSVPService_SubmitRSVP_RSVPNotOpen(t *testing.T) {
 		UserID: userID,
 		Status: "draft", // Not published
 	}
-	weddingRepo.weddings[weddingID] = wedding
+	weddingRepo.On("GetByID", mock.Anything, weddingID).Return(wedding, nil)
 
 	req := SubmitRSVPRequest{
 		FirstName:       "John",
@@ -187,7 +194,7 @@ func TestRSVPService_SubmitRSVP_RSVPNotOpen(t *testing.T) {
 
 func TestRSVPService_SubmitRSVP_DuplicateEmail(t *testing.T) {
 	rsvpRepo := NewMockRSVPRepository()
-	weddingRepo := NewMockWeddingRepository()
+	weddingRepo := &MockWeddingRepository{}
 	service := NewRSVPService(rsvpRepo, weddingRepo)
 
 	weddingID := primitive.NewObjectID()
@@ -198,11 +205,11 @@ func TestRSVPService_SubmitRSVP_DuplicateEmail(t *testing.T) {
 		ID:     weddingID,
 		UserID: userID,
 		Status: "published",
-		RSVP: &models.RSVPSettings{
-			Enabled: boolPtr(true),
+		RSVP: models.RSVPSettings{
+			Enabled: true,
 		},
 	}
-	weddingRepo.weddings[weddingID] = wedding
+	weddingRepo.On("GetByID", mock.Anything, weddingID).Return(wedding, nil)
 
 	// Create existing RSVP
 	existingRSVP := &models.RSVP{
@@ -231,7 +238,7 @@ func TestRSVPService_SubmitRSVP_DuplicateEmail(t *testing.T) {
 
 func TestRSVPService_SubmitRSVP_TooManyPlusOnes(t *testing.T) {
 	rsvpRepo := NewMockRSVPRepository()
-	weddingRepo := NewMockWeddingRepository()
+	weddingRepo := &MockWeddingRepository{}
 	service := NewRSVPService(rsvpRepo, weddingRepo)
 
 	weddingID := primitive.NewObjectID()
@@ -242,12 +249,12 @@ func TestRSVPService_SubmitRSVP_TooManyPlusOnes(t *testing.T) {
 		ID:     weddingID,
 		UserID: userID,
 		Status: "published",
-		RSVP: &models.RSVPSettings{
-			Enabled:     boolPtr(true),
+		RSVP: models.RSVPSettings{
+			Enabled:     true,
 			MaxPlusOnes: 1,
 		},
 	}
-	weddingRepo.weddings[weddingID] = wedding
+	weddingRepo.On("GetByID", mock.Anything, weddingID).Return(wedding, nil)
 
 	// Try to submit with 2 plus ones
 	req := SubmitRSVPRequest{
@@ -268,7 +275,7 @@ func TestRSVPService_SubmitRSVP_TooManyPlusOnes(t *testing.T) {
 
 func TestRSVPService_UpdateRSVP(t *testing.T) {
 	rsvpRepo := NewMockRSVPRepository()
-	weddingRepo := NewMockWeddingRepository()
+	weddingRepo := &MockWeddingRepository{}
 	service := NewRSVPService(rsvpRepo, weddingRepo)
 
 	weddingID := primitive.NewObjectID()
@@ -279,12 +286,12 @@ func TestRSVPService_UpdateRSVP(t *testing.T) {
 		ID:     weddingID,
 		UserID: userID,
 		Status: "published",
-		RSVP: &models.RSVPSettings{
-			Enabled:     boolPtr(true),
+		RSVP: models.RSVPSettings{
+			Enabled:     true,
 			MaxPlusOnes: 2,
 		},
 	}
-	weddingRepo.weddings[weddingID] = wedding
+	weddingRepo.On("GetByID", mock.Anything, weddingID).Return(wedding, nil)
 
 	// Create existing RSVP
 	rsvp := &models.RSVP{
@@ -315,7 +322,7 @@ func TestRSVPService_UpdateRSVP(t *testing.T) {
 
 func TestRSVPService_UpdateRSVP_NotFound(t *testing.T) {
 	rsvpRepo := NewMockRSVPRepository()
-	weddingRepo := NewMockWeddingRepository()
+	weddingRepo := &MockWeddingRepository{}
 	service := NewRSVPService(rsvpRepo, weddingRepo)
 
 	nonExistentID := primitive.NewObjectID()
@@ -330,7 +337,7 @@ func TestRSVPService_UpdateRSVP_NotFound(t *testing.T) {
 
 func TestRSVPService_UpdateRSVP_CannotModify(t *testing.T) {
 	rsvpRepo := NewMockRSVPRepository()
-	weddingRepo := NewMockWeddingRepository()
+	weddingRepo := &MockWeddingRepository{}
 	service := NewRSVPService(rsvpRepo, weddingRepo)
 
 	weddingID := primitive.NewObjectID()
@@ -342,7 +349,7 @@ func TestRSVPService_UpdateRSVP_CannotModify(t *testing.T) {
 		UserID: userID,
 		Status: "published",
 	}
-	weddingRepo.weddings[weddingID] = wedding
+	weddingRepo.On("GetByID", mock.Anything, weddingID).Return(wedding, nil)
 
 	// Create old RSVP (more than 24 hours ago)
 	rsvp := &models.RSVP{
@@ -367,7 +374,7 @@ func TestRSVPService_UpdateRSVP_CannotModify(t *testing.T) {
 
 func TestRSVPService_DeleteRSVP(t *testing.T) {
 	rsvpRepo := NewMockRSVPRepository()
-	weddingRepo := NewMockWeddingRepository()
+	weddingRepo := &MockWeddingRepository{}
 	service := NewRSVPService(rsvpRepo, weddingRepo)
 
 	weddingID := primitive.NewObjectID()
@@ -379,7 +386,7 @@ func TestRSVPService_DeleteRSVP(t *testing.T) {
 		UserID: userID,
 		Status: "published",
 	}
-	weddingRepo.weddings[weddingID] = wedding
+	weddingRepo.On("GetByID", mock.Anything, weddingID).Return(wedding, nil)
 
 	// Create RSVP
 	rsvp := &models.RSVP{
@@ -403,7 +410,7 @@ func TestRSVPService_DeleteRSVP(t *testing.T) {
 
 func TestRSVPService_DeleteRSVP_Unauthorized(t *testing.T) {
 	rsvpRepo := NewMockRSVPRepository()
-	weddingRepo := NewMockWeddingRepository()
+	weddingRepo := &MockWeddingRepository{}
 	service := NewRSVPService(rsvpRepo, weddingRepo)
 
 	weddingID := primitive.NewObjectID()
@@ -416,7 +423,7 @@ func TestRSVPService_DeleteRSVP_Unauthorized(t *testing.T) {
 		UserID: otherUserID, // Different owner
 		Status: "published",
 	}
-	weddingRepo.weddings[weddingID] = wedding
+	weddingRepo.On("GetByID", mock.Anything, weddingID).Return(wedding, nil)
 
 	// Create RSVP
 	rsvp := &models.RSVP{
@@ -436,7 +443,7 @@ func TestRSVPService_DeleteRSVP_Unauthorized(t *testing.T) {
 
 func TestRSVPService_ListRSVPs(t *testing.T) {
 	rsvpRepo := NewMockRSVPRepository()
-	weddingRepo := NewMockWeddingRepository()
+	weddingRepo := &MockWeddingRepository{}
 	service := NewRSVPService(rsvpRepo, weddingRepo)
 
 	weddingID := primitive.NewObjectID()
@@ -448,7 +455,7 @@ func TestRSVPService_ListRSVPs(t *testing.T) {
 		UserID: userID,
 		Status: "published",
 	}
-	weddingRepo.weddings[weddingID] = wedding
+	weddingRepo.On("GetByID", mock.Anything, weddingID).Return(wedding, nil)
 
 	// Create RSVPs
 	for i := 0; i < 3; i++ {
@@ -470,7 +477,7 @@ func TestRSVPService_ListRSVPs(t *testing.T) {
 
 func TestRSVPService_GetRSVPStatistics(t *testing.T) {
 	rsvpRepo := NewMockRSVPRepository()
-	weddingRepo := NewMockWeddingRepository()
+	weddingRepo := &MockWeddingRepository{}
 	service := NewRSVPService(rsvpRepo, weddingRepo)
 
 	weddingID := primitive.NewObjectID()
@@ -482,7 +489,7 @@ func TestRSVPService_GetRSVPStatistics(t *testing.T) {
 		UserID: userID,
 		Status: "published",
 	}
-	weddingRepo.weddings[weddingID] = wedding
+	weddingRepo.On("GetByID", mock.Anything, weddingID).Return(wedding, nil)
 
 	stats, err := service.GetRSVPStatistics(context.Background(), weddingID, userID)
 	require.NoError(t, err)
@@ -491,7 +498,7 @@ func TestRSVPService_GetRSVPStatistics(t *testing.T) {
 
 func TestRSVPService_ExportRSVPs(t *testing.T) {
 	rsvpRepo := NewMockRSVPRepository()
-	weddingRepo := NewMockWeddingRepository()
+	weddingRepo := &MockWeddingRepository{}
 	service := NewRSVPService(rsvpRepo, weddingRepo)
 
 	weddingID := primitive.NewObjectID()
@@ -503,7 +510,7 @@ func TestRSVPService_ExportRSVPs(t *testing.T) {
 		UserID: userID,
 		Status: "published",
 	}
-	weddingRepo.weddings[weddingID] = wedding
+	weddingRepo.On("GetByID", mock.Anything, weddingID).Return(wedding, nil)
 
 	// Create RSVP
 	rsvp := &models.RSVP{

@@ -100,9 +100,7 @@ func (m *MockRSVPService) ListRSVPs(ctx context.Context, weddingID primitive.Obj
 
 func (m *MockRSVPService) GetRSVPStatistics(ctx context.Context, weddingID primitive.ObjectID, userID primitive.ObjectID) (*models.RSVPStatistics, error) {
 	stats := &models.RSVPStatistics{
-		TotalResponses:    len(m.rsvps),
-		DietaryCounts:     make(map[string]int),
-		SubmissionTrend:    []models.DailyCount{},
+		TotalResponses: len(m.rsvps),
 	}
 	return stats, nil
 }
@@ -151,7 +149,7 @@ func setupRSVPRouter() (*gin.Engine, *MockRSVPService) {
 }
 
 func TestRSVPHandler_SubmitRSVP(t *testing.T) {
-	router, mockService := setupRSVPRouter()
+	router, _ := setupRSVPRouter()
 
 	weddingID := primitive.NewObjectID()
 	reqBody := services.SubmitRSVPRequest{
@@ -315,7 +313,7 @@ func TestRSVPHandler_GetRSVPs_InvalidID(t *testing.T) {
 }
 
 func TestRSVPHandler_GetRSVPStatistics(t *testing.T) {
-	router, mockService := setupRSVPRouter()
+	router, _ := setupRSVPRouter()
 
 	weddingID := primitive.NewObjectID()
 

@@ -15,10 +15,10 @@ import (
 )
 
 type WeddingHandler struct {
-	weddingService *services.WeddingService
+	weddingService services.WeddingServiceInterface
 }
 
-func NewWeddingHandler(weddingService *services.WeddingService) *WeddingHandler {
+func NewWeddingHandler(weddingService services.WeddingServiceInterface) *WeddingHandler {
 	return &WeddingHandler{
 		weddingService: weddingService,
 	}

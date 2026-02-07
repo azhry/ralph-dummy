@@ -196,7 +196,9 @@ func TestGuestService_CreateGuest_Unauthorized(t *testing.T) {
 		ID:     weddingID,
 		UserID: otherUserID, // Different user
 	}
-	weddingRepo.weddings[weddingID] = wedding
+
+	// Set up mock expectation
+	weddingRepo.On("GetByID", mock.Anything, weddingID).Return(wedding, nil)
 
 	// Test data
 	guest := &models.Guest{
@@ -208,6 +210,8 @@ func TestGuestService_CreateGuest_Unauthorized(t *testing.T) {
 	err := service.CreateGuest(context.Background(), weddingID, userID, guest)
 	assert.Error(t, err)
 	assert.Contains(t, err.Error(), "unauthorized")
+
+	weddingRepo.AssertExpectations(t)
 }
 
 func TestGuestService_CreateGuest_ValidationError(t *testing.T) {
@@ -222,7 +226,9 @@ func TestGuestService_CreateGuest_ValidationError(t *testing.T) {
 		ID:     weddingID,
 		UserID: userID,
 	}
-	weddingRepo.weddings[weddingID] = wedding
+
+	// Set up mock expectation
+	weddingRepo.On("GetByID", mock.Anything, weddingID).Return(wedding, nil)
 
 	// Test data with missing required fields
 	guest := &models.Guest{
@@ -234,6 +240,8 @@ func TestGuestService_CreateGuest_ValidationError(t *testing.T) {
 	err := service.CreateGuest(context.Background(), weddingID, userID, guest)
 	assert.Error(t, err)
 	assert.Contains(t, err.Error(), "first name is required")
+
+	weddingRepo.AssertExpectations(t)
 }
 
 func TestGuestService_CreateGuest_DuplicateEmail(t *testing.T) {
@@ -248,7 +256,7 @@ func TestGuestService_CreateGuest_DuplicateEmail(t *testing.T) {
 		ID:     weddingID,
 		UserID: userID,
 	}
-	weddingRepo.weddings[weddingID] = wedding
+	weddingRepo.On("GetByID", mock.Anything, weddingID).Return(wedding, nil)
 
 	// Create first guest
 	guest1 := &models.Guest{
@@ -284,7 +292,7 @@ func TestGuestService_GetGuestByID(t *testing.T) {
 		ID:     weddingID,
 		UserID: userID,
 	}
-	weddingRepo.weddings[weddingID] = wedding
+	weddingRepo.On("GetByID", mock.Anything, weddingID).Return(wedding, nil)
 
 	// Create test guest
 	guest := &models.Guest{
@@ -299,6 +307,8 @@ func TestGuestService_GetGuestByID(t *testing.T) {
 	found, err := service.GetGuestByID(context.Background(), guest.ID, userID)
 	assert.NoError(t, err)
 	assert.Equal(t, guest.FirstName, found.FirstName)
+
+	weddingRepo.AssertExpectations(t)
 }
 
 func TestGuestService_UpdateGuest(t *testing.T) {
@@ -313,7 +323,7 @@ func TestGuestService_UpdateGuest(t *testing.T) {
 		ID:     weddingID,
 		UserID: userID,
 	}
-	weddingRepo.weddings[weddingID] = wedding
+	weddingRepo.On("GetByID", mock.Anything, weddingID).Return(wedding, nil)
 
 	// Create test guest
 	guest := &models.Guest{
@@ -328,6 +338,8 @@ func TestGuestService_UpdateGuest(t *testing.T) {
 	guest.FirstName = "Updated"
 	err := service.UpdateGuest(context.Background(), guest.ID, userID, guest)
 	assert.NoError(t, err)
+
+	weddingRepo.AssertExpectations(t)
 }
 
 func TestGuestService_DeleteGuest(t *testing.T) {
@@ -342,7 +354,7 @@ func TestGuestService_DeleteGuest(t *testing.T) {
 		ID:     weddingID,
 		UserID: userID,
 	}
-	weddingRepo.weddings[weddingID] = wedding
+	weddingRepo.On("GetByID", mock.Anything, weddingID).Return(wedding, nil)
 
 	// Create test guest
 	guest := &models.Guest{
@@ -360,6 +372,8 @@ func TestGuestService_DeleteGuest(t *testing.T) {
 	// Verify deletion
 	_, err = service.GetGuestByID(context.Background(), guest.ID, userID)
 	assert.Error(t, err)
+
+	weddingRepo.AssertExpectations(t)
 }
 
 func TestGuestService_CreateManyGuests(t *testing.T) {
@@ -374,7 +388,7 @@ func TestGuestService_CreateManyGuests(t *testing.T) {
 		ID:     weddingID,
 		UserID: userID,
 	}
-	weddingRepo.weddings[weddingID] = wedding
+	weddingRepo.On("GetByID", mock.Anything, weddingID).Return(wedding, nil)
 
 	// Create test guests
 	guests := []*models.Guest{
@@ -398,4 +412,6 @@ func TestGuestService_CreateManyGuests(t *testing.T) {
 		assert.Equal(t, weddingID, guest.WeddingID)
 		assert.Equal(t, userID, guest.CreatedBy)
 	}
+
+	weddingRepo.AssertExpectations(t)
 }

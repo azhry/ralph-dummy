@@ -13,10 +13,10 @@ import (
 )
 
 type RSVPHandler struct {
-	rsvpService *services.RSVPService
+	rsvpService services.RSVPServiceInterface
 }
 
-func NewRSVPHandler(rsvpService *services.RSVPService) *RSVPHandler {
+func NewRSVPHandler(rsvpService services.RSVPServiceInterface) *RSVPHandler {
 	return &RSVPHandler{
 		rsvpService: rsvpService,
 	}

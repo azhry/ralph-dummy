@@ -3,6 +3,7 @@ package services
 import (
 	"bytes"
 	"context"
+	"fmt"
 	"io"
 	"mime/multipart"
 	"testing"
@@ -10,7 +11,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
-	"github.com/stretchr/testify/require"
+
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.uber.org/zap/zaptest"
 	"wedding-invitation-backend/internal/domain/models"
@@ -104,7 +105,7 @@ func (m *MockMediaRepository) GetByCreatedBy(ctx context.Context, userID primiti
 
 func TestFileValidator_Validate(t *testing.T) {
 	validator := NewFileValidator([]string{"image/jpeg", "image/png", "image/webp"}, 5*1024*1024)
-	
+
 	tests := []struct {
 		name           string
 		filename       string
@@ -172,21 +173,21 @@ func TestFileValidator_Validate(t *testing.T) {
 func TestMediaService_UploadFile(t *testing.T) {
 	ctx := context.Background()
 	logger := zaptest.NewLogger(t)
-	
+
 	// Create mocks
 	mockRepo := new(MockMediaRepository)
 	mockStorage := new(MockStorageService)
 	validator := NewFileValidator([]string{"image/jpeg", "image/png", "image/webp"}, 5*1024*1024)
 	imageProcessor := NewImageProcessor([]ThumbnailSize{}, false) // No thumbnails for simplicity
-	
+
 	config := DefaultMediaServiceConfig()
 	service := NewMediaService(mockRepo, mockStorage, validator, imageProcessor, logger, config)
-	
+
 	userID := primitive.NewObjectID()
-	
+
 	// Valid JPEG file content
 	jpegContent := []byte{0xFF, 0xD8, 0xFF, 0xE0, 0x00, 0x10, 0x4A, 0x46, 0x49, 0x46, 0x00, 0x01}
-	
+
 	tests := []struct {
 		name        string
 		filename    string
@@ -200,7 +201,7 @@ func TestMediaService_UploadFile(t *testing.T) {
 			filename: "test.jpg",
 			fileSize: int64(len(jpegContent)),
 			setupMocks: func() {
-				mockStorage.On("Upload", mock.Anything, mock.AnythingOfType("string"), 
+				mockStorage.On("Upload", mock.Anything, mock.AnythingOfType("string"),
 					mock.AnythingOfType("[]uint8"), "image/jpeg", mock.AnythingOfType("map[string]string")).
 					Return("http://example.com/uploads/test.jpg", nil)
 				mockRepo.On("Create", mock.Anything, mock.AnythingOfType("*models.Media")).Return(nil)
@@ -222,9 +223,9 @@ func TestMediaService_UploadFile(t *testing.T) {
 			// Reset mocks
 			mockRepo.ExpectedCalls = nil
 			mockStorage.ExpectedCalls = nil
-			
+
 			tt.setupMocks()
-			
+
 			reader := bytes.NewReader(jpegContent)
 			header := &multipart.FileHeader{
 				Filename: tt.filename,
@@ -252,26 +253,26 @@ func TestMediaService_UploadFile(t *testing.T) {
 func TestMediaService_GetUserMedia(t *testing.T) {
 	ctx := context.Background()
 	logger := zaptest.NewLogger(t)
-	
+
 	// Create mocks
 	mockRepo := new(MockMediaRepository)
 	mockStorage := new(MockStorageService)
 	validator := NewFileValidator([]string{"image/jpeg", "image/png", "image/webp"}, 5*1024*1024)
 	imageProcessor := NewImageProcessor([]ThumbnailSize{}, false)
-	
+
 	config := DefaultMediaServiceConfig()
 	service := NewMediaService(mockRepo, mockStorage, validator, imageProcessor, logger, config)
-	
+
 	userID := primitive.NewObjectID()
-	
+
 	tests := []struct {
-		name         string
-		page         int
-		pageSize     int
-		filters      repository.MediaFilter
-		setupMocks   func()
-		expectError  bool
-		expectedLen  int
+		name          string
+		page          int
+		pageSize      int
+		filters       repository.MediaFilter
+		setupMocks    func()
+		expectError   bool
+		expectedLen   int
 		expectedTotal int64
 	}{
 		{
@@ -289,7 +290,7 @@ func TestMediaService_GetUserMedia(t *testing.T) {
 				}), mock.AnythingOfType("repository.ListOptions")).Return(mediaList, int64(2), nil)
 			},
 			expectError:   false,
-			expectedLen:  2,
+			expectedLen:   2,
 			expectedTotal: 2,
 		},
 	}
@@ -297,9 +298,9 @@ func TestMediaService_GetUserMedia(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			mockRepo.ExpectedCalls = nil
-			
+
 			tt.setupMocks()
-			
+
 			result, total, err := service.GetUserMedia(ctx, userID, tt.page, tt.pageSize, tt.filters)
 
 			if tt.expectError {
@@ -318,16 +319,16 @@ func TestMediaService_GetUserMedia(t *testing.T) {
 func TestMediaService_DeleteMedia(t *testing.T) {
 	ctx := context.Background()
 	logger := zaptest.NewLogger(t)
-	
+
 	// Create mocks
 	mockRepo := new(MockMediaRepository)
 	mockStorage := new(MockStorageService)
 	validator := NewFileValidator([]string{"image/jpeg", "image/png", "image/webp"}, 5*1024*1024)
 	imageProcessor := NewImageProcessor([]ThumbnailSize{}, false)
-	
+
 	config := DefaultMediaServiceConfig()
 	service := NewMediaService(mockRepo, mockStorage, validator, imageProcessor, logger, config)
-	
+
 	userID := primitive.NewObjectID()
 	mediaID := primitive.NewObjectID()
 	otherUserID := primitive.NewObjectID()
@@ -377,9 +378,9 @@ func TestMediaService_DeleteMedia(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			mockRepo.ExpectedCalls = nil
-			
+
 			tt.setupMocks()
-			
+
 			err := service.DeleteMedia(ctx, tt.mediaID, tt.userID)
 
 			if tt.expectError {

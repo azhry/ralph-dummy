@@ -35,9 +35,13 @@ func TestUploadIntegration(t *testing.T) {
 	// Create router with upload routes
 	router := gin.New()
 
+	// Create a fixed userID for both middleware and test setup
+	userID := primitive.NewObjectID()
+	testMedia := createTestMedia()
+	testMedia.CreatedBy = userID
+
 	// Mock auth middleware to set user ID
 	router.Use(func(c *gin.Context) {
-		userID := primitive.NewObjectID()
 		c.Set("userID", userID.Hex())
 		c.Next()
 	})
@@ -53,10 +57,6 @@ func TestUploadIntegration(t *testing.T) {
 		protected.GET("/media", uploadHandler.HandleListMedia)
 		protected.DELETE("/media/:id", uploadHandler.HandleDeleteMedia)
 	}
-
-	userID := primitive.NewObjectID()
-	testMedia := createTestMedia()
-	testMedia.CreatedBy = userID
 
 	t.Run("Complete upload workflow", func(t *testing.T) {
 		// Step 1: Generate presigned URL
@@ -133,7 +133,7 @@ func TestUploadIntegration(t *testing.T) {
 		assert.Equal(t, testMedia.ID.Hex(), getMediaResp.ID)
 
 		// Step 4: List user media
-		mockMediaService.On("GetUserMedia", mock.Anything, userID, 1, 10, mock.AnythingOfType("repository.MediaFilter")).
+		mockMediaService.On("GetUserMedia", mock.Anything, userID, 1, 10, mock.Anything).
 			Return([]*models.Media{testMedia}, int64(1), nil).Once()
 
 		req = httptest.NewRequest(http.MethodGet, "/api/v1/media?page=1&pageSize=10", nil)
