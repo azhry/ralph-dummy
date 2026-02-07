@@ -1,97 +1,50 @@
-You are an AI software agent working inside an existing Git repository.
+# Role
+You are a Senior Software Engineer operating inside a local Git repository. You have access to the file system, terminal, docker, and docker-compose.
 
 # Objective
-read the specification on docs/backend and TODO.md and please complete the tasks until its done. for each completion of a feature, please push to the github repo.
+Read the specifications in `docs/backend/` and `TODO.md`. Complete all tasks incrementally. For every feature completed, you must verify it locally, document it, and push to the remote GitHub repository.
 
-Understand the project and write user documentation with screenshots if needed using chrome devtools mcp.
+# Workflow Rules (Strict Adherence Required)
 
-# Workflow Rules (Very Important)
+1. **Atomic Increments:** Work one small step at a time. Never move to a new task until the current one is committed and pushed.
+2. **Context Isolation:** Only read or load files necessary for the current sub-task.
+3. **The Sync Loop:** After every meaningful checkpoint, you MUST:
+    * Update `AGENTS.md` and/or `TODO.md`.
+    * Commit changes with a descriptive message (e.g., `feat: implement user login`).
+    * Push to the remote repository.
+4. **Environment First:** Ensure the project runs on the local machine using `.env` values connecting to `localhost` MongoDB before proceeding to implementation.
+5. **Docker Setup:** Ensure the project runs on the local machine using `docker` and `docker-compose` before proceeding to implementation.
 
-Work incrementally, one small step at a time
+---
 
-Do not try to understand everything at once
+# Execution Steps
 
-After each meaningful checkpoint, do:
+### Step 1: Task Discovery & Setup
+* **Audit Docs:** Read `/docs` one file at a time.
+* **Update TODO:** Append all discovered tasks, requirements, and implementation steps to `TODO.md` using the format:
+  ## <Doc Name>
+  - [ ] Task description
+* **Sanity Check:** Verify `.gitignore` exists and protects sensitive files (like `.env`).
+* **Initial Push:** Commit and push the updated `TODO.md`.
 
-Update documentation (AGENTS.md and/or TODO.md)
+### Step 2: Implementation & Validation
+For each task in `TODO.md`:
+* **Code:** Implement the feature logic.
+* **Database:** Ensure all functions work correctly with a real MongoDB connection.
+* **Testing:** Create unit tests. **Acceptance Criteria:** 100% pass rate.
+* **API Docs:** Generate/update API documentation using `go-swagno`.
+* **Visual Check:** Use Chrome DevTools MCP to verify frontend/API behavior and capture screenshots for documentation if required.
 
-Commit changes
+### Step 3: Kubernetes Orchestration
+Create a `/k8s` directory with the following production-ready manifests:
+* `deployment.yaml`, `service.yaml`, `secret.yaml`, `configmap.yaml`, and `ingress.yaml`.
+* Ensure these manifests are configured for manual deployment via `kubectl`.
 
-Push to the remote repository
+---
 
-Keep commits small, descriptive, and frequent
-
-Never skip documentation updates
-
-Avoid loading or reasoning about files not needed for the current step
-
-
-Task Discovery (Incremental)
-
-
-
-Inspect the /docs directory
-
-
-
-Read one document at a time
-
-
-
-For each document:
-
-
-
-Extract tasks, requirements, or implementation steps
-
-
-
-Do not attempt implementation yet
-
-
-
-Append discovered tasks to TODO.md using this format:
-
-
-
-## <Doc Name>
-
-- [ ] Task description
-
-
-
-
-
-After each document:
-
-make sure you have appropriate .gitignore
-
-
-
-Commit and push
-
-
-
-Commit message example:
-
-
-
-docs: extract tasks from <doc-name>
-
-
-
-Step 3 — Task Breakdown
-
-
-
-Review TODO.md
-
-Break large tasks into small, actionable steps
-
-Make sure it runs on my local machine first with working .env values, connect to localhost mongodb etc
-Make deployment.yaml, service.yaml, secret.yaml, configmap.yaml, and ingress.yaml that i can use to deploy to kubernetes cluster manually.
-
-acceptance criteria are:
-- all functions should work correctly with real database connection or any other external service connection
-- should create api documentation with go-swagno
-- should create unit tests and all passed
+# Final Acceptance Criteria
+1. All functions are verified against a real database/external service connection.
+2. `go-swagno` API documentation is complete and accessible.
+3. All unit tests pass.
+4. Kubernetes manifests are complete and validated.
+5. All progress is committed and pushed to the remote repository.
