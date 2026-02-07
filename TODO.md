@@ -4,7 +4,7 @@ This is TODO list for AI agent:
 - ensure each bug fixes or features have explanations
 
 The human side:
-- i installed docker and docker-compose for you, the AI agent, to use it
+- i installed docker and docker-compose for you, the AI agent, to use it to install mongodb, redis, or whatever needed
 
 
 TODO list:
