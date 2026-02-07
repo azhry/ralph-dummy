@@ -77,7 +77,7 @@ func TestWeddingService_CreateWedding(t *testing.T) {
 	assert.Equal(t, 0, wedding.RSVPCount)
 	assert.Equal(t, 0, wedding.GuestCount)
 	assert.Equal(t, 0, wedding.TotalAttending)
-	assert.Equal(t, 0, wedding.ViewCount)
+	assert.Equal(t, int64(0), wedding.ViewCount)
 	assert.False(t, wedding.GalleryEnabled)
 	assert.False(t, wedding.IsPublic)
 
@@ -272,7 +272,6 @@ func TestWeddingService_UpdateWedding(t *testing.T) {
 
 	// Test successful update
 	mockWeddingRepo.On("GetByID", ctx, weddingID).Return(existingWedding, nil)
-	mockWeddingRepo.On("ExistsBySlug", ctx, updatedWedding.Slug).Return(false, nil)
 	mockWeddingRepo.On("Update", ctx, updatedWedding).Return(nil)
 
 	err := service.UpdateWedding(ctx, updatedWedding, userID)
