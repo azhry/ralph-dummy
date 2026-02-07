@@ -17,36 +17,38 @@ A production-ready backend for the Wedding Invitation system built with Go and M
 - ✅ **Security Middleware** - Rate limiting, CORS, security headers, validation
 - ✅ **Admin Features** - User management and system analytics
 
+## 📚 Documentation
+
+| Document | Description |
+|----------|-------------|
+| **[QUICK_START.md](./QUICK_START.md)** | Step-by-step setup guide for new users |
+| **[VISUAL_GUIDE.md](./VISUAL_GUIDE.md)** | System architecture and workflow diagrams |
+| **[USER_GUIDE.md](./USER_GUIDE.md)** | Comprehensive API usage examples |
+| **[docs/API_DOCUMENTATION.md](./docs/API_DOCUMENTATION.md)** | Complete REST API reference |
+| **[AGENTS.md](./AGENTS.md)** | Development documentation for contributors |
+
 ## 🚀 Quick Start
+
+**New to the project?** Start with [QUICK_START.md](./QUICK_START.md) for a step-by-step setup guide.
 
 ### Prerequisites
 - Go 1.21+
 - MongoDB 6.0+
 - Redis (optional, for rate limiting)
 
-### Development Setup
+### One-Command Setup
 
 ```bash
-# Clone the repository
-git clone <repository-url>
-cd wedding-invitation-backend
-
-# Copy environment configuration
-cp .env.example .env
-# Edit .env with your configuration
-
-# Install dependencies
-go mod tidy
-
-# Start MongoDB (using Docker)
-docker run -d --name wedding-mongo \
-  -p 27017:27017 \
-  -e MONGO_INITDB_DATABASE=wedding_invitations \
-  mongo:6.0
-
-# Run the server
+# Quick setup (if you have Docker and Go)
+git clone <repository-url> && cd wedding-invitation-backend && \
+cp .env.example .env && go mod tidy && \
+docker run -d --name wedding-mongo -p 27017:27017 mongo:6.0 && \
 go run cmd/api/main.go
 ```
+
+### Detailed Setup
+
+For detailed setup instructions, troubleshooting, and first API calls, see [QUICK_START.md](./QUICK_START.md).
 
 ### Run Tests
 
