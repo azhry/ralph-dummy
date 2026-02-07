@@ -424,11 +424,13 @@ func (s *analyticsService) parseUserAgent(userAgent string) (device, browser, os
 
 	userAgent = strings.ToLower(userAgent)
 
-	// Detect device type
-	if strings.Contains(userAgent, "mobile") || strings.Contains(userAgent, "android") || strings.Contains(userAgent, "iphone") {
-		device = "mobile"
-	} else if strings.Contains(userAgent, "tablet") || strings.Contains(userAgent, "ipad") {
+	// Detect device type - check for tablet first as iPad also contains "mobile"
+	if strings.Contains(userAgent, "ipad") {
 		device = "tablet"
+	} else if strings.Contains(userAgent, "tablet") {
+		device = "tablet"
+	} else if strings.Contains(userAgent, "mobile") || strings.Contains(userAgent, "android") || strings.Contains(userAgent, "iphone") {
+		device = "mobile"
 	} else {
 		device = "desktop"
 	}
@@ -448,17 +450,17 @@ func (s *analyticsService) parseUserAgent(userAgent string) (device, browser, os
 		browser = "other"
 	}
 
-	// Detect OS
-	if strings.Contains(userAgent, "windows") {
-		os = "windows"
+	// Detect OS - check for iOS first as it includes both iPhone and iPad
+	if strings.Contains(userAgent, "iphone") || strings.Contains(userAgent, "ipad") || strings.Contains(userAgent, "ios") {
+		os = "ios"
 	} else if strings.Contains(userAgent, "mac os") {
 		os = "macos"
+	} else if strings.Contains(userAgent, "windows") {
+		os = "windows"
 	} else if strings.Contains(userAgent, "linux") {
 		os = "linux"
 	} else if strings.Contains(userAgent, "android") {
 		os = "android"
-	} else if strings.Contains(userAgent, "ios") || strings.Contains(userAgent, "iphone") || strings.Contains(userAgent, "ipad") {
-		os = "ios"
 	} else {
 		os = "other"
 	}
@@ -547,7 +549,7 @@ func (s *analyticsService) SanitizeReferrer(referrer string) string {
 		referrer = referrer[:idx]
 	}
 
-	// Limit length
+	// Limit length to 500 characters
 	if len(referrer) > 500 {
 		referrer = referrer[:500]
 	}
@@ -599,14 +601,14 @@ func (s *analyticsService) SanitizeCustomData(data map[string]interface{}) map[s
 	sanitized := make(map[string]interface{})
 
 	for key, value := range data {
-		// Limit key length
+		// Sanitize key first (only alphanumeric and underscore)
+		reg := regexp.MustCompile(`[^a-zA-Z0-9_]`)
+		key = reg.ReplaceAllString(key, "_")
+
+		// Limit key length after sanitization
 		if len(key) > 50 {
 			key = key[:50]
 		}
-
-		// Sanitize key (only alphanumeric and underscore)
-		reg := regexp.MustCompile(`[^a-zA-Z0-9_]`)
-		key = reg.ReplaceAllString(key, "_")
 
 		// Limit value size
 		strValue := fmt.Sprintf("%v", value)
