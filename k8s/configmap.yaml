@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: wedding-config
+  namespace: wedding-invitation
+  labels:
+    app: wedding-api
+    type: application-config
+  annotations:
+    description: "Application configuration for Wedding Invitation API"
+data:
+  mongodb-database: "wedding_invitations"
+  aws-region: "us-east-1"
+  s3-bucket: "wedding-production-uploads"
+  s3-cdn-domain: "cdn.wedding.app"
+  email-provider: "sendgrid"
+  email-from-address: "noreply@wedding.app"
+  rate-limit-requests: "100"
+  rate-limit-window: "60"
+  allowed-origins: "https://wedding.app,https://*.wedding.app"
+  jwt-access-ttl: "15m"
+  jwt-refresh-ttl: "168h"
+  bcrypt-cost: "12"
+  enable-swagger: "false"
+  enable-debug-endpoints: "false"
+  app-name: "Wedding Invitation API"
+  app-version: "1.0.0"
+  support-email: "support@wedding.app"
