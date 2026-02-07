@@ -4091,3 +4091,1149 @@
 2026-02-07T08:48:25.162244Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1347), flags: (0x4: END_HEADERS) }
 2026-02-07T08:48:25.162261Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1347), flags: (0x1: END_STREAM) }
 2026-02-07T08:48:25.336708Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1347), size_increment: 2147418111 }
+2026-02-07T08:48:35.336409Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1347), flags: (0x4: END_HEADERS) }
+2026-02-07T08:48:35.336461Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1347), flags: (0x1: END_STREAM) }
+2026-02-07T08:48:35.336576Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:48:35.336631Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1349), flags: (0x4: END_HEADERS) }
+2026-02-07T08:48:35.336670Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1349), flags: (0x1: END_STREAM) }
+2026-02-07T08:48:35.511992Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1349), size_increment: 2147418111 }
+2026-02-07T08:48:45.514428Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1349), flags: (0x4: END_HEADERS) }
+2026-02-07T08:48:45.514492Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1349), flags: (0x1: END_STREAM) }
+2026-02-07T08:48:45.514639Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:48:45.514707Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1351), flags: (0x4: END_HEADERS) }
+2026-02-07T08:48:45.514746Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1351), flags: (0x1: END_STREAM) }
+2026-02-07T08:48:45.690050Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1351), size_increment: 2147418111 }
+2026-02-07T08:48:55.691826Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1351), flags: (0x4: END_HEADERS) }
+2026-02-07T08:48:55.691878Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1351), flags: (0x1: END_STREAM) }
+2026-02-07T08:48:55.691994Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:48:55.692087Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1353), flags: (0x4: END_HEADERS) }
+2026-02-07T08:48:55.692144Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1353), flags: (0x1: END_STREAM) }
+2026-02-07T08:48:55.865959Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1353), size_increment: 2147418111 }
+2026-02-07T08:49:05.869968Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1353), flags: (0x4: END_HEADERS) }
+2026-02-07T08:49:05.870025Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1353), flags: (0x1: END_STREAM) }
+2026-02-07T08:49:05.870157Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:49:05.870213Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1355), flags: (0x4: END_HEADERS) }
+2026-02-07T08:49:05.870234Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1355), flags: (0x1: END_STREAM) }
+2026-02-07T08:49:06.044735Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1355), size_increment: 2147418111 }
+2026-02-07T08:49:16.046229Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1355), flags: (0x4: END_HEADERS) }
+2026-02-07T08:49:16.046296Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1355), flags: (0x1: END_STREAM) }
+2026-02-07T08:49:16.046449Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:49:16.046547Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1357), flags: (0x4: END_HEADERS) }
+2026-02-07T08:49:16.046567Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1357), flags: (0x1: END_STREAM) }
+2026-02-07T08:49:16.220511Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1357), size_increment: 2147418111 }
+2026-02-07T08:49:26.221157Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1357), flags: (0x4: END_HEADERS) }
+2026-02-07T08:49:26.221208Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1357), flags: (0x1: END_STREAM) }
+2026-02-07T08:49:26.221309Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:49:26.221359Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1359), flags: (0x4: END_HEADERS) }
+2026-02-07T08:49:26.221380Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1359), flags: (0x1: END_STREAM) }
+2026-02-07T08:49:26.393990Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1359), size_increment: 2147418111 }
+2026-02-07T08:49:36.395732Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1359), flags: (0x4: END_HEADERS) }
+2026-02-07T08:49:36.395836Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1359), flags: (0x1: END_STREAM) }
+2026-02-07T08:49:36.395949Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:49:36.396008Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1361), flags: (0x4: END_HEADERS) }
+2026-02-07T08:49:36.396043Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1361), flags: (0x1: END_STREAM) }
+2026-02-07T08:49:36.571942Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1361), size_increment: 2147418111 }
+2026-02-07T08:49:46.572836Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1361), flags: (0x4: END_HEADERS) }
+2026-02-07T08:49:46.572931Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1361), flags: (0x1: END_STREAM) }
+2026-02-07T08:49:46.573055Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:49:46.573170Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1363), flags: (0x4: END_HEADERS) }
+2026-02-07T08:49:46.573202Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1363), flags: (0x1: END_STREAM) }
+2026-02-07T08:49:46.746514Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1363), size_increment: 2147418111 }
+2026-02-07T08:49:56.746343Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1363), flags: (0x4: END_HEADERS) }
+2026-02-07T08:49:56.746396Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1363), flags: (0x1: END_STREAM) }
+2026-02-07T08:49:56.746515Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:49:56.746584Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1365), flags: (0x4: END_HEADERS) }
+2026-02-07T08:49:56.746613Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1365), flags: (0x1: END_STREAM) }
+2026-02-07T08:49:56.919753Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1365), size_increment: 2147418111 }
+2026-02-07T08:50:06.922606Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1365), flags: (0x4: END_HEADERS) }
+2026-02-07T08:50:06.922661Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1365), flags: (0x1: END_STREAM) }
+2026-02-07T08:50:06.922768Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:50:06.922826Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1367), flags: (0x4: END_HEADERS) }
+2026-02-07T08:50:06.922855Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1367), flags: (0x1: END_STREAM) }
+2026-02-07T08:50:07.099157Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1367), size_increment: 2147418111 }
+2026-02-07T08:50:17.100187Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1367), flags: (0x4: END_HEADERS) }
+2026-02-07T08:50:17.100246Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1367), flags: (0x1: END_STREAM) }
+2026-02-07T08:50:17.100351Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:50:17.100411Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1369), flags: (0x4: END_HEADERS) }
+2026-02-07T08:50:17.100447Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1369), flags: (0x1: END_STREAM) }
+2026-02-07T08:50:17.274873Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1369), size_increment: 2147418111 }
+2026-02-07T08:50:27.276734Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1369), flags: (0x4: END_HEADERS) }
+2026-02-07T08:50:27.276784Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1369), flags: (0x1: END_STREAM) }
+2026-02-07T08:50:27.276883Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:50:27.276938Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1371), flags: (0x4: END_HEADERS) }
+2026-02-07T08:50:27.276991Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1371), flags: (0x1: END_STREAM) }
+2026-02-07T08:50:27.449891Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1371), size_increment: 2147418111 }
+2026-02-07T08:50:37.451117Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1371), flags: (0x4: END_HEADERS) }
+2026-02-07T08:50:37.451176Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1371), flags: (0x1: END_STREAM) }
+2026-02-07T08:50:37.451274Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:50:37.451338Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1373), flags: (0x4: END_HEADERS) }
+2026-02-07T08:50:37.451368Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1373), flags: (0x1: END_STREAM) }
+2026-02-07T08:50:37.625654Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1373), size_increment: 2147418111 }
+2026-02-07T08:50:47.626339Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1373), flags: (0x4: END_HEADERS) }
+2026-02-07T08:50:47.626388Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1373), flags: (0x1: END_STREAM) }
+2026-02-07T08:50:47.626484Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:50:47.626544Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1375), flags: (0x4: END_HEADERS) }
+2026-02-07T08:50:47.626562Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1375), flags: (0x1: END_STREAM) }
+2026-02-07T08:50:47.800158Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1375), size_increment: 2147418111 }
+2026-02-07T08:50:57.800555Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1375), flags: (0x4: END_HEADERS) }
+2026-02-07T08:50:57.800611Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1375), flags: (0x1: END_STREAM) }
+2026-02-07T08:50:57.800715Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:50:57.800766Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1377), flags: (0x4: END_HEADERS) }
+2026-02-07T08:50:57.800787Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1377), flags: (0x1: END_STREAM) }
+2026-02-07T08:50:57.973463Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1377), size_increment: 2147418111 }
+2026-02-07T08:51:07.976474Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1377), flags: (0x4: END_HEADERS) }
+2026-02-07T08:51:07.976547Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1377), flags: (0x1: END_STREAM) }
+2026-02-07T08:51:07.976664Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:51:07.976732Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1379), flags: (0x4: END_HEADERS) }
+2026-02-07T08:51:07.976790Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1379), flags: (0x1: END_STREAM) }
+2026-02-07T08:51:08.152240Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1379), size_increment: 2147418111 }
+2026-02-07T08:51:18.153589Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1379), flags: (0x4: END_HEADERS) }
+2026-02-07T08:51:18.153661Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1379), flags: (0x1: END_STREAM) }
+2026-02-07T08:51:18.153780Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:51:18.153829Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1381), flags: (0x4: END_HEADERS) }
+2026-02-07T08:51:18.153847Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1381), flags: (0x1: END_STREAM) }
+2026-02-07T08:51:18.329054Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1381), size_increment: 2147418111 }
+2026-02-07T08:51:28.332307Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1381), flags: (0x4: END_HEADERS) }
+2026-02-07T08:51:28.332351Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1381), flags: (0x1: END_STREAM) }
+2026-02-07T08:51:28.332453Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:51:28.332504Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1383), flags: (0x4: END_HEADERS) }
+2026-02-07T08:51:28.332541Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1383), flags: (0x1: END_STREAM) }
+2026-02-07T08:51:28.505045Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1383), size_increment: 2147418111 }
+2026-02-07T08:51:38.507337Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1383), flags: (0x4: END_HEADERS) }
+2026-02-07T08:51:38.507379Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1383), flags: (0x1: END_STREAM) }
+2026-02-07T08:51:38.507477Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:51:38.507539Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1385), flags: (0x4: END_HEADERS) }
+2026-02-07T08:51:38.507575Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1385), flags: (0x1: END_STREAM) }
+2026-02-07T08:51:38.682466Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1385), size_increment: 2147418111 }
+2026-02-07T08:51:48.692747Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1385), flags: (0x4: END_HEADERS) }
+2026-02-07T08:51:48.692800Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1385), flags: (0x1: END_STREAM) }
+2026-02-07T08:51:48.692901Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:51:48.692951Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1387), flags: (0x4: END_HEADERS) }
+2026-02-07T08:51:48.692972Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1387), flags: (0x1: END_STREAM) }
+2026-02-07T08:51:48.866758Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1387), size_increment: 2147418111 }
+2026-02-07T08:51:58.868122Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1387), flags: (0x4: END_HEADERS) }
+2026-02-07T08:51:58.868180Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1387), flags: (0x1: END_STREAM) }
+2026-02-07T08:51:58.868282Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:51:58.868334Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1389), flags: (0x4: END_HEADERS) }
+2026-02-07T08:51:58.868374Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1389), flags: (0x1: END_STREAM) }
+2026-02-07T08:51:59.042048Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1389), size_increment: 2147418111 }
+2026-02-07T08:52:09.046176Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1389), flags: (0x4: END_HEADERS) }
+2026-02-07T08:52:09.046234Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1389), flags: (0x1: END_STREAM) }
+2026-02-07T08:52:09.046354Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:52:09.046414Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1391), flags: (0x4: END_HEADERS) }
+2026-02-07T08:52:09.046449Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1391), flags: (0x1: END_STREAM) }
+2026-02-07T08:52:09.220841Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1391), size_increment: 2147418111 }
+2026-02-07T08:52:19.223908Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1391), flags: (0x4: END_HEADERS) }
+2026-02-07T08:52:19.223974Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1391), flags: (0x1: END_STREAM) }
+2026-02-07T08:52:19.224104Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:52:19.224162Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1393), flags: (0x4: END_HEADERS) }
+2026-02-07T08:52:19.224186Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1393), flags: (0x1: END_STREAM) }
+2026-02-07T08:52:19.397130Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1393), size_increment: 2147418111 }
+2026-02-07T08:52:29.400665Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1393), flags: (0x4: END_HEADERS) }
+2026-02-07T08:52:29.400725Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1393), flags: (0x1: END_STREAM) }
+2026-02-07T08:52:29.400838Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:52:29.400889Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1395), flags: (0x4: END_HEADERS) }
+2026-02-07T08:52:29.400910Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1395), flags: (0x1: END_STREAM) }
+2026-02-07T08:52:29.573544Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1395), size_increment: 2147418111 }
+2026-02-07T08:52:39.576390Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1395), flags: (0x4: END_HEADERS) }
+2026-02-07T08:52:39.576461Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1395), flags: (0x1: END_STREAM) }
+2026-02-07T08:52:39.576595Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:52:39.576664Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1397), flags: (0x4: END_HEADERS) }
+2026-02-07T08:52:39.576691Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1397), flags: (0x1: END_STREAM) }
+2026-02-07T08:52:39.752043Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1397), size_increment: 2147418111 }
+2026-02-07T08:52:49.753152Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1397), flags: (0x4: END_HEADERS) }
+2026-02-07T08:52:49.753233Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1397), flags: (0x1: END_STREAM) }
+2026-02-07T08:52:49.753354Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:52:49.753419Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1399), flags: (0x4: END_HEADERS) }
+2026-02-07T08:52:49.753456Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1399), flags: (0x1: END_STREAM) }
+2026-02-07T08:52:49.927849Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1399), size_increment: 2147418111 }
+2026-02-07T08:52:59.929585Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1399), flags: (0x4: END_HEADERS) }
+2026-02-07T08:52:59.929640Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1399), flags: (0x1: END_STREAM) }
+2026-02-07T08:52:59.929753Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:52:59.929816Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1401), flags: (0x4: END_HEADERS) }
+2026-02-07T08:52:59.929859Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1401), flags: (0x1: END_STREAM) }
+2026-02-07T08:53:00.104385Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1401), size_increment: 2147418111 }
+2026-02-07T08:53:10.105183Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1401), flags: (0x4: END_HEADERS) }
+2026-02-07T08:53:10.105241Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1401), flags: (0x1: END_STREAM) }
+2026-02-07T08:53:10.105366Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:53:10.105431Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1403), flags: (0x4: END_HEADERS) }
+2026-02-07T08:53:10.105477Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1403), flags: (0x1: END_STREAM) }
+2026-02-07T08:53:10.278176Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1403), size_increment: 2147418111 }
+2026-02-07T08:53:20.279828Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1403), flags: (0x4: END_HEADERS) }
+2026-02-07T08:53:20.279895Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1403), flags: (0x1: END_STREAM) }
+2026-02-07T08:53:20.280017Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:53:20.280139Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1405), flags: (0x4: END_HEADERS) }
+2026-02-07T08:53:20.280198Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1405), flags: (0x1: END_STREAM) }
+2026-02-07T08:53:20.453812Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1405), size_increment: 2147418111 }
+2026-02-07T08:53:30.454199Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1405), flags: (0x4: END_HEADERS) }
+2026-02-07T08:53:30.454253Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1405), flags: (0x1: END_STREAM) }
+2026-02-07T08:53:30.454354Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:53:30.454421Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1407), flags: (0x4: END_HEADERS) }
+2026-02-07T08:53:30.454440Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1407), flags: (0x1: END_STREAM) }
+2026-02-07T08:53:30.629155Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1407), size_increment: 2147418111 }
+2026-02-07T08:53:40.630476Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1407), flags: (0x4: END_HEADERS) }
+2026-02-07T08:53:40.630535Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1407), flags: (0x1: END_STREAM) }
+2026-02-07T08:53:40.630645Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:53:40.630703Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1409), flags: (0x4: END_HEADERS) }
+2026-02-07T08:53:40.630735Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1409), flags: (0x1: END_STREAM) }
+2026-02-07T08:53:40.803392Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1409), size_increment: 2147418111 }
+2026-02-07T08:53:50.804789Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1409), flags: (0x4: END_HEADERS) }
+2026-02-07T08:53:50.804864Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1409), flags: (0x1: END_STREAM) }
+2026-02-07T08:53:50.805037Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:53:50.805113Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1411), flags: (0x4: END_HEADERS) }
+2026-02-07T08:53:50.805135Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1411), flags: (0x1: END_STREAM) }
+2026-02-07T08:53:50.977677Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1411), size_increment: 2147418111 }
+2026-02-07T08:54:00.981229Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1411), flags: (0x4: END_HEADERS) }
+2026-02-07T08:54:00.981272Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1411), flags: (0x1: END_STREAM) }
+2026-02-07T08:54:00.981373Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:54:00.981421Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1413), flags: (0x4: END_HEADERS) }
+2026-02-07T08:54:00.981438Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1413), flags: (0x1: END_STREAM) }
+2026-02-07T08:54:01.154346Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1413), size_increment: 2147418111 }
+2026-02-07T08:54:11.156266Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1413), flags: (0x4: END_HEADERS) }
+2026-02-07T08:54:11.156324Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1413), flags: (0x1: END_STREAM) }
+2026-02-07T08:54:11.156428Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:54:11.156480Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1415), flags: (0x4: END_HEADERS) }
+2026-02-07T08:54:11.156501Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1415), flags: (0x1: END_STREAM) }
+2026-02-07T08:54:11.330745Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1415), size_increment: 2147418111 }
+2026-02-07T08:54:21.334135Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1415), flags: (0x4: END_HEADERS) }
+2026-02-07T08:54:21.334193Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1415), flags: (0x1: END_STREAM) }
+2026-02-07T08:54:21.334299Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:54:21.334357Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1417), flags: (0x4: END_HEADERS) }
+2026-02-07T08:54:21.334387Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1417), flags: (0x1: END_STREAM) }
+2026-02-07T08:54:21.508539Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1417), size_increment: 2147418111 }
+2026-02-07T08:54:31.510267Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1417), flags: (0x4: END_HEADERS) }
+2026-02-07T08:54:31.510317Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1417), flags: (0x1: END_STREAM) }
+2026-02-07T08:54:31.510414Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:54:31.510475Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1419), flags: (0x4: END_HEADERS) }
+2026-02-07T08:54:31.510512Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1419), flags: (0x1: END_STREAM) }
+2026-02-07T08:54:31.683052Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1419), size_increment: 2147418111 }
+2026-02-07T08:54:41.685040Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1419), flags: (0x4: END_HEADERS) }
+2026-02-07T08:54:41.685112Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1419), flags: (0x1: END_STREAM) }
+2026-02-07T08:54:41.685212Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:54:41.685268Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1421), flags: (0x4: END_HEADERS) }
+2026-02-07T08:54:41.685297Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1421), flags: (0x1: END_STREAM) }
+2026-02-07T08:54:41.859053Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1421), size_increment: 2147418111 }
+2026-02-07T08:54:51.859983Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1421), flags: (0x4: END_HEADERS) }
+2026-02-07T08:54:51.860041Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1421), flags: (0x1: END_STREAM) }
+2026-02-07T08:54:51.860165Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:54:51.860229Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1423), flags: (0x4: END_HEADERS) }
+2026-02-07T08:54:51.860264Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1423), flags: (0x1: END_STREAM) }
+2026-02-07T08:54:52.033160Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1423), size_increment: 2147418111 }
+2026-02-07T08:55:02.038587Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1423), flags: (0x4: END_HEADERS) }
+2026-02-07T08:55:02.038661Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1423), flags: (0x1: END_STREAM) }
+2026-02-07T08:55:02.038792Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:55:02.038873Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1425), flags: (0x4: END_HEADERS) }
+2026-02-07T08:55:02.038902Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1425), flags: (0x1: END_STREAM) }
+2026-02-07T08:55:02.211766Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1425), size_increment: 2147418111 }
+2026-02-07T08:55:12.215683Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1425), flags: (0x4: END_HEADERS) }
+2026-02-07T08:55:12.215736Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1425), flags: (0x1: END_STREAM) }
+2026-02-07T08:55:12.215843Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:55:12.215893Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1427), flags: (0x4: END_HEADERS) }
+2026-02-07T08:55:12.215911Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1427), flags: (0x1: END_STREAM) }
+2026-02-07T08:55:12.388453Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1427), size_increment: 2147418111 }
+2026-02-07T08:55:22.391890Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1427), flags: (0x4: END_HEADERS) }
+2026-02-07T08:55:22.391936Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1427), flags: (0x1: END_STREAM) }
+2026-02-07T08:55:22.392035Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:55:22.392095Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1429), flags: (0x4: END_HEADERS) }
+2026-02-07T08:55:22.392207Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1429), flags: (0x1: END_STREAM) }
+2026-02-07T08:55:22.565397Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1429), size_increment: 2147418111 }
+2026-02-07T08:55:32.566611Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1429), flags: (0x4: END_HEADERS) }
+2026-02-07T08:55:32.566673Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1429), flags: (0x1: END_STREAM) }
+2026-02-07T08:55:32.566782Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:55:32.566833Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1431), flags: (0x4: END_HEADERS) }
+2026-02-07T08:55:32.566853Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1431), flags: (0x1: END_STREAM) }
+2026-02-07T08:55:32.740056Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1431), size_increment: 2147418111 }
+2026-02-07T08:55:42.745031Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1431), flags: (0x4: END_HEADERS) }
+2026-02-07T08:55:42.745106Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1431), flags: (0x1: END_STREAM) }
+2026-02-07T08:55:42.745219Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:55:42.745269Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1433), flags: (0x4: END_HEADERS) }
+2026-02-07T08:55:42.745289Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1433), flags: (0x1: END_STREAM) }
+2026-02-07T08:55:42.918948Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1433), size_increment: 2147418111 }
+2026-02-07T08:55:52.919265Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1433), flags: (0x4: END_HEADERS) }
+2026-02-07T08:55:52.919340Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1433), flags: (0x1: END_STREAM) }
+2026-02-07T08:55:52.919477Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:55:52.919572Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1435), flags: (0x4: END_HEADERS) }
+2026-02-07T08:55:52.919601Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1435), flags: (0x1: END_STREAM) }
+2026-02-07T08:55:53.096315Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1435), size_increment: 2147418111 }
+2026-02-07T08:56:03.097005Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1435), flags: (0x4: END_HEADERS) }
+2026-02-07T08:56:03.097057Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1435), flags: (0x1: END_STREAM) }
+2026-02-07T08:56:03.097195Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:56:03.097258Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1437), flags: (0x4: END_HEADERS) }
+2026-02-07T08:56:03.097287Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1437), flags: (0x1: END_STREAM) }
+2026-02-07T08:56:03.269767Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1437), size_increment: 2147418111 }
+2026-02-07T08:56:13.271783Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1437), flags: (0x4: END_HEADERS) }
+2026-02-07T08:56:13.271834Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1437), flags: (0x1: END_STREAM) }
+2026-02-07T08:56:13.271935Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:56:13.271991Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1439), flags: (0x4: END_HEADERS) }
+2026-02-07T08:56:13.272026Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1439), flags: (0x1: END_STREAM) }
+2026-02-07T08:56:13.444674Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1439), size_increment: 2147418111 }
+2026-02-07T08:56:23.445366Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1439), flags: (0x4: END_HEADERS) }
+2026-02-07T08:56:23.445426Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1439), flags: (0x1: END_STREAM) }
+2026-02-07T08:56:23.445528Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:56:23.445896Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1441), flags: (0x4: END_HEADERS) }
+2026-02-07T08:56:23.445933Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1441), flags: (0x1: END_STREAM) }
+2026-02-07T08:56:23.618478Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1441), size_increment: 2147418111 }
+2026-02-07T08:56:33.620990Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1441), flags: (0x4: END_HEADERS) }
+2026-02-07T08:56:33.621040Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1441), flags: (0x1: END_STREAM) }
+2026-02-07T08:56:33.621190Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:56:33.621244Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1443), flags: (0x4: END_HEADERS) }
+2026-02-07T08:56:33.621262Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1443), flags: (0x1: END_STREAM) }
+2026-02-07T08:56:33.797275Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1443), size_increment: 2147418111 }
+2026-02-07T08:56:43.797986Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1443), flags: (0x4: END_HEADERS) }
+2026-02-07T08:56:43.798040Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1443), flags: (0x1: END_STREAM) }
+2026-02-07T08:56:43.798159Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:56:43.798220Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1445), flags: (0x4: END_HEADERS) }
+2026-02-07T08:56:43.798247Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1445), flags: (0x1: END_STREAM) }
+2026-02-07T08:56:43.971485Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1445), size_increment: 2147418111 }
+2026-02-07T08:56:53.973528Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1445), flags: (0x4: END_HEADERS) }
+2026-02-07T08:56:53.973601Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1445), flags: (0x1: END_STREAM) }
+2026-02-07T08:56:53.973712Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:56:53.973762Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1447), flags: (0x4: END_HEADERS) }
+2026-02-07T08:56:53.973783Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1447), flags: (0x1: END_STREAM) }
+2026-02-07T08:56:54.146635Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1447), size_increment: 2147418111 }
+2026-02-07T08:57:04.148310Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1447), flags: (0x4: END_HEADERS) }
+2026-02-07T08:57:04.148365Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1447), flags: (0x1: END_STREAM) }
+2026-02-07T08:57:04.148471Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:57:04.148532Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1449), flags: (0x4: END_HEADERS) }
+2026-02-07T08:57:04.148579Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1449), flags: (0x1: END_STREAM) }
+2026-02-07T08:57:04.322112Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1449), size_increment: 2147418111 }
+2026-02-07T08:57:14.325792Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1449), flags: (0x4: END_HEADERS) }
+2026-02-07T08:57:14.325878Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1449), flags: (0x1: END_STREAM) }
+2026-02-07T08:57:14.326027Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:57:14.326127Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1451), flags: (0x4: END_HEADERS) }
+2026-02-07T08:57:14.326174Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1451), flags: (0x1: END_STREAM) }
+2026-02-07T08:57:14.510706Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1451), size_increment: 2147418111 }
+2026-02-07T08:57:24.510622Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1451), flags: (0x4: END_HEADERS) }
+2026-02-07T08:57:24.510663Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1451), flags: (0x1: END_STREAM) }
+2026-02-07T08:57:24.510769Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:57:24.510827Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1453), flags: (0x4: END_HEADERS) }
+2026-02-07T08:57:24.510856Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1453), flags: (0x1: END_STREAM) }
+2026-02-07T08:57:24.688984Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1453), size_increment: 2147418111 }
+2026-02-07T08:57:34.689856Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1453), flags: (0x4: END_HEADERS) }
+2026-02-07T08:57:34.689915Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1453), flags: (0x1: END_STREAM) }
+2026-02-07T08:57:34.690033Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:57:34.690111Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1455), flags: (0x4: END_HEADERS) }
+2026-02-07T08:57:34.690133Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1455), flags: (0x1: END_STREAM) }
+2026-02-07T08:57:34.862795Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1455), size_increment: 2147418111 }
+2026-02-07T08:57:44.864317Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1455), flags: (0x4: END_HEADERS) }
+2026-02-07T08:57:44.864369Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1455), flags: (0x1: END_STREAM) }
+2026-02-07T08:57:44.864466Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:57:44.864526Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1457), flags: (0x4: END_HEADERS) }
+2026-02-07T08:57:44.864573Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1457), flags: (0x1: END_STREAM) }
+2026-02-07T08:57:45.037416Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1457), size_increment: 2147418111 }
+2026-02-07T08:57:55.038852Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1457), flags: (0x4: END_HEADERS) }
+2026-02-07T08:57:55.038906Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1457), flags: (0x1: END_STREAM) }
+2026-02-07T08:57:55.039008Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:57:55.039087Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1459), flags: (0x4: END_HEADERS) }
+2026-02-07T08:57:55.039123Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1459), flags: (0x1: END_STREAM) }
+2026-02-07T08:57:55.211990Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1459), size_increment: 2147418111 }
+2026-02-07T08:58:05.223878Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1459), flags: (0x4: END_HEADERS) }
+2026-02-07T08:58:05.223944Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1459), flags: (0x1: END_STREAM) }
+2026-02-07T08:58:05.224087Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:58:05.224138Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1461), flags: (0x4: END_HEADERS) }
+2026-02-07T08:58:05.224157Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1461), flags: (0x1: END_STREAM) }
+2026-02-07T08:58:05.397441Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1461), size_increment: 2147418111 }
+2026-02-07T08:58:15.398913Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1461), flags: (0x4: END_HEADERS) }
+2026-02-07T08:58:15.398977Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1461), flags: (0x1: END_STREAM) }
+2026-02-07T08:58:15.399131Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:58:15.399188Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1463), flags: (0x4: END_HEADERS) }
+2026-02-07T08:58:15.399229Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1463), flags: (0x1: END_STREAM) }
+2026-02-07T08:58:15.575962Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1463), size_increment: 2147418111 }
+2026-02-07T08:58:25.576662Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1463), flags: (0x4: END_HEADERS) }
+2026-02-07T08:58:25.576716Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1463), flags: (0x1: END_STREAM) }
+2026-02-07T08:58:25.576820Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:58:25.576881Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1465), flags: (0x4: END_HEADERS) }
+2026-02-07T08:58:25.576914Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1465), flags: (0x1: END_STREAM) }
+2026-02-07T08:58:25.749432Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1465), size_increment: 2147418111 }
+2026-02-07T08:58:35.750963Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1465), flags: (0x4: END_HEADERS) }
+2026-02-07T08:58:35.751015Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1465), flags: (0x1: END_STREAM) }
+2026-02-07T08:58:35.751141Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:58:35.751193Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1467), flags: (0x4: END_HEADERS) }
+2026-02-07T08:58:35.751228Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1467), flags: (0x1: END_STREAM) }
+2026-02-07T08:58:35.925456Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1467), size_increment: 2147418111 }
+2026-02-07T08:58:45.928025Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1467), flags: (0x4: END_HEADERS) }
+2026-02-07T08:58:45.928104Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1467), flags: (0x1: END_STREAM) }
+2026-02-07T08:58:45.928227Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:58:45.928285Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1469), flags: (0x4: END_HEADERS) }
+2026-02-07T08:58:45.928308Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1469), flags: (0x1: END_STREAM) }
+2026-02-07T08:58:46.101179Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1469), size_increment: 2147418111 }
+2026-02-07T08:58:56.102978Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1469), flags: (0x4: END_HEADERS) }
+2026-02-07T08:58:56.103052Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1469), flags: (0x1: END_STREAM) }
+2026-02-07T08:58:56.103223Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:58:56.103311Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1471), flags: (0x4: END_HEADERS) }
+2026-02-07T08:58:56.103345Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1471), flags: (0x1: END_STREAM) }
+2026-02-07T08:58:56.275998Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1471), size_increment: 2147418111 }
+2026-02-07T08:59:06.278009Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1471), flags: (0x4: END_HEADERS) }
+2026-02-07T08:59:06.278081Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1471), flags: (0x1: END_STREAM) }
+2026-02-07T08:59:06.278195Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:59:06.278250Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1473), flags: (0x4: END_HEADERS) }
+2026-02-07T08:59:06.278269Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1473), flags: (0x1: END_STREAM) }
+2026-02-07T08:59:06.452469Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1473), size_increment: 2147418111 }
+2026-02-07T08:59:16.456276Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1473), flags: (0x4: END_HEADERS) }
+2026-02-07T08:59:16.456335Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1473), flags: (0x1: END_STREAM) }
+2026-02-07T08:59:16.456438Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:59:16.456503Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1475), flags: (0x4: END_HEADERS) }
+2026-02-07T08:59:16.456538Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1475), flags: (0x1: END_STREAM) }
+2026-02-07T08:59:16.629171Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1475), size_increment: 2147418111 }
+2026-02-07T08:59:26.630278Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1475), flags: (0x4: END_HEADERS) }
+2026-02-07T08:59:26.630335Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1475), flags: (0x1: END_STREAM) }
+2026-02-07T08:59:26.630445Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:59:26.630515Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1477), flags: (0x4: END_HEADERS) }
+2026-02-07T08:59:26.630555Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1477), flags: (0x1: END_STREAM) }
+2026-02-07T08:59:26.806869Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1477), size_increment: 2147418111 }
+2026-02-07T08:59:36.807941Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1477), flags: (0x4: END_HEADERS) }
+2026-02-07T08:59:36.807999Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1477), flags: (0x1: END_STREAM) }
+2026-02-07T08:59:36.808136Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:59:36.808204Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1479), flags: (0x4: END_HEADERS) }
+2026-02-07T08:59:36.808240Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1479), flags: (0x1: END_STREAM) }
+2026-02-07T08:59:36.984453Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1479), size_increment: 2147418111 }
+2026-02-07T08:59:46.986255Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1479), flags: (0x4: END_HEADERS) }
+2026-02-07T08:59:46.986310Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1479), flags: (0x1: END_STREAM) }
+2026-02-07T08:59:46.986409Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:59:46.986471Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1481), flags: (0x4: END_HEADERS) }
+2026-02-07T08:59:46.986501Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1481), flags: (0x1: END_STREAM) }
+2026-02-07T08:59:47.159322Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1481), size_increment: 2147418111 }
+2026-02-07T08:59:57.162531Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1481), flags: (0x4: END_HEADERS) }
+2026-02-07T08:59:57.162597Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1481), flags: (0x1: END_STREAM) }
+2026-02-07T08:59:57.162707Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T08:59:57.162771Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1483), flags: (0x4: END_HEADERS) }
+2026-02-07T08:59:57.162798Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1483), flags: (0x1: END_STREAM) }
+2026-02-07T08:59:57.336182Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1483), size_increment: 2147418111 }
+2026-02-07T09:00:07.337991Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1483), flags: (0x4: END_HEADERS) }
+2026-02-07T09:00:07.338045Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1483), flags: (0x1: END_STREAM) }
+2026-02-07T09:00:07.338175Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:00:07.338228Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1485), flags: (0x4: END_HEADERS) }
+2026-02-07T09:00:07.338254Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1485), flags: (0x1: END_STREAM) }
+2026-02-07T09:00:07.512139Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1485), size_increment: 2147418111 }
+2026-02-07T09:00:17.512657Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1485), flags: (0x4: END_HEADERS) }
+2026-02-07T09:00:17.512717Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1485), flags: (0x1: END_STREAM) }
+2026-02-07T09:00:17.512813Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:00:17.512878Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1487), flags: (0x4: END_HEADERS) }
+2026-02-07T09:00:17.512919Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1487), flags: (0x1: END_STREAM) }
+2026-02-07T09:00:17.687353Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1487), size_increment: 2147418111 }
+2026-02-07T09:00:27.689180Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1487), flags: (0x4: END_HEADERS) }
+2026-02-07T09:00:27.689236Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1487), flags: (0x1: END_STREAM) }
+2026-02-07T09:00:27.689362Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:00:27.689412Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1489), flags: (0x4: END_HEADERS) }
+2026-02-07T09:00:27.689431Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1489), flags: (0x1: END_STREAM) }
+2026-02-07T09:00:27.862215Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1489), size_increment: 2147418111 }
+2026-02-07T09:00:37.865891Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1489), flags: (0x4: END_HEADERS) }
+2026-02-07T09:00:37.865935Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1489), flags: (0x1: END_STREAM) }
+2026-02-07T09:00:37.866036Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:00:37.866144Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1491), flags: (0x4: END_HEADERS) }
+2026-02-07T09:00:37.866229Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1491), flags: (0x1: END_STREAM) }
+2026-02-07T09:00:38.041103Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1491), size_increment: 2147418111 }
+2026-02-07T09:00:48.045755Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1491), flags: (0x4: END_HEADERS) }
+2026-02-07T09:00:48.045808Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1491), flags: (0x1: END_STREAM) }
+2026-02-07T09:00:48.045925Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:00:48.045976Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1493), flags: (0x4: END_HEADERS) }
+2026-02-07T09:00:48.045997Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1493), flags: (0x1: END_STREAM) }
+2026-02-07T09:00:48.222776Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1493), size_increment: 2147418111 }
+2026-02-07T09:00:58.227342Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1493), flags: (0x4: END_HEADERS) }
+2026-02-07T09:00:58.227408Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1493), flags: (0x1: END_STREAM) }
+2026-02-07T09:00:58.227535Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:00:58.227626Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1495), flags: (0x4: END_HEADERS) }
+2026-02-07T09:00:58.227666Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1495), flags: (0x1: END_STREAM) }
+2026-02-07T09:00:58.403072Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1495), size_increment: 2147418111 }
+2026-02-07T09:01:08.405505Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1495), flags: (0x4: END_HEADERS) }
+2026-02-07T09:01:08.405570Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1495), flags: (0x1: END_STREAM) }
+2026-02-07T09:01:08.405695Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:01:08.405758Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1497), flags: (0x4: END_HEADERS) }
+2026-02-07T09:01:08.405787Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1497), flags: (0x1: END_STREAM) }
+2026-02-07T09:01:08.578328Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1497), size_increment: 2147418111 }
+2026-02-07T09:01:18.579816Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1497), flags: (0x4: END_HEADERS) }
+2026-02-07T09:01:18.579872Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1497), flags: (0x1: END_STREAM) }
+2026-02-07T09:01:18.579978Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:01:18.580037Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1499), flags: (0x4: END_HEADERS) }
+2026-02-07T09:01:18.580056Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1499), flags: (0x1: END_STREAM) }
+2026-02-07T09:01:18.752787Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1499), size_increment: 2147418111 }
+2026-02-07T09:01:28.755557Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1499), flags: (0x4: END_HEADERS) }
+2026-02-07T09:01:28.755625Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1499), flags: (0x1: END_STREAM) }
+2026-02-07T09:01:28.755777Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:01:28.755846Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1501), flags: (0x4: END_HEADERS) }
+2026-02-07T09:01:28.755881Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1501), flags: (0x1: END_STREAM) }
+2026-02-07T09:01:28.929287Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1501), size_increment: 2147418111 }
+2026-02-07T09:01:38.932412Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1501), flags: (0x4: END_HEADERS) }
+2026-02-07T09:01:38.932479Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1501), flags: (0x1: END_STREAM) }
+2026-02-07T09:01:38.932607Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:01:38.932666Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1503), flags: (0x4: END_HEADERS) }
+2026-02-07T09:01:38.932710Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1503), flags: (0x1: END_STREAM) }
+2026-02-07T09:01:39.108690Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1503), size_increment: 2147418111 }
+2026-02-07T09:01:49.113159Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1503), flags: (0x4: END_HEADERS) }
+2026-02-07T09:01:49.113213Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1503), flags: (0x1: END_STREAM) }
+2026-02-07T09:01:49.113318Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:01:49.113372Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1505), flags: (0x4: END_HEADERS) }
+2026-02-07T09:01:49.113412Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1505), flags: (0x1: END_STREAM) }
+2026-02-07T09:01:49.286099Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1505), size_increment: 2147418111 }
+2026-02-07T09:01:59.287928Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1505), flags: (0x4: END_HEADERS) }
+2026-02-07T09:01:59.287982Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1505), flags: (0x1: END_STREAM) }
+2026-02-07T09:01:59.288097Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:01:59.288159Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1507), flags: (0x4: END_HEADERS) }
+2026-02-07T09:01:59.288189Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1507), flags: (0x1: END_STREAM) }
+2026-02-07T09:01:59.460842Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1507), size_increment: 2147418111 }
+2026-02-07T09:02:09.462855Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1507), flags: (0x4: END_HEADERS) }
+2026-02-07T09:02:09.462935Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1507), flags: (0x1: END_STREAM) }
+2026-02-07T09:02:09.463114Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:02:09.463168Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1509), flags: (0x4: END_HEADERS) }
+2026-02-07T09:02:09.463203Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1509), flags: (0x1: END_STREAM) }
+2026-02-07T09:02:09.636023Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1509), size_increment: 2147418111 }
+2026-02-07T09:02:19.638486Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1509), flags: (0x4: END_HEADERS) }
+2026-02-07T09:02:19.638545Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1509), flags: (0x1: END_STREAM) }
+2026-02-07T09:02:19.638744Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:02:19.638818Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1511), flags: (0x4: END_HEADERS) }
+2026-02-07T09:02:19.638842Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1511), flags: (0x1: END_STREAM) }
+2026-02-07T09:02:19.812362Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1511), size_increment: 2147418111 }
+2026-02-07T09:02:29.814796Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1511), flags: (0x4: END_HEADERS) }
+2026-02-07T09:02:29.814859Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1511), flags: (0x1: END_STREAM) }
+2026-02-07T09:02:29.814983Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:02:29.815032Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1513), flags: (0x4: END_HEADERS) }
+2026-02-07T09:02:29.815055Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1513), flags: (0x1: END_STREAM) }
+2026-02-07T09:02:29.988149Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1513), size_increment: 2147418111 }
+2026-02-07T09:02:39.990118Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1513), flags: (0x4: END_HEADERS) }
+2026-02-07T09:02:39.990223Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1513), flags: (0x1: END_STREAM) }
+2026-02-07T09:02:39.990369Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:02:39.990424Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1515), flags: (0x4: END_HEADERS) }
+2026-02-07T09:02:39.990445Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1515), flags: (0x1: END_STREAM) }
+2026-02-07T09:02:40.168293Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1515), size_increment: 2147418111 }
+2026-02-07T09:02:50.169424Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1515), flags: (0x4: END_HEADERS) }
+2026-02-07T09:02:50.169480Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1515), flags: (0x1: END_STREAM) }
+2026-02-07T09:02:50.169603Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:02:50.169658Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1517), flags: (0x4: END_HEADERS) }
+2026-02-07T09:02:50.169676Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1517), flags: (0x1: END_STREAM) }
+2026-02-07T09:02:50.342347Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1517), size_increment: 2147418111 }
+2026-02-07T09:03:00.347642Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1517), flags: (0x4: END_HEADERS) }
+2026-02-07T09:03:00.347707Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1517), flags: (0x1: END_STREAM) }
+2026-02-07T09:03:00.347816Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:03:00.347876Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1519), flags: (0x4: END_HEADERS) }
+2026-02-07T09:03:00.347912Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1519), flags: (0x1: END_STREAM) }
+2026-02-07T09:03:00.521861Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1519), size_increment: 2147418111 }
+2026-02-07T09:03:10.523414Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1519), flags: (0x4: END_HEADERS) }
+2026-02-07T09:03:10.523469Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1519), flags: (0x1: END_STREAM) }
+2026-02-07T09:03:10.523602Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:03:10.523653Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1521), flags: (0x4: END_HEADERS) }
+2026-02-07T09:03:10.523673Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1521), flags: (0x1: END_STREAM) }
+2026-02-07T09:03:10.698235Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1521), size_increment: 2147418111 }
+2026-02-07T09:03:20.700495Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1521), flags: (0x4: END_HEADERS) }
+2026-02-07T09:03:20.700558Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1521), flags: (0x1: END_STREAM) }
+2026-02-07T09:03:20.700676Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:03:20.700745Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1523), flags: (0x4: END_HEADERS) }
+2026-02-07T09:03:20.700800Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1523), flags: (0x1: END_STREAM) }
+2026-02-07T09:03:20.873942Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1523), size_increment: 2147418111 }
+2026-02-07T09:03:30.875044Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1523), flags: (0x4: END_HEADERS) }
+2026-02-07T09:03:30.875162Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1523), flags: (0x1: END_STREAM) }
+2026-02-07T09:03:30.875351Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:03:30.875399Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1525), flags: (0x4: END_HEADERS) }
+2026-02-07T09:03:30.875417Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1525), flags: (0x1: END_STREAM) }
+2026-02-07T09:03:31.050132Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1525), size_increment: 2147418111 }
+2026-02-07T09:03:41.054789Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1525), flags: (0x4: END_HEADERS) }
+2026-02-07T09:03:41.054852Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1525), flags: (0x1: END_STREAM) }
+2026-02-07T09:03:41.054970Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:03:41.055026Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1527), flags: (0x4: END_HEADERS) }
+2026-02-07T09:03:41.055053Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1527), flags: (0x1: END_STREAM) }
+2026-02-07T09:03:41.228203Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1527), size_increment: 2147418111 }
+2026-02-07T09:03:51.251982Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1527), flags: (0x4: END_HEADERS) }
+2026-02-07T09:03:51.252114Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1527), flags: (0x1: END_STREAM) }
+2026-02-07T09:03:51.252275Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:03:51.252334Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1529), flags: (0x4: END_HEADERS) }
+2026-02-07T09:03:51.252413Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1529), flags: (0x1: END_STREAM) }
+2026-02-07T09:03:51.426791Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1529), size_increment: 2147418111 }
+2026-02-07T09:04:01.426524Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1529), flags: (0x4: END_HEADERS) }
+2026-02-07T09:04:01.426580Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1529), flags: (0x1: END_STREAM) }
+2026-02-07T09:04:01.426692Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:04:01.426754Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1531), flags: (0x4: END_HEADERS) }
+2026-02-07T09:04:01.426789Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1531), flags: (0x1: END_STREAM) }
+2026-02-07T09:04:01.601919Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1531), size_increment: 2147418111 }
+2026-02-07T09:04:11.603995Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1531), flags: (0x4: END_HEADERS) }
+2026-02-07T09:04:11.604098Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1531), flags: (0x1: END_STREAM) }
+2026-02-07T09:04:11.604212Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:04:11.604274Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1533), flags: (0x4: END_HEADERS) }
+2026-02-07T09:04:11.604295Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1533), flags: (0x1: END_STREAM) }
+2026-02-07T09:04:11.780361Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1533), size_increment: 2147418111 }
+2026-02-07T09:04:21.783835Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1533), flags: (0x4: END_HEADERS) }
+2026-02-07T09:04:21.783896Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1533), flags: (0x1: END_STREAM) }
+2026-02-07T09:04:21.784032Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:04:21.784097Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1535), flags: (0x4: END_HEADERS) }
+2026-02-07T09:04:21.784134Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1535), flags: (0x1: END_STREAM) }
+2026-02-07T09:04:21.962023Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1535), size_increment: 2147418111 }
+2026-02-07T09:04:31.964417Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1535), flags: (0x4: END_HEADERS) }
+2026-02-07T09:04:31.964504Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1535), flags: (0x1: END_STREAM) }
+2026-02-07T09:04:31.964710Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:04:31.964782Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1537), flags: (0x4: END_HEADERS) }
+2026-02-07T09:04:31.964818Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1537), flags: (0x1: END_STREAM) }
+2026-02-07T09:04:32.139073Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1537), size_increment: 2147418111 }
+2026-02-07T09:04:42.140847Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1537), flags: (0x4: END_HEADERS) }
+2026-02-07T09:04:42.140904Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1537), flags: (0x1: END_STREAM) }
+2026-02-07T09:04:42.141011Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:04:42.141102Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1539), flags: (0x4: END_HEADERS) }
+2026-02-07T09:04:42.141138Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1539), flags: (0x1: END_STREAM) }
+2026-02-07T09:04:42.313636Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1539), size_increment: 2147418111 }
+2026-02-07T09:04:52.314762Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1539), flags: (0x4: END_HEADERS) }
+2026-02-07T09:04:52.314813Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1539), flags: (0x1: END_STREAM) }
+2026-02-07T09:04:52.314912Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:04:52.314963Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1541), flags: (0x4: END_HEADERS) }
+2026-02-07T09:04:52.315002Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1541), flags: (0x1: END_STREAM) }
+2026-02-07T09:04:52.489445Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1541), size_increment: 2147418111 }
+2026-02-07T09:05:02.492107Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1541), flags: (0x4: END_HEADERS) }
+2026-02-07T09:05:02.492163Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1541), flags: (0x1: END_STREAM) }
+2026-02-07T09:05:02.492269Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:05:02.492344Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1543), flags: (0x4: END_HEADERS) }
+2026-02-07T09:05:02.492373Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1543), flags: (0x1: END_STREAM) }
+2026-02-07T09:05:02.664946Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1543), size_increment: 2147418111 }
+2026-02-07T09:05:12.665733Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1543), flags: (0x4: END_HEADERS) }
+2026-02-07T09:05:12.665791Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1543), flags: (0x1: END_STREAM) }
+2026-02-07T09:05:12.665897Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:05:12.665949Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1545), flags: (0x4: END_HEADERS) }
+2026-02-07T09:05:12.665969Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1545), flags: (0x1: END_STREAM) }
+2026-02-07T09:05:12.839303Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1545), size_increment: 2147418111 }
+2026-02-07T09:05:22.841494Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1545), flags: (0x4: END_HEADERS) }
+2026-02-07T09:05:22.841556Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1545), flags: (0x1: END_STREAM) }
+2026-02-07T09:05:22.841751Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:05:22.841820Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1547), flags: (0x4: END_HEADERS) }
+2026-02-07T09:05:22.841862Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1547), flags: (0x1: END_STREAM) }
+2026-02-07T09:05:23.016116Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1547), size_increment: 2147418111 }
+2026-02-07T09:05:33.017349Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1547), flags: (0x4: END_HEADERS) }
+2026-02-07T09:05:33.017407Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1547), flags: (0x1: END_STREAM) }
+2026-02-07T09:05:33.017521Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:05:33.017571Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1549), flags: (0x4: END_HEADERS) }
+2026-02-07T09:05:33.017592Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1549), flags: (0x1: END_STREAM) }
+2026-02-07T09:05:33.192601Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1549), size_increment: 2147418111 }
+2026-02-07T09:05:43.199592Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1549), flags: (0x4: END_HEADERS) }
+2026-02-07T09:05:43.199671Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1549), flags: (0x1: END_STREAM) }
+2026-02-07T09:05:43.199788Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:05:43.199841Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1551), flags: (0x4: END_HEADERS) }
+2026-02-07T09:05:43.199861Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1551), flags: (0x1: END_STREAM) }
+2026-02-07T09:05:43.372798Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1551), size_increment: 2147418111 }
+2026-02-07T09:05:53.373367Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1551), flags: (0x4: END_HEADERS) }
+2026-02-07T09:05:53.373437Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1551), flags: (0x1: END_STREAM) }
+2026-02-07T09:05:53.373537Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:05:53.373608Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1553), flags: (0x4: END_HEADERS) }
+2026-02-07T09:05:53.373667Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1553), flags: (0x1: END_STREAM) }
+2026-02-07T09:05:53.548166Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1553), size_increment: 2147418111 }
+2026-02-07T09:06:03.552021Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1553), flags: (0x4: END_HEADERS) }
+2026-02-07T09:06:03.552086Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1553), flags: (0x1: END_STREAM) }
+2026-02-07T09:06:03.552198Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:06:03.552264Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1555), flags: (0x4: END_HEADERS) }
+2026-02-07T09:06:03.552300Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1555), flags: (0x1: END_STREAM) }
+2026-02-07T09:06:03.726299Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1555), size_increment: 2147418111 }
+2026-02-07T09:06:13.726926Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1555), flags: (0x4: END_HEADERS) }
+2026-02-07T09:06:13.726979Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1555), flags: (0x1: END_STREAM) }
+2026-02-07T09:06:13.727117Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:06:13.727169Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1557), flags: (0x4: END_HEADERS) }
+2026-02-07T09:06:13.727189Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1557), flags: (0x1: END_STREAM) }
+2026-02-07T09:06:13.900529Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1557), size_increment: 2147418111 }
+2026-02-07T09:06:23.904083Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1557), flags: (0x4: END_HEADERS) }
+2026-02-07T09:06:23.904133Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1557), flags: (0x1: END_STREAM) }
+2026-02-07T09:06:23.904232Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:06:23.904310Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1559), flags: (0x4: END_HEADERS) }
+2026-02-07T09:06:23.904339Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1559), flags: (0x1: END_STREAM) }
+2026-02-07T09:06:24.076786Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1559), size_increment: 2147418111 }
+2026-02-07T09:06:34.077946Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1559), flags: (0x4: END_HEADERS) }
+2026-02-07T09:06:34.077998Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1559), flags: (0x1: END_STREAM) }
+2026-02-07T09:06:34.078114Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:06:34.078176Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1561), flags: (0x4: END_HEADERS) }
+2026-02-07T09:06:34.078213Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1561), flags: (0x1: END_STREAM) }
+2026-02-07T09:06:34.251835Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1561), size_increment: 2147418111 }
+2026-02-07T09:06:44.258136Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1561), flags: (0x4: END_HEADERS) }
+2026-02-07T09:06:44.258189Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1561), flags: (0x1: END_STREAM) }
+2026-02-07T09:06:44.258299Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:06:44.258359Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1563), flags: (0x4: END_HEADERS) }
+2026-02-07T09:06:44.258394Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1563), flags: (0x1: END_STREAM) }
+2026-02-07T09:06:44.431745Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1563), size_increment: 2147418111 }
+2026-02-07T09:06:54.432367Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1563), flags: (0x4: END_HEADERS) }
+2026-02-07T09:06:54.432420Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1563), flags: (0x1: END_STREAM) }
+2026-02-07T09:06:54.432522Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:06:54.432572Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1565), flags: (0x4: END_HEADERS) }
+2026-02-07T09:06:54.432593Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1565), flags: (0x1: END_STREAM) }
+2026-02-07T09:06:54.606854Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1565), size_increment: 2147418111 }
+2026-02-07T09:07:01.247099Z DEBUG ralph_adapters::pty_executor: PTY reader: EOF
+2026-02-07T09:07:01.247210Z DEBUG ralph_adapters::pty_executor: Output channel closed
+2026-02-07T09:07:01.250167Z  WARN ralph_core::event_loop: Completion event ignored because it was not the last event topic=LOOP_COMPLETE index=10 total_events=27
+2026-02-07T09:07:01.250195Z  WARN ralph_core::event_loop: Completion event ignored because it was not the last event topic=LOOP_COMPLETE index=20 total_events=27
+2026-02-07T09:07:01.250200Z  WARN ralph_core::event_loop: Completion event ignored because it was not the last event topic=LOOP_COMPLETE index=23 total_events=27
+2026-02-07T09:07:01.250215Z DEBUG ralph_core::event_loop: Publishing event from JSONL topic=task.start
+2026-02-07T09:07:01.250231Z DEBUG ralph_core::event_loop: Publishing event from JSONL topic=TASKS_PROGRESS
+2026-02-07T09:07:01.250255Z DEBUG ralph_core::event_loop: Publishing event from JSONL topic=task.resume
+2026-02-07T09:07:01.250261Z DEBUG ralph_core::event_loop: Publishing event from JSONL topic=task.resume
+2026-02-07T09:07:01.250265Z DEBUG ralph_core::event_loop: Publishing event from JSONL topic=task.completed
+2026-02-07T09:07:01.250269Z DEBUG ralph_core::event_loop: Publishing event from JSONL topic=task.resume
+2026-02-07T09:07:01.250274Z DEBUG ralph_core::event_loop: Publishing event from JSONL topic=task.resume
+2026-02-07T09:07:01.250278Z DEBUG ralph_core::event_loop: Publishing event from JSONL topic=task.resume
+2026-02-07T09:07:01.250282Z DEBUG ralph_core::event_loop: Publishing event from JSONL topic=task.resume
+2026-02-07T09:07:01.250288Z DEBUG ralph_core::event_loop: Publishing event from JSONL topic=task.resume
+2026-02-07T09:07:01.250292Z DEBUG ralph_core::event_loop: Publishing event from JSONL topic=loop.terminate
+2026-02-07T09:07:01.250297Z DEBUG ralph_core::event_loop: Publishing event from JSONL topic=task.resume
+2026-02-07T09:07:01.250300Z DEBUG ralph_core::event_loop: Publishing event from JSONL topic=task.resume
+2026-02-07T09:07:01.250303Z DEBUG ralph_core::event_loop: Publishing event from JSONL topic=task.resume
+2026-02-07T09:07:01.250305Z DEBUG ralph_core::event_loop: Publishing event from JSONL topic=security.middleware.completed
+2026-02-07T09:07:01.250308Z DEBUG ralph_core::event_loop: Publishing event from JSONL topic=loop.terminate
+2026-02-07T09:07:01.250310Z DEBUG ralph_core::event_loop: Publishing event from JSONL topic=task.resume
+2026-02-07T09:07:01.250313Z DEBUG ralph_core::event_loop: Publishing event from JSONL topic=loop.terminate
+2026-02-07T09:07:01.250316Z DEBUG ralph_core::event_loop: Publishing event from JSONL topic=task.resume
+2026-02-07T09:07:01.250318Z DEBUG ralph_core::event_loop: Publishing event from JSONL topic=loop.terminate
+2026-02-07T09:07:01.250321Z DEBUG ralph_core::event_loop: Publishing event from JSONL topic=task.resume
+2026-02-07T09:07:01.250323Z DEBUG ralph_core::event_loop: Publishing event from JSONL topic=loop.terminate
+2026-02-07T09:07:01.250326Z DEBUG ralph_core::event_loop: Publishing event from JSONL topic=task.resume
+2026-02-07T09:07:01.250328Z DEBUG ralph_core::event_loop: Publishing event from JSONL topic=task.resume
+2026-02-07T09:07:01.250381Z DEBUG ralph::loop_runner: Iteration 2/100 - ralph active
+2026-02-07T09:07:01.250527Z  INFO ralph_core::event_loop: Memory injection check: enabled=true, inject=Auto, workspace_root="/ralph-dummy"
+2026-02-07T09:07:01.250542Z  INFO ralph_core::event_loop: Looking for memories at: "/ralph-dummy/.ralph/agent/memories.md" (exists: false)
+2026-02-07T09:07:01.250551Z  INFO ralph_core::event_loop: Successfully loaded 0 memories from store
+2026-02-07T09:07:01.250554Z  INFO ralph_core::event_loop: Memory store is empty - no memories to inject
+2026-02-07T09:07:01.250568Z DEBUG ralph_core::event_loop: Injected ralph-tools skill from registry
+2026-02-07T09:07:01.250574Z DEBUG ralph_core::event_loop: Injected robot interaction skill from registry
+2026-02-07T09:07:01.250721Z  INFO ralph_core::event_loop: Injecting scratchpad (18997 chars) into prompt
+2026-02-07T09:07:01.250891Z  INFO ralph_core::event_loop: Injecting ready tasks (0 ready, 0 open, 65 closed) into prompt
+2026-02-07T09:07:01.250916Z DEBUG ralph_core::event_loop: build_prompt: routing to HatlessRalph (solo mode)
+2026-02-07T09:07:01.258870Z DEBUG ralph::loop_runner: Using global backend for 'ralph': opencode
+2026-02-07T09:07:01.259123Z DEBUG ralph_adapters::cli_backend: Built CLI command command=opencode args_count=2 prompt_len=47051 interactive=false uses_stdin=false uses_temp_file=false
+2026-02-07T09:07:01.260508Z DEBUG ralph_adapters::pty_executor: Spawning PTY output reader thread (streaming mode)
+2026-02-07T09:07:04.610180Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1565), flags: (0x4: END_HEADERS) }
+2026-02-07T09:07:04.610238Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1565), flags: (0x1: END_STREAM) }
+2026-02-07T09:07:04.610395Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:07:04.610457Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1567), flags: (0x4: END_HEADERS) }
+2026-02-07T09:07:04.610479Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1567), flags: (0x1: END_STREAM) }
+2026-02-07T09:07:04.784053Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1567), size_increment: 2147418111 }
+2026-02-07T09:07:14.785824Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1567), flags: (0x4: END_HEADERS) }
+2026-02-07T09:07:14.785880Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1567), flags: (0x1: END_STREAM) }
+2026-02-07T09:07:14.786007Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:07:14.786103Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1569), flags: (0x4: END_HEADERS) }
+2026-02-07T09:07:14.786141Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1569), flags: (0x1: END_STREAM) }
+2026-02-07T09:07:14.960455Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1569), size_increment: 2147418111 }
+2026-02-07T09:07:24.961461Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1569), flags: (0x4: END_HEADERS) }
+2026-02-07T09:07:24.961512Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1569), flags: (0x1: END_STREAM) }
+2026-02-07T09:07:24.961612Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:07:24.961694Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1571), flags: (0x4: END_HEADERS) }
+2026-02-07T09:07:24.961730Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1571), flags: (0x1: END_STREAM) }
+2026-02-07T09:07:25.135246Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1571), size_increment: 2147418111 }
+2026-02-07T09:07:35.138179Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1571), flags: (0x4: END_HEADERS) }
+2026-02-07T09:07:35.138251Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1571), flags: (0x1: END_STREAM) }
+2026-02-07T09:07:35.138394Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:07:35.138461Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1573), flags: (0x4: END_HEADERS) }
+2026-02-07T09:07:35.138483Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1573), flags: (0x1: END_STREAM) }
+2026-02-07T09:07:35.312621Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1573), size_increment: 2147418111 }
+2026-02-07T09:07:45.314603Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1573), flags: (0x4: END_HEADERS) }
+2026-02-07T09:07:45.314670Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1573), flags: (0x1: END_STREAM) }
+2026-02-07T09:07:45.314795Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:07:45.314851Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1575), flags: (0x4: END_HEADERS) }
+2026-02-07T09:07:45.314873Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1575), flags: (0x1: END_STREAM) }
+2026-02-07T09:07:45.489244Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1575), size_increment: 2147418111 }
+2026-02-07T09:07:55.489721Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1575), flags: (0x4: END_HEADERS) }
+2026-02-07T09:07:55.489778Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1575), flags: (0x1: END_STREAM) }
+2026-02-07T09:07:55.489917Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:07:55.489966Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1577), flags: (0x4: END_HEADERS) }
+2026-02-07T09:07:55.489985Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1577), flags: (0x1: END_STREAM) }
+2026-02-07T09:07:55.733983Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1577), size_increment: 2147418111 }
+2026-02-07T09:08:05.763780Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1577), flags: (0x4: END_HEADERS) }
+2026-02-07T09:08:05.763831Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1577), flags: (0x1: END_STREAM) }
+2026-02-07T09:08:05.763931Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:08:05.763988Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1579), flags: (0x4: END_HEADERS) }
+2026-02-07T09:08:05.764029Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1579), flags: (0x1: END_STREAM) }
+2026-02-07T09:08:05.943856Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1579), size_increment: 2147418111 }
+2026-02-07T09:08:15.949512Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1579), flags: (0x4: END_HEADERS) }
+2026-02-07T09:08:15.949565Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1579), flags: (0x1: END_STREAM) }
+2026-02-07T09:08:15.949681Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:08:15.949730Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1581), flags: (0x4: END_HEADERS) }
+2026-02-07T09:08:15.949748Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1581), flags: (0x1: END_STREAM) }
+2026-02-07T09:08:16.131968Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1581), size_increment: 2147418111 }
+2026-02-07T09:08:26.132567Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1581), flags: (0x4: END_HEADERS) }
+2026-02-07T09:08:26.132630Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1581), flags: (0x1: END_STREAM) }
+2026-02-07T09:08:26.132744Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:08:26.132796Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1583), flags: (0x4: END_HEADERS) }
+2026-02-07T09:08:26.132817Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1583), flags: (0x1: END_STREAM) }
+2026-02-07T09:08:26.306784Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1583), size_increment: 2147418111 }
+2026-02-07T09:08:36.310195Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1583), flags: (0x4: END_HEADERS) }
+2026-02-07T09:08:36.310255Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1583), flags: (0x1: END_STREAM) }
+2026-02-07T09:08:36.310384Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:08:36.310435Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1585), flags: (0x4: END_HEADERS) }
+2026-02-07T09:08:36.310454Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1585), flags: (0x1: END_STREAM) }
+2026-02-07T09:08:36.484866Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1585), size_increment: 2147418111 }
+2026-02-07T09:08:46.486429Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1585), flags: (0x4: END_HEADERS) }
+2026-02-07T09:08:46.486483Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1585), flags: (0x1: END_STREAM) }
+2026-02-07T09:08:46.486584Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:08:46.486651Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1587), flags: (0x4: END_HEADERS) }
+2026-02-07T09:08:46.486692Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1587), flags: (0x1: END_STREAM) }
+2026-02-07T09:08:46.659434Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1587), size_increment: 2147418111 }
+2026-02-07T09:08:56.659722Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1587), flags: (0x4: END_HEADERS) }
+2026-02-07T09:08:56.659789Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1587), flags: (0x1: END_STREAM) }
+2026-02-07T09:08:56.659900Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:08:56.659962Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1589), flags: (0x4: END_HEADERS) }
+2026-02-07T09:08:56.659998Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1589), flags: (0x1: END_STREAM) }
+2026-02-07T09:08:56.833472Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1589), size_increment: 2147418111 }
+2026-02-07T09:09:06.834523Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1589), flags: (0x4: END_HEADERS) }
+2026-02-07T09:09:06.834571Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1589), flags: (0x1: END_STREAM) }
+2026-02-07T09:09:06.834686Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:09:06.834739Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1591), flags: (0x4: END_HEADERS) }
+2026-02-07T09:09:06.834759Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1591), flags: (0x1: END_STREAM) }
+2026-02-07T09:09:07.007727Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1591), size_increment: 2147418111 }
+2026-02-07T09:09:17.008172Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1591), flags: (0x4: END_HEADERS) }
+2026-02-07T09:09:17.008230Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1591), flags: (0x1: END_STREAM) }
+2026-02-07T09:09:17.008339Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:09:17.008391Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1593), flags: (0x4: END_HEADERS) }
+2026-02-07T09:09:17.008411Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1593), flags: (0x1: END_STREAM) }
+2026-02-07T09:09:17.185202Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1593), size_increment: 2147418111 }
+2026-02-07T09:09:27.186365Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1593), flags: (0x4: END_HEADERS) }
+2026-02-07T09:09:27.186442Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1593), flags: (0x1: END_STREAM) }
+2026-02-07T09:09:27.186609Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:09:27.186710Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1595), flags: (0x4: END_HEADERS) }
+2026-02-07T09:09:27.186747Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1595), flags: (0x1: END_STREAM) }
+2026-02-07T09:09:27.368126Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1595), size_increment: 2147418111 }
+2026-02-07T09:09:37.368539Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1595), flags: (0x4: END_HEADERS) }
+2026-02-07T09:09:37.368593Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1595), flags: (0x1: END_STREAM) }
+2026-02-07T09:09:37.368739Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:09:37.368803Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1597), flags: (0x4: END_HEADERS) }
+2026-02-07T09:09:37.368839Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1597), flags: (0x1: END_STREAM) }
+2026-02-07T09:09:37.968785Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1597), size_increment: 2147418111 }
+2026-02-07T09:09:47.544462Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1597), flags: (0x4: END_HEADERS) }
+2026-02-07T09:09:47.544516Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1597), flags: (0x1: END_STREAM) }
+2026-02-07T09:09:47.544616Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:09:47.544668Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1599), flags: (0x4: END_HEADERS) }
+2026-02-07T09:09:47.544700Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1599), flags: (0x1: END_STREAM) }
+2026-02-07T09:09:47.717570Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1599), size_increment: 2147418111 }
+2026-02-07T09:09:57.718242Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1599), flags: (0x4: END_HEADERS) }
+2026-02-07T09:09:57.718299Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1599), flags: (0x1: END_STREAM) }
+2026-02-07T09:09:57.718399Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:09:57.718473Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1601), flags: (0x4: END_HEADERS) }
+2026-02-07T09:09:57.718510Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1601), flags: (0x1: END_STREAM) }
+2026-02-07T09:09:57.892521Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1601), size_increment: 2147418111 }
+2026-02-07T09:10:07.895182Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1601), flags: (0x4: END_HEADERS) }
+2026-02-07T09:10:07.895252Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1601), flags: (0x1: END_STREAM) }
+2026-02-07T09:10:07.895358Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:10:07.895408Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1603), flags: (0x4: END_HEADERS) }
+2026-02-07T09:10:07.895440Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1603), flags: (0x1: END_STREAM) }
+2026-02-07T09:10:08.068229Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1603), size_increment: 2147418111 }
+2026-02-07T09:10:18.071279Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1603), flags: (0x4: END_HEADERS) }
+2026-02-07T09:10:18.071334Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1603), flags: (0x1: END_STREAM) }
+2026-02-07T09:10:18.071436Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:10:18.071488Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1605), flags: (0x4: END_HEADERS) }
+2026-02-07T09:10:18.071526Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1605), flags: (0x1: END_STREAM) }
+2026-02-07T09:10:18.244059Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1605), size_increment: 2147418111 }
+2026-02-07T09:10:28.245725Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1605), flags: (0x4: END_HEADERS) }
+2026-02-07T09:10:28.245791Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1605), flags: (0x1: END_STREAM) }
+2026-02-07T09:10:28.245917Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:10:28.245985Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1607), flags: (0x4: END_HEADERS) }
+2026-02-07T09:10:28.246022Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1607), flags: (0x1: END_STREAM) }
+2026-02-07T09:10:28.419181Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1607), size_increment: 2147418111 }
+2026-02-07T09:10:38.420197Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1607), flags: (0x4: END_HEADERS) }
+2026-02-07T09:10:38.420240Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1607), flags: (0x1: END_STREAM) }
+2026-02-07T09:10:38.420336Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:10:38.420384Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1609), flags: (0x4: END_HEADERS) }
+2026-02-07T09:10:38.420405Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1609), flags: (0x1: END_STREAM) }
+2026-02-07T09:10:38.593513Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1609), size_increment: 2147418111 }
+2026-02-07T09:10:48.596124Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1609), flags: (0x4: END_HEADERS) }
+2026-02-07T09:10:48.596176Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1609), flags: (0x1: END_STREAM) }
+2026-02-07T09:10:48.596274Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:10:48.596333Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1611), flags: (0x4: END_HEADERS) }
+2026-02-07T09:10:48.596388Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1611), flags: (0x1: END_STREAM) }
+2026-02-07T09:10:48.769149Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1611), size_increment: 2147418111 }
+2026-02-07T09:10:58.771786Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1611), flags: (0x4: END_HEADERS) }
+2026-02-07T09:10:58.771828Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1611), flags: (0x1: END_STREAM) }
+2026-02-07T09:10:58.771928Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:10:58.771992Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1613), flags: (0x4: END_HEADERS) }
+2026-02-07T09:10:58.772021Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1613), flags: (0x1: END_STREAM) }
+2026-02-07T09:10:58.945755Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1613), size_increment: 2147418111 }
+2026-02-07T09:11:08.947753Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1613), flags: (0x4: END_HEADERS) }
+2026-02-07T09:11:08.947807Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1613), flags: (0x1: END_STREAM) }
+2026-02-07T09:11:08.947907Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:11:08.947965Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1615), flags: (0x4: END_HEADERS) }
+2026-02-07T09:11:08.947995Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1615), flags: (0x1: END_STREAM) }
+2026-02-07T09:11:09.121902Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1615), size_increment: 2147418111 }
+2026-02-07T09:11:19.123870Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1615), flags: (0x4: END_HEADERS) }
+2026-02-07T09:11:19.123948Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1615), flags: (0x1: END_STREAM) }
+2026-02-07T09:11:19.124102Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:11:19.124157Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1617), flags: (0x4: END_HEADERS) }
+2026-02-07T09:11:19.124178Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1617), flags: (0x1: END_STREAM) }
+2026-02-07T09:11:19.296948Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1617), size_increment: 2147418111 }
+2026-02-07T09:11:29.299917Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1617), flags: (0x4: END_HEADERS) }
+2026-02-07T09:11:29.299973Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1617), flags: (0x1: END_STREAM) }
+2026-02-07T09:11:29.300108Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:11:29.300177Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1619), flags: (0x4: END_HEADERS) }
+2026-02-07T09:11:29.300200Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1619), flags: (0x1: END_STREAM) }
+2026-02-07T09:11:29.473895Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1619), size_increment: 2147418111 }
+2026-02-07T09:11:39.474551Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1619), flags: (0x4: END_HEADERS) }
+2026-02-07T09:11:39.474622Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1619), flags: (0x1: END_STREAM) }
+2026-02-07T09:11:39.474741Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:11:39.474790Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1621), flags: (0x4: END_HEADERS) }
+2026-02-07T09:11:39.474808Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1621), flags: (0x1: END_STREAM) }
+2026-02-07T09:11:39.648890Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1621), size_increment: 2147418111 }
+2026-02-07T09:11:49.649089Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1621), flags: (0x4: END_HEADERS) }
+2026-02-07T09:11:49.649155Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1621), flags: (0x1: END_STREAM) }
+2026-02-07T09:11:49.649267Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:11:49.649319Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1623), flags: (0x4: END_HEADERS) }
+2026-02-07T09:11:49.649337Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1623), flags: (0x1: END_STREAM) }
+2026-02-07T09:11:49.822894Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1623), size_increment: 2147418111 }
+2026-02-07T09:11:59.825564Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1623), flags: (0x4: END_HEADERS) }
+2026-02-07T09:11:59.825620Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1623), flags: (0x1: END_STREAM) }
+2026-02-07T09:11:59.825731Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:11:59.825797Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1625), flags: (0x4: END_HEADERS) }
+2026-02-07T09:11:59.825832Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1625), flags: (0x1: END_STREAM) }
+2026-02-07T09:12:00.001920Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1625), size_increment: 2147418111 }
+2026-02-07T09:12:09.999726Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1625), flags: (0x4: END_HEADERS) }
+2026-02-07T09:12:09.999782Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1625), flags: (0x1: END_STREAM) }
+2026-02-07T09:12:09.999883Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:12:09.999936Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1627), flags: (0x4: END_HEADERS) }
+2026-02-07T09:12:09.999958Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1627), flags: (0x1: END_STREAM) }
+2026-02-07T09:12:10.173428Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1627), size_increment: 2147418111 }
+2026-02-07T09:12:20.174369Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1627), flags: (0x4: END_HEADERS) }
+2026-02-07T09:12:20.174436Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1627), flags: (0x1: END_STREAM) }
+2026-02-07T09:12:20.174555Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:12:20.174613Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1629), flags: (0x4: END_HEADERS) }
+2026-02-07T09:12:20.174666Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1629), flags: (0x1: END_STREAM) }
+2026-02-07T09:12:20.348568Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1629), size_increment: 2147418111 }
+2026-02-07T09:12:30.350210Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1629), flags: (0x4: END_HEADERS) }
+2026-02-07T09:12:30.350284Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1629), flags: (0x1: END_STREAM) }
+2026-02-07T09:12:30.350423Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:12:30.350483Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1631), flags: (0x4: END_HEADERS) }
+2026-02-07T09:12:30.350506Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1631), flags: (0x1: END_STREAM) }
+2026-02-07T09:12:30.523374Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1631), size_increment: 2147418111 }
+2026-02-07T09:12:40.524775Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1631), flags: (0x4: END_HEADERS) }
+2026-02-07T09:12:40.524861Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1631), flags: (0x1: END_STREAM) }
+2026-02-07T09:12:40.524983Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:12:40.525047Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1633), flags: (0x4: END_HEADERS) }
+2026-02-07T09:12:40.525098Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1633), flags: (0x1: END_STREAM) }
+2026-02-07T09:12:40.698216Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1633), size_increment: 2147418111 }
+2026-02-07T09:12:50.700172Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1633), flags: (0x4: END_HEADERS) }
+2026-02-07T09:12:50.700235Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1633), flags: (0x1: END_STREAM) }
+2026-02-07T09:12:50.700352Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:12:50.700425Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1635), flags: (0x4: END_HEADERS) }
+2026-02-07T09:12:50.700464Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1635), flags: (0x1: END_STREAM) }
+2026-02-07T09:12:50.876325Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1635), size_increment: 2147418111 }
+2026-02-07T09:13:00.879902Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1635), flags: (0x4: END_HEADERS) }
+2026-02-07T09:13:00.879955Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1635), flags: (0x1: END_STREAM) }
+2026-02-07T09:13:00.880056Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:13:00.880132Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1637), flags: (0x4: END_HEADERS) }
+2026-02-07T09:13:00.880152Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1637), flags: (0x1: END_STREAM) }
+2026-02-07T09:13:01.052928Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1637), size_increment: 2147418111 }
+2026-02-07T09:13:11.054584Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1637), flags: (0x4: END_HEADERS) }
+2026-02-07T09:13:11.054663Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1637), flags: (0x1: END_STREAM) }
+2026-02-07T09:13:11.054778Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:13:11.054828Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1639), flags: (0x4: END_HEADERS) }
+2026-02-07T09:13:11.054847Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1639), flags: (0x1: END_STREAM) }
+2026-02-07T09:13:11.228036Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1639), size_increment: 2147418111 }
+2026-02-07T09:13:21.229481Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1639), flags: (0x4: END_HEADERS) }
+2026-02-07T09:13:21.229531Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1639), flags: (0x1: END_STREAM) }
+2026-02-07T09:13:21.229629Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:13:21.229685Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1641), flags: (0x4: END_HEADERS) }
+2026-02-07T09:13:21.229715Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1641), flags: (0x1: END_STREAM) }
+2026-02-07T09:13:21.403180Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1641), size_increment: 2147418111 }
+2026-02-07T09:13:31.403629Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1641), flags: (0x4: END_HEADERS) }
+2026-02-07T09:13:31.403700Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1641), flags: (0x1: END_STREAM) }
+2026-02-07T09:13:31.403835Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:13:31.403901Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1643), flags: (0x4: END_HEADERS) }
+2026-02-07T09:13:31.403937Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1643), flags: (0x1: END_STREAM) }
+2026-02-07T09:13:31.580125Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1643), size_increment: 2147418111 }
+2026-02-07T09:13:41.582565Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1643), flags: (0x4: END_HEADERS) }
+2026-02-07T09:13:41.582617Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1643), flags: (0x1: END_STREAM) }
+2026-02-07T09:13:41.582718Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:13:41.582776Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1645), flags: (0x4: END_HEADERS) }
+2026-02-07T09:13:41.582794Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1645), flags: (0x1: END_STREAM) }
+2026-02-07T09:13:41.757569Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1645), size_increment: 2147418111 }
+2026-02-07T09:13:51.760759Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1645), flags: (0x4: END_HEADERS) }
+2026-02-07T09:13:51.760850Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1645), flags: (0x1: END_STREAM) }
+2026-02-07T09:13:51.760965Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:13:51.761019Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1647), flags: (0x4: END_HEADERS) }
+2026-02-07T09:13:51.761076Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1647), flags: (0x1: END_STREAM) }
+2026-02-07T09:13:51.935996Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1647), size_increment: 2147418111 }
+2026-02-07T09:14:01.937783Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1647), flags: (0x4: END_HEADERS) }
+2026-02-07T09:14:01.937841Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1647), flags: (0x1: END_STREAM) }
+2026-02-07T09:14:01.937959Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:14:01.938009Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1649), flags: (0x4: END_HEADERS) }
+2026-02-07T09:14:01.938028Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1649), flags: (0x1: END_STREAM) }
+2026-02-07T09:14:02.115082Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1649), size_increment: 2147418111 }
+2026-02-07T09:14:12.114698Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1649), flags: (0x4: END_HEADERS) }
+2026-02-07T09:14:12.114760Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1649), flags: (0x1: END_STREAM) }
+2026-02-07T09:14:12.114863Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:14:12.114919Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1651), flags: (0x4: END_HEADERS) }
+2026-02-07T09:14:12.114955Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1651), flags: (0x1: END_STREAM) }
+2026-02-07T09:14:12.295273Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1651), size_increment: 2147418111 }
+2026-02-07T09:14:22.299396Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1651), flags: (0x4: END_HEADERS) }
+2026-02-07T09:14:22.299447Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1651), flags: (0x1: END_STREAM) }
+2026-02-07T09:14:22.299552Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:14:22.299600Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1653), flags: (0x4: END_HEADERS) }
+2026-02-07T09:14:22.299618Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1653), flags: (0x1: END_STREAM) }
+2026-02-07T09:14:22.472507Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1653), size_increment: 2147418111 }
+2026-02-07T09:14:32.473759Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1653), flags: (0x4: END_HEADERS) }
+2026-02-07T09:14:32.473827Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1653), flags: (0x1: END_STREAM) }
+2026-02-07T09:14:32.473938Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:14:32.474007Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1655), flags: (0x4: END_HEADERS) }
+2026-02-07T09:14:32.474046Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1655), flags: (0x1: END_STREAM) }
+2026-02-07T09:14:32.647284Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1655), size_increment: 2147418111 }
+2026-02-07T09:14:42.652048Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1655), flags: (0x4: END_HEADERS) }
+2026-02-07T09:14:42.652145Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1655), flags: (0x1: END_STREAM) }
+2026-02-07T09:14:42.652275Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:14:42.652375Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1657), flags: (0x4: END_HEADERS) }
+2026-02-07T09:14:42.652442Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1657), flags: (0x1: END_STREAM) }
+2026-02-07T09:14:42.825055Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1657), size_increment: 2147418111 }
+2026-02-07T09:14:52.827427Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1657), flags: (0x4: END_HEADERS) }
+2026-02-07T09:14:52.827472Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1657), flags: (0x1: END_STREAM) }
+2026-02-07T09:14:52.827587Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:14:52.827640Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1659), flags: (0x4: END_HEADERS) }
+2026-02-07T09:14:52.827662Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1659), flags: (0x1: END_STREAM) }
+2026-02-07T09:14:53.001629Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1659), size_increment: 2147418111 }
+2026-02-07T09:15:03.005634Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1659), flags: (0x4: END_HEADERS) }
+2026-02-07T09:15:03.005702Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1659), flags: (0x1: END_STREAM) }
+2026-02-07T09:15:03.005880Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:15:03.005961Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1661), flags: (0x4: END_HEADERS) }
+2026-02-07T09:15:03.005998Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1661), flags: (0x1: END_STREAM) }
+2026-02-07T09:15:03.179808Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1661), size_increment: 2147418111 }
+2026-02-07T09:15:13.182716Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1661), flags: (0x4: END_HEADERS) }
+2026-02-07T09:15:13.182788Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1661), flags: (0x1: END_STREAM) }
+2026-02-07T09:15:13.182892Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:15:13.182954Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1663), flags: (0x4: END_HEADERS) }
+2026-02-07T09:15:13.182989Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1663), flags: (0x1: END_STREAM) }
+2026-02-07T09:15:13.360481Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1663), size_increment: 2147418111 }
+2026-02-07T09:15:23.363184Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1663), flags: (0x4: END_HEADERS) }
+2026-02-07T09:15:23.363249Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1663), flags: (0x1: END_STREAM) }
+2026-02-07T09:15:23.363388Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:15:23.363476Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1665), flags: (0x4: END_HEADERS) }
+2026-02-07T09:15:23.363500Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1665), flags: (0x1: END_STREAM) }
+2026-02-07T09:15:23.537884Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1665), size_increment: 2147418111 }
+2026-02-07T09:15:33.539561Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1665), flags: (0x4: END_HEADERS) }
+2026-02-07T09:15:33.539623Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1665), flags: (0x1: END_STREAM) }
+2026-02-07T09:15:33.539799Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:15:33.539865Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1667), flags: (0x4: END_HEADERS) }
+2026-02-07T09:15:33.539889Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1667), flags: (0x1: END_STREAM) }
+2026-02-07T09:15:33.712715Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1667), size_increment: 2147418111 }
+2026-02-07T09:15:43.713558Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1667), flags: (0x4: END_HEADERS) }
+2026-02-07T09:15:43.713629Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1667), flags: (0x1: END_STREAM) }
+2026-02-07T09:15:43.713758Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:15:43.713839Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1669), flags: (0x4: END_HEADERS) }
+2026-02-07T09:15:43.713883Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1669), flags: (0x1: END_STREAM) }
+2026-02-07T09:15:43.886613Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1669), size_increment: 2147418111 }
+2026-02-07T09:15:53.888154Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1669), flags: (0x4: END_HEADERS) }
+2026-02-07T09:15:53.888204Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1669), flags: (0x1: END_STREAM) }
+2026-02-07T09:15:53.888311Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:15:53.888364Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1671), flags: (0x4: END_HEADERS) }
+2026-02-07T09:15:53.888384Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1671), flags: (0x1: END_STREAM) }
+2026-02-07T09:15:54.061415Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1671), size_increment: 2147418111 }
+2026-02-07T09:16:04.064920Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1671), flags: (0x4: END_HEADERS) }
+2026-02-07T09:16:04.064984Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1671), flags: (0x1: END_STREAM) }
+2026-02-07T09:16:04.065141Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:16:04.065206Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1673), flags: (0x4: END_HEADERS) }
+2026-02-07T09:16:04.065247Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1673), flags: (0x1: END_STREAM) }
+2026-02-07T09:16:04.237947Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1673), size_increment: 2147418111 }
+2026-02-07T09:16:14.239110Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1673), flags: (0x4: END_HEADERS) }
+2026-02-07T09:16:14.239178Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1673), flags: (0x1: END_STREAM) }
+2026-02-07T09:16:14.239350Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:16:14.239419Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1675), flags: (0x4: END_HEADERS) }
+2026-02-07T09:16:14.239439Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1675), flags: (0x1: END_STREAM) }
+2026-02-07T09:16:14.411972Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1675), size_increment: 2147418111 }
+2026-02-07T09:16:24.414053Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1675), flags: (0x4: END_HEADERS) }
+2026-02-07T09:16:24.414140Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1675), flags: (0x1: END_STREAM) }
+2026-02-07T09:16:24.414274Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:16:24.414330Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1677), flags: (0x4: END_HEADERS) }
+2026-02-07T09:16:24.414355Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1677), flags: (0x1: END_STREAM) }
+2026-02-07T09:16:24.586957Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1677), size_increment: 2147418111 }
+2026-02-07T09:16:34.588446Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1677), flags: (0x4: END_HEADERS) }
+2026-02-07T09:16:34.588522Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1677), flags: (0x1: END_STREAM) }
+2026-02-07T09:16:34.588632Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:16:34.588685Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1679), flags: (0x4: END_HEADERS) }
+2026-02-07T09:16:34.588708Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1679), flags: (0x1: END_STREAM) }
+2026-02-07T09:16:34.761315Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1679), size_increment: 2147418111 }
+2026-02-07T09:16:44.763936Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1679), flags: (0x4: END_HEADERS) }
+2026-02-07T09:16:44.764008Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1679), flags: (0x1: END_STREAM) }
+2026-02-07T09:16:44.764132Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:16:44.764193Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1681), flags: (0x4: END_HEADERS) }
+2026-02-07T09:16:44.764231Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1681), flags: (0x1: END_STREAM) }
+2026-02-07T09:16:44.938634Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1681), size_increment: 2147418111 }
+2026-02-07T09:16:54.938083Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1681), flags: (0x4: END_HEADERS) }
+2026-02-07T09:16:54.938147Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1681), flags: (0x1: END_STREAM) }
+2026-02-07T09:16:54.938278Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:16:54.938390Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1683), flags: (0x4: END_HEADERS) }
+2026-02-07T09:16:54.938420Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1683), flags: (0x1: END_STREAM) }
+2026-02-07T09:16:55.111616Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1683), size_increment: 2147418111 }
+2026-02-07T09:17:05.112596Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1683), flags: (0x4: END_HEADERS) }
+2026-02-07T09:17:05.112676Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1683), flags: (0x1: END_STREAM) }
+2026-02-07T09:17:05.112873Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:17:05.112942Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1685), flags: (0x4: END_HEADERS) }
+2026-02-07T09:17:05.112966Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1685), flags: (0x1: END_STREAM) }
+2026-02-07T09:17:05.289663Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1685), size_increment: 2147418111 }
+2026-02-07T09:17:15.291492Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1685), flags: (0x4: END_HEADERS) }
+2026-02-07T09:17:15.291546Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1685), flags: (0x1: END_STREAM) }
+2026-02-07T09:17:15.291656Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:17:15.291706Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1687), flags: (0x4: END_HEADERS) }
+2026-02-07T09:17:15.291726Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1687), flags: (0x1: END_STREAM) }
+2026-02-07T09:17:15.465559Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1687), size_increment: 2147418111 }
+2026-02-07T09:17:25.465634Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1687), flags: (0x4: END_HEADERS) }
+2026-02-07T09:17:25.465692Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1687), flags: (0x1: END_STREAM) }
+2026-02-07T09:17:25.465810Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:17:25.465881Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1689), flags: (0x4: END_HEADERS) }
+2026-02-07T09:17:25.465911Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1689), flags: (0x1: END_STREAM) }
+2026-02-07T09:17:25.639201Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1689), size_increment: 2147418111 }
+2026-02-07T09:17:35.641275Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1689), flags: (0x4: END_HEADERS) }
+2026-02-07T09:17:35.641348Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1689), flags: (0x1: END_STREAM) }
+2026-02-07T09:17:35.641480Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:17:35.641536Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1691), flags: (0x4: END_HEADERS) }
+2026-02-07T09:17:35.641565Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1691), flags: (0x1: END_STREAM) }
+2026-02-07T09:17:35.814200Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1691), size_increment: 2147418111 }
+2026-02-07T09:17:45.815357Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1691), flags: (0x4: END_HEADERS) }
+2026-02-07T09:17:45.815419Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1691), flags: (0x1: END_STREAM) }
+2026-02-07T09:17:45.815532Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:17:45.815629Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1693), flags: (0x4: END_HEADERS) }
+2026-02-07T09:17:45.815667Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1693), flags: (0x1: END_STREAM) }
+2026-02-07T09:17:45.990986Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1693), size_increment: 2147418111 }
+2026-02-07T09:17:55.992387Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1693), flags: (0x4: END_HEADERS) }
+2026-02-07T09:17:55.992431Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1693), flags: (0x1: END_STREAM) }
+2026-02-07T09:17:55.992533Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:17:55.992583Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1695), flags: (0x4: END_HEADERS) }
+2026-02-07T09:17:55.992603Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1695), flags: (0x1: END_STREAM) }
+2026-02-07T09:17:56.165291Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1695), size_increment: 2147418111 }
+2026-02-07T09:18:06.167106Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1695), flags: (0x4: END_HEADERS) }
+2026-02-07T09:18:06.167182Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1695), flags: (0x1: END_STREAM) }
+2026-02-07T09:18:06.167313Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:18:06.167389Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1697), flags: (0x4: END_HEADERS) }
+2026-02-07T09:18:06.167457Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1697), flags: (0x1: END_STREAM) }
+2026-02-07T09:18:06.340953Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1697), size_increment: 2147418111 }
+2026-02-07T09:18:16.341577Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1697), flags: (0x4: END_HEADERS) }
+2026-02-07T09:18:16.341635Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1697), flags: (0x1: END_STREAM) }
+2026-02-07T09:18:16.341738Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:18:16.341801Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1699), flags: (0x4: END_HEADERS) }
+2026-02-07T09:18:16.341849Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1699), flags: (0x1: END_STREAM) }
+2026-02-07T09:18:16.514936Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1699), size_increment: 2147418111 }
+2026-02-07T09:18:26.516688Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1699), flags: (0x4: END_HEADERS) }
+2026-02-07T09:18:26.516754Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1699), flags: (0x1: END_STREAM) }
+2026-02-07T09:18:26.516941Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:18:26.516998Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1701), flags: (0x4: END_HEADERS) }
+2026-02-07T09:18:26.517018Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1701), flags: (0x1: END_STREAM) }
+2026-02-07T09:18:26.700544Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1701), size_increment: 2147418111 }
+2026-02-07T09:18:36.703873Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1701), flags: (0x4: END_HEADERS) }
+2026-02-07T09:18:36.703948Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1701), flags: (0x1: END_STREAM) }
+2026-02-07T09:18:36.704121Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:18:36.704221Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1703), flags: (0x4: END_HEADERS) }
+2026-02-07T09:18:36.704289Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1703), flags: (0x1: END_STREAM) }
+2026-02-07T09:18:36.878736Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1703), size_increment: 2147418111 }
+2026-02-07T09:18:46.878950Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1703), flags: (0x4: END_HEADERS) }
+2026-02-07T09:18:46.879030Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1703), flags: (0x1: END_STREAM) }
+2026-02-07T09:18:46.879221Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:18:46.879292Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1705), flags: (0x4: END_HEADERS) }
+2026-02-07T09:18:46.879328Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1705), flags: (0x1: END_STREAM) }
+2026-02-07T09:18:47.052752Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1705), size_increment: 2147418111 }
+2026-02-07T09:18:57.053428Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1705), flags: (0x4: END_HEADERS) }
+2026-02-07T09:18:57.053486Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1705), flags: (0x1: END_STREAM) }
+2026-02-07T09:18:57.053637Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:18:57.053696Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1707), flags: (0x4: END_HEADERS) }
+2026-02-07T09:18:57.053721Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1707), flags: (0x1: END_STREAM) }
+2026-02-07T09:18:57.227788Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1707), size_increment: 2147418111 }
+2026-02-07T09:19:07.229944Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1707), flags: (0x4: END_HEADERS) }
+2026-02-07T09:19:07.230017Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1707), flags: (0x1: END_STREAM) }
+2026-02-07T09:19:07.230197Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:19:07.230248Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1709), flags: (0x4: END_HEADERS) }
+2026-02-07T09:19:07.230268Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1709), flags: (0x1: END_STREAM) }
+2026-02-07T09:19:07.403653Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1709), size_increment: 2147418111 }
+2026-02-07T09:19:17.409868Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1709), flags: (0x4: END_HEADERS) }
+2026-02-07T09:19:17.409923Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1709), flags: (0x1: END_STREAM) }
+2026-02-07T09:19:17.410026Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:19:17.410143Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1711), flags: (0x4: END_HEADERS) }
+2026-02-07T09:19:17.410228Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1711), flags: (0x1: END_STREAM) }
+2026-02-07T09:19:17.584524Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1711), size_increment: 2147418111 }
+2026-02-07T09:19:27.587343Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1711), flags: (0x4: END_HEADERS) }
+2026-02-07T09:19:27.587413Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1711), flags: (0x1: END_STREAM) }
+2026-02-07T09:19:27.587536Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:19:27.587623Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1713), flags: (0x4: END_HEADERS) }
+2026-02-07T09:19:27.587687Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1713), flags: (0x1: END_STREAM) }
+2026-02-07T09:19:27.760246Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1713), size_increment: 2147418111 }
+2026-02-07T09:19:37.796196Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Headers { stream_id: StreamId(1713), flags: (0x4: END_HEADERS) }
+2026-02-07T09:19:37.796256Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=Data { stream_id: StreamId(1713), flags: (0x1: END_STREAM) }
+2026-02-07T09:19:37.796371Z DEBUG hyper::client::pool: reuse idle connection for ("https", api.telegram.org)
+2026-02-07T09:19:37.796422Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Headers { stream_id: StreamId(1715), flags: (0x4: END_HEADERS) }
+2026-02-07T09:19:37.796443Z DEBUG Connection{peer=Client}: h2::codec::framed_write: send frame=Data { stream_id: StreamId(1715), flags: (0x1: END_STREAM) }
+2026-02-07T09:19:37.969057Z DEBUG Connection{peer=Client}: h2::codec::framed_read: received frame=WindowUpdate { stream_id: StreamId(1715), size_increment: 2147418111 }

@@ -29,7 +29,10 @@ type MockMediaService struct {
 }
 
 func (m *MockMediaService) UploadFile(ctx context.Context, file io.Reader, header *multipart.FileHeader, userID primitive.ObjectID) (*models.Media, error) {
-	args := m.Called(ctx, mock.AnythingOfType("io.Reader"), mock.AnythingOfType("*multipart.FileHeader"), userID)
+	args := m.Called(ctx, file, header, userID)
+	if args.Get(0) == nil {
+		return nil, args.Error(1)
+	}
 	return args.Get(0).(*models.Media), args.Error(1)
 }
 
@@ -40,6 +43,9 @@ func (m *MockMediaService) UploadFiles(ctx context.Context, files map[string][]*
 
 func (m *MockMediaService) GetMedia(ctx context.Context, mediaID primitive.ObjectID) (*models.Media, error) {
 	args := m.Called(ctx, mediaID)
+	if args.Get(0) == nil {
+		return nil, args.Error(1)
+	}
 	return args.Get(0).(*models.Media), args.Error(1)
 }
 
@@ -63,13 +69,12 @@ func (m *MockMediaService) ProcessUploadedFile(ctx context.Context, presignedInf
 	return args.Get(0).(*models.Media), args.Error(1)
 }
 
-func setupUploadTestRouter(handler *UploadHandler) *gin.Engine {
+func setupUploadTestRouter(handler *UploadHandler, userID primitive.ObjectID) *gin.Engine {
 	gin.SetMode(gin.TestMode)
 	router := gin.New()
 
 	// Mock auth middleware to set user ID
 	router.Use(func(c *gin.Context) {
-		userID := primitive.NewObjectID()
 		c.Set("userID", userID.Hex())
 		c.Next()
 	})
@@ -111,7 +116,7 @@ func createMultipartFile(t *testing.T, filename string, content []byte) (*bytes.
 	body := &bytes.Buffer{}
 	writer := multipart.NewWriter(body)
 
-	part, err := writer.CreateFormFile("files", filename)
+	part, err := writer.CreateFormFile("file", filename)
 	require.NoError(t, err)
 
 	_, err = part.Write(content)
@@ -127,9 +132,10 @@ func TestUploadHandler_HandleSingleUpload(t *testing.T) {
 	logger := zaptest.NewLogger(t)
 	mockService := new(MockMediaService)
 	handler := NewUploadHandler(mockService, logger)
-	router := setupUploadTestRouter(handler)
 
 	userID := primitive.NewObjectID()
+	router := setupUploadTestRouter(handler, userID)
+
 	testMedia := createTestMedia()
 	testMedia.CreatedBy = userID
 
@@ -146,7 +152,7 @@ func TestUploadHandler_HandleSingleUpload(t *testing.T) {
 			filename:    "test.jpg",
 			fileContent: []byte("test image content"),
 			setupMocks: func() {
-				mockService.On("UploadFile", mock.Anything, mock.AnythingOfType("*multipart.FileHeader"), userID).Return(testMedia, nil)
+				mockService.On("UploadFile", mock.Anything, mock.Anything, mock.Anything, userID).Return(testMedia, nil)
 			},
 			expectedStatus: http.StatusOK,
 			expectError:    false,
@@ -156,7 +162,7 @@ func TestUploadHandler_HandleSingleUpload(t *testing.T) {
 			filename:    "test.jpg",
 			fileContent: []byte("test image content"),
 			setupMocks: func() {
-				mockService.On("UploadFile", mock.Anything, mock.Anything, userID).Return(nil, fmt.Errorf("upload failed"))
+				mockService.On("UploadFile", mock.Anything, mock.Anything, mock.Anything, userID).Return(nil, fmt.Errorf("upload failed"))
 			},
 			expectedStatus: http.StatusInternalServerError,
 			expectError:    true,
@@ -200,9 +206,10 @@ func TestUploadHandler_HandlePresignURL(t *testing.T) {
 	logger := zaptest.NewLogger(t)
 	mockService := new(MockMediaService)
 	handler := NewUploadHandler(mockService, logger)
-	router := setupUploadTestRouter(handler)
 
 	userID := primitive.NewObjectID()
+	router := setupUploadTestRouter(handler, userID)
+
 	presignedInfo := &services.PresignedUploadInfo{
 		URL:    "https://storage.example.com/upload",
 		Fields: map[string]string{"mediaId": "test-media-id"},
@@ -295,9 +302,9 @@ func TestUploadHandler_HandleGetMedia(t *testing.T) {
 	logger := zaptest.NewLogger(t)
 	mockService := new(MockMediaService)
 	handler := NewUploadHandler(mockService, logger)
-	router := setupUploadTestRouter(handler)
 
 	userID := primitive.NewObjectID()
+	router := setupUploadTestRouter(handler, userID)
 	testMedia := createTestMedia()
 	testMedia.CreatedBy = userID
 
@@ -370,9 +377,10 @@ func TestUploadHandler_HandleListMedia(t *testing.T) {
 	logger := zaptest.NewLogger(t)
 	mockService := new(MockMediaService)
 	handler := NewUploadHandler(mockService, logger)
-	router := setupUploadTestRouter(handler)
 
 	userID := primitive.NewObjectID()
+	router := setupUploadTestRouter(handler, userID)
+
 	testMedia1 := createTestMedia()
 	testMedia1.CreatedBy = userID
 	testMedia2 := createTestMedia()
@@ -435,9 +443,10 @@ func TestUploadHandler_HandleDeleteMedia(t *testing.T) {
 	logger := zaptest.NewLogger(t)
 	mockService := new(MockMediaService)
 	handler := NewUploadHandler(mockService, logger)
-	router := setupUploadTestRouter(handler)
 
 	userID := primitive.NewObjectID()
+	router := setupUploadTestRouter(handler, userID)
+
 	testMedia := createTestMedia()
 	testMedia.CreatedBy = userID
 

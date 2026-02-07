@@ -231,7 +231,8 @@ func TestRSVPHandler_SubmitRSVP_InvalidBody(t *testing.T) {
 
 	errorMsg, exists := response["error"]
 	assert.True(t, exists)
-	assert.Contains(t, errorMsg.(string), "Invalid request body")
+	// The validation error contains detailed field validation messages
+	assert.Contains(t, errorMsg.(string), "FirstName is required")
 }
 
 func TestRSVPHandler_SubmitRSVP_ServiceError(t *testing.T) {
@@ -246,6 +247,7 @@ func TestRSVPHandler_SubmitRSVP_ServiceError(t *testing.T) {
 		LastName:        "Doe",
 		Status:          "attending",
 		AttendanceCount: 1,
+		Source:          "web",
 	}
 
 	body, _ := json.Marshal(reqBody)
@@ -263,7 +265,7 @@ func TestRSVPHandler_SubmitRSVP_ServiceError(t *testing.T) {
 
 	errorMsg, exists := response["error"]
 	assert.True(t, exists)
-	assert.Contains(t, errorMsg.(string), "RSVP is not open")
+	assert.Contains(t, errorMsg.(string), "RSVP is not open for this wedding")
 }
 
 func TestRSVPHandler_GetRSVPs(t *testing.T) {
